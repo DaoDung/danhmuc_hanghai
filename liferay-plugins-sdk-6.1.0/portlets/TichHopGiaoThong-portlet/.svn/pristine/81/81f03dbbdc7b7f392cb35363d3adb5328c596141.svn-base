@@ -1,0 +1,199 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<v-alert color="success" icon="new_releases" :value="msgType === 1">
+  {{msg}}
+</v-alert>
+<v-alert color="error" icon="new_releases" :value="msgType === 2">
+  {{msg}}
+</v-alert>
+
+<!-- 
+	#START THU TUC 'NC':
+	
+	File xử lý nghiệp vụ trạng thái hồ sơ.
+	roleUserFilterselectedType == -1 ( xác định user thuộc role kế hoạch )
+	roleUserFilterselectedType == -2 ( xác định user thuộc role thủ tục )
+	roleUserFilterselectedType == -3 ( xác định user thuộc role lãnh đạo )
+	roleUserFilterselectedType == -4 ( xác định user thuộc role văn thư )
+	roleUserFilterselectedType == -5 ( xác định user thuộc role kế toán )
+	detail.documentTypeCode == 'NC' ( xác định là hồ sơ Tàu thuyền nhập cảnh )
+	
+	note: yêu cầu nghiệp vụ của thủ tục 'NC' được thể hiện bên dưới:
+		- File: /html/can_bo/action_nghiepvu/ho_so/tt1/action_kehoach.jspf : Hiển thị nghiệp vụ của Role kế hoạch
+		- File: /html/can_bo/action_nghiepvu/ho_so/tt1/action_thutuc.jspf : Hiển thị nghiệp vụ của Role thủ tục
+		- Role lãnh đạo + văn thư chỉ được xem hồ sơ.
+ -->
+<div v-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt1/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt1/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC 'NC'
+ -->
+
+<div v-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt6/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt6/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '6'
+ -->
+
+<!-- 
+	#START THU TUC 'XC':
+ -->
+<div v-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt2/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt2/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC 'XC'
+ -->
+
+ <div v-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt17/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt17/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '7'
+ -->
+
+<!-- 
+	#START THU TUC 'QC':
+ -->
+<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt3/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt3/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC 'QC'
+ -->
+ 
+ 
+<!-- 
+	#START THU TUC '8':
+	NHAP_CANH_DAU_KHI
+ -->
+<div v-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt4/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt4/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '8'
+ -->
+
+
+ <!-- 
+	#START THU TUC '9':
+	XUAT_CANH_DAU_KHI
+ -->
+<div v-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt5/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt5/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '9'
+ -->
+
+ 
+ <!-- 
+	#START THU TUC '10':
+	VAO_CANG_DAU_KHI
+ -->
+<div v-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt6/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt6/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '10'
+ -->
+
+ 
+ <!-- 
+	#START THU TUC '11':
+	ROI_CANG_DAU_KHI
+ -->
+<div v-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt7/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt7/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '11'
+ -->
+
+ 
+ <!-- 
+	#START THU TUC '4':
+	TAU_THUYEN_VAO_CANG
+ -->
+<div v-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt8/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt8/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '4'
+ -->
+
+
+ <!-- 
+	#START THU TUC '5':
+	TAU_THUYEN_ROI_CANG
+ -->
+<div v-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt9/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt9/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '5'
+ -->
+
+ 
+ <!-- 
+	#START THU TUC '12':
+	CHUYEN_CANG_VAO
+ -->
+<div v-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt10/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt10/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '12'
+ -->
+
+
+ <!-- 
+	#START THU TUC '13':
+	CHUYEN_CANG_ROI
+ -->
+<div v-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -1">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt11/action_kehoach.jspf"%>
+</div>
+<div v-else-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -2">
+	<%@ include file="/html/can_bo/action_nghiepvu/ho_so/tt11/action_thutuc.jspf"%>
+</div>
+<!-- 
+	#END THU TUC '13'
+ -->

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BaoCao_14" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="7566b8e6-bd59-4051-bc40-48bcbb38cc09">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="CCR_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[CCR_DUYET]]></fieldDescription>
+	</field>
+	<field name="CCR_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[CCR_KYSO]]></fieldDescription>
+	</field>
+	<field name="CCV_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[CCV_DUYET]]></fieldDescription>
+	</field>
+	<field name="CCV_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[CCV_KYSO]]></fieldDescription>
+	</field>
+	<field name="CVHH" class="java.lang.String">
+		<fieldDescription><![CDATA[CVHH]]></fieldDescription>
+	</field>
+	<field name="NCDK_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NCDK_DUYET]]></fieldDescription>
+	</field>
+	<field name="NCDK_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NCDK_KYSO]]></fieldDescription>
+	</field>
+	<field name="NC_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NC_DUYET]]></fieldDescription>
+	</field>
+	<field name="NC_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NC_KYSO]]></fieldDescription>
+	</field>
+	<field name="QC_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[QC_DUYET]]></fieldDescription>
+	</field>
+	<field name="QC_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[QC_KYSO]]></fieldDescription>
+	</field>
+	<field name="RCDK_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RCDK_DUYET]]></fieldDescription>
+	</field>
+	<field name="RCDK_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RCDK_KYSO]]></fieldDescription>
+	</field>
+	<field name="RCTND_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RCTND_DUYET]]></fieldDescription>
+	</field>
+	<field name="RCTND_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RCTND_KYSO]]></fieldDescription>
+	</field>
+	<field name="RC_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RC_DUYET]]></fieldDescription>
+	</field>
+	<field name="RC_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[RC_KYSO]]></fieldDescription>
+	</field>
+	<field name="VCDK_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VCDK_DUYET]]></fieldDescription>
+	</field>
+	<field name="VCDK_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VCDK_KYSO]]></fieldDescription>
+	</field>
+	<field name="VCTND_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VCTND_DUYET]]></fieldDescription>
+	</field>
+	<field name="VCTND_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VCTND_KYSO]]></fieldDescription>
+	</field>
+	<field name="VC_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VC_DUYET]]></fieldDescription>
+	</field>
+	<field name="VC_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[VC_KYSO]]></fieldDescription>
+	</field>
+	<field name="XC_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XC_DUYET]]></fieldDescription>
+	</field>
+	<field name="XC_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XC_KYSO]]></fieldDescription>
+	</field>
+	<field name="XCPTTND_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XCPTTND_DUYET]]></fieldDescription>
+	</field>
+	<field name="XCPTTND_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XCPTTND_KYSO]]></fieldDescription>
+	</field>
+	<field name="NCPTTND_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NCPTTND_DUYET]]></fieldDescription>
+	</field>
+	<field name="NCPTTND_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[NCPTTND_KYSO]]></fieldDescription>
+	</field>
+	<field name="maritimeOrder" class="java.lang.Integer">
+		<fieldDescription><![CDATA[maritimeOrder]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.String">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="XCDK_DUYET" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XCDK_DUYET]]></fieldDescription>
+	</field>
+	<field name="XCDK_KYSO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[XCDK_KYSO]]></fieldDescription>
+	</field>
+	<variable name="SUM_CCR_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CCR_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_CCR_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CCR_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_CCV_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CCV_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_CCV_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CCV_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NCDK_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NCDK_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NCDK_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NCDK_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NC_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NC_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_NC_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NC_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_QC_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{QC_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_QC_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{QC_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_RCDK_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{RCDK_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_RCDK_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{RCDK_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_RC_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{RC_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_RC_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{RC_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VCDK_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VCDK_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VCDK_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VCDK_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VC_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VC_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VC_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VC_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_XC_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{XC_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_XC_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{XC_KYSO}]]></variableExpression>
+	</variable>
+	<variable name="SUM_XCDK_DUYET" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{XCDK_DUYET}]]></variableExpression>
+	</variable>
+	<variable name="SUM_XCDK_KYSO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{XCDK_KYSO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="60">
+			<staticText>
+				<reportElement x="0" y="0" width="28" height="60" uuid="ce2afbe3-52a4-4b35-ba21-669ba582b283"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="0" width="190" height="30" uuid="86af4bd5-521a-41db-a3b8-60d90e8dde78"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số lượng hồ sơ điện tử]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="463" y="30" width="92" height="30" uuid="d05151e3-0f6e-46fc-a256-3c42ce054997"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Được phê duyệt\n không ký số"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="30" width="98" height="30" uuid="20931a07-3d88-476e-be15-869c9afabbf2"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Được phê duyệt\n có chữ ký số"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="0" width="337" height="60" uuid="458598ab-78e1-4ae7-bb63-5d6d94ba5818"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thủ tục]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="124" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="365" y="0" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="0782e5fe-a3e7-4a4b-8011-907a31468c06"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VCTND_KYSO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="0" width="92" height="20" isPrintWhenDetailOverflows="true" uuid="efbcbcf9-9480-4d96-9496-d45e712bbcaa"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VCTND_DUYET}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="20" width="92" height="20" isPrintWhenDetailOverflows="true" uuid="6b0b8f04-8042-4f9d-aa53-d6fbf98b4de6"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RCTND_DUYET}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="365" y="20" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="d731cdd1-2ca3-45c4-90c6-00086f770a4e"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RCTND_KYSO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="40" width="92" height="20" isPrintWhenDetailOverflows="true" uuid="6610253d-f8ca-460b-af01-b86e2adc2826"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NCPTTND_DUYET}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="365" y="40" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="914763a1-9181-4623-bbd0-adfda7f3fa5e"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NCPTTND_KYSO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="60" width="92" height="20" isPrintWhenDetailOverflows="true" uuid="ac5b2820-f307-4170-a624-fbbc93a35c39"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{XCPTTND_DUYET}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="365" y="60" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="e4734663-25a5-4035-ba05-37ebfd046420"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{XCPTTND_KYSO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="0" width="337" height="20" uuid="d66a72d4-34b2-4cff-94c0-120417d68b67"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Tàu biển Nhập cảnh tại cảng thủy nội địa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="40" width="337" height="20" uuid="04a5d65b-7d9a-4ba7-a71b-0750fcfd6428"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Phương tiện TNĐ VN-CPC nhập cảnh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="28" height="20" uuid="77bca265-6b8c-4798-ace7-181bd04421b4"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="28" height="20" uuid="c6fc945f-5eb1-4845-a1f3-cb817045a580"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="28" height="20" uuid="2691e8d4-94f2-4963-bd59-3d3119f4a575"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="28" height="20" uuid="fb65c0f4-b503-436f-98b5-33029db318e9"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="60" width="337" height="20" uuid="f6c32fb2-d762-4df1-bb92-8601b3a346cc"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Phương tiện TNĐ VN-CPC xuất cảnh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="28" height="20" uuid="a955dce7-4489-42b2-b47b-3c43cfc22c37"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="80" width="337" height="20" uuid="086960bb-3d74-4ca5-94bf-36066fb0bd99"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Tổng cộng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="20" width="337" height="20" uuid="9863da37-1a0f-49e4-8b0e-972f9a494119"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Tàu biển Xuất cảnh tại cảng thủy nội địa]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="365" y="80" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="f6eeceea-c3f4-4fab-a7bd-7cd071e67b63"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VCTND_KYSO} + $F{RCTND_KYSO} + $F{NCPTTND_KYSO} + $F{XCPTTND_KYSO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="80" width="92" height="20" isPrintWhenDetailOverflows="true" uuid="6c08f073-24d7-4d1b-a121-a122468108df"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VCTND_DUYET} + $F{RCTND_DUYET} + $F{NCPTTND_DUYET} + $F{XCPTTND_DUYET}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

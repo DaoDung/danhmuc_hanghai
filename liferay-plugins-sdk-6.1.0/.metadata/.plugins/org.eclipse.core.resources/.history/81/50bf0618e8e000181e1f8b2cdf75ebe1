@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PassengerList_subreport2" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="24698d51-c580-45ef-b5ee-c1ab0fc2adfe">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="birthDay" class="java.util.Date">
+		<fieldDescription><![CDATA[birthDay]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[birthDay.class]]></fieldDescription>
+	</field>
+	<field name="date" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.date]]></fieldDescription>
+	</field>
+	<field name="day" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.day]]></fieldDescription>
+	</field>
+	<field name="hours" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.hours]]></fieldDescription>
+	</field>
+	<field name="minutes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.minutes]]></fieldDescription>
+	</field>
+	<field name="month" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.month]]></fieldDescription>
+	</field>
+	<field name="seconds" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.seconds]]></fieldDescription>
+	</field>
+	<field name="time" class="java.lang.Long">
+		<fieldDescription><![CDATA[birthDay.time]]></fieldDescription>
+	</field>
+	<field name="timezoneOffset" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.timezoneOffset]]></fieldDescription>
+	</field>
+	<field name="year" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.year]]></fieldDescription>
+	</field>
+	<field name="birthPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[birthPlace]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="familyName" class="java.lang.String">
+		<fieldDescription><![CDATA[familyName]]></fieldDescription>
+	</field>
+	<field name="givenName" class="java.lang.String">
+		<fieldDescription><![CDATA[givenName]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="isTransit" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isTransit]]></fieldDescription>
+	</field>
+	<field name="nationality" class="java.lang.String">
+		<fieldDescription><![CDATA[nationality]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="passengerCode" class="java.lang.String">
+		<fieldDescription><![CDATA[passengerCode]]></fieldDescription>
+	</field>
+	<field name="passportExpiredDate" class="java.util.Date">
+		<fieldDescription><![CDATA[passportExpiredDate]]></fieldDescription>
+	</field>
+	<field name="portOfDisembarkation" class="java.lang.String">
+		<fieldDescription><![CDATA[portOfDisembarkation]]></fieldDescription>
+	</field>
+	<field name="portOfEmbarkation" class="java.lang.String">
+		<fieldDescription><![CDATA[portOfEmbarkation]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="serialNumberOfIdentity" class="java.lang.String">
+		<fieldDescription><![CDATA[serialNumberOfIdentity]]></fieldDescription>
+	</field>
+	<field name="typeOfIdentity" class="java.lang.String">
+		<fieldDescription><![CDATA[typeOfIdentity]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="75" splitType="Stretch">
+			<textField>
+				<reportElement x="500" y="0" width="103" height="46" uuid="dd7012d0-5e9b-453e-8b54-a53f4a60cb2c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cảng lên tàu<br>Port of embarkation"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="711" y="0" width="91" height="74" uuid="c6baea49-adb3-483d-acb9-5042325923c5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Hành khách quá cảnh hay không<br>Transit passenger or not"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="105" height="40" uuid="b74e2000-4454-46f3-ac51-e69882209428"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Họ và tên<br>Family name, given name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="0" width="89" height="40" uuid="be5ec0e5-b3aa-48f3-8f1f-98b91fc80070"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Quốc tịch<br>Nationality"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="0" width="91" height="68" uuid="6ea1dff3-150f-46c1-9cff-59f7eaeaf943"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Số hộ chiếu <br>Serial number of identity or travel document"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="81" height="65" uuid="e09e0500-4178-4842-bc49-c44734051240"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày và<br>nơi sinh<br>Date and place<br>of birth"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="0" width="105" height="52" uuid="dc092979-2f7a-438a-b28d-965a363e7555"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Loại Hộ chiếu<br>Type of identity or travel document"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="603" y="0" width="108" height="53" uuid="28d2c3f7-adcd-4a4c-8f6b-805e38715dc4"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cảng rời tàu<br>Port of disembarkation"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="40" width="105" height="34" uuid="bba66728-e0b4-4d91-99a9-6895119b2f7a"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="37" width="88" height="37" uuid="a2731518-decb-4a59-bdf7-9ba6b49e5406"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="59" width="81" height="15" uuid="f9fcf371-5ac8-42dc-a14b-90826ba752e1"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="52" width="105" height="22" uuid="b7fcc2f6-c754-407b-bba4-f9ff66caa851"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="68" width="91" height="6" uuid="fa9fc1c0-9b16-435c-a67f-78294fb59348"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="52" width="103" height="22" uuid="cd7b025d-747c-4faa-9c7e-12a14d9437de"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="603" y="46" width="108" height="28" uuid="67679cac-9b08-4d02-8033-4bbe7cf23394"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="29" height="40" uuid="11b640cf-ed04-4412-bb4a-84aa2858781e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="29" height="34" uuid="573d7846-1cc8-4609-8af2-55603d43dc9a"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="603" y="0" width="108" height="20" isPrintWhenDetailOverflows="true" uuid="c0335986-bb3e-440b-8e24-922b25126b61"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getPortName(new java.util.Date(), $F{portOfDisembarkation})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="711" y="0" width="91" height="20" isPrintWhenDetailOverflows="true" uuid="c7ef58ef-78f1-4d2d-9168-09c3e12e73ec"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isTransit}==1) ? "có" : "không"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="134" y="0" width="88" height="20" isPrintWhenDetailOverflows="true" uuid="07ecf965-4b78-46a5-8c18-c0860d6ffe5e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getStateName(new java.util.Date(), $F{nationality})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="304" y="0" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="5469e169-f90b-41aa-8786-c3b8937384f4"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getPassportTypeNameVN(new java.util.Date(), $F{typeOfIdentity})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="409" y="0" width="91" height="20" isPrintWhenDetailOverflows="true" uuid="bcbf9248-b3a5-4881-b3d6-f9a3befbee49"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serialNumberOfIdentity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="29" y="0" width="105" height="20" isPrintWhenDetailOverflows="true" uuid="7af1f205-b141-44bc-8c8f-0c126bc78535"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familyName}.toUpperCase() + " " + $F{givenName}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="500" y="0" width="103" height="20" isPrintWhenDetailOverflows="true" uuid="0e807170-31e8-4dff-9e53-c5a91768340a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getPortName(new java.util.Date(), $F{portOfEmbarkation})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="223" y="0" width="81" height="20" isPrintWhenDetailOverflows="true" uuid="ec83f665-c8de-47c4-9ffd-e105e553fdf9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.tichhop.report.ReportFunction.parseDateToString($F{birthDay}) +" "+ $F{birthPlace}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="29" height="20" isPrintWhenDetailOverflows="true" uuid="fc3e4352-f95e-4235-8659-31dd23a9b7ec"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

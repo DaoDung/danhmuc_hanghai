@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7566b8e6-bd59-4051-bc40-48bcbb38cc09">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="142"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Dataset1" uuid="2416488f-bee2-4800-913e-d0d1d9cac81f">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="maritimeName" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeName]]></fieldDescription>
+	</field>
+	<field name="maritimeNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeNameVN]]></fieldDescription>
+	</field>
+	<field name="monthOfPeriod" class="java.lang.String">
+		<fieldDescription><![CDATA[monthOfPeriod]]></fieldDescription>
+	</field>
+	<field name="reportDate" class="java.lang.String">
+		<fieldDescription><![CDATA[reportDate]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<fieldDescription><![CDATA[startDate]]></fieldDescription>
+	</field>
+	<field name="toDate" class="java.lang.String">
+		<fieldDescription><![CDATA[toDate]]></fieldDescription>
+	</field>
+	<field name="viewHoanThanhThuTuc" class="java.util.List">
+		<fieldDescription><![CDATA[viewHoanThanhThuTuc]]></fieldDescription>
+	</field>
+	<field name="yearOfPeriod" class="java.lang.String">
+		<fieldDescription><![CDATA[yearOfPeriod]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="10" width="801" height="30" uuid="ab3b6f8d-32ed-4ec3-b8be-2c806b01e897"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BÁO CÁO SỐ LƯỢNG HỒ SƠ ĐÃ HOÀN THÀNH THỦ TỤC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="40" width="801" height="20" uuid="1b39f0e2-a6c8-4d00-94b7-9b3e9dd4d6b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{toDate} == null) ? ("(" + "<i>" + "Tháng  ...  Năm  ...  " + "</i>" + ")" ) : ("<i>" + "Tháng  " + $F{monthOfPeriod} + " Năm  " + $F{yearOfPeriod} + "</i>")]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<subreport isUsingCache="false">
+				<reportElement x="1" y="0" width="801" height="20" uuid="d1b321eb-0545-43f8-a731-45e37ef6b6c4"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{viewHoanThanhThuTuc})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BaoCao_13.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

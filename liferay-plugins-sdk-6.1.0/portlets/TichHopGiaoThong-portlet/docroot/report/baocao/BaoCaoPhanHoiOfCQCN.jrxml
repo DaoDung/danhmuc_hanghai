@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BaoCaoPhanHoiOfCQCN" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="39f5521f-a06e-4828-87ef-b150738d9423">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="216"/>
+	<subDataset name="DatasetResultMinistry" uuid="9870d68b-fe8c-4e8c-83bb-7a3c973a777a">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="businessTypeCode" class="java.lang.Integer">
+			<fieldDescription><![CDATA[businessTypeCode]]></fieldDescription>
+		</field>
+		<field name="cachedModel" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+		</field>
+		<field name="division" class="java.lang.String">
+			<fieldDescription><![CDATA[division]]></fieldDescription>
+		</field>
+		<field name="documentName" class="java.lang.Long">
+			<fieldDescription><![CDATA[documentName]]></fieldDescription>
+		</field>
+		<field name="documentYear" class="java.lang.Integer">
+			<fieldDescription><![CDATA[documentYear]]></fieldDescription>
+		</field>
+		<field name="escapedModel" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+		</field>
+		<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+			<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+		</field>
+		<field name="id" class="java.lang.Long">
+			<fieldDescription><![CDATA[id]]></fieldDescription>
+		</field>
+		<field name="latestDate" class="java.util.Date">
+			<fieldDescription><![CDATA[latestDate]]></fieldDescription>
+		</field>
+		<field name="ministryCode" class="java.lang.String">
+			<fieldDescription><![CDATA[ministryCode]]></fieldDescription>
+		</field>
+		<field name="new" class="java.lang.Boolean">
+			<fieldDescription><![CDATA[new]]></fieldDescription>
+		</field>
+		<field name="officerName" class="java.lang.String">
+			<fieldDescription><![CDATA[officerName]]></fieldDescription>
+		</field>
+		<field name="organization" class="java.lang.String">
+			<fieldDescription><![CDATA[organization]]></fieldDescription>
+		</field>
+		<field name="primaryKey" class="java.lang.Long">
+			<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+		</field>
+		<field name="primaryKeyObj" class="java.io.Serializable">
+			<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+		</field>
+		<field name="remarks" class="java.lang.String">
+			<fieldDescription><![CDATA[remarks]]></fieldDescription>
+		</field>
+		<field name="requestCode" class="java.lang.String">
+			<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+		</field>
+		<field name="requestState" class="java.lang.Integer">
+			<fieldDescription><![CDATA[requestState]]></fieldDescription>
+		</field>
+		<field name="response" class="java.lang.String">
+			<fieldDescription><![CDATA[response]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MINISTRY_NAME" class="java.lang.String"/>
+	<parameter name="DOCUMENT_TYPE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="allResultHistoryMinistrie" class="java.util.List">
+		<fieldDescription><![CDATA[allResultHistoryMinistrie]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="createDate" class="java.lang.String">
+		<fieldDescription><![CDATA[createDate]]></fieldDescription>
+	</field>
+	<field name="maritimeName" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeName]]></fieldDescription>
+	</field>
+	<field name="maritimeNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeNameVN]]></fieldDescription>
+	</field>
+	<field name="ministryNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[ministryNameVN]]></fieldDescription>
+	</field>
+	<field name="shipName" class="java.lang.String">
+		<fieldDescription><![CDATA[shipName]]></fieldDescription>
+	</field>
+	<field name="stateCode" class="java.lang.String">
+		<fieldDescription><![CDATA[stateCode]]></fieldDescription>
+	</field>
+	<field name="callSign" class="java.lang.String">
+		<fieldDescription><![CDATA[callSign]]></fieldDescription>
+	</field>
+	<field name="grt" class="java.lang.Double">
+		<fieldDescription><![CDATA[grt]]></fieldDescription>
+	</field>
+	<field name="shipCaptain" class="java.lang.String">
+		<fieldDescription><![CDATA[shipCaptain]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="325" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="40" width="555" height="17" uuid="821f7076-b2f3-4678-a8cf-9c67878377d9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="555" height="43" uuid="19d9c6f3-80dc-4e86-8220-ae725294aa2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[THÔNG BÁO PHẢN HỒI TỪ CƠ QUAN CHUYÊN NGÀNH
+REPORT OF RESPONSE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="1113830e-654d-4232-8eb0-97dc23c01c69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="20" uuid="b351687c-ce63-4862-bff2-17e38a0702ec"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="555" height="17" uuid="3679be50-6e7c-4256-ab2a-4f76abecc839"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<line>
+				<reportElement x="210" y="77" width="135" height="1" uuid="d9dec8bc-441a-4d2f-87a3-e678909851d8"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="266" y="242" width="289" height="17" uuid="81b3e1eb-2b96-4080-a994-f422284fc971"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Name of master]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="363" y="225" width="192" height="17" uuid="e907d6d4-308e-4081-9ee9-3c807c058c86"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>" + (($F{shipCaptain} == null) ? "" : $F{shipCaptain}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="265" width="350" height="17" uuid="77cb4345-7d4b-4f29-917a-5f6b0c2cb1fe"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{MINISTRY_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="157" width="59" height="17" uuid="58854536-2b41-4af9-8b31-bcca137a18bd"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[1. Tên tàu:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="157" width="207" height="17" uuid="246ddecf-646b-4045-9fab-b90e3a079ece"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>" + (($F{shipName} == null) ? "" : $F{shipName}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="157" width="212" height="17" uuid="1f985029-22f8-4cda-84f3-d87f7a8659a8"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>" + vn.gt.utils.GetNameFunction.getStateName(new java.util.Date(), $F{stateCode}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="266" y="174" width="289" height="17" uuid="12607bb8-e637-4272-87c8-8c2b73835ea3"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Flag State of ship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="242" width="266" height="17" uuid="1dda8809-dbc8-4e8f-942b-47d84d2ad658"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Gross tonnage]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="191" width="448" height="17" uuid="fcaa436f-4452-4d4e-8876-c92b21fdd861"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>" + (($F{callSign} == null) ? "" : $F{callSign}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="174" width="266" height="17" uuid="8e2b5d19-728b-49e7-af04-6bf682ad9502"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Name of ship]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="225" width="87" height="17" uuid="b6ea9e43-5773-4c47-bc83-20e0085a6679"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Tổng dung tích:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="225" width="97" height="17" uuid="3f8e4d4e-e7e2-4177-bc4f-015cdb6ed1ee"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Tên thuyền trưởng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="157" width="77" height="17" uuid="86e3d3e2-d22a-4520-b269-397a8635823a"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Quốc tịch tàu:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="265" width="205" height="17" uuid="2b3a2e34-3105-4404-a208-d09918384dfc"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[2. Phản hồi của cơ quan chuyên ngành: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="225" width="179" height="17" uuid="bf20a8c1-b010-44cb-9211-4dd0e6b348fe"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>" + ($F{grt}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="300" width="77" height="25" uuid="f19c663a-f019-45ac-bf9c-061464749d7c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Khai mới / sửa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="300" width="103" height="25" uuid="f90f0027-4db0-4977-ab65-109454081ccf"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Ý kiến]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="26" height="25" uuid="d9323ce0-466a-41d1-a8b9-a687ae2c2a1d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="300" width="111" height="25" uuid="6ea35c55-b8be-4aff-b96b-33c439a33c91"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Phản hồi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="300" width="80" height="25" uuid="4fc8328c-898c-47e4-b78d-f97def90fce1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Loại thông điệp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="300" width="75" height="25" uuid="c56be373-f80d-4a80-a581-302cdce188f4"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Thời gian gửi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="300" width="83" height="25" uuid="35d6793f-10a9-429e-8b0c-cdf3f730d697"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Công chức]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="208" width="555" height="17" uuid="397b5ed8-dbd2-43f7-a900-d2d3aee4fc88"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{DOCUMENT_TYPE}.toString()).equals("6")) ? "Registration Number " : (($P{DOCUMENT_TYPE}.toString()).equals("7")) ? "Registration Number " : "Call Sign"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="190" width="105" height="17" uuid="b27f3969-d2c6-474d-aff9-fed9651337e5"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{DOCUMENT_TYPE}.toString()).equals("6")) ? "Số đăng ký: " : (($P{DOCUMENT_TYPE}.toString()).equals("7")) ? "Số đăng ký: " : "Hô hiệu: "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="20" uuid="d39b9867-460c-4053-b925-116730244763"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetResultMinistry" uuid="ad6ae820-1c01-452d-a98e-f744c39f333c">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{allResultHistoryMinistrie})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="555">
+						<textField isStretchWithOverflow="true" pattern="">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="294" y="0" width="75" height="20" isPrintWhenDetailOverflows="true" uuid="b78e1deb-0b16-44a7-9c9c-06ecc9f42d3f"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph spacingBefore="3" spacingAfter="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{latestDate} == null) ? "" : vn.gt.utils.FormatData.parseDateToTringType3($F{latestDate}))]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="217" y="0" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="29b448ec-1803-4754-b455-97abf1462024"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph spacingBefore="3" spacingAfter="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getFunctionNameByRequestCode($F{requestCode})]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="369" y="0" width="83" height="20" isPrintWhenDetailOverflows="true" uuid="6302f21e-3c3a-4f7e-9cdd-58316e4c3e82"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph spacingBefore="3" spacingAfter="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{officerName} == null) ? "" : $F{officerName})]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="26" y="0" width="111" height="20" isPrintWhenDetailOverflows="true" uuid="8d00f4b4-ab17-4d5f-a752-3f20be610a47"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph spacingBefore="3" spacingAfter="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getStatusName($F{response})]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="452" y="0" width="103" height="20" isPrintWhenDetailOverflows="true" uuid="b68994c1-8853-4307-948d-1fcdf1bfbe9c"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph rightIndent="3" spacingBefore="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{remarks} == null) ? "" : $F{remarks})]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="137" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="574128a9-889e-4f69-b05b-2b6ebead7501"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+								<paragraph spacingBefore="3" spacingAfter="3"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{businessTypeCode} == null ) ? "" : (vn.gt.utils.GetNameFunction.getBusinessTypeName($F{businessTypeCode})))]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="26" height="20" isPrintWhenDetailOverflows="true" uuid="57386ce8-1d7a-47f3-96df-d03c69dd9fcc"/>
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+								<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="85"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,23 @@
+<div id="menu_template" class="hidden">
+	<div class="layout row wrap" v-show="screen_state === 0">
+		
+		<div class="flex xs12" >
+			<jx-hanghai-filter-left
+				:document_type_api="document_type_api"
+				@filteraction="filteraction"
+				@document-lists="getDocumentTypes"
+				ref="filterleft"
+			>
+			
+			</jx-hanghai-filter-left>
+		</div>
+		<div style="width: 100%;" class="ml-3" v-if="!loadingroleUserFilter">
+			<content-placeholders>
+				<content-placeholders-text :lines="4" />
+			</content-placeholders>
+		</div>
+		<div class="flex xs12" v-else>
+			<div class="flex xs12" jx-bind="roleUserFilter"></div>
+		</div>
+	</div>
+</div>

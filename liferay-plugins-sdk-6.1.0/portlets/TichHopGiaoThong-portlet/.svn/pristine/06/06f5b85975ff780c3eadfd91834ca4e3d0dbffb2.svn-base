@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CargoDeclaration_subreport2" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ea07111-f822-40d8-a40e-4ea581b413a6">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="billOfLadingNo" class="java.lang.String">
+		<fieldDescription><![CDATA[billOfLadingNo]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="goodItemCode" class="java.lang.String">
+		<fieldDescription><![CDATA[goodItemCode]]></fieldDescription>
+	</field>
+	<field name="goodItemDescription" class="java.lang.String">
+		<fieldDescription><![CDATA[goodItemDescription]]></fieldDescription>
+	</field>
+	<field name="grossWeight" class="java.lang.Double">
+		<fieldDescription><![CDATA[grossWeight]]></fieldDescription>
+	</field>
+	<field name="grossWeightUnit" class="java.lang.String">
+		<fieldDescription><![CDATA[grossWeightUnit]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="kindOfPackages" class="java.lang.String">
+		<fieldDescription><![CDATA[kindOfPackages]]></fieldDescription>
+	</field>
+	<field name="marksandNosofGoods" class="java.lang.String">
+		<fieldDescription><![CDATA[marksandNosofGoods]]></fieldDescription>
+	</field>
+	<field name="measurement" class="java.lang.Double">
+		<fieldDescription><![CDATA[measurement]]></fieldDescription>
+	</field>
+	<field name="measurementUnit" class="java.lang.String">
+		<fieldDescription><![CDATA[measurementUnit]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="numberOfPackage" class="java.lang.Long">
+		<fieldDescription><![CDATA[numberOfPackage]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="0" width="78" height="55" uuid="ae1d718d-4a16-4cf9-a938-cb68c9464e57"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[6. Ký hiệu và
+số hiệu
+hàng hóa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="198" height="37" uuid="bdc9eb7e-fd10-4e08-90d3-3af63a2a5df3"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[7. Số và loại bao kiện;
+loại hàng hóa, mã hàng hóa
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="113" height="19" uuid="fc9831c7-2bf7-485b-8ec1-a4a5efb9fd54"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[8. Tổng trọng lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="0" width="112" height="19" uuid="e1836501-27ee-4b86-828d-873c7bccf56f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[9. Kích thước
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="34" width="113" height="53" uuid="4661542f-d725-4cf4-813e-218231cd0d1e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="37" uuid="ebb11349-0b87-4929-873d-7c3497d87738"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[* Số vận đơn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="54" height="50" uuid="a937aafa-ce7d-4703-865b-bb61d3e2a8bb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[B/L No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="19" width="113" height="15" uuid="db6eddb5-ef81-41e8-ae8d-160a5ec1bca8"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Gross weight]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="55" width="78" height="32" uuid="0b8d539a-e593-4564-a9ee-3fced5c49150"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Marks and Nos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="37" width="198" height="50" uuid="8fa08a6b-dcb5-439b-a6f7-aaeab2592bb4"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Number and kind of packages;
+description of goods
+or, if available, the HS code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="19" width="112" height="68" uuid="b7a64f72-059f-45d4-bd99-42ee570fb9d9"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Measurement]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="443" y="0" width="112" height="20" isPrintWhenDetailOverflows="true" uuid="12341080-f36f-4cf7-9dbc-eea720e42239"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{measurement} + "   " + (($F{measurementUnit}.length() < 5) ? vn.gt.utils.GetNameFunction.getUnitGeneralName(new java.util.Date(), $F{measurementUnit}) : $F{measurementUnit})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="54" y="0" width="78" height="20" isPrintWhenDetailOverflows="true" uuid="8898bfc0-f468-4ff9-bdc5-5279c01b6c3f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marksandNosofGoods}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="330" y="0" width="113" height="20" isPrintWhenDetailOverflows="true" uuid="900a4fa4-89db-45e6-bd03-8afadbf379d5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grossWeight} + "   " + (($F{grossWeightUnit}.length() < 5) ? vn.gt.utils.GetNameFunction.getUnitGeneralName(new java.util.Date(), $F{grossWeightUnit}) : $F{grossWeightUnit})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="132" y="0" width="198" height="20" isPrintWhenDetailOverflows="true" uuid="3a705b95-3cf6-45d5-9690-b6208ec1eeb0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numberOfPackage} + "    " + vn.gt.utils.GetNameFunction.getPackage(new java.util.Date(), $F{kindOfPackages})+ (($F{kindOfPackages}.length()==0) ? "" : "; <br> ")+ $F{goodItemDescription}+ (($F{goodItemDescription}.length()==0 || $F{goodItemCode}.length()==0) ? "" : "; <br>")+ vn.gt.utils.GetNameFunction.getNameGoods(new java.util.Date(), $F{goodItemCode})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="54" height="20" isPrintWhenDetailOverflows="true" uuid="865240a9-24ce-456b-a69c-a04c70c2a0d0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="11" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{billOfLadingNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

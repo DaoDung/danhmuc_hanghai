@@ -1,0 +1,366 @@
+#footer {
+	background: white;
+    padding: 10px 0 8px;
+    border-top: 1px solid #ddd;
+}
+#footer ul {
+	list-style-type: none;
+    text-align: center;
+}
+#footer ul li {
+	display: inline-block;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 15px;
+}
+#footer ul li a {
+	color: #0d2434;
+}
+#footer ul li .manual {
+	background: #3563C1;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: whitesmoke;
+    text-decoration: none;
+}
+body {
+	font-family: Roboto,sans-serif;
+}
+body .application--wrap {
+	min-height: calc(100vh - 161px);
+}
+body .navigation-drawer {
+	position: absolute;
+	border: 1px solid #ddd;
+    border-width: 1px 1px 0 0;
+    overflow: hidden;
+}
+html {
+	overflow: auto;
+}
+
+#banner {
+	height: 105px;
+	overflow: hidden;
+	background-color: #3563C1;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+#banner > .container-fluid {
+    padding: 10px 30px;
+    display: flex;
+}
+#banner > .container-fluid a {
+    color: white;
+    text-decoration: none;
+}
+#banner > .container-fluid .actions-group {
+    margin-left: auto;
+}
+#banner > nav h1, #banner > nav ul ul {
+    display: none;
+}
+#banner > nav > ul {
+    background-color: white;
+    overflow: hidden;
+}
+#banner ~ .application {
+	padding-top: 5px;
+}
+#banner > nav > ul li {
+    float: left;
+    list-style: none;
+}
+#banner > nav > ul li a {
+    display: block;
+    padding: 6px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 26px;
+    color: #2a2a2a;
+}
+#banner > nav > ul li a img {
+    float: left;
+    margin-right: 10px;
+}
+#banner > nav > ul li:first-child a {
+	background-color: #3563c1;
+	color: white;
+}
+
+.menu__content--select {
+    margin-top: 22px;
+}
+
+body .danhSachHoSoTable__class .table>thead>tr>th:nth-child(1) {
+    width: 40px;
+    padding: 8px;
+}
+body .danhSachHoSoTable__class .table>thead>tr>th:nth-child(2) {
+	width: auto;
+	padding: 8px;
+}
+body .danhSachHoSoTable__class .table>thead>tr>th:nth-child(4) {
+	padding: 8px;
+}
+body .danhSachHoSoTable__class .table>thead>tr>th:nth-child(8),
+body .danhSachHoSoTable__class .table>thead>tr>th:nth-child(10) {
+	width: 130px;
+	padding: 8px;
+}
+
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(1),
+body .danhSachHoSocoQuanTable__class .table>thead>tr>th:nth-child(1) {
+	width: 50px;
+	padding: 8px;
+}
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(2) {
+	width: 200px;
+	padding: 8px;
+}
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(4) {
+	width: 40px;
+	padding: 8px;
+}
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(5) {
+	width: 40px;
+	padding: 8px;
+}
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(6) {
+	width: 150px;
+	padding: 8px;
+}
+body .danhSachHoSoKhaiBaoTable__class .table>thead>tr>th:nth-child(7),
+body .danhSachHoSocoQuanTable__class .table>thead>tr>th:nth-child(4) {
+	width: 350px;
+	padding: 8px;
+}
+
+body .danhSachHangHoaTable__class .table>thead>tr>th:nth-child(1),
+body .danhSachHangHoaTable__class .table>thead>tr>th:nth-child(7) {
+	width: 50px;
+	padding: 8px;
+}
+body .danhSachHoSocoQuanTable__class .text-bold{
+    font-weight: bold;
+    color: #1975d3;
+}
+/*------------------------------
+			Pagination
+------------------------------*/
+body .pagination button {
+  box-shadow: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  font-size: 13px;
+  width: 30px;
+  height: 30px;
+}
+body .pagination button i {
+  font-size: 1.5em !important;
+}
+body .pagination li:not(:first-child) button {
+  margin-left: -1px;
+}
+
+.pagging-table .input-group--text-field {
+	height: 32px;
+}
+button:focus {
+  outline: none !important;
+}
+body .input-group.input-group--selection-controls.switch label {
+    padding-left: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1c75d3;
+}
+body .list--group__header {
+    list-style: none;
+}
+body .tabs__div {
+	max-width: 350px;
+}
+body .tabs__container {
+	height: 36px;
+    background-color: #d6e9f7;
+    border-color: #d6e9f7 !important;
+}
+body .tabs__div {
+    max-width: 350px;
+}
+.application .theme--light.input-group.input-group--textarea:not(.input-group--full-width) .input-group__input, 
+.theme--light .input-group.input-group--textarea:not(.input-group--full-width) .input-group__input {
+    border: 1px solid rgba(0,0,0,.54) !important;
+}
+.input-group--text-field.input-group--textarea:not(.input-group--full-width) .input-group__input {
+    padding: 0 !important;
+    height: 70px;
+}
+body .tabs__content .card__actions {
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: -5px;
+}
+body .input-group--text-field.input-group--textarea textarea {
+    font-size: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+}
+body .fade-transition-leave-active {
+	display: none !important;
+}
+body .slide-y-transition-leave-active {
+	display: none !important;
+}
+html {
+    font-size: 13px;
+}
+.background-triangle-small + div.header_tools, .background-triangle-big + div.header_tools {
+    width: -webkit-calc( 100% - 100% );
+    width: calc(100% - 100% );
+    align-items: center;
+}
+body .btn-border-left {
+    border-left: 2px solid white;
+    border-radius: 0;
+}
+body .btn .btn__content .icon {
+    color: #939393;
+}
+body button.revert__icon i {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(-180deg);
+}
+body .list__group__items .list__tile--link .list__tile__action {
+    padding-right: 0px;
+}
+body .icon {
+    font-size: 18px;
+}
+body .vdatetime {
+    width: 100%;
+}
+
+body .giay_to_xuat_trinh.table-bordered {
+    border: 0;
+}
+body .giay_to_xuat_trinh.table-bordered table.table tbody td,
+body .danhSachHangHoaTable__class.table-bordered table.table tbody td {
+   color: inherit;
+  border-right: 1px solid #dddddd;
+}
+body .thong__tin_gt_xt .expansion-panel__body{
+	    padding: 0 !important;
+}
+body .thong__tin_gt_xt {
+	border-bottom: 0 !important;
+}
+body .danhSachHangHoaTable__class {
+  	width: 100%;
+    border-top: 0;
+}
+body .danhSachHoSocoQuanTable__class {
+	border: 0;
+}
+
+body .wd-label-color-tim,
+body .wd-label-color-tim a {
+	color: #909!important;
+}
+
+body .wd-label-color-light-green,
+body .wd-label-color-light-green a {
+    color: #2c8c00!important;
+}
+
+body .wd-label-color-red,
+body .wd-label-color-red a {
+    color: #f00!important;
+}
+body .wd-bg-color-yellow {
+    background-color: rgb(236, 233, 18);
+}
+body .wd-label-color-dark-blue,
+body .wd-label-color-dark-blue a {
+    color: #0054ff!important;
+}
+
+body .speed-dial__list .btn__content {
+    text-transform: none;
+}
+body .btn.theme--dark .btn__content .icon {
+    color: #fff;
+}
+body .speed-dial--fixed {
+    top: 50px !important;
+}
+.speed-dial {
+  z-index: 3;
+  float: right;
+}
+
+.menu__content {
+    z-index: 3002 !important;
+    max-height: 250px;
+}
+.menu__content .list > div{
+   cursor: pointer;
+}
+.alert.alert--outline {
+    background: white;
+}
+body .subheader,
+body .btn__content,
+body .btn {
+    font-size: 13px;
+}
+body .btn {
+	height: 32px;
+}
+body .btn--icon {
+    width: 32px;
+}
+body .tabs__div {
+    font-size: 12px;
+}
+body .chip .chip__content {
+    height: 25px;
+}
+.primary {
+    background-color: #3563c1!important;
+    border-color: #3563c1!important;
+}
+body .giay_to_xuat_trinh.table-bordered th:nth-child(4),
+body .giay_to_xuat_trinh.table-bordered th:nth-child(5) {
+	width: 160px
+}
+body .giay_to_xuat_trinh.table-bordered .subheader .input-group.date {
+    line-height: 30px !important;
+}
+.giay_to_xuat_trinh .bootstrap-datetimepicker-widget th, .giay_to_xuat_trinh .bootstrap-datetimepicker-widget td {
+    cursor: pointer;
+    padding: 2px 8px !important;
+    border: 0 !important;
+}
+.giay_to_xuat_trinh .bootstrap-datetimepicker-widget td.active{
+	color: #fff !important;
+}
+.giay_to_xuat_trinh .bootstrap-datetimepicker-widget,
+body .extFormXuLy .bootstrap-datetimepicker-widget {
+   position: fixed;
+   left: unset;
+}
+body .extFormXuLy .input-group.date > i {
+   top: 0 !important;
+}
+body .icon__nopadding .input-group.date .icon{
+    top: 0 !important;
+}
+
+body .dialog:not(.dialog--fullscreen) {
+	overflow: hidden;
+}

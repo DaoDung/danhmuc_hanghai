@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PassengerList_subreport2" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="24698d51-c580-45ef-b5ee-c1ab0fc2adfe">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="birthDay" class="java.util.Date">
+		<fieldDescription><![CDATA[birthDay]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[birthDay.class]]></fieldDescription>
+	</field>
+	<field name="date" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.date]]></fieldDescription>
+	</field>
+	<field name="day" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.day]]></fieldDescription>
+	</field>
+	<field name="hours" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.hours]]></fieldDescription>
+	</field>
+	<field name="minutes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.minutes]]></fieldDescription>
+	</field>
+	<field name="month" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.month]]></fieldDescription>
+	</field>
+	<field name="seconds" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.seconds]]></fieldDescription>
+	</field>
+	<field name="time" class="java.lang.Long">
+		<fieldDescription><![CDATA[birthDay.time]]></fieldDescription>
+	</field>
+	<field name="timezoneOffset" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.timezoneOffset]]></fieldDescription>
+	</field>
+	<field name="year" class="java.lang.Integer">
+		<fieldDescription><![CDATA[birthDay.year]]></fieldDescription>
+	</field>
+	<field name="birthPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[birthPlace]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="familyName" class="java.lang.String">
+		<fieldDescription><![CDATA[familyName]]></fieldDescription>
+	</field>
+	<field name="givenName" class="java.lang.String">
+		<fieldDescription><![CDATA[givenName]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="isTransit" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isTransit]]></fieldDescription>
+	</field>
+	<field name="nationality" class="java.lang.String">
+		<fieldDescription><![CDATA[nationality]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="passengerCode" class="java.lang.String">
+		<fieldDescription><![CDATA[passengerCode]]></fieldDescription>
+	</field>
+	<field name="passportExpiredDate" class="java.util.Date">
+		<fieldDescription><![CDATA[passportExpiredDate]]></fieldDescription>
+	</field>
+	<field name="portOfDisembarkation" class="java.lang.String">
+		<fieldDescription><![CDATA[portOfDisembarkation]]></fieldDescription>
+	</field>
+	<field name="portOfEmbarkation" class="java.lang.String">
+		<fieldDescription><![CDATA[portOfEmbarkation]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="serialNumberOfIdentity" class="java.lang.String">
+		<fieldDescription><![CDATA[serialNumberOfIdentity]]></fieldDescription>
+	</field>
+	<field name="typeOfIdentity" class="java.lang.String">
+		<fieldDescription><![CDATA[typeOfIdentity]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="50" height="32" uuid="28cd5d58-4349-4a06-9425-97eea23cd593"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="182" height="32" uuid="15026368-4f26-4e8b-bf15-4f62e523a4e5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Họ và tên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="0" width="147" height="32" uuid="14945e7d-8017-4c96-ae94-9679fbd571b5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày và nơi sinh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="0" width="137" height="32" uuid="63b34b8e-934c-40c5-b71b-eea068e10639"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số hộ chiếu/GCMND]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="399" y="0" width="137" height="20" isPrintWhenDetailOverflows="true" uuid="cd44e6dc-c5a4-4a07-a780-9e31124cf5de"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serialNumberOfIdentity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="70" y="0" width="182" height="20" isPrintWhenDetailOverflows="true" uuid="2ee0e9f8-95a0-4487-aef9-30197e820f87"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familyName}.toUpperCase() + " " + $F{givenName}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="252" y="0" width="147" height="20" isPrintWhenDetailOverflows="true" uuid="48b8f4cc-3150-44a2-a537-918dc9023b00"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.tichhop.report.ReportFunction.parseDateToString($F{birthDay}) +" "+ $F{birthPlace}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="20" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="2a164b01-257f-4bd3-8ff6-0d1b38c9c452"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

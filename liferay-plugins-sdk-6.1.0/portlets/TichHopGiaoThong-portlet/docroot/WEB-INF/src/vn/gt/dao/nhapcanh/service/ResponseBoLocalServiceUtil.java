@@ -1,0 +1,298 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package vn.gt.dao.nhapcanh.service;
+
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+/**
+ * The utility for the response bo local service. This utility wraps {@link vn.gt.dao.nhapcanh.service.impl.ResponseBoLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author win_64
+ * @see ResponseBoLocalService
+ * @see vn.gt.dao.nhapcanh.service.base.ResponseBoLocalServiceBaseImpl
+ * @see vn.gt.dao.nhapcanh.service.impl.ResponseBoLocalServiceImpl
+ * @generated
+ */
+public class ResponseBoLocalServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link vn.gt.dao.nhapcanh.service.impl.ResponseBoLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
+
+	/**
+	* Adds the response bo to the database. Also notifies the appropriate model listeners.
+	*
+	* @param responseBo the response bo
+	* @return the response bo that was added
+	* @throws SystemException if a system exception occurred
+	*/
+	public static vn.gt.dao.nhapcanh.model.ResponseBo addResponseBo(
+		vn.gt.dao.nhapcanh.model.ResponseBo responseBo)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addResponseBo(responseBo);
+	}
+
+	/**
+	* Creates a new response bo with the primary key. Does not add the response bo to the database.
+	*
+	* @param id the primary key for the new response bo
+	* @return the new response bo
+	*/
+	public static vn.gt.dao.nhapcanh.model.ResponseBo createResponseBo(long id) {
+		return getService().createResponseBo(id);
+	}
+
+	/**
+	* Deletes the response bo with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param id the primary key of the response bo
+	* @throws PortalException if a response bo with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteResponseBo(long id)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteResponseBo(id);
+	}
+
+	/**
+	* Deletes the response bo from the database. Also notifies the appropriate model listeners.
+	*
+	* @param responseBo the response bo
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteResponseBo(
+		vn.gt.dao.nhapcanh.model.ResponseBo responseBo)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteResponseBo(responseBo);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
+	@SuppressWarnings("rawtypes")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQuery(dynamicQuery);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
+	@SuppressWarnings("rawtypes")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
+	@SuppressWarnings("rawtypes")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQueryCount(dynamicQuery);
+	}
+
+	public static vn.gt.dao.nhapcanh.model.ResponseBo fetchResponseBo(long id)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchResponseBo(id);
+	}
+
+	/**
+	* Returns the response bo with the primary key.
+	*
+	* @param id the primary key of the response bo
+	* @return the response bo
+	* @throws PortalException if a response bo with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static vn.gt.dao.nhapcanh.model.ResponseBo getResponseBo(long id)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getResponseBo(id);
+	}
+
+	public static com.liferay.portal.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns a range of all the response bos.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of response bos
+	* @param end the upper bound of the range of response bos (not inclusive)
+	* @return the range of response bos
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<vn.gt.dao.nhapcanh.model.ResponseBo> getResponseBos(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getResponseBos(start, end);
+	}
+
+	/**
+	* Returns the number of response bos.
+	*
+	* @return the number of response bos
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getResponseBosCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getResponseBosCount();
+	}
+
+	/**
+	* Updates the response bo in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param responseBo the response bo
+	* @return the response bo that was updated
+	* @throws SystemException if a system exception occurred
+	*/
+	public static vn.gt.dao.nhapcanh.model.ResponseBo updateResponseBo(
+		vn.gt.dao.nhapcanh.model.ResponseBo responseBo)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateResponseBo(responseBo);
+	}
+
+	/**
+	* Updates the response bo in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param responseBo the response bo
+	* @param merge whether to merge the response bo with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the response bo that was updated
+	* @throws SystemException if a system exception occurred
+	*/
+	public static vn.gt.dao.nhapcanh.model.ResponseBo updateResponseBo(
+		vn.gt.dao.nhapcanh.model.ResponseBo responseBo, boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateResponseBo(responseBo, merge);
+	}
+
+	/**
+	* Returns the Spring bean ID for this bean.
+	*
+	* @return the Spring bean ID for this bean
+	*/
+	public static java.lang.String getBeanIdentifier() {
+		return getService().getBeanIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+	}
+
+	public static void clearService() {
+		_service = null;
+	}
+
+	public static ResponseBoLocalService getService() {
+		if (_service == null) {
+			Object object = PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+					ResponseBoLocalService.class.getName());
+			ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+					"portletClassLoader");
+
+			ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(object,
+					ResponseBoLocalService.class.getName(), portletClassLoader);
+
+			_service = new ResponseBoLocalServiceClp(classLoaderProxy);
+
+			ClpSerializer.setClassLoader(portletClassLoader);
+
+			ReferenceRegistry.registerReference(ResponseBoLocalServiceUtil.class,
+				"_service");
+			MethodCache.remove(ResponseBoLocalService.class);
+		}
+
+		return _service;
+	}
+
+	public void setService(ResponseBoLocalService service) {
+		MethodCache.remove(ResponseBoLocalService.class);
+
+		_service = service;
+
+		ReferenceRegistry.registerReference(ResponseBoLocalServiceUtil.class,
+			"_service");
+		MethodCache.remove(ResponseBoLocalService.class);
+	}
+
+	private static ResponseBoLocalService _service;
+}

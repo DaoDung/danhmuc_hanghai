@@ -1,0 +1,16 @@
+Buildfile: /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/portlets/TichHopGiaoThong-portlet/build.xml
+compile:
+merge:
+     [copy] Copying 3 files to /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/portlets/TichHopGiaoThong-portlet/docroot/WEB-INF/lib
+     [copy] Copying 5 files to /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/portlets/TichHopGiaoThong-portlet/docroot/WEB-INF/lib
+compile-java:
+    [javac] Compiling 1 source file to /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/portlets/TichHopGiaoThong-portlet/docroot/WEB-INF/classes
+merge:
+war:
+   [delete] Deleting: /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/dist/TichHopGiaoThong-portlet-6.1.0.1.war
+clean-portal-dependencies:
+      [zip] Building zip: /home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/dist/TichHopGiaoThong-portlet-6.1.0.1.war
+deploy:
+     [copy] Copying 1 file to /home/hoanganh/Downloads/Telegram Desktop/liferay-portal-6.1.0-ce-ga1/liferay-portal-6.1.0-ce-ga1/deploy
+BUILD SUCCESSFUL
+Total time: 10 seconds

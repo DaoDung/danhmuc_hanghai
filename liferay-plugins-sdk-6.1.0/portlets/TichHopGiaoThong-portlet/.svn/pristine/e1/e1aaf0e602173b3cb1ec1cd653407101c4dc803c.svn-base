@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.gt.dao.common">
+	<author>win_64</author>
+	<namespace>gt</namespace>
+
+	<entity name="UserPort" table="user_port" local-service="true" remote-service="false" data-source="gtDataSource" cache-enabled="false">
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="userId" db-name="userid" type="long" />
+		<column name="createDate" db-name="createdate" type="Date" />
+		<column name="status" db-name="status" type="int" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="PortCode" return-type="Collection">
+			<finder-column name="portCode" />
+		</finder>
+		<finder name="UserId" return-type="UserPort" unique="true">
+			<finder-column name="userId" />
+		</finder>
+
+	</entity>
+	<entity name="LogMessageValidation" table="LOG_MESSAGE_VALIDATION" local-service="true" remote-service="false" data-source="gtDataSource" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestDirection" db-name="RequestDirection" type="String" />
+		<column name="requestDate" db-name="RequestDate" type="Date" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		<column name="tagProperty" db-name="TagProperty" type="String" />
+		<column name="dataValidation" db-name="DataValidation" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="DocumentNameDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+	</entity>
+	<entity name="UserSign" table="user_sign" local-service="true" remote-service="false" data-source="gtDataSource" cache-enabled="false">
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="userId" db-name="userid" type="long" />
+		<column name="portCode" db-name="portcode" type="String" />
+		<column name="title" db-name="title" type="String" />
+		<column name="representative" db-name="representative" type="String" />
+		<column name="fileChuKyId" db-name="filechukyid" type="long" />
+		<column name="fileConDauId" db-name="filecondauid" type="long" />
+		<column name="fileChungThuSoId" db-name="filechungthusoid" type="long" />
+		<column name="modifyUser" db-name="modifyuser" type="String" />
+		<column name="modifyDate" db-name="modifydate" type="Date" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="PortCode" return-type="Collection">
+			<finder-column name="portCode" />
+		</finder>
+		<finder name="UserId" return-type="UserPort" unique="true">
+			<finder-column name="userId" />
+		</finder>
+
+	</entity>
+
+</service-builder>

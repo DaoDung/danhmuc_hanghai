@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.4">
+  <display-name>TichHopGiaoThong-portlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <jsp-config>
+    <taglib>
+      <taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
+      <taglib-location>
+                /WEB-INF/tld/liferay-portlet.tld
+            </taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>http://liferay.com/tld/aui</taglib-uri>
+      <taglib-location>/WEB-INF/tld/aui.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+  <session-config>
+    <session-timeout>90</session-timeout>
+  </session-config>
+  <filter>  
+<filter-name>f1</filter-name>  
+<filter-class>vn.gt.tichhop.sendmessage.MyFilter</filter-class>  
+</filter>  
+   
+<filter-mapping>  
+<filter-name>f1</filter-name>  
+<url-pattern>/*</url-pattern>  
+</filter-mapping>  
+  
+  
+  <listener>
+    <listener-class>com.liferay.portal.kernel.spring.context.PortletContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <description>sessionListener</description>
+    <listener-class>vn.gt.listener.CheckSessionLoginListener</listener-class>
+  </listener>
+  <servlet>
+		<servlet-name>KeyPayServlet</servlet-name>
+		<servlet-class>vn.gt.payment.servlet.KeyPayServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>KeyPayServlet</servlet-name>
+		<url-pattern>/KeyPayServlet/*</url-pattern>
+	</servlet-mapping>
+  <servlet>
+    <display-name>Apache-Axis Servlet</display-name>
+    <servlet-name>AxisServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/servlet/AxisServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>*.jws</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Axis Admin Servlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/servlet/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>jsp</servlet-name>
+    <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+    <init-param>
+      <param-name>mappedfile</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </servlet>
+</web-app>

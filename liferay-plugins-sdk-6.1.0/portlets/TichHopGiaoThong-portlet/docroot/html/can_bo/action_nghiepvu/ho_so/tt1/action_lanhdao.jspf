@@ -1,0 +1,59 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<v-tabs :scrollable="false" >
+	<v-tabs-bar dark class="grey-opencps-panel grey-opencps-panel-group-button">
+		<v-tabs-slider color="primary"></v-tabs-slider>
+		<v-tabs-item
+	       v-for="(item, index) in kehoachActions"
+	       :key="item.id"
+	       :href="'#tab-' + item.id"
+	     >
+	       {{item.name}}
+	     </v-tabs-item>
+	</v-tabs-bar>
+	<v-tabs-items>
+		<v-tabs-content :id="'tab-1'" reverse-transition="slide-y-transition" transition="slide-y-transition">
+			<v-card flat>
+				<v-card-text>
+						Bạn có muốn tiếp tục xử lý?
+						<v-card-actions>
+							<v-btn color="primary" v-on:click.native="tt1_actionHuyBoSung(detail, 1)">
+								Xác nhận
+							</v-btn>
+						</v-card-actions>
+				</v-card-text>
+			</v-card>
+		</v-tabs-content>
+		<v-tabs-content :id="'tab-2'" reverse-transition="slide-y-transition" transition="slide-y-transition">
+			<v-card flat>
+				<v-card-text>
+						Nhập lý do <small class="red--text text--darken-3">*</small>:
+						<v-text-field
+							v-model="ykienReject"
+							textarea
+						></v-text-field> 
+						<v-card-actions>
+							<v-btn color="primary" v-on:click.native="tt1_actionHuyBoSung(detail, 2)">
+								Xác nhận
+							</v-btn>
+						</v-card-actions>
+				</v-card-text>
+			</v-card>
+		</v-tabs-content>
+		<v-tabs-content :id="'tab-3'" reverse-transition="slide-y-transition" transition="slide-y-transition">
+			<v-card flat>
+				<v-card-text>
+						Nhập lý do <small class="red--text text--darken-3">*</small>:
+						<v-text-field
+							v-model="ykien"
+							textarea
+						></v-text-field>
+						<v-card-actions>
+							<v-btn color="primary" v-on:click.native="tt1_actionHuyBoSung(detail, 9)">
+								Xác nhận
+							</v-btn>
+						</v-card-actions>
+				</v-card-text>
+			</v-card>
+		</v-tabs-content>
+	</v-tabs-items>
+</v-tabs>

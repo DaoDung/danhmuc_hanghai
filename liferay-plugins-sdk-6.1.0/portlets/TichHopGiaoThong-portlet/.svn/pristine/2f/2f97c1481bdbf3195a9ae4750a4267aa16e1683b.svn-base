@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="crewlist_temp_subreport1" pageWidth="802" pageHeight="554" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="72c58fca-3758-4373-ad2c-920689dcd65d">
+	<property name="ireport.zoom" value="1.241842646118311"/>
+	<property name="ireport.x" value="18"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="attachedFile" class="java.lang.String">
+		<fieldDescription><![CDATA[attachedFile]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="callSign" class="java.lang.String">
+		<fieldDescription><![CDATA[callSign]]></fieldDescription>
+	</field>
+	<field name="crewList" class="java.lang.Integer">
+		<fieldDescription><![CDATA[crewList]]></fieldDescription>
+	</field>
+	<field name="dateOfArrival" class="java.util.Date">
+		<fieldDescription><![CDATA[dateOfArrival]]></fieldDescription>
+	</field>
+	<field name="documentName" class="java.lang.Long">
+		<fieldDescription><![CDATA[documentName]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="flagStateOfShip" class="java.lang.String">
+		<fieldDescription><![CDATA[flagStateOfShip]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="imoNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[imoNumber]]></fieldDescription>
+	</field>
+	<field name="isArrival" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isArrival]]></fieldDescription>
+	</field>
+	<field name="lastPortOfCallCode" class="java.lang.String">
+		<fieldDescription><![CDATA[lastPortOfCallCode]]></fieldDescription>
+	</field>
+	<field name="masterSigned" class="java.lang.Integer">
+		<fieldDescription><![CDATA[masterSigned]]></fieldDescription>
+	</field>
+	<field name="masterSignedImage" class="java.lang.Integer">
+		<fieldDescription><![CDATA[masterSignedImage]]></fieldDescription>
+	</field>
+	<field name="nameOfShip" class="java.lang.String">
+		<fieldDescription><![CDATA[nameOfShip]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="portOfArrivalCode" class="java.lang.String">
+		<fieldDescription><![CDATA[portOfArrivalCode]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="requestState" class="java.lang.Integer">
+		<fieldDescription><![CDATA[requestState]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.util.Date">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<field name="signPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[signPlace]]></fieldDescription>
+	</field>
+	<field name="userCreated" class="java.lang.String">
+		<fieldDescription><![CDATA[userCreated]]></fieldDescription>
+	</field>
+	<field name="voyageNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[voyageNumber]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="48" width="79" height="20" uuid="1f6ebc68-0307-45e7-9ef5-e2e31ecb73ff"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[1.1 Tên tàu: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="88" width="200" height="20" uuid="762a075d-d06b-4544-94cc-e64d62e9ad38"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1.2 Số IMO:<b> "+$F{imoNumber}+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="68" width="122" height="20" uuid="3861702d-5007-43be-a751-9d7f2f2e37e8"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Port of arrival/departure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="48" width="122" height="20" uuid="c020aba3-548e-4dee-a3db-68e5def5a4de"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[2. Cảng đến/rời: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="68" width="339" height="20" uuid="bd934822-69a7-42e7-9c4a-6f9b91bcd231"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Date of arrival/departure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="48" width="129" height="20" uuid="d0a1af3e-f62a-43d2-ab0a-9972d72c0746"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[3. Ngày đến / rời: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="108" width="263" height="21" uuid="88598454-52d1-4dfd-909f-52e2facfccb0"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Call sign]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="88" width="263" height="20" uuid="837bc7a5-8675-422d-961c-37638be6fec2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1.3 Hô hiệu:<b> "+$F{callSign}+"</b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="88" width="339" height="20" uuid="69dde953-0363-4f7c-934c-77cc655d559d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1.4 Số chuyến đi:<b> "+$F{voyageNumber}+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="463" y="108" width="339" height="21" uuid="8e27bffe-331b-4699-a466-0461f96865e0"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Voyage number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="200" height="21" uuid="b52cfb8e-0343-4ea6-9b97-292862d84554"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[IMO number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="69" height="20" uuid="6d0062e3-8a27-41d8-8d7d-48ae620e9726"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Name of ship]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="129" width="463" height="20" uuid="c069ada5-3e94-495b-910a-1ff8c2cd0f76"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4. Quốc tịch tàu:<b> " + vn.gt.utils.GetNameFunction.getStateName(($F{signDate} == null) ? new java.util.Date() : $F{signDate}, $F{flagStateOfShip}) + "</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="149" width="463" height="20" uuid="74d74ef6-3a16-49a9-b7f5-1bbf31c261dc"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Flag State of ship]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="463" y="129" width="339" height="20" uuid="b52a4e57-3a32-407f-8ac5-99a5087666e0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<5. Cảng rời cuối cùng:<b> " + vn.gt.utils.GetNameFunction.getPortName(($F{signDate} == null) ? new java.util.Date() : $F{signDate}, $F{lastPortOfCallCode})+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="463" y="149" width="339" height="20" uuid="1aef2afb-5e86-4922-a3a7-32fc64920bb3"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Last port of call]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="18" width="154" height="17" uuid="2644df05-e00b-4694-9219-6f2b798d94b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Đến]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="33" width="154" height="15" uuid="0b18eb51-010a-44e9-97ab-cc77655f243c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Arrival]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="18" width="117" height="17" uuid="b01853d9-457e-493e-bca5-f10825db447c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rời]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="33" width="117" height="15" uuid="6a301b7e-1feb-4db3-9ea4-7610d480c2d2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Departure]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="703" y="33" width="99" height="15" uuid="72ea51b7-0357-4ce7-ab38-fcd6f01ca58b"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Page No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="703" y="18" width="99" height="15" uuid="dbe473f7-f478-4240-9390-7fa934f7a5d0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Trang số:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="18" width="27" height="30" uuid="1ecd7463-e62c-4b86-9ad3-97c96d21564c"/>
+				<box>
+					<pen lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isArrival}==1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="18" width="27" height="30" uuid="86bbbea5-77d7-496f-addf-a98b7a6978e6"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isArrival}==0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="48" width="141" height="40" uuid="1b50d7c2-4909-4be0-8c17-56fcb9e4448d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="true" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getPortName(($F{signDate} == null) ? new java.util.Date() : $F{signDate}, $F{portOfArrivalCode})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="48" width="131" height="40" uuid="0e542b14-e533-4e8d-b4b2-d5fd796d3c51"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="true" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nameOfShip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="592" y="48" width="210" height="20" uuid="624028f8-4491-4fb3-8bc1-c0f634eac144"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="true" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.tichhop.report.ReportFunction.parseDateToString($F{dateOfArrival})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

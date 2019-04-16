@@ -1,0 +1,52 @@
+<%@page import="vn.gt.utils.PageType"%>
+<%@page import="vn.gt.utils.CheckBusinessUtil"%>
+<%@page import="vn.gt.tichhop.message.MessageType"%>
+<%@page import="vn.gt.dao.danhmucgt.service.DmGtStatusLocalServiceUtil"%>
+<%@page import="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page pageEncoding="UTF-8"%>
+
+<tr <%=CheckBusinessUtil.checkDisplayColumnLichSu(renderRequest.getParameter(PageType.REQUEST_CODE), requestCodeKeHoachDetail, i + 1, results.size()) %>>
+	<td class="text-center"><%= i + 1%></td>
+	
+	<%
+		String versionPhienBan = interfaceRequest.getRequestVersion();
+		if (messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0) {
+			versionPhienBan = versionNo;
+		}
+		String phienBan = versionPhienBan + " - " + (Validator.isNotNull(interfaceRequest) ? DmGTFunctionTypeLocalServiceUtil.findNameByFunctionTypeCode(interfaceRequest.getFunctionType()) : "");
+	%>
+	<td class="text-center"><a href="<%=chiTietHoSoKeHoachTheoVersion%>"><%=phienBan%></a></td>
+	<%
+	if (requestStateKeHoach == 4 || requestStateKeHoach == 9) {
+		if (((messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_BO_GTVT_CAP_KHI_XUAT_CANH)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_QUA_CANH)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_CHO_TAU_DEN)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.PTTND_GIAY_PHEP_VAO_CANG)) == 0) )
+				&& requestStateKeHoach == 4 && isApproval == 1 ) {
+		%>
+			<td class="text-center"><span style="color:#0054FF;"><label>Đã duyệt</label></span></td>
+			<%} else {%>
+			<td class="text-center"><span style="color:#0054FF;"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateKeHoach, MessageType.TRANG_THAI_BAN_KHAI) %></span></td>
+			<%
+		}
+	} else if (requestStateKeHoach == 5 || requestStateKeHoach == 6) {
+		%>
+		<td class="text-center"><span style="color:#FF0000;"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateKeHoach, MessageType.TRANG_THAI_BAN_KHAI) %></span></td>
+		<%
+	} else {
+		%>
+		<td class="text-center"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateKeHoach, MessageType.TRANG_THAI_BAN_KHAI) %></td>
+		<%
+	}
+	%>
+	<td class="text-center" ><%=FormatData.parseDateToTringType3(interfaceRequest.getRequestedDate()) %></td>
+	<td class="text-center" ><%=interfaceRequest.getSenderName() %></td>
+	<td class="text-center"><%=(messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0) ? "Cán bộ kế hoạch" : 
+		(((messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_BO_GTVT_CAP_KHI_XUAT_CANH)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_QUA_CANH)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.PTTND_GIAY_PHEP_VAO_CANG)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_CHO_TAU_DEN)) == 0)) ? "Cán bộ thủ tục" : "NLTT nộp")%></td>
+	<td class="text-left"><%=interfaceRequest.getRemarks() %></td>
+</tr>

@@ -1,0 +1,74 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div v-if="1===1">
+	<v-tabs v-model="activeTab" @input="changeTabs"  :scrollable="false" v-if="detailThanhPhan.messageType === 70">
+		<v-tabs-bar dark class="grey-opencps-panel grey-opencps-panel-group-button">
+			<v-tabs-slider color="primary"></v-tabs-slider>
+			<v-tabs-item :key="1" href="#tabthanhphan1" >
+				Đóng dấu BCY
+			</v-tabs-item>
+		</v-tabs-bar>
+		<v-tabs-items>
+			<v-tabs-content id="tabthanhphan1" reverse-transition="slide-y-transition" transition="slide-y-transition">
+				<v-card flat>
+					<v-card-text>
+							<jx-hanghai-crypto
+								:computerhash="getComputerHashURL"
+								:detail="detail"
+								:messagetype="detailThanhPhan.messageType"
+								:actiontype="71"
+								@kyso-submit-func="kysoSubmit"
+							></jx-hanghai-crypto>
+					</v-card-text>
+				</v-card>
+			</v-tabs-content>
+		</v-tabs-items>
+	</v-tabs>
+</div>
+
+<div v-if="detailThanhPhan.messageType === 2014">
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Danh sách giấy tờ xuất trình cho phương tiện"
+		name_column_1=""
+		:items="itemsGiayToXuatTrinhChoPhuongTien"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Giấy chứng nhận khả năng chuyên môn thuyền viên làm việc trên tàu biển Việt Nam"
+		name_column_1="Thuyền viên"
+		:items="itemsGiayToXuatTrinh_39"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Sổ thuyền viên"
+		name_column_1="Thuyền viên"
+		:items="itemsGiayToXuatTrinh_40"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Các Giấy xác nhận việc cấp Giấy chứng nhận vô tuyến điện viên hệ GMDSS hạng tổng quát (GOC)"
+		name_column_1="Thuyền viên"
+		:items="itemsGiayToXuatTrinh_48"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Giấy chứng nhận vô tuyến điện viên hệ GMDSS hạng hạn chế (ROC)"
+		name_column_1="Thuyền viên"
+		:items="itemsGiayToXuatTrinh_49"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+	<jx-hanghai-detail-giay-to-xuat-trinh
+		title_name="Giấy chứng nhận xác nhận giấy huấn luyện nghiệp vụ đặc biệt cho tàu chuyên dùng"
+		name_column_1="Thuyền viên"
+		:items="itemsGiayToXuatTrinh_50"
+	></jx-hanghai-detail-giay-to-xuat-trinh>
+</div>
+
+<div v-if="detailThanhPhan.messageType === 23">
+	<jx-hanghai-detail-ket-qua-xac-nhan
+		:document_name="detail.documentName"
+		:document_year="detail.documentYear"
+		:thong_bao_api="thong_bao_api"
+		:ghi_chu_api="ghi_chu_api"
+		:detail_model="detail"
+		:type="roleUserFilterselectedType"
+		:thanh_phan_lists="thanhPhanLists"
+		thanh_phan_code="NC_1,NC_6,NC_7,NC_8,NC_9"
+		ref="hanghaidetailxacnhan"
+	>
+	</jx-hanghai-detail-ket-qua-xac-nhan>
+</div>

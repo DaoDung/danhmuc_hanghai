@@ -1,0 +1,1393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.gt.dao.danhmuc">
+	<author>win_64</author>
+	<namespace>gt</namespace>
+	<entity name="RmdcShip" table="dmdc_ship" local-service="true" remote-service="true" cache-enabled="false" data-source="gtDataSource" >
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="shipId" db-name="shipid" type="int" />
+		<column name="shipName" db-name="shipname" type="String" />
+		<column name="shipTypeId" db-name="shiptypeid" type="int" />
+		<column name="shipTypeCode" db-name="shiptypecode" type="String" />
+		<column name="imo" db-name="imo" type="String" />
+		<column name="callSign" db-name="callsign" type="String" />
+		<column name="stateId" db-name="stateid" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="registryNumber" db-name="registrynumber" type="String" />
+		<column name="registryDate" db-name="registrydate" type="Date" />
+		<column name="registryPortId" db-name="registryportid" type="int" />
+		<column name="registryPortCode" db-name="registryportcode" type="String" />
+		<column name="gt" db-name="gt" type="double" />
+		<column name="nrt" db-name="nrt" type="double" />
+		<column name="dwt" db-name="dwt" type="double" />
+		<column name="length" db-name="shiplength" type="double" />
+		<column name="width" db-name="shipwidth" type="double" />
+		<column name="height" db-name="shipheight" type="double" />
+		<column name="sailingSpeed" db-name="sailingspeed" type="double" />
+		<column name="color" db-name="color" type="String" />
+		<column name="boneCode" db-name="bonecode" type="String" />
+		<column name="machineCode" db-name="machinecode" type="String" />
+		<column name="shipAgencyId" db-name="shipagencyid" type="int" />
+		<column name="shipAgencyCode" db-name="shipagencycode" type="String" />
+		<column name="fishingBoatRegistration" db-name="fishingboatregistration" type="String" />
+		<column name="roleShip" db-name="roleship" type="int" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="ShipId" return-type="Collection">
+			<finder-column name="shipId" />
+		</finder>
+		<finder name="ShipTypeCode" return-type="Collection">
+			<finder-column name="shipTypeCode" />
+		</finder>
+	</entity>
+
+	<entity name="HistoryRmdcShip" table="history_dmdc_ship" local-service="true" remote-service="true" data-source="gtDataSource"   cache-enabled="false">
+
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="shipId" db-name="shipid" type="int" />
+		<column name="shipName" db-name="shipname" type="String" />
+		<column name="shipTypeId" db-name="shiptypeid" type="int" />
+		<column name="shipTypeCode" db-name="shiptypecode" type="String" />
+		<column name="imo" db-name="imo" type="String" />
+		<column name="callSign" db-name="callsign" type="String" />
+		<column name="stateId" db-name="stateid" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="registryNumber" db-name="registrynumber" type="String" />
+		<column name="registryDate" db-name="registrydate" type="Date" />
+		<column name="registryPortId" db-name="registryportid" type="int" />
+		<column name="registryPortCode" db-name="registryportcode" type="String" />
+		<column name="gt" db-name="gt" type="double" />
+		<column name="nrt" db-name="nrt" type="double" />
+		<column name="dwt" db-name="dwt" type="double" />
+		<column name="length" db-name="ship_length" type="double" />
+		<column name="width" db-name="ship_width" type="double" />
+		<column name="height" db-name="ship_height" type="double" />
+		<column name="sailingSpeed" db-name="sailingspeed" type="double" />
+		<column name="color" db-name="color" type="String" />
+		<column name="boneCode" db-name="bonecode" type="String" />
+		<column name="machineCode" db-name="machinecode" type="String" />
+		<column name="shipAgencyId" db-name="shipagencyid" type="int" />
+		<column name="shipAgencyCode" db-name="shipagencycode" type="String" />
+		<column name="fishingBoatRegistration" db-name="fishingboatregistration" type="String" />
+		<column name="roleShip" db-name="roleship" type="int" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+
+		<finder name="SyncVersion" return-type="Collection">
+			<finder-column name="syncVersion" />
+		</finder>
+		<finder name="ShipTypeCode" return-type="Collection">
+			<finder-column name="shipTypeCode" />
+		</finder>
+	</entity>
+
+	<entity name="HistorySyncVersion" table="history_sync_version" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="timeofPublish" db-name="timeofpublish" type="Date" />
+		<column name="categoryID" db-name="categoryid" type="String" />
+		<column name="syncUnit" db-name="syncunit" type="String" />
+		<column name="syncUser" db-name="syncuser" type="String" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+		<column name="latestValueDate" db-name="latestvaluedate" type="Date" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="SyncVersion" return-type="Collection">
+			<finder-column name="syncVersion" />
+		</finder>
+
+
+
+	</entity>
+
+	<entity name="DmSyncCategory" table="dm_sync_category" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="categoryId" db-name="CategoryID" type="String" />
+
+		<column name="categoryDescription" db-name="categorydescription" type="String" />
+
+		<column name="modifiedUser" db-name="modifieduser" type="String" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+	</entity>
+
+	<entity name="DmEnterrise" table="dm_enterprise" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="enterpriseCode" db-name="enterprisecode" type="String" />
+		<column name="enterpriseTaxCode" db-name="enterprisetaxcode" type="String" />
+		<column name="enterpriseName" db-name="enterprisename" type="String" />
+		<column name="enterpriseShortName" db-name="enterpriseshortname" type="String" />
+		<column name="enterpriseForeignName" db-name="enterpriseforeignname" type="String" />
+		<column name="enterprisePerson" db-name="enterpriseperson" type="String" />
+		<column name="enterpriseHOAddress" db-name="enterprisehoaddress" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="cityCode" db-name="citycode" type="String" />
+		<column name="districtCode" db-name="districtcode" type="String" />
+		<column name="wardCode" db-name="wardcode" type="String" />
+		<column name="telephoneNo" db-name="telephoneno" type="String" />
+		<column name="registrationCode" db-name="registrationcode" type="String" />
+		<column name="registrationAddress" db-name="registrationaddress" type="String" />
+		<column name="registrationDate" db-name="registrationdate" type="Date" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+		<column name="modifiedUser" db-name="modifieduser" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="EnterpriseCode" return-type="Collection">
+			<finder-column name="enterpriseCode" />
+		</finder>
+
+		<finder name="EnterpriseTaxCode" return-type="Collection">
+			<finder-column name="enterpriseTaxCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmHistoryEnterrise" table="dm_history_enterprise" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="enterpriseCode" db-name="enterprisecode" type="String" />
+		<column name="enterpriseTaxCode" db-name="enterprisetaxcode" type="String" />
+		<column name="enterpriseName" db-name="enterprisename" type="String" />
+		<column name="enterpriseShortName" db-name="enterpriseshortname" type="String" />
+		<column name="enterpriseForeignName" db-name="enterpriseforeignname" type="String" />
+		<column name="enterprisePerson" db-name="enterpriseperson" type="String" />
+		<column name="enterpriseHOAddress" db-name="enterprisehoaddress" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="cityCode" db-name="citycode" type="String" />
+		<column name="districtCode" db-name="districtcode" type="String" />
+		<column name="wardCode" db-name="wardcode" type="String" />
+		<column name="telephoneNo" db-name="telephoneno" type="String" />
+		<column name="registrationCode" db-name="registrationcode" type="String" />
+		<column name="registrationAddress" db-name="registrationaddress" type="String" />
+		<column name="registrationDate" db-name="registrationdate" type="Date" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+		<column name="modifiedUser" db-name="modifieduser" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="SyncVersion" return-type="Collection">
+			<finder-column name="syncVersion" />
+		</finder>
+
+		<finder name="EnterpriseCode" return-type="Collection">
+			<finder-column name="enterpriseCode" />
+		</finder>
+
+		<finder name="EnterpriseTaxCode" return-type="Collection">
+			<finder-column name="enterpriseTaxCode" />
+		</finder>
+
+	</entity>
+
+	<entity name="DmState" table="dm_state" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="stateName" db-name="statename" type="String" />
+		<column name="description" db-name="description" type="String" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+
+		<finder name="StateCode" return-type="Collection">
+			<finder-column name="stateCode" />
+		</finder>
+
+
+	</entity>
+
+	<entity name="DmHistoryState" table="dm_history_state" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="stateName" db-name="statename" type="String" />
+		<column name="description" db-name="description" type="String" />
+		<column name="isDelete" db-name="isdelete" type="int" />
+		<column name="markedAsDelete" db-name="markedasdelete" type="int" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="requestedDate" db-name="requesteddate" type="Date" />
+		<column name="syncVersion" db-name="syncversion" type="String" />
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="SyncVersion" return-type="Collection">
+			<finder-column name="syncVersion" />
+		</finder>
+		<finder name="StateCode" return-type="Collection">
+			<finder-column name="stateCode" />
+		</finder>
+		<finder name="StateCodeAndSyncVersion" return-type="DmHistoryState">
+			<finder-column name="stateCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="DmTestN01Request" table="dm_test_n01_request" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="requestID" db-name="requestid" type="int" primary="true" />
+		<column name="enterpriseCode" db-name="enterprisecode" type="String" />
+		<column name="tenDuAn" db-name="ten_du_an" type="String" />
+		<column name="suCanThietDauTu" db-name="su_can_thiet_dau_tu" type="String" />
+		<column name="viTri" db-name="vi_tri" type="String" />
+		<column name="loaiTauBienGioiHanVaoCang" db-name="loai_tau_bien_gioi_han_vao_cang" type="String" />
+		<column name="soLuongCauCang" db-name="so_luong_cau_cang" type="String" />
+		<column name="tongDienTichXayDungDuKien" db-name="tong_dien_tich_xay_dung_du_kien" type="String" />
+		<column name="taiLieulienQuan" db-name="tai_lieu_lien_quan" type="String" />
+		<column name="modifiedDate" db-name="modifieddate" type="Date" />
+		<column name="modifiedUser" db-name="modifiedUser" type="String" />
+		<column name="isAuthorized" db-name="isAuthorized" type="int" />
+		<column name="authorizedDate" db-name="authorizeddate" type="Date" />
+		<column name="authorizedUser" db-name="authorizeduser" type="String" />
+
+		<order by="asc">
+			<order-column name="requestID" />
+		</order>
+	</entity>
+
+
+
+	<entity name="DmArrivalPurpose" table="DM_ARRIVAL_PURPOSE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="purposeCode" db-name="PurposeCode" type="String" />
+		<column name="purposeName" db-name="PurposeName" type="String" />
+		<column name="purposeNameVN" db-name="PurposeNameVN" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PurposeCode" return-type="Collection">
+			<finder-column name="purposeCode" />
+		</finder>
+
+
+	</entity>
+
+
+	<entity name="DmHistoryArrivalPurpose" table="DM_HISTORY_ARRIVAL_PURPOSE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="purposeCode" db-name="PurposeCode" type="String" />
+		<column name="purposeName" db-name="PurposeName" type="String" />
+		<column name="purposeNameVN" db-name="PurposeNameVN" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PurposeCode" return-type="Collection">
+			<finder-column name="purposeCode" />
+		</finder>
+		<finder name="PurposeCodeAndSyncVersion" return-type="DmHistoryArrivalPurpose">
+			<finder-column name="purposeCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="DmShipAgency" table="DM_SHIP_AGENCY" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="shipAgencyCode" db-name="ShipAgencyCode" type="String" />
+		<column name="shipAgencyName" db-name="ShipAgencyName" type="String" />
+		<column name="shipAgencyNameVN" db-name="ShipAgencyNameVN" type="String" />
+		<column name="taxCode" db-name="TaxCode" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="phone" db-name="Phone" type="String" />
+		<column name="fax" db-name="Fax" type="String" />
+		<column name="email" db-name="Email" type="String" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="contacter" db-name="Contacter" type="String" />
+		<column name="position" db-name="Position" type="String" />
+		<column name="contactTell" db-name="ContactTell" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="ShipAgencyCode" return-type="Collection">
+			<finder-column name="shipAgencyCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmHistoryShipAgency" table="DM_HISTORY_SHIP_AGENCY" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="shipAgencyCode" db-name="ShipAgencyCode" type="String" />
+		<column name="shipAgencyName" db-name="ShipAgencyName" type="String" />
+		<column name="shipAgencyNameVN" db-name="ShipAgencyNameVN" type="String" />
+		<column name="taxCode" db-name="TaxCode" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="phone" db-name="Phone" type="String" />
+		<column name="fax" db-name="Fax" type="String" />
+		<column name="email" db-name="Email" type="String" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="contacter" db-name="Contacter" type="String" />
+		<column name="position" db-name="Position" type="String" />
+		<column name="contactTell" db-name="ContactTell" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="ShipAgencyCode" return-type="Collection">
+			<finder-column name="shipAgencyCode" />
+		</finder>
+		<finder name="ShipAgencyCodeAndSyncVersion" return-type="DmHistoryShipAgency">
+			<finder-column name="shipAgencyCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmShipType" table="DM_SHIP_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="shipTypeName" db-name="ShipTypeName" type="String" />
+		<column name="shipTypeNameVN" db-name="ShipTypeNameVN" type="String" />
+		<column name="shipTypeOrder" db-name="ShipTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="ShipTypeCode" return-type="Collection">
+			<finder-column name="shipTypeCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="DmHistoryShipType" table="DM_HISTORY_SHIP_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="shipTypeName" db-name="ShipTypeName" type="String" />
+		<column name="shipTypeNameVN" db-name="ShipTypeNameVN" type="String" />
+		<column name="shipTypeOrder" db-name="ShipTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="ShipTypeCode" return-type="Collection">
+			<finder-column name="shipTypeCode" />
+		</finder>
+		<finder name="ShipTypeCodeAndSyncVersion" return-type="DmHistoryShipType">
+			<finder-column name="shipTypeCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+
+	</entity>
+
+
+
+
+	<entity name="DmPortRegion" table="DM_PORT_REGION" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portRegionName" db-name="PortRegionName" type="String" />
+		<column name="portRegionNameVN" db-name="PortRegionNameVN" type="String" />
+		<column name="portRegionRef" db-name="PortRegionRef" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="PortRegionCode" return-type="Collection">
+			<finder-column name="portRegionCode" />
+		</finder>
+
+		<finder name="PortRegionRef" return-type="Collection">
+			<finder-column name="portRegionRef" />
+		</finder>
+		
+		<finder name="PortCodeName" return-type="Collection">
+			<finder-column name="portCode" />
+		</finder>
+		
+	</entity>
+
+
+	<entity name="DmHistoryPortRegion" table="DM_HISTORY_PORT_REGION" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portRegionName" db-name="PortRegionName" type="String" />
+		<column name="portRegionNameVN" db-name="PortRegionNameVN" type="String" />
+		<column name="portRegionRef" db-name="PortRegionRef" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="PortRegionCode" return-type="Collection">
+			<finder-column name="portRegionCode" />
+		</finder>
+		<finder name="PortRegionCodeAndSyncVersion" return-type="DmHistoryPortRegion">
+			<finder-column name="portRegionCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+
+	</entity>
+
+
+
+
+	<entity name="DmPortWharf" table="DM_PORT_WHARF" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+		<column name="portWharfName" db-name="PortWharfName" type="String" />
+		<column name="portWharfNameVN" db-name="PortWharfNameVN" type="String" />
+		<column name="portWharfType" db-name="PortWharfType" type="int" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="note" db-name="Note" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortWharfCode" return-type="Collection">
+			<finder-column name="portWharfCode" />
+		</finder>
+		<finder name="PortWharfCodeAndSyncVersion" return-type="Collection">
+			<finder-column name="portWharfCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+
+		<finder name="PortRegionCode" return-type="Collection">
+			<finder-column name="portRegionCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="DmHistoryPortWharf" table="DM_HISTORY_PORT_WHARF" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+		<column name="portWharfName" db-name="PortWharfName" type="String" />
+		<column name="portWharfNameVN" db-name="PortWharfNameVN" type="String" />
+		<column name="portWharfType" db-name="PortWharfType" type="int" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="note" db-name="Note" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortWharfCode" return-type="Collection">
+			<finder-column name="portWharfCode" />
+		</finder>
+		<finder name="PortWharfCodeAndSyncVersion" return-type="DmHistoryPortWharf">
+			<finder-column name="portWharfCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmPortHarbour" table="DM_PORT_HARBOUR" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portHarbourName" db-name="PortHarbourName" type="String" />
+		<column name="portHarbourNameVN" db-name="PortHarbourNameVN" type="String" />
+		<column name="portHarbourType" db-name="PortHarbourType" type="int" />
+		<column name="portRegion" db-name="PortRegion" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="note" db-name="Note" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortHarbourCode" return-type="Collection">
+			<finder-column name="portHarbourCode" />
+		</finder>
+		<finder name="PortRegionCode" return-type="Collection">
+			<finder-column name="portRegionCode" />
+		</finder>
+		<finder name="PortRegion" return-type="Collection">
+			<finder-column name="portRegion" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="DmHistoryPortHarbour" table="DM_HISTORY_PORT_HARBOUR" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portHarbourName" db-name="PortHarbourName" type="String" />
+		<column name="portHarbourNameVN" db-name="PortHarbourNameVN" type="String" />
+		<column name="portHarbourType" db-name="PortHarbourType" type="int" />
+		<column name="portRegion" db-name="PortRegion" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="note" db-name="Note" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortHarbourCode" return-type="Collection">
+			<finder-column name="portHarbourCode" />
+		</finder>
+		<finder name="PortHarbourCodeAndSyncVersion" return-type="DmHistoryPortHarbour">
+			<finder-column name="portHarbourCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+		<finder name="PortRegionCode" return-type="Collection">
+			<finder-column name="portRegionCode" />
+		</finder>
+	</entity>
+
+
+
+
+
+	<entity name="DmPort" table="DM_PORT" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="loCode" db-name="LoCode" type="String" />
+		<column name="portName" db-name="PortName" type="String" />
+		<column name="fullName" db-name="FullName" type="String" />
+		<column name="fullNameVN" db-name="FullNameVN" type="String" />
+		<column name="portType" db-name="PortType" type="String" />
+		<column name="portOrder" db-name="PortOrder" type="int" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortCode" return-type="Collection">
+			<finder-column name="portCode" />
+		</finder>
+		<finder name="LoCode" return-type="Collection">
+			<finder-column name="loCode" />
+		</finder>
+		<finder name="StateCodeAndCityCode" return-type="Collection">
+			<finder-column name="stateCode" />
+			<finder-column name="citycode" />
+		</finder>
+		
+		<finder name="PortCodeLoCode" return-type="DmPort">
+			<finder-column name="portCode" />
+			<finder-column name="loCode" />
+		</finder>
+		
+	</entity>
+
+
+	<entity name="DmHistoryPort" table="DM_HISTORY_PORT" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="loCode" db-name="LoCode" type="String" />
+		<column name="portName" db-name="PortName" type="String" />
+		<column name="fullName" db-name="FullName" type="String" />
+		<column name="fullNameVN" db-name="FullNameVN" type="String" />
+		<column name="portType" db-name="PortType" type="String" />
+		<column name="portOrder" db-name="PortOrder" type="int" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PortCode" return-type="Collection">
+			<finder-column name="portCode" />
+		</finder>
+		<finder name="PortCodeAndSyncVersion" return-type="DmHistoryPort">
+			<finder-column name="portCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="DmUnitGeneral" table="DM_UNIT_GENERAL" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="unitCode" db-name="UnitCode" type="String" />
+		<column name="unitName" db-name="UnitName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="UnitCode" return-type="Collection">
+			<finder-column name="unitCode" />
+		</finder>
+		<finder name="UnitCodeAndSyncVersion" return-type="DmUnitGeneral">
+			<finder-column name="unitCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+	<entity name="DmHistoryUnitGeneral" table="DM_HISTORY_UNIT_GENERAL" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="unitCode" db-name="UnitCode" type="String" />
+		<column name="unitName" db-name="UnitName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="UnitCode" return-type="Collection">
+			<finder-column name="unitCode" />
+		</finder>
+		<finder name="UnitCodeAndSyncVersion" return-type="DmHistoryUnitGeneral">
+			<finder-column name="unitCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+	<entity name="DmDocType" table="DM_DOC_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="documentTypeCode" db-name="DocumentTypeCode" type="String" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		<column name="documentTypeName" db-name="DocumentTypeName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="DocumentTypeCode" return-type="Collection">
+			<finder-column name="documentTypeCode" />
+		</finder>
+	</entity>
+
+	<entity name="DmHistoryDocType" table="DM_HISTORY_DOC_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="documentTypeCode" db-name="DocumentTypeCode" type="String" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		<column name="documentTypeName" db-name="DocumentTypeName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="DocumentType" return-type="DmHistoryDocType">
+			<finder-column name="documentType" />
+		</finder>
+		<finder name="DocumentTypeAndSyncVersion" return-type="DmHistoryDocType">
+			<finder-column name="documentType" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+	<entity name="DmPassportType" table="DM_PASSPORT_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="passportTypeCode" db-name="PassportTypeCode" type="String" />
+		<column name="passportType" db-name="PassportType" type="String" />
+		<column name="passportTypeName" db-name="PassportTypeName" type="String" />
+		<column name="passportTypeNameVN" db-name="PassportTypeNameVN" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PassportTypeCode" return-type="Collection">
+			<finder-column name="passportTypeCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmHistoryPassportType" table="DM_HISTORY_PASSPORT_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="passportTypeCode" db-name="PassportTypeCode" type="String" />
+		<column name="passportType" db-name="PassportType" type="String" />
+		<column name="passportTypeName" db-name="PassportTypeName" type="String" />
+		<column name="passportTypeNameVN" db-name="PassportTypeNameVN" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PassportTypeCode" return-type="Collection">
+			<finder-column name="passportTypeCode" />
+		</finder>
+		<finder name="PassportTypeCodeAndSyncVersion" return-type="DmHistoryPassportType">
+			<finder-column name="passportTypeCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmSecurityLevel" table="DM_SECURITY_LEVEL" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="securityLevelCode" db-name="SecurityLevelCode" type="String" />
+		<column name="securityLevel" db-name="SecurityLevel" type="String" />
+		<column name="securityLevelName" db-name="SecurityLevelName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="SecurityLevelCode" return-type="Collection">
+			<finder-column name="securityLevelCode" />
+		</finder>
+		<finder name="SecurityLevelCodeAndSyncVersion" return-type="DmSecurityLevel">
+			<finder-column name="securityLevelCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmHistorySecurityLevel" table="DM_HISTORY_SECURITY_LEVEL" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+		<column name="securityLevelCode" db-name="SecurityLevelCode" type="String" />
+		<column name="securityLevel" db-name="SecurityLevel" type="String" />
+		<column name="securityLevelName" db-name="SecurityLevelName" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="SecurityLevelCode" return-type="Collection">
+			<finder-column name="securityLevelCode" />
+		</finder>
+		<finder name="SecurityLevelCodeAndSyncVersion" return-type="DmHistorySecurityLevel">
+			<finder-column name="securityLevelCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="DmGoodsType" table="DM_GOODS_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="goodsTypeCode" db-name="GoodsTypeCode" type="String" />
+		<column name="goodsTypeName" db-name="GoodsTypeName" type="String" />
+		<column name="goodsTypeNameVN" db-name="GoodsTypeNameVN" type="String" />
+		<column name="goodsTypeOrder" db-name="GoodsTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="GoodsTypeCode" return-type="Collection">
+			<finder-column name="goodsTypeCode" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="DmHistoryGoodsType" table="DM_HISTORY_GOODS_TYPE" local-service="true" remote-service="false" data-source="gtDataSource"   cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="goodsTypeCode" db-name="GoodsTypeCode" type="String" />
+		<column name="goodsTypeName" db-name="GoodsTypeName" type="String" />
+		<column name="goodsTypeNameVN" db-name="GoodsTypeNameVN" type="String" />
+		<column name="goodsTypeOrder" db-name="GoodsTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="GoodsTypeCode" return-type="Collection">
+			<finder-column name="goodsTypeCode" />
+		</finder>
+		<finder name="GoodsTypeCodeAndSyncVersion" return-type="DmHistoryGoodsType">
+			<finder-column name="goodsTypeCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmMaritime" table="DM_MARITIME" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="maritimeCode" db-name="MaritimeCode" type="String" />
+		<column name="maritimeReference" db-name="MaritimeReference" type="String" />
+		<column name="maritimeOrder" db-name="MaritimeOrder" type="int" />
+		<column name="maritimeName" db-name="MaritimeName" type="String" />
+		<column name="maritimeNameVN" db-name="MaritimeNameVN" type="String" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="MaritimeCode" return-type="DmMaritime">
+			<finder-column name="maritimeCode" />
+		</finder>
+		<finder name="MaritimeReference" return-type="DmMaritime">
+			<finder-column name="maritimeReference" />
+		</finder>
+		
+		<finder name="Delete" return-type="Collection">
+			<finder-column name="isDelete" />
+			<finder-column name="markedAsDelete" />
+		</finder>
+	</entity>
+
+	<entity name="DmHistoryMaritime" table="DM_HISTORY_MARITIME" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="maritimeCode" db-name="MaritimeCode" type="String" />
+		<column name="maritimeReference" db-name="MaritimeReference" type="String" />
+		<column name="maritimeOrder" db-name="MaritimeOrder" type="int" />
+		<column name="maritimeName" db-name="MaritimeName" type="String" />
+		<column name="maritimeNameVN" db-name="MaritimeNameVN" type="String" />
+		<column name="address" db-name="Address" type="String" />
+		<column name="addressVN" db-name="AddressVN" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="citycode" db-name="CityCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="MaritimeCode" return-type="Collection">
+			<finder-column name="maritimeCode" />
+		</finder>
+		<finder name="MaritimeCodeAndSyncVersion" return-type="DmHistoryMaritime">
+			<finder-column name="maritimeCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmRankRating" table="DM_RANK_RATING" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="rankCode" db-name="RankCode" type="String" />
+		<column name="rankName" db-name="RankName" type="String" />
+		<column name="rankNameVN" db-name="RankNameVN" type="String" />
+		<column name="rankOrder" db-name="RankOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RankCode" return-type="Collection">
+			<finder-column name="rankCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmHistoryRankRating" table="DM_HISTORY_RANK_RATING" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="rankCode" db-name="RankCode" type="String" />
+		<column name="rankName" db-name="RankName" type="String" />
+		<column name="rankNameVN" db-name="RankNameVN" type="String" />
+		<column name="rankOrder" db-name="RankOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RankCode" return-type="Collection">
+			<finder-column name="rankCode" />
+		</finder>
+		<finder name="RankCodeAndSyncVersion" return-type="DmHistoryRankRating">
+			<finder-column name="rankCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmGoods" table="DM_GOODS" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="goodsItemCode" db-name="GoodsItemCode" type="String" />
+		<column name="goodsItemName" db-name="GoodsItemName" type="String" />
+		<column name="goodsItemNameVN" db-name="GoodsItemNameVN" type="String" />
+		<column name="goodsItemOrder" db-name="GoodsItemOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="GoodsItemCode" return-type="Collection">
+			<finder-column name="goodsItemCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmHistoryGoods" table="DM_HISTORY_GOODS" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="goodsItemCode" db-name="GoodsItemCode" type="String" />
+		<column name="goodsItemName" db-name="GoodsItemName" type="String" />
+		<column name="goodsItemNameVN" db-name="GoodsItemNameVN" type="String" />
+		<column name="goodsItemOrder" db-name="GoodsItemOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="GoodsItemCode" return-type="Collection">
+			<finder-column name="goodsItemCode" />
+		</finder>
+		<finder name="GoodsItemCodeAndSyncVersion" return-type="DmHistoryGoods">
+			<finder-column name="goodsItemCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmPackage" table="DM_PACKAGE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="packageCode" db-name="PackageCode" type="String" />
+		<column name="packageName" db-name="PackageName" type="String" />
+		<column name="packageNameVN" db-name="PackageNameVN" type="String" />
+		<column name="packageOrder" db-name="PackageOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PackageCode" return-type="Collection">
+			<finder-column name="packageCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="DmHistoryPackage" table="DM_HISTORY_PACKAGE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="packageCode" db-name="PackageCode" type="String" />
+		<column name="packageName" db-name="PackageName" type="String" />
+		<column name="packageNameVN" db-name="PackageNameVN" type="String" />
+		<column name="packageOrder" db-name="PackageOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="PackageCode" return-type="Collection">
+			<finder-column name="packageCode" />
+		</finder>
+		<finder name="PackageCodeAndSyncVersion" return-type="DmHistoryPackage">
+			<finder-column name="packageCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+
+	<entity name="DmRepresentative" table="DM_REPRESENTATIVE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="repCode" db-name="RepCode" type="String" />
+		<column name="repName" db-name="RepName" type="String" />
+		<column name="repNameVN" db-name="RepNameVN" type="String" />
+		<column name="repLevel" db-name="RepLevel" type="int"/>
+		<column name="repOrder" db-name="RepOrder" type="int" />
+		<column name="maritimeCode" db-name="MaritimeCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RepCode" return-type="DmRepresentative">
+			<finder-column name="repCode" />
+		</finder>
+
+		<finder name="MaritimeCode" return-type="Collection">
+			<finder-column name="maritimeCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmHistoryRepresentative" table="DM_HISTORY_REPRESENTATIVE" local-service="true" remote-service="false" data-source="gtDataSource"  cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="repCode" db-name="RepCode" type="String" />
+		<column name="repName" db-name="RepName" type="String" />
+		<column name="repNameVN" db-name="RepNameVN" type="String" />
+		<column name="repLevel" db-name="RepLevel" type="int"/>
+		<column name="repOrder" db-name="RepOrder" type="int" />
+		<column name="maritimeCode" db-name="MaritimeCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RepCode" return-type="DmHistoryRepresentative">
+			<finder-column name="repCode" />
+		</finder>
+		<finder name="RepCodeAndSyncVersion" return-type="DmHistoryRepresentative">
+			<finder-column name="repCode" />
+			<finder-column name="syncVersion" />
+		</finder>
+	</entity>
+	
+	<entity name="ThamSoHeThong" table="user_system_init" local-service="true" remote-service="true"  data-source="gtDataSource"  cache-enabled="false">
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long"  primary="true"/>
+		<column name="valueData" db-name="valuedata" type="String"/>
+		<column name="keyData" db-name="keydata" type="String"/>
+		<column name="description" db-name="description" type="String"/>
+		
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		
+		<finder return-type="ThamSoHeThong" name="KeyData">
+			<finder-column name="keyData" />
+		</finder>	
+		<finder return-type="ThamSoHeThong" name="KeyDataAndDescription">
+			<finder-column name="keyData" />
+			<finder-column name="description" />
+		</finder>	
+	</entity>
+	
+	
+	<entity name="DmDataItem" table="dm_dataitem"  local-service="true" remote-service="false"  cache-enabled="false"
+		data-source="gtDataSource">
+		<!-- PK fields -->
+		<column name="Id" db-name="id" type="long"  primary="true"/>
+	
+		<column name="DataGroupId" db-name="datagroupid" type="long"/>
+		<column name="Code0" db-name="code" type="String"/>
+		<column name="Node1" db-name="node_1" type="String"/>
+		<column name="Node2" db-name="node_2" type="String"/>
+		<column name="Node3" db-name="node_3" type="String"/>
+		<column name="Node4" db-name="node_4" type="String"/>
+		<column name="Level" db-name="level" type="int"/>
+		<column name="Name" db-name="name" type="String"/>
+		<column name="ShortName" db-name="short_name" type="String"/>
+		<column name="Description" db-name="description" type="String"/>
+		<column name="ValidatedFrom" db-name="validatedfrom" type="Date"/>
+		<column name="ValidatedTo" db-name="validatedto" type="Date"/>
+		<column name="Order" db-name="order_" type="int"/>
+		<column name="Status" db-name="status" type="int"/>
+
+		<!-- Order -->
+		<order by="asc"><order-column name="Id" /></order>
+		
+		
+
+		<finder name="DataGroupIdAndCode0" return-type="DmDataItem" >
+			<finder-column name="DataGroupId" />
+			<finder-column name="Code0" />
+		</finder>
+		
+		<finder name="DataGroupIdAndNode1" return-type="Collection" >
+			<finder-column name="DataGroupId" />
+			<finder-column name="Node1" />
+		</finder>
+		
+		<finder name="DataGroupIdAndNode2" return-type="Collection" >
+			<finder-column name="DataGroupId" />
+			<finder-column name="Node2" />
+		</finder>
+		
+		<finder name="DataGroupIdAndLevelandShortName" return-type="Collection" >
+			<finder-column name="DataGroupId"/>
+			<finder-column name="Level"/>
+			<finder-column name="ShortName"/>
+		</finder>
+		
+		<finder name="DataGroupIdAndLevel" return-type="Collection" >
+			<finder-column name="DataGroupId"/>
+			<finder-column name="Level"/>
+		</finder>
+		
+		<finder name="DataGroupId" return-type="Collection" >
+			<finder-column name="DataGroupId"/>
+		</finder>
+		
+		<finder name="DataGroupIdAndShortName" return-type="Collection" >
+			<finder-column name="DataGroupId"/>
+			<finder-column name="ShortName"/>
+		</finder>		
+	</entity>
+
+</service-builder>

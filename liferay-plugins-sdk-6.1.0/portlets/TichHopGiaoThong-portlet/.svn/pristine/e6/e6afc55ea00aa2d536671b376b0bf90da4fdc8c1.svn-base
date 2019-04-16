@@ -1,0 +1,1 @@
+data_doc_type = '{"NC": "Tàu thuyền nhập cảnh","XC": "Tàu thuyền xuất cảnh","QC": "Tàu thuyền quá cảnh","4": "Tàu thuyền vào cảng","5": "Tàu thuyền rời cảng","8": "Nhập cảnh dầu khí","9": "Xuất cảnh dầu khí","10": "Vào cảng dầu khí","11": "Rời cảng dầu khí","12": "Chuyển cảng vào","13": "Chuyển cảng rời"}';

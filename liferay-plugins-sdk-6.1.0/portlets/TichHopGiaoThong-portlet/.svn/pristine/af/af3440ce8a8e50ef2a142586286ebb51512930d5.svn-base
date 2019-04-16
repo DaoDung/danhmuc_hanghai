@@ -1,0 +1,2309 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="vn.gt.dao.nhapcanh.model.CrewList">
+		<field name="id" type="long" />
+		<field name="crewCode" type="String" />
+		<field name="documentNo" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="birthDay" type="Date" />
+		<field name="birthPlace" type="String" />
+		<field name="familyName" type="String" />
+		<field name="fullName" type="String" />
+		<field name="givenName" type="String" />
+		<field name="passportNumber" type="String" />
+		<field name="passportType" type="String" />
+		<field name="rankCode" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifyDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.nhapcanh.model.Document">
+		<field name="id" type="long" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="documentTypeCode" type="String" />
+		<field name="callSign" type="String" />
+		<field name="preDocumentName" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="lastModifiedDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.nhapcanh.model.DocumentGeneral">
+		<field name="id" type="long" />
+		<field name="documentNo" type="String" />
+		<field name="documentFunction" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="isDeparture" type="int" />
+		<field name="shipCode" type="String" />
+		<field name="arrivalOrDeparturePortCode" type="String" />
+		<field name="timeArrivalOrDeparture" type="Date" />
+		<field name="imoNumber" type="String" />
+		<field name="callSign" type="String" />
+		<field name="voyageNumber" type="int" />
+		<field name="shipNationCode" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="lastPort" type="String" />
+		<field name="contactDetailShipAgent" type="String" />
+		<field name="grossTonnage" type="double" />
+		<field name="netTonnage" type="double" />
+		<field name="positionShipInPort" type="int" />
+		<field name="briefParticularsVoyage" type="String" />
+		<field name="briefDescriptionCargo" type="String" />
+		<field name="crewNumber" type="int" />
+		<field name="passengerNumber" type="int" />
+		<field name="remarks" type="String" />
+		<field name="cargoDeclaration" type="String" />
+		<field name="shipStoresDeclaration" type="String" />
+		<field name="crewList" type="String" />
+		<field name="passengerList" type="String" />
+		<field name="shipRequirements" type="String" />
+		<field name="isCrewEffectDeclaration" type="int" />
+		<field name="isMaritimeDeclarationHealth" type="int" />
+		<field name="createDate" type="Date" />
+		<field name="modifyDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.nhapcanh.model.PassengerList">
+		<field name="id" type="long" />
+		<field name="passengerCode" type="String" />
+		<field name="documentNo" type="String" />
+		<field name="fullName" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="birthDay" type="Date" />
+		<field name="birthPlace" type="String" />
+		<field name="passportTypeCode" type="String" />
+		<field name="passPortNo" type="String" />
+		<field name="portCheckInCode" type="String" />
+		<field name="portCheckOutCode" type="String" />
+		<field name="isTransit" type="boolean" />
+		<field name="createDate" type="Date" />
+		<field name="modifyDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.nhapcanh.model.ResponseBo">
+		<field name="id" type="long" />
+		<field name="isSuccess" type="int" />
+		<field name="errorMessage" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmArrivalPurpose">
+		<field name="id" type="int" />
+		<field name="purposeCode" type="String" />
+		<field name="purposeName" type="String" />
+		<field name="purposeNameVN" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmDataItem">
+		<field name="Id" type="long" />
+		<field name="DataGroupId" type="long" />
+		<field name="Code0" type="String" />
+		<field name="Node1" type="String" />
+		<field name="Node2" type="String" />
+		<field name="Node3" type="String" />
+		<field name="Node4" type="String" />
+		<field name="Level" type="int" />
+		<field name="Name" type="String" />
+		<field name="ShortName" type="String" />
+		<field name="Description" type="String" />
+		<field name="ValidatedFrom" type="Date" />
+		<field name="ValidatedTo" type="Date" />
+		<field name="Order" type="int" />
+		<field name="Status" type="int" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmDocType">
+		<field name="id" type="int" />
+		<field name="documentTypeCode" type="String" />
+		<field name="documentType" type="String" />
+		<field name="documentTypeName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmEnterrise">
+		<field name="id" type="int" />
+		<field name="enterpriseCode" type="String" />
+		<field name="enterpriseTaxCode" type="String" />
+		<field name="enterpriseName" type="String" />
+		<field name="enterpriseShortName" type="String" />
+		<field name="enterpriseForeignName" type="String" />
+		<field name="enterprisePerson" type="String" />
+		<field name="enterpriseHOAddress" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="cityCode" type="String" />
+		<field name="districtCode" type="String" />
+		<field name="wardCode" type="String" />
+		<field name="telephoneNo" type="String" />
+		<field name="registrationCode" type="String" />
+		<field name="registrationAddress" type="String" />
+		<field name="registrationDate" type="Date" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+		<field name="modifiedUser" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmGoods">
+		<field name="id" type="int" />
+		<field name="goodsItemCode" type="String" />
+		<field name="goodsItemName" type="String" />
+		<field name="goodsItemNameVN" type="String" />
+		<field name="goodsItemOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmGoodsType">
+		<field name="id" type="int" />
+		<field name="goodsTypeCode" type="String" />
+		<field name="goodsTypeName" type="String" />
+		<field name="goodsTypeNameVN" type="String" />
+		<field name="goodsTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryArrivalPurpose">
+		<field name="id" type="int" />
+		<field name="purposeCode" type="String" />
+		<field name="purposeName" type="String" />
+		<field name="purposeNameVN" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryDocType">
+		<field name="id" type="int" />
+		<field name="documentTypeCode" type="String" />
+		<field name="documentType" type="String" />
+		<field name="documentTypeName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryEnterrise">
+		<field name="id" type="int" />
+		<field name="enterpriseCode" type="String" />
+		<field name="enterpriseTaxCode" type="String" />
+		<field name="enterpriseName" type="String" />
+		<field name="enterpriseShortName" type="String" />
+		<field name="enterpriseForeignName" type="String" />
+		<field name="enterprisePerson" type="String" />
+		<field name="enterpriseHOAddress" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="cityCode" type="String" />
+		<field name="districtCode" type="String" />
+		<field name="wardCode" type="String" />
+		<field name="telephoneNo" type="String" />
+		<field name="registrationCode" type="String" />
+		<field name="registrationAddress" type="String" />
+		<field name="registrationDate" type="Date" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+		<field name="modifiedUser" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryGoods">
+		<field name="id" type="int" />
+		<field name="goodsItemCode" type="String" />
+		<field name="goodsItemName" type="String" />
+		<field name="goodsItemNameVN" type="String" />
+		<field name="goodsItemOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryGoodsType">
+		<field name="id" type="int" />
+		<field name="goodsTypeCode" type="String" />
+		<field name="goodsTypeName" type="String" />
+		<field name="goodsTypeNameVN" type="String" />
+		<field name="goodsTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryMaritime">
+		<field name="id" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="maritimeReference" type="String" />
+		<field name="maritimeOrder" type="int" />
+		<field name="maritimeName" type="String" />
+		<field name="maritimeNameVN" type="String" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPackage">
+		<field name="id" type="int" />
+		<field name="packageCode" type="String" />
+		<field name="packageName" type="String" />
+		<field name="packageNameVN" type="String" />
+		<field name="packageOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPassportType">
+		<field name="id" type="int" />
+		<field name="passportTypeCode" type="String" />
+		<field name="passportType" type="String" />
+		<field name="passportTypeName" type="String" />
+		<field name="passportTypeNameVN" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPort">
+		<field name="id" type="int" />
+		<field name="portCode" type="String" />
+		<field name="loCode" type="String" />
+		<field name="portName" type="String" />
+		<field name="fullName" type="String" />
+		<field name="fullNameVN" type="String" />
+		<field name="portType" type="String" />
+		<field name="portOrder" type="int" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPortHarbour">
+		<field name="id" type="int" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portHarbourName" type="String" />
+		<field name="portHarbourNameVN" type="String" />
+		<field name="portHarbourType" type="int" />
+		<field name="portRegion" type="String" />
+		<field name="portCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="note" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPortRegion">
+		<field name="id" type="int" />
+		<field name="portRegionCode" type="String" />
+		<field name="portRegionName" type="String" />
+		<field name="portRegionNameVN" type="String" />
+		<field name="portRegionRef" type="String" />
+		<field name="portCode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryPortWharf">
+		<field name="id" type="int" />
+		<field name="portWharfCode" type="String" />
+		<field name="portWharfName" type="String" />
+		<field name="portWharfNameVN" type="String" />
+		<field name="portWharfType" type="int" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="note" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryRankRating">
+		<field name="id" type="int" />
+		<field name="rankCode" type="String" />
+		<field name="rankName" type="String" />
+		<field name="rankNameVN" type="String" />
+		<field name="rankOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryRepresentative">
+		<field name="id" type="int" />
+		<field name="repCode" type="String" />
+		<field name="repName" type="String" />
+		<field name="repNameVN" type="String" />
+		<field name="repLevel" type="int" />
+		<field name="repOrder" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistorySecurityLevel">
+		<field name="id" type="int" />
+		<field name="securityLevelCode" type="String" />
+		<field name="securityLevel" type="String" />
+		<field name="securityLevelName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryShipAgency">
+		<field name="id" type="int" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="shipAgencyName" type="String" />
+		<field name="shipAgencyNameVN" type="String" />
+		<field name="taxCode" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="phone" type="String" />
+		<field name="fax" type="String" />
+		<field name="email" type="String" />
+		<field name="description" type="String" />
+		<field name="contacter" type="String" />
+		<field name="position" type="String" />
+		<field name="contactTell" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryShipType">
+		<field name="id" type="int" />
+		<field name="shipTypeCode" type="String" />
+		<field name="shipTypeName" type="String" />
+		<field name="shipTypeNameVN" type="String" />
+		<field name="shipTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryState">
+		<field name="id" type="int" />
+		<field name="stateCode" type="String" />
+		<field name="stateName" type="String" />
+		<field name="description" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmHistoryUnitGeneral">
+		<field name="id" type="int" />
+		<field name="unitCode" type="String" />
+		<field name="unitName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmMaritime">
+		<field name="id" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="maritimeReference" type="String" />
+		<field name="maritimeOrder" type="int" />
+		<field name="maritimeName" type="String" />
+		<field name="maritimeNameVN" type="String" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPackage">
+		<field name="id" type="int" />
+		<field name="packageCode" type="String" />
+		<field name="packageName" type="String" />
+		<field name="packageNameVN" type="String" />
+		<field name="packageOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPassportType">
+		<field name="id" type="int" />
+		<field name="passportTypeCode" type="String" />
+		<field name="passportType" type="String" />
+		<field name="passportTypeName" type="String" />
+		<field name="passportTypeNameVN" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPort">
+		<field name="id" type="int" />
+		<field name="portCode" type="String" />
+		<field name="loCode" type="String" />
+		<field name="portName" type="String" />
+		<field name="fullName" type="String" />
+		<field name="fullNameVN" type="String" />
+		<field name="portType" type="String" />
+		<field name="portOrder" type="int" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPortHarbour">
+		<field name="id" type="int" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portHarbourName" type="String" />
+		<field name="portHarbourNameVN" type="String" />
+		<field name="portHarbourType" type="int" />
+		<field name="portRegion" type="String" />
+		<field name="portCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="note" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPortRegion">
+		<field name="id" type="int" />
+		<field name="portRegionCode" type="String" />
+		<field name="portRegionName" type="String" />
+		<field name="portRegionNameVN" type="String" />
+		<field name="portRegionRef" type="String" />
+		<field name="portCode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmPortWharf">
+		<field name="id" type="int" />
+		<field name="portWharfCode" type="String" />
+		<field name="portWharfName" type="String" />
+		<field name="portWharfNameVN" type="String" />
+		<field name="portWharfType" type="int" />
+		<field name="portCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="note" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmRankRating">
+		<field name="id" type="int" />
+		<field name="rankCode" type="String" />
+		<field name="rankName" type="String" />
+		<field name="rankNameVN" type="String" />
+		<field name="rankOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmRepresentative">
+		<field name="id" type="int" />
+		<field name="repCode" type="String" />
+		<field name="repName" type="String" />
+		<field name="repNameVN" type="String" />
+		<field name="repLevel" type="int" />
+		<field name="repOrder" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmSecurityLevel">
+		<field name="id" type="int" />
+		<field name="securityLevelCode" type="String" />
+		<field name="securityLevel" type="String" />
+		<field name="securityLevelName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmShipAgency">
+		<field name="id" type="int" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="shipAgencyName" type="String" />
+		<field name="shipAgencyNameVN" type="String" />
+		<field name="taxCode" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="citycode" type="String" />
+		<field name="address" type="String" />
+		<field name="addressVN" type="String" />
+		<field name="phone" type="String" />
+		<field name="fax" type="String" />
+		<field name="email" type="String" />
+		<field name="description" type="String" />
+		<field name="contacter" type="String" />
+		<field name="position" type="String" />
+		<field name="contactTell" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmShipType">
+		<field name="id" type="int" />
+		<field name="shipTypeCode" type="String" />
+		<field name="shipTypeName" type="String" />
+		<field name="shipTypeNameVN" type="String" />
+		<field name="shipTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmState">
+		<field name="id" type="int" />
+		<field name="stateCode" type="String" />
+		<field name="stateName" type="String" />
+		<field name="description" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmSyncCategory">
+		<field name="id" type="long" />
+		<field name="categoryId" type="String" />
+		<field name="categoryDescription" type="String" />
+		<field name="modifiedUser" type="String" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmTestN01Request">
+		<field name="requestID" type="int" />
+		<field name="enterpriseCode" type="String" />
+		<field name="tenDuAn" type="String" />
+		<field name="suCanThietDauTu" type="String" />
+		<field name="viTri" type="String" />
+		<field name="loaiTauBienGioiHanVaoCang" type="String" />
+		<field name="soLuongCauCang" type="String" />
+		<field name="tongDienTichXayDungDuKien" type="String" />
+		<field name="taiLieulienQuan" type="String" />
+		<field name="modifiedDate" type="Date" />
+		<field name="modifiedUser" type="String" />
+		<field name="isAuthorized" type="int" />
+		<field name="authorizedDate" type="Date" />
+		<field name="authorizedUser" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.DmUnitGeneral">
+		<field name="id" type="int" />
+		<field name="unitCode" type="String" />
+		<field name="unitName" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.HistoryRmdcShip">
+		<field name="id" type="long" />
+		<field name="shipId" type="int" />
+		<field name="shipName" type="String" />
+		<field name="shipTypeId" type="int" />
+		<field name="shipTypeCode" type="String" />
+		<field name="imo" type="String" />
+		<field name="callSign" type="String" />
+		<field name="stateId" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="registryNumber" type="String" />
+		<field name="registryDate" type="Date" />
+		<field name="registryPortId" type="int" />
+		<field name="registryPortCode" type="String" />
+		<field name="gt" type="double" />
+		<field name="nrt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="length" type="double" />
+		<field name="width" type="double" />
+		<field name="height" type="double" />
+		<field name="sailingSpeed" type="double" />
+		<field name="color" type="String" />
+		<field name="boneCode" type="String" />
+		<field name="machineCode" type="String" />
+		<field name="shipAgencyId" type="int" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="fishingBoatRegistration" type="String" />
+		<field name="roleShip" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.HistorySyncVersion">
+		<field name="id" type="long" />
+		<field name="requestedDate" type="Date" />
+		<field name="timeofPublish" type="Date" />
+		<field name="categoryID" type="String" />
+		<field name="syncUnit" type="String" />
+		<field name="syncUser" type="String" />
+		<field name="syncVersion" type="String" />
+		<field name="latestValueDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.RmdcShip">
+		<field name="id" type="long" />
+		<field name="shipId" type="int" />
+		<field name="shipName" type="String" />
+		<field name="shipTypeId" type="int" />
+		<field name="shipTypeCode" type="String" />
+		<field name="imo" type="String" />
+		<field name="callSign" type="String" />
+		<field name="stateId" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="registryNumber" type="String" />
+		<field name="registryDate" type="Date" />
+		<field name="registryPortId" type="int" />
+		<field name="registryPortCode" type="String" />
+		<field name="gt" type="double" />
+		<field name="nrt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="length" type="double" />
+		<field name="width" type="double" />
+		<field name="height" type="double" />
+		<field name="sailingSpeed" type="double" />
+		<field name="color" type="String" />
+		<field name="boneCode" type="String" />
+		<field name="machineCode" type="String" />
+		<field name="shipAgencyId" type="int" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="fishingBoatRegistration" type="String" />
+		<field name="roleShip" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmuc.model.ThamSoHeThong">
+		<field name="id" type="long" />
+		<field name="valueData" type="String" />
+		<field name="keyData" type="String" />
+		<field name="description" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.HistoryInterfaceRequest">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="locCode" type="String" />
+		<field name="requestDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="requestDirection" type="String" />
+		<field name="requestState" type="int" />
+		<field name="requestResponseTime" type="Date" />
+		<field name="documentType" type="String" />
+		<field name="businessType" type="String" />
+		<field name="functionType" type="String" />
+		<field name="requestContent" type="String" />
+		<field name="senderName" type="String" />
+		<field name="requestVersion" type="String" />
+		<field name="senderIdentify" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="sendingDate" type="Date" />
+		<field name="receiverIdentify" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.HistoryInterfaceRequestField">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="locCode" type="String" />
+		<field name="requestDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="requestDirection" type="String" />
+		<field name="requestState" type="int" />
+		<field name="requestResponseTime" type="Date" />
+		<field name="documentType" type="String" />
+		<field name="businessType" type="String" />
+		<field name="functionType" type="String" />
+		<field name="senderName" type="String" />
+		<field name="requestVersion" type="String" />
+		<field name="senderIdentify" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="sendingDate" type="Date" />
+		<field name="receiverIdentify" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.InterfaceRequest">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="locCode" type="String" />
+		<field name="requestDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="requestDirection" type="String" />
+		<field name="requestState" type="int" />
+		<field name="requestResponseTime" type="Date" />
+		<field name="documentType" type="String" />
+		<field name="documentNameRef" type="String" />
+		<field name="businessType" type="String" />
+		<field name="functionType" type="String" />
+		<field name="requestContent" type="String" />
+		<field name="senderName" type="String" />
+		<field name="requestVersion" type="String" />
+		<field name="senderIdentify" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="sendingDate" type="Date" />
+		<field name="receiverIdentify" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.InterfaceRequestField">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="locCode" type="String" />
+		<field name="requestDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="requestDirection" type="String" />
+		<field name="requestState" type="int" />
+		<field name="requestResponseTime" type="Date" />
+		<field name="documentType" type="String" />
+		<field name="documentNameRef" type="String" />
+		<field name="businessType" type="String" />
+		<field name="functionType" type="String" />
+		<field name="senderName" type="String" />
+		<field name="requestVersion" type="String" />
+		<field name="senderIdentify" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="sendingDate" type="Date" />
+		<field name="receiverIdentify" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssueAcceptance">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="numberPortClearance" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="portofAuthority" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="numberOfCrews" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="callSign" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="cargo" type="String" />
+		<field name="volumeCargo" type="double" />
+		<field name="cargoUnit" type="String" />
+		<field name="cargoDescription" type="String" />
+		<field name="transitCargo" type="String" />
+		<field name="volumeTransitCargo" type="double" />
+		<field name="transitCargoUnit" type="String" />
+		<field name="timeOfDeparture" type="Date" />
+		<field name="portCode" type="String" />
+		<field name="portWharfCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="validUntil" type="Date" />
+		<field name="issueDate" type="Date" />
+		<field name="directorOfMaritime" type="String" />
+		<field name="certificateNo" type="String" />
+		<field name="requestState" type="int" />
+		<field name="gt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="versionNo" type="String" />
+		<field name="isApproval" type="int" />
+		<field name="approvalDate" type="Date" />
+		<field name="approvalName" type="String" />
+		<field name="remarks" type="String" />
+		<field name="isCancel" type="int" />
+		<field name="cancelDate" type="Date" />
+		<field name="cancelName" type="String" />
+		<field name="cancelNote" type="String" />
+		<field name="representative" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="signName" type="String" />
+		<field name="signTitle" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="stampStatus" type="long" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssueAcceptanceForTransit">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="numberAcceptanceForTransit" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="callSign" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="loa" type="double" />
+		<field name="unitLOA" type="String" />
+		<field name="breadth" type="double" />
+		<field name="unitBreadth" type="String" />
+		<field name="grossTonnage" type="double" />
+		<field name="grossTonnageUnit" type="String" />
+		<field name="netTonnage" type="double" />
+		<field name="netTonnageUnit" type="String" />
+		<field name="dwt" type="double" />
+		<field name="unitDWT" type="String" />
+		<field name="shownDraftxF" type="double" />
+		<field name="unitShownDraftxF" type="String" />
+		<field name="shownDraftxA" type="double" />
+		<field name="unitShownDraftxA" type="String" />
+		<field name="clearanceHeight" type="double" />
+		<field name="unitClearanceHeight" type="String" />
+		<field name="permittedTransitFrom" type="Date" />
+		<field name="permittedTransitTo" type="Date" />
+		<field name="timeOfDeparture" type="Date" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssuePermissionForTransit">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="numberPermissionForTransit" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="requestState" type="int" />
+		<field name="portofAuthority" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="gt" type="double" />
+		<field name="numberOfCrews" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="callSign" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="transitCargo" type="String" />
+		<field name="volumeCargo" type="double" />
+		<field name="cargoUnit" type="String" />
+		<field name="cargoDescription" type="String" />
+		<field name="permittedTransitFrom" type="String" />
+		<field name="permittedTransitTo" type="String" />
+		<field name="timeOfDeparture" type="Date" />
+		<field name="validUntil" type="Date" />
+		<field name="dateOfSign" type="Date" />
+		<field name="userCreated" type="String" />
+		<field name="directorOfMaritime" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="certificateNo" type="String" />
+		<field name="versionNo" type="String" />
+		<field name="isApproval" type="int" />
+		<field name="approvalDate" type="Date" />
+		<field name="approvalName" type="String" />
+		<field name="remarks" type="String" />
+		<field name="isCancel" type="int" />
+		<field name="cancelDate" type="Date" />
+		<field name="cancelName" type="String" />
+		<field name="cancelNote" type="String" />
+		<field name="representative" type="String" />
+		<field name="digitalAttachedFile" type="long" />
+		<field name="signDate" type="Date" />
+		<field name="signName" type="String" />
+		<field name="signTitle" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="stampStatus" type="long" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssuePortClearance">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="numberPortClearance" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="portofAuthority" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="numberOfCrews" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="callSign" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="cargo" type="String" />
+		<field name="volumeCargo" type="double" />
+		<field name="cargoUnit" type="String" />
+		<field name="cargoDescription" type="String" />
+		<field name="transitCargo" type="String" />
+		<field name="volumeTransitCargo" type="double" />
+		<field name="transitCargoUnit" type="String" />
+		<field name="timeOfDeparture" type="Date" />
+		<field name="nextProvinceCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="maritimePortCode" type="String" />
+		<field name="portCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+		<field name="validUntil" type="Date" />
+		<field name="issueDate" type="Date" />
+		<field name="directorOfMaritime" type="String" />
+		<field name="certificateNo" type="String" />
+		<field name="requestState" type="int" />
+		<field name="gt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="nextMaritimePortCode" type="String" />
+		<field name="nextPortRegionCode" type="String" />
+		<field name="nextPortHarbourCode" type="String" />
+		<field name="nextPortWharfCode" type="String" />
+		<field name="versionNo" type="String" />
+		<field name="isApproval" type="int" />
+		<field name="approvalDate" type="Date" />
+		<field name="approvalName" type="String" />
+		<field name="remarks" type="String" />
+		<field name="isCancel" type="int" />
+		<field name="cancelDate" type="Date" />
+		<field name="cancelName" type="String" />
+		<field name="cancelNote" type="String" />
+		<field name="representative" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="signName" type="String" />
+		<field name="signTitle" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="stampStatus" type="long" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssueShiftingOrder">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="numberShiftingOrder" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="portofAuthority" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="anchoringPortCode" type="String" />
+		<field name="anchoringPortWharfCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+		<field name="shiftingPortWharfCode" type="String" />
+		<field name="shiftingDate" type="Date" />
+		<field name="reasonToShift" type="String" />
+		<field name="issueDate" type="Date" />
+		<field name="directorOfMaritime" type="String" />
+		<field name="certificateNo" type="String" />
+		<field name="requestState" type="int" />
+		<field name="versionNo" type="String" />
+		<field name="isApproval" type="int" />
+		<field name="approvalDate" type="Date" />
+		<field name="approvalName" type="String" />
+		<field name="remarks" type="String" />
+		<field name="isCancel" type="int" />
+		<field name="cancelDate" type="Date" />
+		<field name="cancelName" type="String" />
+		<field name="cancelNote" type="String" />
+		<field name="representative" type="String" />
+		<field name="digitalAttachedFile" type="long" />
+		<field name="signDate" type="Date" />
+		<field name="signName" type="String" />
+		<field name="signTitle" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="stampStatus" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="shownDraftxF" type="double" />
+		<field name="unitShownDraftxF" type="String" />
+		<field name="shownDraftxA" type="double" />
+		<field name="unitShownDraftxA" type="String" />
+		<field name="loa" type="double" />
+		<field name="loaUnit" type="String" />
+		<field name="dwt" type="double" />
+		<field name="dwtUnit" type="String" />
+		<field name="tugBoat" type="String" />
+		<field name="from" type="String" />
+		<field name="to" type="String" />
+		<field name="taxCodeOfShipownersAgents" type="String" />
+		<field name="nameOfShipownersAgents" type="String" />
+		<field name="shipAgencyAddress" type="String" />
+		<field name="shipAgencyPhone" type="String" />
+		<field name="shipAgencyFax" type="String" />
+		<field name="shipAgencyEmail" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.IssueShiftingOrderChanel">
+		<field name="shiftingOrderId" type="long" />
+		<field name="chanelCode" type="String" />
+		<field name="chanelName" type="String" />
+		<field name="order" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.Modify">
+		<field name="id" type="long" />
+		<field name="modifyCode" type="String" />
+		<field name="modifyDesc" type="String" />
+		<field name="organization" type="String" />
+		<field name="division" type="String" />
+		<field name="name" type="String" />
+		<field name="modifyDate" type="Date" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.NoticeShipMessage">
+		<field name="id" type="long" />
+		<field name="noticeShipCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="confirmTime" type="int" />
+		<field name="callSign" type="String" />
+		<field name="arrivalDate" type="Date" />
+		<field name="arrivalPortCode" type="String" />
+		<field name="portGoingToCode" type="String" />
+		<field name="nameAndAddOfShipOwners" type="String" />
+		<field name="clearanceHeight" type="long" />
+		<field name="shownDraft" type="long" />
+		<field name="dwt" type="long" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="purposeCode" type="int" />
+		<field name="crewNumber" type="long" />
+		<field name="passengerNumber" type="long" />
+		<field name="quantityAndTypeOfCargo" type="String" />
+		<field name="otherPersons" type="int" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempAnimalQuarantine">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="numberOfCrew" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="animalNameFirst" type="String" />
+		<field name="animalNameBetween" type="String" />
+		<field name="animalNameThis" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempAttachmentDeclarationHealth">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="attachmentCode" type="String" />
+		<field name="passengerOrCrewCode" type="String" />
+		<field name="name" type="String" />
+		<field name="age" type="int" />
+		<field name="sex" type="int" />
+		<field name="nationality" type="String" />
+		<field name="portJoinVesselCode" type="String" />
+		<field name="dateJoinVessel" type="Date" />
+		<field name="classOrRating" type="int" />
+		<field name="natureOfIllness" type="String" />
+		<field name="dateOfOnsetOfSymptom" type="Date" />
+		<field name="reportedMedicalOfficer" type="int" />
+		<field name="disposalOfCase" type="String" />
+		<field name="medicinesOrOther" type="String" />
+		<field name="comments" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCargoDeclaration">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callsign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="portReport" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="portOfLoading" type="String" />
+		<field name="listGoods" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="documentYear" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCargoItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="cargoCategory" type="String" />
+		<field name="cargoType" type="String" />
+		<field name="cargoCode" type="String" />
+		<field name="description" type="String" />
+		<field name="quantity" type="double" />
+		<field name="unit" type="String" />
+		<field name="sequence" type="int" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCrewDetails">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="crewcode" type="String" />
+		<field name="familyName" type="String" />
+		<field name="givenName" type="String" />
+		<field name="rankCode" type="String" />
+		<field name="nationality" type="String" />
+		<field name="dateOfBirth" type="Date" />
+		<field name="placeOfBirth" type="String" />
+		<field name="passportNumber" type="String" />
+		<field name="passportTypeCode" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCrewEffectsDeclaration">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callsign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="listCrewEffects" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="documentYear" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCrewEffectsItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="crewEffectItemcode" type="String" />
+		<field name="familyName" type="String" />
+		<field name="givenName" type="String" />
+		<field name="rankOrratingCode" type="String" />
+		<field name="effectsIneligibleForRelief" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempCrewList">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callSign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="portOfArrivalCode" type="String" />
+		<field name="dateOfArrival" type="Date" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="crewList" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDangerousGoodsItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="dangerousGoodItemCode" type="String" />
+		<field name="refNumber" type="String" />
+		<field name="marksContainer" type="String" />
+		<field name="numberContainer" type="String" />
+		<field name="numberOfPackage" type="String" />
+		<field name="kindOfPackages" type="String" />
+		<field name="properShippingName" type="String" />
+		<field name="goodClass" type="String" />
+		<field name="unNumber" type="String" />
+		<field name="packingGroup" type="String" />
+		<field name="subsidiaryRisk" type="String" />
+		<field name="flashPoint" type="String" />
+		<field name="marinePollutant" type="String" />
+		<field name="grossWeight" type="double" />
+		<field name="ems" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDangerousGoodsNanifest">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="masterName" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callsign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="portOfLoadingCode" type="String" />
+		<field name="portOfDischargeCode" type="String" />
+		<field name="shippingAgent" type="String" />
+		<field name="additionalRemark" type="String" />
+		<field name="listDangerousGoods" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="documentYear" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDeclarationForAnimalQuarantine">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="numberOfCrew" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="animalNameFirst" type="String" />
+		<field name="animalNameBetween" type="String" />
+		<field name="animalNameThis" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDeclarationForPlantQuarantine">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="doctorName" type="String" />
+		<field name="numberOfCrew" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="firstPortOfLoadingCode" type="String" />
+		<field name="dateOfdeparture" type="Date" />
+		<field name="plantNameFirst" type="String" />
+		<field name="plantNameBetween" type="String" />
+		<field name="plantNameThis" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="documentYear" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDeclarationOfHealth">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="submittedPortCode" type="String" />
+		<field name="dateSubmitted" type="Date" />
+		<field name="nameOfShip" type="String" />
+		<field name="registration" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="arrivingFrom" type="String" />
+		<field name="sailingTo" type="String" />
+		<field name="nationality" type="String" />
+		<field name="masterName" type="String" />
+		<field name="grossTonnage" type="double" />
+		<field name="grossTonnageUnit" type="String" />
+		<field name="tonnage" type="double" />
+		<field name="tonnageUnit" type="String" />
+		<field name="certificatecarried" type="int" />
+		<field name="issuedAt" type="String" />
+		<field name="issueDate" type="Date" />
+		<field name="reInspectionrequired" type="int" />
+		<field name="isShipVisitedWHO" type="int" />
+		<field name="visitedWHOPortCode" type="String" />
+		<field name="dateOfVisitedWHO" type="Date" />
+		<field name="listPortName" type="String" />
+		<field name="doctorName" type="String" />
+		<field name="doctorSigndate" type="Date" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempDocument">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="documentTypeCode" type="String" />
+		<field name="userCreated" type="String" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="shipName" type="String" />
+		<field name="shipTypeCode" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="shipCaptain" type="String" />
+		<field name="imo" type="String" />
+		<field name="grt" type="double" />
+		<field name="nt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="unitGRT" type="String" />
+		<field name="unitNT" type="String" />
+		<field name="unitDWT" type="String" />
+		<field name="callSign" type="String" />
+		<field name="preDocumentName" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="lastModifiedDate" type="Date" />
+		<field name="flowFlag" type="int" />
+		<field name="documentStatusCode" type="int" />
+		<field name="locationCode" type="String" />
+		<field name="maritimeCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="portCode" type="String" />
+		<field name="lastPortCode" type="String" />
+		<field name="shipPosition" type="int" />
+		<field name="shipOwnerCode" type="String" />
+		<field name="arrivalShipAgency" type="String" />
+		<field name="departureShipAgency" type="String" />
+		<field name="shipDateFrom" type="Date" />
+		<field name="shipDateTo" type="Date" />
+		<field name="upgradeVersion" type="int" />
+		<field name="nameOfShipownersAgents" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempGeneralDeclaration">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentReference" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="shipTypeCode" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callSign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="portOfArrivalCode" type="String" />
+		<field name="dateOfArrival" type="Date" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="portWharfCode" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="certificateOfRegistryNumber" type="String" />
+		<field name="certificateOfRegistryDate" type="Date" />
+		<field name="certificateOfRegistryPortName" type="String" />
+		<field name="taxCodeOfShipownersAgents" type="String" />
+		<field name="nameOfShipownersAgents" type="String" />
+		<field name="shipAgencyAddress" type="String" />
+		<field name="shipAgencyPhone" type="String" />
+		<field name="shipAgencyFax" type="String" />
+		<field name="shipAgencyEmail" type="String" />
+		<field name="grossTonnage" type="double" />
+		<field name="netTonnage" type="double" />
+		<field name="positionOfShipInport" type="String" />
+		<field name="briefParticularsOfVoyage" type="String" />
+		<field name="previousPortsOfCall" type="String" />
+		<field name="subsequentPortsOfCall" type="String" />
+		<field name="dischargedPorts" type="String" />
+		<field name="remainingCargo" type="String" />
+		<field name="briefDescriptionOfTheCargo" type="String" />
+		<field name="numberOfCrew" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="shipRequirementsInTermsOfWaste" type="String" />
+		<field name="remarks" type="String" />
+		<field name="numberCargoDeclaration" type="String" />
+		<field name="numberShipStoreDeclaration" type="String" />
+		<field name="numberCrewList" type="String" />
+		<field name="numberPassengerList" type="String" />
+		<field name="numberCrewEffects" type="String" />
+		<field name="numberHealthMaritime" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="CargoOnBoard" type="String" />
+		<field name="Cargo" type="String" />
+		<field name="VolumeCargo" type="double" />
+		<field name="CargoUnit" type="String" />
+		<field name="CargoDescription" type="String" />
+		<field name="ratedPower" type="String" />
+		<field name="seatingCapacity" type="String" />
+		<field name="lyingCapacity" type="String" />
+		<field name="maritimePortCode" type="String" />
+		<field name="lastProvinceCode" type="String" />
+		<field name="nextProvinceCode" type="String" />
+		<field name="lastMaritimePortCode" type="String" />
+		<field name="lastPortRegionCode" type="String" />
+		<field name="lastPortHarbourCode" type="String" />
+		<field name="lastPortWharfCode" type="String" />
+		<field name="nextMaritimePortCode" type="String" />
+		<field name="nextPortRegionCode" type="String" />
+		<field name="nextPortHarbourCode" type="String" />
+		<field name="nextPortWharfCode" type="String" />
+		<field name="link" type="String" />
+		<field name="qrCode" type="String" />
+		<field name="portClearanceNo" type="String" />
+		<field name="loa" type="double" />
+		<field name="unitLOA" type="String" />
+		<field name="breadth" type="double" />
+		<field name="unitBreadth" type="String" />
+		<field name="clearanceHeight" type="double" />
+		<field name="unitClearanceHeight" type="String" />
+		<field name="shownDraftxF" type="double" />
+		<field name="unitShownDraftxF" type="String" />
+		<field name="shownDraftxA" type="double" />
+		<field name="unitShownDraftxA" type="String" />
+		<field name="dwt" type="double" />
+		<field name="unitDWT" type="String" />
+		<field name="timeOfPORTArrival" type="Date" />
+		<field name="timeOfPilotOnBoard" type="Date" />
+		<field name="tugBoat" type="String" />
+		<field name="do_" type="String" />
+		<field name="fo" type="String" />
+		<field name="fw" type="String" />
+		<field name="placeOfReception" type="String" />
+		<field name="nameOfShipOwners" type="String" />
+		<field name="addressOfShipOwners" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempGoodsItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="billOfLadingNo" type="String" />
+		<field name="goodItemCode" type="String" />
+		<field name="goodItemDescription" type="String" />
+		<field name="numberOfPackage" type="long" />
+		<field name="kindOfPackages" type="String" />
+		<field name="marksandNosofGoods" type="String" />
+		<field name="grossWeight" type="double" />
+		<field name="grossWeightUnit" type="String" />
+		<field name="measurement" type="double" />
+		<field name="measurementUnit" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempHealthCrewPassengerList">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="healthCrewPassengerCode" type="String" />
+		<field name="passengerOrCrewCode" type="String" />
+		<field name="passengerOrCrewName" type="String" />
+		<field name="classOrRating" type="int" />
+		<field name="stateVisitedCode" type="String" />
+		<field name="portVisitedCode" type="String" />
+		<field name="fromDate" type="Date" />
+		<field name="toDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempHealthQuestion">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="healthQuestionCode" type="String" />
+		<field name="personDied" type="int" />
+		<field name="personDiedNo" type="int" />
+		<field name="personDiedReport" type="String" />
+		<field name="isinfectious" type="int" />
+		<field name="infectiousReport" type="String" />
+		<field name="illPassengersGreaterNomal" type="int" />
+		<field name="illPassengersNo" type="int" />
+		<field name="illPersonsOnBoard" type="int" />
+		<field name="illPersonsReport" type="int" />
+		<field name="medicalPractitionerConsulted" type="int" />
+		<field name="medicalTreatmentOrAdvice" type="String" />
+		<field name="infectionOrSpreadOfDisease" type="int" />
+		<field name="infectionsReport" type="String" />
+		<field name="isSanitary" type="int" />
+		<field name="sanitaryDes" type="String" />
+		<field name="isStowaways" type="int" />
+		<field name="joinShip" type="String" />
+		<field name="isAnimal" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempMaritimePaymentConfig">
+		<field name="id" type="long" />
+		<field name="maritimeCode" type="String" />
+		<field name="merchantCode" type="String" />
+		<field name="merchantKey" type="String" />
+		<field name="merchantName" type="String" />
+		<field name="keypayDomain" type="String" />
+		<field name="keypayVersion" type="String" />
+		<field name="returnURL" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempNoTiceShipMessage">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="noticeShipType" type="String" />
+		<field name="noticeShipCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="confirmTime" type="int" />
+		<field name="shipName" type="String" />
+		<field name="shipTypeCode" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="shipCaptain" type="String" />
+		<field name="imo" type="String" />
+		<field name="grt" type="double" />
+		<field name="dwt" type="double" />
+		<field name="unitGRT" type="String" />
+		<field name="unitDWT" type="String" />
+		<field name="callSign" type="String" />
+		<field name="arrivalDate" type="Date" />
+		<field name="arrivalPortCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="portWharfCode" type="String" />
+		<field name="portGoingToStateName" type="String" />
+		<field name="portGoingToCode" type="String" />
+		<field name="nameOfShipOwners" type="String" />
+		<field name="addressOfShipOwners" type="String" />
+		<field name="shipOwnerstateCode" type="String" />
+		<field name="shipOwnerPhone" type="String" />
+		<field name="shipOwnerFax" type="String" />
+		<field name="shipOwnerEmail" type="String" />
+		<field name="loa" type="double" />
+		<field name="breadth" type="double" />
+		<field name="clearanceHeight" type="double" />
+		<field name="shownDraftxF" type="double" />
+		<field name="shownDraftxA" type="double" />
+		<field name="unitLOA" type="String" />
+		<field name="unitBreadth" type="String" />
+		<field name="unitClearanceHeight" type="String" />
+		<field name="unitShownDraftxF" type="String" />
+		<field name="unitShownDraftxA" type="String" />
+		<field name="certificateOfRegistryNumber" type="String" />
+		<field name="certificateOfRegistryDate" type="Date" />
+		<field name="certificateOfRegistryPortName" type="String" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="shipAgencyAddress" type="String" />
+		<field name="shipAgencyPhone" type="String" />
+		<field name="shipAgencyFax" type="String" />
+		<field name="shipAgencyEmail" type="String" />
+		<field name="purposeCode" type="String" />
+		<field name="purposeSpecified" type="String" />
+		<field name="crewNumber" type="long" />
+		<field name="unitCrew" type="String" />
+		<field name="passengerNumber" type="long" />
+		<field name="unitPassenger" type="String" />
+		<field name="quantityAndTypeOfCargo" type="String" />
+		<field name="unitQuantityofCargo" type="String" />
+		<field name="typeOfCargo" type="String" />
+		<field name="otherPersons" type="int" />
+		<field name="remarks" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="documentYear" type="int" />
+		<field name="nameOfShipAgent" type="String" />
+		<field name="documentReference" type="long" />
+		<field name="isArrival" type="int" />
+		<field name="voyageNumber" type="String" />
+		<field name="netTonnage" type="double" />
+		<field name="netTonnageUnit" type="String" />
+		<field name="positionOfShipInPort" type="String" />
+		<field name="briefParticularsOfVoyage" type="String" />
+		<field name="previousPortsOfCall" type="String" />
+		<field name="subsequentPortsOfCall" type="String" />
+		<field name="dischargedPorts" type="String" />
+		<field name="remainingCargo" type="String" />
+		<field name="shipRequirementsInTermsOfWaste" type="String" />
+		<field name="numberCargoDeclaration" type="int" />
+		<field name="numberShipStoreDeclaration" type="int" />
+		<field name="numberCrewList" type="int" />
+		<field name="numberPassengerList" type="int" />
+		<field name="numberCrewEffectsDeclaration" type="int" />
+		<field name="numberHealthMaritimeDeclaration" type="int" />
+		<field name="portClearanceNo" type="String" />
+		<field name="timeOfPORTArrival" type="Date" />
+		<field name="timeOfPilotOnBoard" type="Date" />
+		<field name="tugBoat" type="String" />
+		<field name="do_" type="String" />
+		<field name="fo" type="String" />
+		<field name="fw" type="String" />
+		<field name="placeOfReception" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempPassengerDetails">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="passengerCode" type="String" />
+		<field name="familyName" type="String" />
+		<field name="givenName" type="String" />
+		<field name="nationality" type="String" />
+		<field name="birthDay" type="Date" />
+		<field name="birthPlace" type="String" />
+		<field name="typeOfIdentity" type="String" />
+		<field name="passportExpiredDate" type="Date" />
+		<field name="serialNumberOfIdentity" type="String" />
+		<field name="portOfEmbarkation" type="String" />
+		<field name="portOfDisembarkation" type="String" />
+		<field name="isTransit" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempPassengerList">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="portOfArrivalCode" type="String" />
+		<field name="dateOfArrival" type="Date" />
+		<field name="imoNumber" type="String" />
+		<field name="callSign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="listPassengers" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="NumberOfLeftPassengers" type="int" />
+		<field name="NumberOfVNmeses" type="int" />
+		<field name="NumberOfForeigners" type="int" />
+		<field name="TotalPassengers" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempPersonList">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="name" type="String" />
+		<field name="age" type="String" />
+		<field name="nationalCode" type="String" />
+		<field name="nationalName" type="String" />
+		<field name="ilnessStatus" type="String" />
+		<field name="reasonOfDead" type="String" />
+		<field name="personType" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempPlantQuarantine">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="documentYear" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="doctorName" type="String" />
+		<field name="numberOfCrew" type="int" />
+		<field name="numberOfPassengers" type="int" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="nextPortOfCallCode" type="String" />
+		<field name="firstPortOfLoadingCode" type="String" />
+		<field name="dateOfdeparture" type="Date" />
+		<field name="plantNameFirst" type="String" />
+		<field name="plantNameBetween" type="String" />
+		<field name="plantNameThis" type="String" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempShipSecurityMessage">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentYear" type="int" />
+		<field name="shipSecurityCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="userCreated" type="String" />
+		<field name="shipAgencyCode" type="String" />
+		<field name="nameOfShipAgent" type="String" />
+		<field name="shipName" type="String" />
+		<field name="shipTypeCode" type="String" />
+		<field name="stateCode" type="String" />
+		<field name="shipCaptain" type="String" />
+		<field name="imo" type="String" />
+		<field name="grt" type="double" />
+		<field name="unitGRT" type="String" />
+		<field name="crewNumber" type="long" />
+		<field name="arrivalDate" type="Date" />
+		<field name="purposeCode" type="String" />
+		<field name="purposeSpecified" type="String" />
+		<field name="portRegionCode" type="String" />
+		<field name="portWharfCode" type="String" />
+		<field name="shipAgencyPhone" type="String" />
+		<field name="shipAgencyFax" type="String" />
+		<field name="isInternationalShipSecurity" type="int" />
+		<field name="nameOfISSC" type="String" />
+		<field name="dateOfISSC" type="Date" />
+		<field name="dateOfExpiryISSC" type="Date" />
+		<field name="securityLevelCode" type="String" />
+		<field name="securityFromDate" type="Date" />
+		<field name="isAdditionalSecurityMeasures" type="int" />
+		<field name="additionalSecurityDetail" type="String" />
+		<field name="isMaintainSecurity" type="int" />
+		<field name="maintainSecurityDetail" type="String" />
+		<field name="latitude" type="String" />
+		<field name="longitude" type="String" />
+		<field name="hasShipSecurityPortItems" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="callSign" type="String" />
+		<field name="arrivalPortCode" type="String" />
+		<field name="portHarbourCode" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempShipSecurityPortItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="shipSecurityPortItemCode" type="String" />
+		<field name="portCode" type="String" />
+		<field name="dateArrival" type="Date" />
+		<field name="dateDeparture" type="Date" />
+		<field name="securityLevelCode" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempShipStoresDeclaration">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="userCreated" type="String" />
+		<field name="isArrival" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="imoNumber" type="String" />
+		<field name="callsign" type="String" />
+		<field name="voyageNumber" type="String" />
+		<field name="nationalityOfShip" type="String" />
+		<field name="portOfArrivalCode" type="String" />
+		<field name="dateOfArrival" type="Date" />
+		<field name="lastPortOfCallCode" type="String" />
+		<field name="numberOfPersonsOnBoat" type="int" />
+		<field name="periodOfStay" type="String" />
+		<field name="periodOfStayUnit" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="listShipsStores" type="int" />
+		<field name="signPlace" type="String" />
+		<field name="signDate" type="Date" />
+		<field name="masterSigned" type="int" />
+		<field name="masterSignedImage" type="int" />
+		<field name="attachedFile" type="long" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempShipStoresItems">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="shipsstoreItemCode" type="String" />
+		<field name="nameOfArticle" type="String" />
+		<field name="quantity" type="String" />
+		<field name="quantityUnit" type="String" />
+		<field name="locationOnBoat" type="String" />
+		<field name="useInBoat" type="int" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempUnitGeneral">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="grossTonnageUnit" type="String" />
+		<field name="netTonnageUnit" type="String" />
+		<field name="unitDWT" type="String" />
+		<field name="unitLOA" type="String" />
+		<field name="unitBreadth" type="String" />
+		<field name="unitClearanceHeight" type="String" />
+		<field name="unitShownDraft" type="String" />
+		<field name="unitShownDraftxF" type="String" />
+		<field name="unitShownDraftxA" type="String" />
+		<field name="unitHorsePower" type="String" />
+		<field name="unitRemainingOnBoardxB" type="String" />
+		<field name="unitRemainingOnBoardxS" type="String" />
+		<field name="unitFO" type="String" />
+		<field name="unitLO" type="String" />
+		<field name="unitFW" type="String" />
+		<field name="unitDO" type="String" />
+		<field name="unitSludgeOil" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.TempWasteList">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="typeCode" type="String" />
+		<field name="typeName" type="String" />
+		<field name="weight" type="double" />
+		<field name="unit" type="String" />
+	</model>
+	<model name="vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc">
+		<field name="CVHH" type="String" />
+		<field name="MaritimeOrder" type="int" />
+		<field name="NC_KYSO" type="int" />
+		<field name="XC_KYSO" type="int" />
+		<field name="QC_KYSO" type="int" />
+		<field name="VC_KYSO" type="int" />
+		<field name="RC_KYSO" type="int" />
+		<field name="CCV_KYSO" type="int" />
+		<field name="CCR_KYSO" type="int" />
+		<field name="VCDK_KYSO" type="int" />
+		<field name="RCDK_KYSO" type="int" />
+		<field name="NCDK_KYSO" type="int" />
+		<field name="XCDK_KYSO" type="int" />
+		<field name="VCTND_KYSO" type="int" />
+		<field name="RCTND_KYSO" type="int" />
+		<field name="NC_DUYET" type="int" />
+		<field name="XC_DUYET" type="int" />
+		<field name="QC_DUYET" type="int" />
+		<field name="VC_DUYET" type="int" />
+		<field name="RC_DUYET" type="int" />
+		<field name="CCV_DUYET" type="int" />
+		<field name="CCR_DUYET" type="int" />
+		<field name="VCDK_DUYET" type="int" />
+		<field name="RCDK_DUYET" type="int" />
+		<field name="NCDK_DUYET" type="int" />
+		<field name="XCDK_DUYET" type="int" />
+		<field name="VCTND_DUYET" type="int" />
+		<field name="RCTND_DUYET" type="int" />
+		<field name="NCPTTND_DUYET" type="int" />
+		<field name="XCPTTND_DUYET" type="int" />
+		<field name="NCPTTND_KYSO" type="int" />
+		<field name="XCPTTND_KYSO" type="int" />
+	</model>
+	<model name="vn.gt.dao.common.model.LogMessageValidation">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestDirection" type="String" />
+		<field name="requestDate" type="Date" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="documentType" type="String" />
+		<field name="tagProperty" type="String" />
+		<field name="dataValidation" type="String" />
+	</model>
+	<model name="vn.gt.dao.common.model.UserPort">
+		<field name="id" type="long" />
+		<field name="portCode" type="String" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="status" type="int" />
+	</model>
+	<model name="vn.gt.dao.common.model.UserSign">
+		<field name="id" type="long" />
+		<field name="userId" type="long" />
+		<field name="portCode" type="String" />
+		<field name="title" type="String" />
+		<field name="representative" type="String" />
+		<field name="fileChuKyId" type="long" />
+		<field name="fileConDauId" type="long" />
+		<field name="fileChungThuSoId" type="long" />
+		<field name="modifyUser" type="String" />
+		<field name="modifyDate" type="Date" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmCertificate">
+		<field name="id" type="long" />
+		<field name="certificateCode" type="String" />
+		<field name="certificateName" type="String" />
+		<field name="certificateNameVN" type="String" />
+		<field name="certificateOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGTBusinessType">
+		<field name="id" type="long" />
+		<field name="businessTypeCode" type="int" />
+		<field name="businessTypeName" type="String" />
+		<field name="businessTypeNameVN" type="String" />
+		<field name="businessTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGTFunctionType">
+		<field name="id" type="long" />
+		<field name="functionTypeCode" type="String" />
+		<field name="functionTypeName" type="String" />
+		<field name="functionTypeNameVN" type="String" />
+		<field name="functionTypeOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtOrganization">
+		<field name="id" type="long" />
+		<field name="organizationCode" type="String" />
+		<field name="organizationName" type="String" />
+		<field name="organizationNameVN" type="String" />
+		<field name="organizationorder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtReportCategory">
+		<field name="id" type="long" />
+		<field name="category" type="String" />
+		<field name="categoryName" type="String" />
+		<field name="categoryOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtReportTemplate">
+		<field name="id" type="long" />
+		<field name="reportCode" type="int" />
+		<field name="reportName" type="String" />
+		<field name="reportType" type="int" />
+		<field name="category" type="String" />
+		<field name="description" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtRouteConfig">
+		<field name="id" type="long" />
+		<field name="routeCode" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="locCode" type="String" />
+		<field name="ipName" type="String" />
+		<field name="portName" type="String" />
+		<field name="linkAddress" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGTShipPosition">
+		<field name="id" type="long" />
+		<field name="positionCode" type="String" />
+		<field name="positionName" type="String" />
+		<field name="remarks" type="String" />
+		<field name="positionOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtStatus">
+		<field name="id" type="long" />
+		<field name="statusCode" type="int" />
+		<field name="statusName" type="String" />
+		<field name="type" type="int" />
+		<field name="description" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmGtVersion">
+		<field name="id" type="int" />
+		<field name="versionName" type="String" />
+		<field name="versionDate" type="Date" />
+		<field name="versionDeployer" type="String" />
+		<field name="contents" type="String" />
+		<field name="description" type="String" />
+		<field name="dbFileName" type="String" />
+		<field name="dbFileSize" type="String" />
+		<field name="dbDescription" type="String" />
+		<field name="appFileName" type="String" />
+		<field name="appFileSize" type="String" />
+		<field name="appDescription" type="String" />
+		<field name="specFileName" type="String" />
+		<field name="specFileSize" type="String" />
+		<field name="specDescription" type="String" />
+		<field name="organizationCode" type="String" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmHistoryMinistry">
+		<field name="id" type="long" />
+		<field name="ministryCode" type="String" />
+		<field name="ministryName" type="String" />
+		<field name="ministryNameVN" type="String" />
+		<field name="ministryOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.danhmucgt.model.DmMinistry">
+		<field name="id" type="long" />
+		<field name="ministryCode" type="String" />
+		<field name="ministryName" type="String" />
+		<field name="ministryNameVN" type="String" />
+		<field name="ministryOrder" type="int" />
+		<field name="isDelete" type="int" />
+		<field name="markedAsDelete" type="int" />
+		<field name="modifiedDate" type="Date" />
+		<field name="requestedDate" type="Date" />
+		<field name="syncVersion" type="String" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultCertificate">
+		<field name="id" type="long" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="certificateCode" type="String" />
+		<field name="certificateOrder" type="int" />
+		<field name="certificateNo" type="String" />
+		<field name="certificateIssueDate" type="Date" />
+		<field name="certificateExpiredDate" type="Date" />
+		<field name="examinationDate" type="Date" />
+		<field name="description" type="String" />
+		<field name="comment" type="String" />
+		<field name="approvalName" type="String" />
+		<field name="isExamined" type="int" />
+		<field name="mandatory" type="int" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultCompetion">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="nameOfShip" type="String" />
+		<field name="flagStateOfShip" type="String" />
+		<field name="nameOfMaster" type="String" />
+		<field name="grossTonnage" type="double" />
+		<field name="portOfArrivalCode" type="String" />
+		<field name="maritimeCode" type="String" />
+		<field name="division" type="String" />
+		<field name="approvalName" type="String" />
+		<field name="approvalTime" type="Date" />
+		<field name="certificateNo" type="String" />
+		<field name="responseStatusHQ" type="int" />
+		<field name="responseStatusBP" type="int" />
+		<field name="responseStatusYT" type="int" />
+		<field name="responseStatusDV" type="int" />
+		<field name="responseStatusTV" type="int" />
+		<field name="responseStatusCVHH" type="int" />
+		<field name="responseTimeHQ" type="Date" />
+		<field name="responseTimeBP" type="Date" />
+		<field name="responseTimeYT" type="Date" />
+		<field name="responseTimeDV" type="Date" />
+		<field name="responseTimeTV" type="Date" />
+		<field name="responseTimeCVHH" type="Date" />
+		<field name="responseHQ" type="String" />
+		<field name="responseBP" type="String" />
+		<field name="responseYT" type="String" />
+		<field name="responseDV" type="String" />
+		<field name="responseTV" type="String" />
+		<field name="responseCVHH" type="String" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultDeclaration">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="businessOrder" type="int" />
+		<field name="businessTypeCode" type="int" />
+		<field name="latestSend" type="int" />
+		<field name="declarationTime" type="Date" />
+		<field name="arrivalDepartureTime" type="Date" />
+		<field name="remainingTime" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultHistoryMinistry">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="ministryCode" type="String" />
+		<field name="organization" type="String" />
+		<field name="division" type="String" />
+		<field name="officerName" type="String" />
+		<field name="latestDate" type="Date" />
+		<field name="businessTypeCode" type="int" />
+		<field name="response" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultMinistry">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="int" />
+		<field name="documentYear" type="int" />
+		<field name="ministryCode" type="String" />
+		<field name="organization" type="String" />
+		<field name="division" type="String" />
+		<field name="officerName" type="String" />
+		<field name="latestDate" type="Date" />
+		<field name="businessTypeCode" type="int" />
+		<field name="response" type="String" />
+		<field name="remarks" type="String" />
+	</model>
+	<model name="vn.gt.dao.result.model.ResultNotification">
+		<field name="id" type="long" />
+		<field name="requestCode" type="String" />
+		<field name="requestState" type="int" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="maritimeCode" type="String" />
+		<field name="role" type="long" />
+		<field name="response" type="String" />
+		<field name="organization" type="String" />
+		<field name="division" type="String" />
+		<field name="officerName" type="String" />
+		<field name="latestDate" type="String" />
+		<field name="businessTypeCode" type="int" />
+		<field name="remarks" type="String" />
+		<field name="isReply" type="int" />
+		<field name="responseTime" type="Date" />
+	</model>
+	<model name="vn.gt.dao.result.model.TempDebitNote">
+		<field name="id" type="long" />
+		<field name="ATTACHEDFILE" type="long" />
+		<field name="corporationid" type="String" />
+		<field name="debitnotenumber" type="String" />
+		<field name="division" type="String" />
+		<field name="documentName" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="financialaccountant" type="String" />
+		<field name="fromdate" type="Date" />
+		<field name="markasdeleted" type="int" />
+		<field name="organization" type="String" />
+		<field name="paymenttype" type="int" />
+		<field name="reportby" type="String" />
+		<field name="reportdate" type="Date" />
+		<field name="todate" type="Date" />
+		<field name="totalpayment" type="double" />
+		<field name="transactionid" type="String" />
+		<field name="mariTimeCode" type="int" />
+		<field name="comments" type="String" />
+		<field name="documentTypeCode" type="String" />
+		<field name="keypayGoodCode" type="String" />
+		<field name="keypayMerchantCode" type="String" />
+		<field name="paymentGateStatusCode" type="String" />
+		<field name="paymentGateResponseData" type="String" />
+		<field name="paymentGateCheckCode" type="int" />
+		<field name="paymentGateCheckResponseData" type="String" />
+		<field name="keypayURL" type="String" />
+		<field name="currency" type="String" />
+	</model>
+	<model name="vn.dao.gt.asw.model.AswmsgMessageQueue">
+		<field name="id" type="long" />
+		<field name="version" type="String" />
+		<field name="messageId" type="String" />
+		<field name="senderName" type="String" />
+		<field name="senderIdentity" type="String" />
+		<field name="senderCountryCode" type="String" />
+		<field name="senderMinistryCode" type="String" />
+		<field name="senderOrganizationCode" type="String" />
+		<field name="senderUnitCode" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="receiverIdentity" type="String" />
+		<field name="receiverCountryCode" type="String" />
+		<field name="receiverMinistryCode" type="String" />
+		<field name="receiverOrganizationCode" type="String" />
+		<field name="receiverUnitCode" type="String" />
+		<field name="documentType" type="String" />
+		<field name="type" type="int" />
+		<field name="function" type="String" />
+		<field name="reference" type="long" />
+		<field name="preReference" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="sendDate" type="Date" />
+		<field name="signature" type="String" />
+		<field name="systemSignature" type="String" />
+		<field name="allContent" type="String" />
+		<field name="createdTime" type="Date" />
+		<field name="webservice" type="int" />
+		<field name="validated" type="int" />
+		<field name="priority" type="int" />
+		<field name="description" type="String" />
+		<field name="validationCode" type="String" />
+		<field name="soLanGui" type="int" />
+		<field name="hoSoThuTucId" type="long" />
+		<field name="phieuXuLyPhuId" type="long" />
+	</model>
+	<model name="vn.dao.gt.asw.model.MonitorMessageQueue">
+		<field name="id" type="long" />
+		<field name="version" type="String" />
+		<field name="messageId" type="String" />
+		<field name="senderName" type="String" />
+		<field name="senderIdentity" type="String" />
+		<field name="senderCountryCode" type="String" />
+		<field name="senderMinistryCode" type="String" />
+		<field name="senderOrganizationCode" type="String" />
+		<field name="senderUnitCode" type="String" />
+		<field name="receiverName" type="String" />
+		<field name="receiverIdentity" type="String" />
+		<field name="receiverCountryCode" type="String" />
+		<field name="receiverMinistryCode" type="String" />
+		<field name="receiverOrganizationCode" type="String" />
+		<field name="receiverUnitCode" type="String" />
+		<field name="documentType" type="String" />
+		<field name="type" type="int" />
+		<field name="function" type="String" />
+		<field name="reference" type="long" />
+		<field name="preReference" type="long" />
+		<field name="documentYear" type="int" />
+		<field name="sendDate" type="Date" />
+		<field name="createdTime" type="Date" />
+		<field name="webservice" type="int" />
+		<field name="validated" type="int" />
+		<field name="priority" type="int" />
+		<field name="description" type="String" />
+		<field name="validationCode" type="String" />
+		<field name="soLanGui" type="int" />
+		<field name="hoSoThuTucId" type="long" />
+		<field name="phieuXuLyPhuId" type="long" />
+	</model>
+</model-hints>

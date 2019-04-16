@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Shifting_Order" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="556" leftMargin="25" rightMargin="14" topMargin="20" bottomMargin="20" uuid="7d866905-bd5e-4768-ba90-a10a504eeb7d">
+	<property name="ireport.zoom" value="1.3310000000000013"/>
+	<property name="ireport.x" value="33"/>
+	<property name="ireport.y" value="644"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="maritimeName" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeName]]></fieldDescription>
+	</field>
+	<field name="maritimeNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeNameVN]]></fieldDescription>
+	</field>
+	<field name="anchoringPortCode" class="java.lang.String">
+		<fieldDescription><![CDATA[anchoringPortCode]]></fieldDescription>
+	</field>
+	<field name="anchoringPortWharfCode" class="java.lang.String">
+		<fieldDescription><![CDATA[anchoringPortWharfCode]]></fieldDescription>
+	</field>
+	<field name="approvalDate" class="java.util.Date">
+		<fieldDescription><![CDATA[approvalDate]]></fieldDescription>
+	</field>
+	<field name="approvalName" class="java.lang.String">
+		<fieldDescription><![CDATA[approvalName]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="cancelDate" class="java.util.Date">
+		<fieldDescription><![CDATA[cancelDate]]></fieldDescription>
+	</field>
+	<field name="cancelName" class="java.lang.String">
+		<fieldDescription><![CDATA[cancelName]]></fieldDescription>
+	</field>
+	<field name="cancelNote" class="java.lang.String">
+		<fieldDescription><![CDATA[cancelNote]]></fieldDescription>
+	</field>
+	<field name="certificateNo" class="java.lang.String">
+		<fieldDescription><![CDATA[certificateNo]]></fieldDescription>
+	</field>
+	<field name="directorOfMaritime" class="java.lang.String">
+		<fieldDescription><![CDATA[directorOfMaritime]]></fieldDescription>
+	</field>
+	<field name="documentName" class="java.lang.Long">
+		<fieldDescription><![CDATA[documentName]]></fieldDescription>
+	</field>
+	<field name="documentYear" class="java.lang.Integer">
+		<fieldDescription><![CDATA[documentYear]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="flagStateOfShip" class="java.lang.String">
+		<fieldDescription><![CDATA[flagStateOfShip]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="isApproval" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isApproval]]></fieldDescription>
+	</field>
+	<field name="isCancel" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isCancel]]></fieldDescription>
+	</field>
+	<field name="issueDate" class="java.util.Date">
+		<fieldDescription><![CDATA[issueDate]]></fieldDescription>
+	</field>
+	<field name="nameOfShip" class="java.lang.String">
+		<fieldDescription><![CDATA[nameOfShip]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="numberShiftingOrder" class="java.lang.String">
+		<fieldDescription><![CDATA[numberShiftingOrder]]></fieldDescription>
+	</field>
+	<field name="portHarbourCode" class="java.lang.String">
+		<fieldDescription><![CDATA[portHarbourCode]]></fieldDescription>
+	</field>
+	<field name="portofAuthority" class="java.lang.String">
+		<fieldDescription><![CDATA[portofAuthority]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="reasonToShift" class="java.lang.String">
+		<fieldDescription><![CDATA[reasonToShift]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[remarks]]></fieldDescription>
+	</field>
+	<field name="representative" class="java.lang.String">
+		<fieldDescription><![CDATA[representative]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="requestState" class="java.lang.Integer">
+		<fieldDescription><![CDATA[requestState]]></fieldDescription>
+	</field>
+	<field name="shiftingDate" class="java.util.Date">
+		<fieldDescription><![CDATA[shiftingDate]]></fieldDescription>
+	</field>
+	<field name="shiftingPortWharfCode" class="java.lang.String">
+		<fieldDescription><![CDATA[shiftingPortWharfCode]]></fieldDescription>
+	</field>
+	<field name="versionNo" class="java.lang.String">
+		<fieldDescription><![CDATA[versionNo]]></fieldDescription>
+	</field>
+	<field name="signTitle" class="java.lang.String"/>
+	<field name="signName" class="java.lang.String"/>
+	<title>
+		<band height="561" splitType="Stretch">
+			<line>
+				<reportElement x="351" y="95" width="105" height="1" uuid="34092693-15d5-4fa5-8efb-78bc3190d14b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="130" width="543" height="21" uuid="89157200-a079-4827-9ca6-9dc6022a0604"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LỆNH ĐIỀU ĐỘNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="57" width="309" height="17" uuid="0ac8ba57-9262-4835-bab6-e3c5e58f0d71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="39" width="309" height="18" uuid="1fe24481-9c3d-470e-9cc8-4a9db8ebfa57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="151" width="543" height="18" uuid="d78f57a5-51ba-4451-bc3f-2f0441433fe4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SHIFTING ORDER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="17" width="309" height="22" uuid="e691044f-9032-4def-aa5f-0239644ceb9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="74" width="309" height="17" uuid="831927fc-7fe5-4872-8b73-a4a9ee635d26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="221" height="22" uuid="0d01f8a3-4133-4162-9924-6e75122dbe4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỤC HÀNG HẢI VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="39" width="221" height="18" uuid="24df55ab-b6ff-4a0c-92b9-069e10ca1839"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vietnam Maritime Administration]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="57" width="221" height="17" uuid="2a88e7e5-fc15-4de2-8989-41a7b5b4f776"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{maritimeNameVN} == null) ? "Cảng vụ hàng hải………." : $F{maritimeNameVN}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="74" width="221" height="17" uuid="db41a7d0-1d79-4030-9b64-c86f53bb9731"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{maritimeName} == null) ? "The Maritime Administration of........" : $F{maritimeName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="267" width="296" height="14" uuid="70488488-3ca9-4cbd-ae2b-7bd17c31fbef"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[The Director of Maritime Administration of ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="455" width="518" height="17" uuid="46ce3871-de79-42ab-97d2-500823084f19"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Yêu cầu ông thực hiện nghiêm chỉnh lệnh này.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="423" width="107" height="14" uuid="a854e8ae-7653-4b24-a02c-aa58bf4e0e0b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Reasons to shift]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="406" width="411" height="31" uuid="3430fb52-2323-490e-a9f1-c90225412cc1"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{reasonToShift} == null) ? "" : $F{reasonToShift}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="323" y="250" width="233" height="17" isPrintWhenDetailOverflows="true" uuid="421ef9fe-2ed8-4b13-88cd-19b625fe6d32"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Yêu cầu tàu: " + (($F{nameOfShip} == null) ? "" : "<b>" + $F{nameOfShip}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="514" width="518" height="17" uuid="ce2de8e0-c116-45d7-b295-ea18b9d888c6"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Giấy phép số: " + (($F{certificateNo} == null) ? "" : "<b>" + $F{certificateNo}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="217" width="460" height="17" uuid="d17434d3-1ba1-4ab7-a1c9-00f85586eedf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[To: master of M/V]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="323" y="315" width="233" height="40" uuid="86825ea1-7bbf-4ddf-8583-c277dce833b9"/>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["To be shifted to  "  + "<b>" + vn.gt.utils.GetNameFunction.getPortHarbourNameVN(new java.util.Date(), $F{portHarbourCode})+"</b>"
++" <b>"+ vn.gt.utils.GetNameFunction.getPortWharfNameVN(new java.util.Date(), $F{shiftingPortWharfCode}) +"</b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="200" width="400" height="17" uuid="3bfe383e-83fd-4f79-a0d0-7f229b459e2f"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thuyền trưởng tàu " + (($F{nameOfShip} == null) ? "" : $F{nameOfShip})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="27" y="250" width="296" height="17" isPrintWhenDetailOverflows="true" uuid="ecb71c81-a72f-437e-b80c-ffbc22843b24"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Giám đốc Cảng vụ hàng hải: " + "<b>" + vn.gt.utils.GetNameFunction.getCityCode(new java.util.Date(), $F{portofAuthority}) + "</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="315" width="296" height="17" uuid="c79fa2a0-cd97-47be-8568-eea6a95e62a4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Anchoring/Berthing at]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="355" width="529" height="17" uuid="b1c71fdd-f7d0-44f1-a2d7-7831dd7c5668"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vào hồi: " + "<b>" + vn.gt.tichhop.report.ReportFunction.parserDateToString3($F{shiftingDate}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="200" width="60" height="17" uuid="ca5a9596-14ac-4670-81fb-7cd7b7829505"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" isItalic="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Kính gửi: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="267" width="82" height="14" uuid="e3bb4179-1353-4238-a28b-cb6823781322"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Requests the vessel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="531" width="518" height="14" uuid="80cd06be-95c9-48a0-a28a-758fa0d5cc94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="323" y="298" width="233" height="17" uuid="52ad5ff5-5f03-4c8b-9d9f-cd22176b4804"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Di chuyển tới: " + "<b>" + vn.gt.utils.GetNameFunction.getPortName(new java.util.Date(), $F{anchoringPortCode}) + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="372" width="529" height="14" uuid="6837fa89-5872-4b89-84f7-0860c9efe7c9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[At  hrs  on  month  year]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="298" width="296" height="17" uuid="88e26f59-a92c-44a7-852e-5730e6bc5f17"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="13" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Đang neo đậu tại: " + "<b>" + "" + "<b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="472" width="518" height="14" uuid="5a6a5279-d8ef-4da3-bde1-0264ba260ea5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[You are requested to comply in full this shifting order.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="406" width="107" height="17" uuid="dcdabc35-5e59-42bc-aa9e-c78f30200573"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" isItalic="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lý do điều động: "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="142">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="256" y="0" width="289" height="18" uuid="584fb42c-c6f4-441e-9791-6fda2532a617"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(vn.gt.tichhop.report.ReportFunction.parserDateToString4($F{issueDate}) == "") ? "Ngày…… tháng…… năm 20……" : vn.gt.tichhop.report.ReportFunction.parserDateToString5($F{issueDate})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="256" y="33" width="289" height="17" uuid="fa6e98d5-a781-493c-9715-b9d9a832db06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{signTitle} == null) ? "GIÁM ĐỐC" : $F{signTitle}.toUpperCase())]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="256" y="50" width="289" height="15" uuid="ec50f683-be4d-45bf-946d-df08a7c6a6a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{representative} == null || $F{representative}.compareTo("GIÁM ĐỐC") == 0) ? "Director" : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="256" y="18" width="289" height="15" uuid="b2840cc0-f380-44dd-8fdf-fab6c570e88b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date  " + vn.gt.tichhop.report.ReportFunction.parseDateToString($F{issueDate})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="320" y="65" width="225" height="60" uuid="3d4e1f7d-9fd3-450b-82fc-69c56f735b06">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA["#"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="256" y="125" width="289" height="17" uuid="c6b7f326-7f12-456c-8e43-bca6804e51c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{signName} == null) ? "" : $F{signName})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

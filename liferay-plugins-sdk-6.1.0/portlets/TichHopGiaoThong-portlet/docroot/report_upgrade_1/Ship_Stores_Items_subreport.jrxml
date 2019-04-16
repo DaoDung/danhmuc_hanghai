@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ship_Stores_Items_subreport" pageWidth="555" pageHeight="245" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="65e7805d-3220-4b2b-9c69-08c37b6e7a51">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="locationOnBoat" class="java.lang.String">
+		<fieldDescription><![CDATA[locationOnBoat]]></fieldDescription>
+	</field>
+	<field name="nameOfArticle" class="java.lang.String">
+		<fieldDescription><![CDATA[nameOfArticle]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.String">
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="quantityUnit" class="java.lang.String">
+		<fieldDescription><![CDATA[quantityUnit]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="shipsstoreItemCode" class="java.lang.String">
+		<fieldDescription><![CDATA[shipsstoreItemCode]]></fieldDescription>
+	</field>
+	<field name="useInBoat" class="java.lang.Integer">
+		<fieldDescription><![CDATA[useInBoat]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="421" y="0" width="134" height="17" uuid="ae36739b-ac0b-42eb-8a89-5f632b0ab5f8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[11. Sử dụng ở trên tàu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="144" height="17" uuid="570ce6e2-59a6-4baa-95d8-285a1a0dd09d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[9. Số lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="144" height="17" uuid="c0470a87-b1d6-4cb0-916f-a3c0eacfc612"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[8. Tên vật phẩm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="0" width="133" height="17" uuid="24bef3ce-f782-4b57-ae77-229d851f481b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[10. Vị trí tên tàu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="17" width="133" height="15" uuid="6c76f3af-25fd-4dca-9e4b-02e07f037c50"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Location on board]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="144" height="15" uuid="3b900f4b-a1c1-45f7-b9f5-77a9314ef4d8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Name of article]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="17" width="134" height="15" uuid="f0469e66-8eb5-49bd-866c-7a15c7eca0fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Official use]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="17" width="144" height="15" uuid="a5fc46dc-4e2a-4b7b-9d46-5795d99101da"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="17" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="144" height="17" isPrintWhenDetailOverflows="true" uuid="34c3dde1-0e12-42b8-a475-b61784f183f0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nameOfArticle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="421" y="0" width="134" height="17" isPrintWhenDetailOverflows="true" uuid="a5e7c298-9485-4770-abff-d81afa39a0ed"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{useInBoat} == 0) ? "Không" : (($F{useInBoat} == 1) ? "Có" : $F{useInBoat})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="288" y="0" width="133" height="17" isPrintWhenDetailOverflows="true" uuid="8ef3d7f3-309f-447a-aa8c-751bc1adc54f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{locationOnBoat}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="144" y="0" width="144" height="17" isPrintWhenDetailOverflows="true" uuid="33828645-5819-4ce5-b4b6-2be38584088c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity} + "   " + vn.gt.utils.GetNameFunction.getUnitGeneralName(new java.util.Date(), $F{quantityUnit})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

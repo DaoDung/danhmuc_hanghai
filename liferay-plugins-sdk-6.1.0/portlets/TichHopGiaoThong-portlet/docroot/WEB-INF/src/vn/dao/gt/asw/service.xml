@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.dao.gt.asw">
+	<author>win 64</author>
+	<namespace>gt</namespace>
+	<entity name="AswmsgMessageQueue" table="aswmsg_messagequeue" local-service="true" remote-service="false"  data-source="gtDataSource"  cache-enabled="false">
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long"  primary="true"/>
+
+		<column name="version" db-name="version" type="String"/>
+		<column name="messageId" db-name="messageId" type="String"/>
+		<column name="senderName" db-name="sendername" type="String"/>
+		<column name="senderIdentity" db-name="senderidentity" type="String"/>
+		<column name="senderCountryCode" db-name="sendercountrycode" type="String"/>
+		<column name="senderMinistryCode" db-name="senderministrycode" type="String"/>
+		<column name="senderOrganizationCode" db-name="senderorganizationcode" type="String"/>
+		<column name="senderUnitCode" db-name="senderunitcode" type="String"/>
+		<column name="receiverName" db-name="receivername" type="String"/>
+		<column name="receiverIdentity" db-name="receiveridentity" type="String"/>
+		<column name="receiverCountryCode" db-name="receivercountrycode" type="String"/>
+		<column name="receiverMinistryCode" db-name="receiverministrycode" type="String"/>
+		<column name="receiverOrganizationCode" db-name="receiverorganizationcode" type="String"/>
+		<column name="receiverUnitCode" db-name="receiverunitcode" type="String"/>
+		<column name="documentType" db-name="documenttype" type="String"/>
+		<column name="type" db-name="type" type="int"/>
+		<column name="function" db-name="function" type="String"/>
+		<column name="reference" db-name="reference" type="long"/>
+		<column name="preReference" db-name="prereference" type="long"/>
+		<column name="documentYear" db-name="documentyear" type="int"/>
+		<column name="sendDate" db-name="senddate" type="Date"/>
+		<column name="signature" db-name="signature" type="String"/>
+		<column name="systemSignature" db-name="systemsignature" type="String"/>
+		<column name="allContent" db-name="allcontent" type="String"/>
+		<column name="createdTime" db-name="createdtime" type="Date"/>
+		<column name="webservice" db-name="webservice" type="int"/>
+		<column name="validated" db-name="validated" type="int"/>
+		<column name="priority" db-name="priority" type="int"/>
+		<column name="description" type="String" db-name="description"/>
+		<column name="validationCode" type="String" db-name="validationcode"/>
+		<column name="soLanGui" db-name="solangui" type="int"/>
+		<column name="hoSoThuTucId" db-name="hoSoThuTucId" type="long"/>
+		<column name="phieuXuLyPhuId" db-name="phieuXuLyPhuId" type="long"/>
+		<!-- Order -->
+		<order by="desc"><order-column name="priority" /></order>
+		
+		<finder return-type="AswmsgMessageQueue" name="VersionAndMessageId">
+			<finder-column name="version"/>
+			<finder-column name="messageId"/>
+		</finder>
+		<finder return-type="Collection" name="MessageId">			
+			<finder-column name="messageId"/>
+		</finder>
+		<finder return-type="Collection" name="HoSoThuTucId">
+			<finder-column name="hoSoThuTucId"/>
+			<finder-column name="type"/>
+			<finder-column name="function"/>
+		</finder>
+		<finder return-type="Collection" name="PhieuXuLyPhuId">
+			<finder-column name="phieuXuLyPhuId"/>
+			<finder-column name="type"/>
+			<finder-column name="function"/>
+		</finder>
+		
+		<finder return-type="Collection" name="LayPhieuXuLyPhuId">
+			<finder-column name="phieuXuLyPhuId"/>
+		</finder>
+		<finder return-type="Collection" name="LayHoSoThuTucId">
+			<finder-column name="hoSoThuTucId"/>
+		</finder>
+	</entity>
+	
+	<entity name="MonitorMessageQueue" table="aswmsg_messagequeue" local-service="true" remote-service="false"  data-source="gtDataSource"  cache-enabled="false">
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long"  primary="true"/>
+
+		<column name="version" db-name="version" type="String"/>
+		<column name="messageId" db-name="messageId" type="String"/>
+		<column name="senderName" db-name="sendername" type="String"/>
+		<column name="senderIdentity" db-name="senderidentity" type="String"/>
+		<column name="senderCountryCode" db-name="sendercountrycode" type="String"/>
+		<column name="senderMinistryCode" db-name="senderministrycode" type="String"/>
+		<column name="senderOrganizationCode" db-name="senderorganizationcode" type="String"/>
+		<column name="senderUnitCode" db-name="senderunitcode" type="String"/>
+		<column name="receiverName" db-name="receivername" type="String"/>
+		<column name="receiverIdentity" db-name="receiveridentity" type="String"/>
+		<column name="receiverCountryCode" db-name="receivercountrycode" type="String"/>
+		<column name="receiverMinistryCode" db-name="receiverministrycode" type="String"/>
+		<column name="receiverOrganizationCode" db-name="receiverorganizationcode" type="String"/>
+		<column name="receiverUnitCode" db-name="receiverunitcode" type="String"/>
+		<column name="documentType" db-name="documenttype" type="String"/>
+		<column name="type" db-name="type" type="int"/>
+		<column name="function" db-name="function" type="String"/>
+		<column name="reference" db-name="reference" type="long"/>
+		<column name="preReference" db-name="prereference" type="long"/>
+		<column name="documentYear" db-name="documentyear" type="int"/>
+		<column name="sendDate" db-name="senddate" type="Date"/>
+		<column name="createdTime" db-name="createdtime" type="Date"/>
+		<column name="webservice" db-name="webservice" type="int"/>
+		<column name="validated" db-name="validated" type="int"/>
+		<column name="priority" db-name="priority" type="int"/>
+		<column name="description" type="String" db-name="description"/>
+		<column name="validationCode" type="String" db-name="validationcode"/>
+		<column name="soLanGui" db-name="solangui" type="int"/>
+		<column name="hoSoThuTucId" db-name="hoSoThuTucId" type="long"/>
+		<column name="phieuXuLyPhuId" db-name="phieuXuLyPhuId" type="long"/>
+		
+		<!-- Order -->
+		<order by="desc"><order-column name="priority" /></order>
+		
+		<finder return-type="Collection" name="MessageId">			
+			<finder-column name="messageId"/>
+		</finder>
+		
+		<finder return-type="Collection" name="HoSoThuTucId">
+			<finder-column name="hoSoThuTucId"/>
+		</finder>
+		<finder return-type="Collection" name="LayPhieuXuLyPhuId">
+			<finder-column name="phieuXuLyPhuId"/>
+		</finder>
+		<finder return-type="Collection" name="LayMessageId">
+			<finder-column name="documentType"/>
+		</finder>
+	</entity>
+</service-builder>

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.gt.dao.danhmucgt">
+	<author>win_64</author>
+	<namespace>gt</namespace>
+
+	<entity name="DmGtStatus" table="DM_GT_STATUS" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="statusCode" db-name="StatusCode" type="int" />
+		<column name="statusName" db-name="StatusName" type="String" />
+		<column name="type" db-name="Types" type="int" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="Type" return-type="Collection">
+			<finder-column name="type" />
+		</finder>
+
+		<finder name="StatusCode" return-type="Collection">
+			<finder-column name="statusCode" />
+			<finder-column name="type" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmGTBusinessType" table="DM_GT_BUSINESS_TYPE" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="businessTypeCode" db-name="BusinessTypeCode" type="int" />
+		<column name="businessTypeName" db-name="BusinessTypeName" type="String" />
+		<column name="businessTypeNameVN" db-name="BusinessTypeNameVN" type="String" />
+		<column name="businessTypeOrder" db-name="BusinessTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="BusinessTypeCode" return-type="DmGTBusinessType">
+			<finder-column name="businessTypeCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmGTFunctionType" table="DM_GT_FUNCTION_TYPE" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="functionTypeCode" db-name="FunctionTypeCode" type="String" />
+		<column name="functionTypeName" db-name="FunctionTypeName" type="String" />
+		<column name="functionTypeNameVN" db-name="FunctionTypeNameVN" type="String" />
+		<column name="functionTypeOrder" db-name="FunctionTypeOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="FunctionTypeCode" return-type="DmGTFunctionType">
+			<finder-column name="functionTypeCode" />
+		</finder>
+
+	</entity>
+
+	<entity name="DmGTShipPosition" table="DM_GT_SHIP_POSITION" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="positionCode" db-name="PositionCode" type="String" />
+		<column name="positionName" db-name="PositionName" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="positionOrder" db-name="PositionOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="PositionCode" return-type="Collection">
+			<finder-column name="positionCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmGtReportTemplate" table="DM_GT_REPORT_TEMPLATE" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="reportCode" db-name="ReportCode" type="int" />
+		<column name="reportName" db-name="ReportName" type="String" />
+		<column name="reportType" db-name="ReportType" type="int" />
+		<column name="category" db-name="Category" type="String" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="ReportCode" return-type="DmGtReportTemplate">
+			<finder-column name="reportCode" />
+		</finder>
+
+		<finder name="reportType" return-type="Collection">
+			<finder-column name="reportType" />
+		</finder>
+
+	</entity>
+
+	<entity name="DmGtReportCategory" table="DM_GT_REPORT_CATEGORY" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="category" db-name="Category" type="String" />
+		<column name="categoryName" db-name="CategoryName" type="String" />
+		<column name="categoryOrder" db-name="CategoryOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+	</entity>
+
+	<entity name="DmGtOrganization" table="DM_GT_ORGANIZATION" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="organizationName" db-name="OrganizationName" type="String" />
+		<column name="organizationNameVN" db-name="OrganizationNameVN" type="String" />
+		<column name="organizationorder" db-name="OrganizationOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="OrganizationCode" return-type="DmGtOrganization">
+			<finder-column name="organizationCode" />
+		</finder>
+
+
+	</entity>
+
+
+
+	<entity name="DmGtRouteConfig" table="DM_GT_ROUTE_CONFIG" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="routeCode" db-name="RouteCode" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="locCode" db-name="LocCode" type="String" />
+		<column name="ipName" db-name="IPName" type="String" />
+		<column name="portName" db-name="PortName" type="String" />
+		<column name="linkAddress" db-name="LinkAddress" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RouteCode" return-type="DmGtRouteConfig">
+			<finder-column name="routeCode" />
+		</finder>
+
+		<finder name="IsDelete" return-type="Collection">
+			<finder-column name="isDelete" />
+		</finder>
+		
+		<finder name="LocCode" return-type="Collection">
+			<finder-column name="locCode" />
+			<finder-column name="isDelete" />
+		</finder>
+
+	</entity>
+
+	<entity name="DmGtVersion" table="DM_GT_VERSION" local-service="true" remote-service="false" data-source="gtDataSource" cache-enabled="false">
+		<column name="id" db-name="id" type="int" primary="true" />
+
+		<column name="versionName" db-name="VersionName" type="String" />
+		<column name="versionDate" db-name="VersionDate" type="Date" />
+		<column name="versionDeployer" db-name="VersionDeployer" type="String" />
+		<column name="contents" db-name="Contents" type="String" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="dbFileName" db-name="DBFileName" type="String" />
+		<column name="dbFileSize" db-name="DBFileSize" type="String" />
+		<column name="dbDescription" db-name="DBDescription" type="String" />
+		<column name="appFileName" db-name="APPFileName" type="String" />
+		<column name="appFileSize" db-name="APPFileSize" type="String" />
+		<column name="appDescription" db-name="APPDescription" type="String" />
+		<column name="specFileName" db-name="SpecFileName" type="String" />
+		<column name="specFileSize" db-name="SpecFileSize" type="String" />
+		<column name="specDescription" db-name="SpecDescription" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+	</entity>
+
+	<entity name="DmCertificate" table="DM_CERTIFICATE" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="certificateCode" db-name="CertificateCode" type="String" />
+		<column name="certificateName" db-name="CertificateName" type="String" />
+		<column name="certificateNameVN" db-name="CertificateNameVN" type="String" />
+		<column name="certificateOrder" db-name="CertificateOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="CertificateCode" return-type="Collection">
+			<finder-column name="certificateCode" />
+		</finder>
+		<finder name="CertificateCodeAndCertificateName" return-type="Collection">
+			<finder-column name="certificateCode" />
+			<finder-column name="certificateName" />
+		</finder>
+		<finder name="F_LCODE_GT" return-type="Collection" where=" ( certificateCode != 39) ">
+			<finder-column name="certificateCode" comparator="&gt;"/>
+		</finder>
+		<finder name="F_LCODE_LT" return-type="Collection" where=" ( certificateCode != 39) ">
+			<finder-column name="certificateCode" comparator="&lt;"/>
+		</finder>
+	</entity>
+
+	<entity name="DmHistoryMinistry" table="DM_HISTORY_MINISTRY" local-service="true" remote-service="true" data-source="gtDataSource"
+		cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="ministryCode" db-name="MinistryCode" type="String" />
+		<column name="ministryName" db-name="MinistryName" type="String" />
+		<column name="ministryNameVN" db-name="MinistryNameVN" type="String" />
+		<column name="ministryOrder" db-name="MinistryOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="MinistryCode" return-type="DmHistoryMinistry">
+			<finder-column name="ministryCode" />
+		</finder>
+
+	</entity>
+
+
+	<entity name="DmMinistry" table="DM_MINISTRY" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="ministryCode" db-name="MinistryCode" type="String" />
+		<column name="ministryName" db-name="MinistryName" type="String" />
+		<column name="ministryNameVN" db-name="MinistryNameVN" type="String" />
+		<column name="ministryOrder" db-name="MinistryOrder" type="int" />
+		<column name="isDelete" db-name="IsDelete" type="int" />
+		<column name="markedAsDelete" db-name="MarkedAsDelete" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+		<column name="syncVersion" db-name="SyncVersion" type="String" />
+
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="MinistryCode" return-type="DmMinistry">
+			<finder-column name="ministryCode" />
+		</finder>
+
+	</entity>
+
+
+</service-builder>

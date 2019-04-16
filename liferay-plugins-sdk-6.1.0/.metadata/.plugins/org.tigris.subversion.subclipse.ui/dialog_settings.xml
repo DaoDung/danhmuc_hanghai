@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="101" key="HistoryTableProvider.revisions.Revision"/>
+	<item value="252" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.Date"/>
+	<item value="85" key="CommitDialog.location.y"/>
+	<item value="0" key="CommitDialog.location.x"/>
+	<item value="500" key="CommitDialog.weights.0"/>
+	<item value="500" key="CommitDialog.weights.1"/>
+	<item value="200" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.Author"/>
+	<item value="251" key="HistoryTableProvider.revisionsBlock.Date"/>
+	<item value="624" key="CommitDialog.size.y"/>
+	<item value="1366" key="CommitDialog.size.x"/>
+	<item value="501" key="HistoryTableProvider.revisions.Comment"/>
+	<item value="251" key="HistoryTableProvider.revisions.Date"/>
+	<item value="501" key="HistoryTableProvider.revisionsBlock.Comment"/>
+	<item value="200" key="HistoryTableProvider.revisions.Author"/>
+	<item value="200" key="HistoryTableProvider.revisionsBlock.Author"/>
+	<item value="101" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.Revision"/>
+	<item value="101" key="HistoryTableProvider.revisionsBlock.Revision"/>
+	<item value="502" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.Comment"/>
+	<section name="CommitWizard">
+		<item value="500" key="VWeight2"/>
+		<item value="500" key="VWeight1"/>
+		<item value="false" key="ShowCompare"/>
+	</section>
+</section>

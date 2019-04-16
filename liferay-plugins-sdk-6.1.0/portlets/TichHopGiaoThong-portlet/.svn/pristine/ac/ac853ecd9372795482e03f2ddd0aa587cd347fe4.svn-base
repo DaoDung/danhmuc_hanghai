@@ -1,0 +1,654 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package vn.gt.dao.noticeandmessage.model;
+
+import com.liferay.portal.model.ModelWrapper;
+
+/**
+ * <p>
+ * This class is a wrapper for {@link ViewHoanThanhThuTuc}.
+ * </p>
+ *
+ * @author    win_64
+ * @see       ViewHoanThanhThuTuc
+ * @generated
+ */
+public class ViewHoanThanhThuTucWrapper implements ViewHoanThanhThuTuc,
+	ModelWrapper<ViewHoanThanhThuTuc> {
+	public ViewHoanThanhThuTucWrapper(ViewHoanThanhThuTuc viewHoanThanhThuTuc) {
+		_viewHoanThanhThuTuc = viewHoanThanhThuTuc;
+	}
+
+	public Class<?> getModelClass() {
+		return ViewHoanThanhThuTuc.class;
+	}
+
+	public String getModelClassName() {
+		return ViewHoanThanhThuTuc.class.getName();
+	}
+
+	/**
+	* Returns the primary key of this view hoan thanh thu tuc.
+	*
+	* @return the primary key of this view hoan thanh thu tuc
+	*/
+	public java.lang.String getPrimaryKey() {
+		return _viewHoanThanhThuTuc.getPrimaryKey();
+	}
+
+	/**
+	* Sets the primary key of this view hoan thanh thu tuc.
+	*
+	* @param primaryKey the primary key of this view hoan thanh thu tuc
+	*/
+	public void setPrimaryKey(java.lang.String primaryKey) {
+		_viewHoanThanhThuTuc.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the c v h h of this view hoan thanh thu tuc.
+	*
+	* @return the c v h h of this view hoan thanh thu tuc
+	*/
+	public java.lang.String getCVHH() {
+		return _viewHoanThanhThuTuc.getCVHH();
+	}
+
+	/**
+	* Sets the c v h h of this view hoan thanh thu tuc.
+	*
+	* @param CVHH the c v h h of this view hoan thanh thu tuc
+	*/
+	public void setCVHH(java.lang.String CVHH) {
+		_viewHoanThanhThuTuc.setCVHH(CVHH);
+	}
+
+	/**
+	* Returns the maritime order of this view hoan thanh thu tuc.
+	*
+	* @return the maritime order of this view hoan thanh thu tuc
+	*/
+	public int getMaritimeOrder() {
+		return _viewHoanThanhThuTuc.getMaritimeOrder();
+	}
+
+	/**
+	* Sets the maritime order of this view hoan thanh thu tuc.
+	*
+	* @param MaritimeOrder the maritime order of this view hoan thanh thu tuc
+	*/
+	public void setMaritimeOrder(int MaritimeOrder) {
+		_viewHoanThanhThuTuc.setMaritimeOrder(MaritimeOrder);
+	}
+
+	/**
+	* Returns the n c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the n c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getNC_KYSO() {
+		return _viewHoanThanhThuTuc.getNC_KYSO();
+	}
+
+	/**
+	* Sets the n c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param NC_KYSO the n c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setNC_KYSO(int NC_KYSO) {
+		_viewHoanThanhThuTuc.setNC_KYSO(NC_KYSO);
+	}
+
+	/**
+	* Returns the x c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the x c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getXC_KYSO() {
+		return _viewHoanThanhThuTuc.getXC_KYSO();
+	}
+
+	/**
+	* Sets the x c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param XC_KYSO the x c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setXC_KYSO(int XC_KYSO) {
+		_viewHoanThanhThuTuc.setXC_KYSO(XC_KYSO);
+	}
+
+	/**
+	* Returns the q c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the q c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getQC_KYSO() {
+		return _viewHoanThanhThuTuc.getQC_KYSO();
+	}
+
+	/**
+	* Sets the q c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param QC_KYSO the q c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setQC_KYSO(int QC_KYSO) {
+		_viewHoanThanhThuTuc.setQC_KYSO(QC_KYSO);
+	}
+
+	/**
+	* Returns the v c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the v c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getVC_KYSO() {
+		return _viewHoanThanhThuTuc.getVC_KYSO();
+	}
+
+	/**
+	* Sets the v c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param VC_KYSO the v c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setVC_KYSO(int VC_KYSO) {
+		_viewHoanThanhThuTuc.setVC_KYSO(VC_KYSO);
+	}
+
+	/**
+	* Returns the r c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the r c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getRC_KYSO() {
+		return _viewHoanThanhThuTuc.getRC_KYSO();
+	}
+
+	/**
+	* Sets the r c_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param RC_KYSO the r c_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setRC_KYSO(int RC_KYSO) {
+		_viewHoanThanhThuTuc.setRC_KYSO(RC_KYSO);
+	}
+
+	/**
+	* Returns the c c v_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the c c v_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getCCV_KYSO() {
+		return _viewHoanThanhThuTuc.getCCV_KYSO();
+	}
+
+	/**
+	* Sets the c c v_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param CCV_KYSO the c c v_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setCCV_KYSO(int CCV_KYSO) {
+		_viewHoanThanhThuTuc.setCCV_KYSO(CCV_KYSO);
+	}
+
+	/**
+	* Returns the c c r_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the c c r_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getCCR_KYSO() {
+		return _viewHoanThanhThuTuc.getCCR_KYSO();
+	}
+
+	/**
+	* Sets the c c r_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param CCR_KYSO the c c r_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setCCR_KYSO(int CCR_KYSO) {
+		_viewHoanThanhThuTuc.setCCR_KYSO(CCR_KYSO);
+	}
+
+	/**
+	* Returns the v c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the v c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getVCDK_KYSO() {
+		return _viewHoanThanhThuTuc.getVCDK_KYSO();
+	}
+
+	/**
+	* Sets the v c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param VCDK_KYSO the v c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setVCDK_KYSO(int VCDK_KYSO) {
+		_viewHoanThanhThuTuc.setVCDK_KYSO(VCDK_KYSO);
+	}
+
+	/**
+	* Returns the r c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the r c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getRCDK_KYSO() {
+		return _viewHoanThanhThuTuc.getRCDK_KYSO();
+	}
+
+	/**
+	* Sets the r c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param RCDK_KYSO the r c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setRCDK_KYSO(int RCDK_KYSO) {
+		_viewHoanThanhThuTuc.setRCDK_KYSO(RCDK_KYSO);
+	}
+
+	/**
+	* Returns the n c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the n c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getNCDK_KYSO() {
+		return _viewHoanThanhThuTuc.getNCDK_KYSO();
+	}
+
+	/**
+	* Sets the n c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param NCDK_KYSO the n c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setNCDK_KYSO(int NCDK_KYSO) {
+		_viewHoanThanhThuTuc.setNCDK_KYSO(NCDK_KYSO);
+	}
+
+	/**
+	* Returns the x c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the x c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getXCDK_KYSO() {
+		return _viewHoanThanhThuTuc.getXCDK_KYSO();
+	}
+
+	/**
+	* Sets the x c d k_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param XCDK_KYSO the x c d k_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setXCDK_KYSO(int XCDK_KYSO) {
+		_viewHoanThanhThuTuc.setXCDK_KYSO(XCDK_KYSO);
+	}
+
+	/**
+	* Returns the v c t n d_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the v c t n d_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getVCTND_KYSO() {
+		return _viewHoanThanhThuTuc.getVCTND_KYSO();
+	}
+
+	/**
+	* Sets the v c t n d_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param VCTND_KYSO the v c t n d_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setVCTND_KYSO(int VCTND_KYSO) {
+		_viewHoanThanhThuTuc.setVCTND_KYSO(VCTND_KYSO);
+	}
+
+	/**
+	* Returns the r c t n d_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @return the r c t n d_ k y s o of this view hoan thanh thu tuc
+	*/
+	public int getRCTND_KYSO() {
+		return _viewHoanThanhThuTuc.getRCTND_KYSO();
+	}
+
+	/**
+	* Sets the r c t n d_ k y s o of this view hoan thanh thu tuc.
+	*
+	* @param RCTND_KYSO the r c t n d_ k y s o of this view hoan thanh thu tuc
+	*/
+	public void setRCTND_KYSO(int RCTND_KYSO) {
+		_viewHoanThanhThuTuc.setRCTND_KYSO(RCTND_KYSO);
+	}
+
+	/**
+	* Returns the n c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the n c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getNC_DUYET() {
+		return _viewHoanThanhThuTuc.getNC_DUYET();
+	}
+
+	/**
+	* Sets the n c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param NC_DUYET the n c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setNC_DUYET(int NC_DUYET) {
+		_viewHoanThanhThuTuc.setNC_DUYET(NC_DUYET);
+	}
+
+	/**
+	* Returns the x c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the x c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getXC_DUYET() {
+		return _viewHoanThanhThuTuc.getXC_DUYET();
+	}
+
+	/**
+	* Sets the x c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param XC_DUYET the x c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setXC_DUYET(int XC_DUYET) {
+		_viewHoanThanhThuTuc.setXC_DUYET(XC_DUYET);
+	}
+
+	/**
+	* Returns the q c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the q c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getQC_DUYET() {
+		return _viewHoanThanhThuTuc.getQC_DUYET();
+	}
+
+	/**
+	* Sets the q c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param QC_DUYET the q c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setQC_DUYET(int QC_DUYET) {
+		_viewHoanThanhThuTuc.setQC_DUYET(QC_DUYET);
+	}
+
+	/**
+	* Returns the v c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the v c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getVC_DUYET() {
+		return _viewHoanThanhThuTuc.getVC_DUYET();
+	}
+
+	/**
+	* Sets the v c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param VC_DUYET the v c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setVC_DUYET(int VC_DUYET) {
+		_viewHoanThanhThuTuc.setVC_DUYET(VC_DUYET);
+	}
+
+	/**
+	* Returns the r c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the r c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getRC_DUYET() {
+		return _viewHoanThanhThuTuc.getRC_DUYET();
+	}
+
+	/**
+	* Sets the r c_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param RC_DUYET the r c_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setRC_DUYET(int RC_DUYET) {
+		_viewHoanThanhThuTuc.setRC_DUYET(RC_DUYET);
+	}
+
+	/**
+	* Returns the c c v_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the c c v_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getCCV_DUYET() {
+		return _viewHoanThanhThuTuc.getCCV_DUYET();
+	}
+
+	/**
+	* Sets the c c v_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param CCV_DUYET the c c v_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setCCV_DUYET(int CCV_DUYET) {
+		_viewHoanThanhThuTuc.setCCV_DUYET(CCV_DUYET);
+	}
+
+	/**
+	* Returns the c c r_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the c c r_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getCCR_DUYET() {
+		return _viewHoanThanhThuTuc.getCCR_DUYET();
+	}
+
+	/**
+	* Sets the c c r_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param CCR_DUYET the c c r_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setCCR_DUYET(int CCR_DUYET) {
+		_viewHoanThanhThuTuc.setCCR_DUYET(CCR_DUYET);
+	}
+
+	/**
+	* Returns the v c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the v c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getVCDK_DUYET() {
+		return _viewHoanThanhThuTuc.getVCDK_DUYET();
+	}
+
+	/**
+	* Sets the v c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param VCDK_DUYET the v c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setVCDK_DUYET(int VCDK_DUYET) {
+		_viewHoanThanhThuTuc.setVCDK_DUYET(VCDK_DUYET);
+	}
+
+	/**
+	* Returns the r c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the r c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getRCDK_DUYET() {
+		return _viewHoanThanhThuTuc.getRCDK_DUYET();
+	}
+
+	/**
+	* Sets the r c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param RCDK_DUYET the r c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setRCDK_DUYET(int RCDK_DUYET) {
+		_viewHoanThanhThuTuc.setRCDK_DUYET(RCDK_DUYET);
+	}
+
+	/**
+	* Returns the n c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the n c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getNCDK_DUYET() {
+		return _viewHoanThanhThuTuc.getNCDK_DUYET();
+	}
+
+	/**
+	* Sets the n c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param NCDK_DUYET the n c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setNCDK_DUYET(int NCDK_DUYET) {
+		_viewHoanThanhThuTuc.setNCDK_DUYET(NCDK_DUYET);
+	}
+
+	/**
+	* Returns the x c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the x c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getXCDK_DUYET() {
+		return _viewHoanThanhThuTuc.getXCDK_DUYET();
+	}
+
+	/**
+	* Sets the x c d k_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param XCDK_DUYET the x c d k_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setXCDK_DUYET(int XCDK_DUYET) {
+		_viewHoanThanhThuTuc.setXCDK_DUYET(XCDK_DUYET);
+	}
+
+	/**
+	* Returns the v c t n d_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the v c t n d_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getVCTND_DUYET() {
+		return _viewHoanThanhThuTuc.getVCTND_DUYET();
+	}
+
+	/**
+	* Sets the v c t n d_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param VCTND_DUYET the v c t n d_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setVCTND_DUYET(int VCTND_DUYET) {
+		_viewHoanThanhThuTuc.setVCTND_DUYET(VCTND_DUYET);
+	}
+
+	/**
+	* Returns the r c t n d_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @return the r c t n d_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public int getRCTND_DUYET() {
+		return _viewHoanThanhThuTuc.getRCTND_DUYET();
+	}
+
+	/**
+	* Sets the r c t n d_ d u y e t of this view hoan thanh thu tuc.
+	*
+	* @param RCTND_DUYET the r c t n d_ d u y e t of this view hoan thanh thu tuc
+	*/
+	public void setRCTND_DUYET(int RCTND_DUYET) {
+		_viewHoanThanhThuTuc.setRCTND_DUYET(RCTND_DUYET);
+	}
+
+	public boolean isNew() {
+		return _viewHoanThanhThuTuc.isNew();
+	}
+
+	public void setNew(boolean n) {
+		_viewHoanThanhThuTuc.setNew(n);
+	}
+
+	public boolean isCachedModel() {
+		return _viewHoanThanhThuTuc.isCachedModel();
+	}
+
+	public void setCachedModel(boolean cachedModel) {
+		_viewHoanThanhThuTuc.setCachedModel(cachedModel);
+	}
+
+	public boolean isEscapedModel() {
+		return _viewHoanThanhThuTuc.isEscapedModel();
+	}
+
+	public java.io.Serializable getPrimaryKeyObj() {
+		return _viewHoanThanhThuTuc.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_viewHoanThanhThuTuc.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+		return _viewHoanThanhThuTuc.getExpandoBridge();
+	}
+
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_viewHoanThanhThuTuc.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	@Override
+	public java.lang.Object clone() {
+		return new ViewHoanThanhThuTucWrapper((ViewHoanThanhThuTuc)_viewHoanThanhThuTuc.clone());
+	}
+
+	public int compareTo(
+		vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc viewHoanThanhThuTuc) {
+		return _viewHoanThanhThuTuc.compareTo(viewHoanThanhThuTuc);
+	}
+
+	@Override
+	public int hashCode() {
+		return _viewHoanThanhThuTuc.hashCode();
+	}
+
+	public com.liferay.portal.model.CacheModel<vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc> toCacheModel() {
+		return _viewHoanThanhThuTuc.toCacheModel();
+	}
+
+	public vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc toEscapedModel() {
+		return new ViewHoanThanhThuTucWrapper(_viewHoanThanhThuTuc.toEscapedModel());
+	}
+
+	@Override
+	public java.lang.String toString() {
+		return _viewHoanThanhThuTuc.toString();
+	}
+
+	public java.lang.String toXmlString() {
+		return _viewHoanThanhThuTuc.toXmlString();
+	}
+
+	public void persist()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_viewHoanThanhThuTuc.persist();
+	}
+
+	/**
+	 * @deprecated Renamed to {@link #getWrappedModel}
+	 */
+	public ViewHoanThanhThuTuc getWrappedViewHoanThanhThuTuc() {
+		return _viewHoanThanhThuTuc;
+	}
+
+	public ViewHoanThanhThuTuc getWrappedModel() {
+		return _viewHoanThanhThuTuc;
+	}
+
+	public void resetOriginalValues() {
+		_viewHoanThanhThuTuc.resetOriginalValues();
+	}
+
+	private ViewHoanThanhThuTuc _viewHoanThanhThuTuc;
+}

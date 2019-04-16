@@ -1,0 +1,254 @@
+
+<div id="hangHaiViewJX_form_template" class="hidden">
+	<div class="jx-content-wrap layout wrap">
+		<div class="flex xs6 hanghai_detail_page" :class="{'max-width': screen_state !== 0, 'no-width': screen_state === 0}">
+
+	      	<v-slide-x-transition>
+      			<div class="layout wrap">
+					<div class="flex xs3" v-if="screen_state !== 0">
+						<jx-hanghai-detail-part 
+							v-on:backtolistpdf="backState(1)" 
+							:thanh_phan_ho_so_api="thanh_phan_ho_so_api"
+							:detail_ho_so="detail"
+							@thanhphan-selected="thanhPhanSelected"
+							:type="roleUserFilterselectedType"
+							ref="hanghaidetailpart"
+							>
+						</jx-hanghai-detail-part>
+					</div>
+					<div class="flex xs9" v-if="screen_state === 1">
+						<jx-hanghai-detail v-on:backtolist="backState(0)"
+							:document_name="detail.documentName"
+							:document_year="detail.documentYear"
+							:thong_bao_api="thong_bao_api"
+							:ghi_chu_api="ghi_chu_api"
+							:thong_tin_khai_bao_api="thong_tin_khai_bao_api"
+							:detail_model="detail"
+							:type="roleUserFilterselectedType"
+							ref="hanghaidetail"
+						>
+						</jx-hanghai-detail>
+						<div v-if="detail.id > 0">
+							<%@ include file="/html/can_bo/action_nghiepvu/action.jspf"%>
+						</div>
+					</div>
+					<div class="flex xs9" v-if="screen_state === 2">
+						
+						<jx-hanghai-detail-pdf 
+							v-on:backtolistpdf="backState(1)" 
+							:detail_tp="detailThanhPhan"
+							:detail_tp_file_api="detail_tp_file_api"
+							:document_type="documentType"
+							:doc_type="doc_type"
+							ref="hanghaidetailpdf"
+							>
+							<template scope="defaultSlotScope" >
+								<div v-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt1/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt1/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt1/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'NC' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt1/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt2/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt2/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt2/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'XC' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt2/action_vanthu.jspf"%>
+								</div>
+								
+								<div v-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt16/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt16/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt16/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '6' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt16/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt17/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt17/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt17/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '7' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt17/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_vanthu.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 90 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == 'QC' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 90 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt3/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt4/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt4/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt4/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '8' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt4/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt5/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt5/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt5/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '9' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt5/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt6/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt6/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt6/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '10' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt6/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt7/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt7/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt7/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '11' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt7/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt8/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt8/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt8/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '4' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt8/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt9/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt9/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt9/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '5' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt9/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt10/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt10/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt10/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '12' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 70 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt10/action_vanthu.jspf"%>
+								</div>
+
+								<div v-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -1">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt11/action_kehoach.jspf"%>
+								</div>
+								<div v-else-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -2">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt11/action_thutuc.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -3 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt11/action_lanhdao.jspf"%>
+								</div>
+								<div v-if="detail.documentTypeCode == '13' && roleUserFilterselectedType == -4 && ( detailThanhPhan.messageType === 60 || detailThanhPhan.messageType === 2014 || detailThanhPhan.messageType === 23 )">
+									<%@ include file="/html/can_bo/action_nghiepvu/thanh_phan/tt11/action_vanthu.jspf"%>
+								</div>
+
+							</template>
+						</jx-hanghai-detail-pdf>
+					</div>
+				</div>
+			</v-slide-x-transition>
+			
+	    </div>
+	
+	    <div class="flex xs6" :class="{'no-width': screen_state !== 0, 'max-width': screen_state === 0}">
+	
+			<v-slide-x-transition>
+				<div v-show="screen_state === 0">
+					<div>
+						<jx-hanghai-filter-adv
+							:filter_adv_api="filter_adv_api"
+							ref="filteradv"
+						></jx-hanghai-filter-adv>
+					</div>
+					<div style="width: 100%;" v-if="!loadingHoSoTable">
+						<content-placeholders>
+							<content-placeholders-img />
+							<content-placeholders-heading />
+						</content-placeholders>
+					</div>
+					<div v-else class="layout wrap" jx-bind="khoDuLieuHoSoList">
+		
+					</div>
+				</div>
+			</v-slide-x-transition>
+		
+	    </div>
+
+	</div>
+</div>

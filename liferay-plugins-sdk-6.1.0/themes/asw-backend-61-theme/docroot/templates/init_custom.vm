@@ -1,0 +1,11 @@
+#*
+This file allows you to override and define new Velocity variables.
+*#
+#set ($images_folder = "$theme_display.getPathThemeImages()")
+#set ($js_sprytabbedpanels = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/SpryAccordion.js")))
+
+#set ($jquery_main_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/jquery-1.8.2.min.js")))
+#set ($jquery_core_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/jquery.easytabs.min.js")))
+#set ($js_common_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/common.js")))
+#set ($js_egov_common_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/menu_jquery.js")))
+

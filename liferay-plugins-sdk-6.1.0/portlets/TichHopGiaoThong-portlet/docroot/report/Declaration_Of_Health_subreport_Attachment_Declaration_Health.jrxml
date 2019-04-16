@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Declaration_Of_Health_subreport_Attachment_Declaration_Health" pageWidth="555" pageHeight="1010" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0987dddc-5de5-4ac7-a992-4ef64853cc6c">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="432"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="healthQuestionCode" class="java.lang.String">
+		<fieldDescription><![CDATA[healthQuestionCode]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="illPassengersGreaterNomal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[illPassengersGreaterNomal]]></fieldDescription>
+	</field>
+	<field name="illPassengersNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[illPassengersNo]]></fieldDescription>
+	</field>
+	<field name="illPersonsOnBoard" class="java.lang.Integer">
+		<fieldDescription><![CDATA[illPersonsOnBoard]]></fieldDescription>
+	</field>
+	<field name="illPersonsReport" class="java.lang.Integer">
+		<fieldDescription><![CDATA[illPersonsReport]]></fieldDescription>
+	</field>
+	<field name="infectionOrSpreadOfDisease" class="java.lang.Integer">
+		<fieldDescription><![CDATA[infectionOrSpreadOfDisease]]></fieldDescription>
+	</field>
+	<field name="infectionsReport" class="java.lang.String">
+		<fieldDescription><![CDATA[infectionsReport]]></fieldDescription>
+	</field>
+	<field name="infectiousReport" class="java.lang.String">
+		<fieldDescription><![CDATA[infectiousReport]]></fieldDescription>
+	</field>
+	<field name="isAnimal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isAnimal]]></fieldDescription>
+	</field>
+	<field name="isSanitary" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isSanitary]]></fieldDescription>
+	</field>
+	<field name="isStowaways" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isStowaways]]></fieldDescription>
+	</field>
+	<field name="isinfectious" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isinfectious]]></fieldDescription>
+	</field>
+	<field name="joinShip" class="java.lang.String">
+		<fieldDescription><![CDATA[joinShip]]></fieldDescription>
+	</field>
+	<field name="medicalPractitionerConsulted" class="java.lang.Integer">
+		<fieldDescription><![CDATA[medicalPractitionerConsulted]]></fieldDescription>
+	</field>
+	<field name="medicalTreatmentOrAdvice" class="java.lang.String">
+		<fieldDescription><![CDATA[medicalTreatmentOrAdvice]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="personDied" class="java.lang.Integer">
+		<fieldDescription><![CDATA[personDied]]></fieldDescription>
+	</field>
+	<field name="personDiedNo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[personDiedNo]]></fieldDescription>
+	</field>
+	<field name="personDiedReport" class="java.lang.String">
+		<fieldDescription><![CDATA[personDiedReport]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="sanitaryDes" class="java.lang.String">
+		<fieldDescription><![CDATA[sanitaryDes]]></fieldDescription>
+	</field>
+	<title>
+		<band height="1008" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="555" height="20" uuid="1c55aa3c-4910-47b3-a6b1-de11b5e93665"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÁC CÂU HỎI VỀ Y TẾ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="555" height="20" uuid="c6fe8c11-a76a-4d4e-ab85-910e5650fb11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Health Questions]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="63" width="555" height="53" uuid="f1eb107c-f7d8-4371-acd2-4144c73b2f79"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>1. Có người chết không phải do tai nạn trong hành trình?/</span>Has an person died on board during the voyage otherwise than as a result of accident?"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="452" y="116" width="69" height="20" uuid="afa16aae-c555-4d8b-a224-263a0e1dacbc"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="116" width="53" height="20" uuid="e12f5c64-751c-41b3-8419-be50998ee173"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="521" y="116" width="20" height="20" uuid="30ee9997-a073-4881-ad32-ac11d0a6e507"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{personDied} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="116" width="20" height="20" uuid="98302e75-26d5-49cc-b8e8-3a53eadbaa5b"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{personDied} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="136" width="555" height="50" uuid="afb417dc-1698-4514-8a1d-0a2b82cb0b34"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, phải có báo cáo chi tiết kèm theo</span>/If yes, state particulars in attached schedule/<span style='font-size:12px'>Số tử vong</span>/Total of deaths/"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="186" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="c2b4714a-09a9-4926-8634-d9c5d85257d1"/>
+				<textElement markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personDiedReport} + " /<b> " + $F{personDiedNo} +"</b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="206" width="555" height="69" uuid="c23a67f3-f861-4c3e-87cf-67eb869c1608"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>2. Có trường hợp nghi mắc bệnh truyền nhiễm trên tàu hoặc trong quá trình hành trình hay không?</span>/Is there on board has there been during the international voyage any case of disease which you suspect to be of an infectious nature?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="275" width="20" height="20" uuid="8c8a094d-daa4-4a0f-9390-54b06284a964"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isinfectious} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="275" width="20" height="20" uuid="ce26af4d-00e5-4e2c-9737-7a7400509ce4"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isinfectious} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="295" width="555" height="37" uuid="e9896143-d4f2-4db1-bf9a-828e8574deda"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, phải có báo cáo chi tiết theo mẫu kèm theo</span>/If yes, state particulars in attached schedule"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="332" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="41ea502a-02de-4249-8ebb-263306d67590"/>
+				<textElement markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{infectionsReport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="352" width="555" height="54" uuid="c789ad2e-8406-4536-b63b-29381a556d68"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>3. Có số hành khách bị ốm trong hành trình lớn hơn bình thường không?</span>/Has the total number of ill passengers during the voyage been greater than normal/expected?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="406" width="20" height="20" uuid="344a093d-ed45-4e68-81f6-2f931ee08817"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{illPassengersGreaterNomal} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="406" width="20" height="20" uuid="a177e3ab-a407-4385-a1b3-1bfe2a1dc8b2"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{illPassengersGreaterNomal} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="426" width="555" height="20" uuid="b1168552-0de1-401f-9b75-7d36afdf6a11"/>
+				<textElement markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Bao nhiêu người?</span>/How many ill person?<b>"  + $F{illPassengersNo}+"</b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="446" width="555" height="20" uuid="7b7dee57-e6ef-47b3-bb16-5a92fad72252"/>
+				<textElement markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>4. Hiện tại có người ốm trên tàu không?</span>/Is there any ill person on board now?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="466" width="20" height="20" uuid="aea1a46f-ad80-499c-a1ea-5fd700072739"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{illPersonsOnBoard} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="522" y="466" width="20" height="20" uuid="f454408e-8889-480d-a0fb-b7ca921824bf"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{illPersonsOnBoard} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="486" width="555" height="20" uuid="1f2a0466-de75-435a-8a21-e3309ebce0e0"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, phải có báo cáo chi tiết theo mẫu kèm theo</span>/If yes, state particulars in attached schedule"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="506" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="d684a7e8-babb-465b-be72-8123be2d1f4f"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{illPersonsReport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="526" width="555" height="20" uuid="240d699d-18ad-4852-b394-757ed0a5c633"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>5. Có được nhân viên y tế can thiệp không?</span>/Was a medical practitioner consulted?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="546" width="21" height="20" uuid="5be9c380-19f4-4a7f-925d-849f5874918c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{medicalPractitionerConsulted} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="546" width="21" height="20" uuid="97b7356b-1ff1-4009-afef-43fa96cf0bdc"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{medicalPractitionerConsulted} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="566" width="555" height="49" uuid="195f4642-5719-4e7d-882c-ad302b70b336"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, nêu chi tiết biện pháp điều trị hoặc tư vấn y tế kèm theo</span>/If yes, state particulars of medical treatment or advice provided in attached schedule"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="615" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="7b83dafc-7aff-48c9-86f3-d8443a4c5a44"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicalTreatmentOrAdvice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="635" width="555" height="56" uuid="f28ff989-3676-4b7e-b857-42faf9fb59a7"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>6. Bạn có biết điều gì có thể gây nhiễm hoặc lan truyền bệnh trên tàu không?</span>/Are you aware of any condition on board which may lead to infection or spread of disease?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="522" y="691" width="19" height="20" uuid="fd3223f7-b099-4b2f-843a-c0da3e6dcc70"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{infectionOrSpreadOfDisease} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="691" width="21" height="20" uuid="55362228-c50c-4ce5-a176-58e56cb8bb00"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{infectionOrSpreadOfDisease} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="711" width="555" height="20" uuid="c52b3955-7a7f-4799-afc9-8085d36e78ca"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, phải có báo cáo chi tiết theo mẫu kèm theo</span>/If yes, state particulars in attached schedule"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="731" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="b6d0dcb1-87ec-4a85-8082-85260241f593"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{infectionsReport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="751" width="555" height="55" uuid="77455300-17cc-42f3-8930-61ce0f983504"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>7. Có biện pháp vệ sinh nào (như kiểm dịch, cách ly, tẩy trùng hoặc tẩy uế) được áp dụng trên tàu không?</span>/ Has any sanitary measure (e.g. quarantine, isolation, disinfection or decontamination) been applied on board?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="806" width="20" height="20" uuid="348f276e-9882-427e-814e-5a21dbace050"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isSanitary} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="806" width="20" height="20" uuid="00e553ea-b3b6-41ed-b0dd-a3b857e8ad8c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isSanitary} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="826" width="555" height="20" uuid="65bee238-33ec-4061-ab82-b0b288f882f2"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, nêu cụ thể loại, nơi và thời gian áp dụng</span>/If yes, specify type, place and date"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="846" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="83f09792-d15a-4e69-8b68-5677e2608dad"/>
+				<textElement markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sanitaryDes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="866" width="555" height="20" uuid="29ee527b-6615-4a18-a480-a4e61151ff84"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>8. Có người đi lậu vé trên tàu không?</span>/Have any stowaways been found on board?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="886" width="20" height="20" uuid="62d74289-8d3e-4d05-a79c-ced49d993159"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isSanitary} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="886" width="20" height="20" uuid="0e7e3890-d2c7-4e75-b474-470385268cae"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isStowaways} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="906" width="555" height="20" uuid="ea6bac6d-8061-4ec1-a0b0-a0f6ea9ddae9"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Nếu có, nơi họ lên tàu ở đâu (nếu biết)?</span>/If yes, where did they join the ship (if known)?"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="926" width="555" height="20" isPrintWhenDetailOverflows="true" uuid="879ad37d-2142-41c8-b82f-bac91211a157"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{joinShip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="946" width="555" height="41" uuid="f80cadea-fcae-4085-ae44-806c1728ccfa"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>9. Có động vật bị ốm hoặc động vật cảnh trên tàu không?</span>/Is there a sick animal or pet on board?"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="987" width="20" height="20" uuid="10ddb5e6-66ec-42ba-afd0-2e3db836a910"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isAnimal} == 1) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="521" y="987" width="20" height="20" uuid="95c01690-7022-482e-87d3-a9df68402caa"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{isAnimal} == 0) ? " X " : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="378" y="275" width="53" height="20" uuid="af50588a-7e03-485b-959f-0a821a74bd7d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="406" width="53" height="20" uuid="ce13ad00-796f-4673-b4fa-87d541738d79"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="466" width="53" height="20" uuid="d5e9ac84-8ee4-49b6-b347-7273257e50ae"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="546" width="52" height="20" uuid="e8f331ba-6dd8-4011-87e1-1f311567c8c1"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="691" width="52" height="20" uuid="bd8384c7-3f43-40ae-b0f0-2b63731a82c8"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="806" width="52" height="20" uuid="b6b296ad-83a9-4dbe-b16a-cea9d0763aa7"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="886" width="52" height="20" uuid="f6984066-ffdb-4071-bee7-e4e8b514d11c"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="987" width="52" height="20" uuid="12abef56-da2e-4a3b-85c3-927d0c6cadae"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Có/Yes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="275" width="69" height="20" uuid="a40b0fa2-a43c-415a-8d18-68f324e9fa39"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="406" width="69" height="20" uuid="fd4a737d-c43a-425c-9c15-c16fcc84f866"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="466" width="69" height="20" uuid="f2df1742-dafc-4f3c-9f45-5fad3d6041dc"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="546" width="68" height="20" uuid="d5305840-19e1-435d-babc-f0bad4973eb3"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="691" width="68" height="20" uuid="3ba309ee-0674-4189-a887-be956a594393"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="806" width="68" height="20" uuid="2698317c-8c94-4f91-a03c-4aef10488394"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="886" width="68" height="20" uuid="b98c30a1-cdeb-464e-b53e-28e9bf6c813d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="987" width="68" height="20" uuid="8d6011ae-d8f2-4c1d-a91c-9c8154281670"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Không/No:]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

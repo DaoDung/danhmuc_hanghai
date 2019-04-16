@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ship_Stores_Declaration" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62a1d1b3-0315-4daa-8b4f-6b22831fe9ef">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="tempShipStoresDeclarationes" class="java.util.List">
+		<fieldDescription><![CDATA[tempShipStoresDeclarationes]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="tempShipStoresItems" class="java.util.List">
+		<fieldDescription><![CDATA[tempShipStoresItems]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.lang.String">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<field name="signPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[signPlace]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="17" uuid="e68bfb3f-e3b9-4a78-8d4f-dacf0329401e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="555" height="17" uuid="145a0fe4-8479-413b-b283-908e56d6f517"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="555" height="15" uuid="17d2742e-0221-48e7-8f90-833c57b09dbc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="555" height="15" uuid="e55046a0-370b-43b9-8e8b-156cf1a9e4a3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<line>
+				<reportElement x="163" y="70" width="229" height="1" uuid="ce2e57c1-0e5d-497d-8d89-973341dd67d9"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="80" width="555" height="18" uuid="09e3df5f-4445-4ad8-9940-8a28f0c25a43"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BẢN KHAI DỰ TRỮ CỦA TÀU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="98" width="555" height="15" uuid="c8c688ba-19e1-4b1a-a1bc-dda1894b71ad"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SHIP’S STORES DECLARATION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="dbb2e8ea-1bf8-49de-9ed0-6c2d0a527f6a"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempShipStoresDeclarationes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Ship_Stores_Declaration_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="66fdba86-6a14-4271-a1fb-e48a1d7af5e0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempShipStoresItems})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Ship_Stores_Items_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="103">
+			<staticText>
+				<reportElement x="205" y="32" width="350" height="17" uuid="7fecc1a2-9f24-4fd9-916a-07a1174c636e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Thuyền trưởng (đại lý hoặc sỹ quan được ủy quyền)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="205" y="2" width="350" height="15" uuid="addbe2df-1c04-4f4a-a32b-76c6bd1c0be2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{signPlace} == null) ? "…………" : $F{signPlace}) + ", " +
+(($F{signDate} == null) ? "ngày … tháng … năm 20…" : $F{signDate})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="205" y="47" width="350" height="15" uuid="0440ea3e-8dcd-46d4-9a22-cf454e1060a8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Master (or authorized agent or officer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="17" width="350" height="15" uuid="ddd9afcb-5565-4190-b550-6f3710be70af"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Date ……………...........]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

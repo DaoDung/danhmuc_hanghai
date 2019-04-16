@@ -1,0 +1,274 @@
+<!-- TODO paymentViewJX template one page view List detail template -->
+<div id="activity_expand_list_template" class="hidden">
+  <template slot="items" slot-scope="props">
+
+    <td class="text-xs-left" v-if="roleUserFilterselectedType === -1" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+    	{{ khoDuLieuHoSoListpage * 15 - 15 + props.index + 1 }}
+    </td>
+	 <td class="text-xs-left" v-else :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+    	{{ khoDuLieuHoSoListpage * 15 - 15 + props.index + 1 }}
+    </td>
+
+	<td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}' style="position: relative;">
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+				{{props.item.requestState | hhstatelabel}}
+		</a>
+		<v-tooltip top v-if="props.item.ghichu.length > 0">
+      <v-icon size="16" v-if="props.item.ghichu.length > 0" slot="activator" color="primary">info</v-icon>
+      <span v-if="props.item.ghichu.length > 0">{{props.item.ghichu}}</span>
+    </v-tooltip>
+    </td>
+		<td v-else-if="roleUserFilterselectedType === -2" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}' style="position: relative;">
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+				{{props.item.documentStatusCode | hhstatelabeltt}}
+		</a>
+		<v-tooltip top v-if="props.item.ghichu.length > 0">
+      <v-icon size="16" v-if="props.item.ghichu.length > 0" slot="activator" color="primary">info</v-icon>
+      <span v-if="props.item.ghichu.length > 0">{{props.item.ghichu}}</span>
+    </v-tooltip>
+    </td>
+		<td v-else-if="roleUserFilterselectedType === -3 || roleUserFilterselectedType === -4" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+				<span v-if="props.item.requestState === 14">
+					{{props.item.requestState | hhstatelabel}}
+				</span>
+				<span v-else>
+					{{props.item.documentStatusCode | hhstatelabeltt}}
+				</span>
+		</a>
+    </td>
+<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+				{{props.item.requestState | hhstatelabel}}
+		</a>
+    </td>
+    
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.documentName}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.documentName}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.shipName}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.shipName}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.callSign}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.callSign}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.imo}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.imo}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{data_state[props.item.stateCode]}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{data_state[props.item.stateCode]}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.shipDateFrom | datetime}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.shipDateFrom | datetime}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.nameOfShipownersAgents}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.nameOfShipownersAgents}}
+		</a>
+    </td>
+
+
+    <td v-if="roleUserFilterselectedType === -1" class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.requestState === 14 || props.item.requestState === 114,
+    	"wd-label-color-light-green": props.item.requestState === 12,
+    	"wd-label-color-red": props.item.requestState === 13 || props.item.requestState === 16,
+    	"wd-label-color-dark-blue": props.item.requestState === 15,
+    	"wd-bg-color-yellow": props.item.requestState === 27
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.createdDate | datetime}}
+		</a>
+    </td>
+		<td v-else class="text-xs-center" :class='{
+    	"wd-label-color-tim": props.item.documentStatusCode === 20 || props.item.documentStatusCode === 120,
+    	"wd-label-color-light-green": props.item.documentStatusCode === 18,
+    	"wd-label-color-red": props.item.documentStatusCode === 10,
+    	"wd-label-color-dark-blue": props.item.documentStatusCode === 19,
+    	"wd-bg-color-yellow": props.item.documentStatusCode === 13
+    	}'>
+		<a href="javascript:;" @click.stop.prevent="toDetailHoSo(1, props.item)">
+			{{props.item.createdDate | datetime}}
+		</a>
+    </td>
+
+  </template>
+</div>

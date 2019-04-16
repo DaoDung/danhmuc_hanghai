@@ -1,0 +1,2102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.gt.dao.noticeandmessage">
+	<author>win_64</author>
+	<namespace>gt</namespace>
+
+	<entity name="NoticeShipMessage" table="notice_ship_message" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="noticeShipCode" db-name="noticeshipcode" type="String" />
+		<column name="documentName" db-name="documentname" type="long" />
+		<column name="userCreated" db-name="usercreated" type="String" />
+		<column name="confirmTime" db-name="confirmtime" type="int" />
+		<column name="callSign" db-name="callsign" type="String" />
+		<column name="arrivalDate" db-name="arrivaldate" type="Date" />
+		<column name="arrivalPortCode" db-name="arrivalportcode" type="String" />
+		<column name="portGoingToCode" db-name="portgoingtocode" type="String" />
+		<column name="nameAndAddOfShipOwners" db-name="nameandaddofshipowners" type="String" />
+		<column name="clearanceHeight" db-name="clearanceheight" type="long" />
+		<column name="shownDraft" db-name="showndraft" type="long" />
+		<column name="dwt" db-name="dwt" type="long" />
+		<column name="shipAgencyCode" db-name="shipagencycode" type="String" />
+		<column name="purposeCode" db-name="purposecode" type="int" />
+		<column name="crewNumber" db-name="crewnumber" type="long" />
+		<column name="passengerNumber" db-name="passengernumber" type="long" />
+		<column name="quantityAndTypeOfCargo" db-name="quantityandtypeofcargo" type="String" />
+		<column name="otherPersons" db-name="otherpersons" type="int" />
+		<column name="remarks" db-name="remarks" type="String" />
+
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+	</entity>
+
+	<entity name="TempShipSecurityMessage" table="TEMP_SHIP_SECURITY_MESSAGE" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="shipSecurityCode" db-name="ShipSecurityCode" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="shipAgencyCode" db-name="ShipAgencyCode" type="String" />
+		<column name="nameOfShipAgent" db-name="NameOfShipAgent" type="String" />
+		<column name="shipName" db-name="ShipName" type="String" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="shipCaptain" db-name="ShipCaptain" type="String" />
+		<column name="imo" db-name="IMO" type="String" />
+		<column name="grt" db-name="GRT" type="double" />
+		<column name="unitGRT" db-name="UnitGRT" type="String" />
+		<column name="crewNumber" db-name="CrewNumber" type="long" />
+
+
+
+		<column name="arrivalDate" db-name="ArrivalDate" type="Date" />
+		<column name="purposeCode" db-name="PurposeCode" type="String" />
+		<column name="purposeSpecified" db-name="PurposeSpecified" type="String" />
+
+
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+		<column name="shipAgencyPhone" db-name="ShipAgencyPhone" type="String" />
+		<column name="shipAgencyFax" db-name="ShipAgencyFax" type="String" />
+		<column name="isInternationalShipSecurity" db-name="IsShipSecurity" type="int" />
+		<column name="nameOfISSC" db-name="NameOfISSC" type="String" />
+		<column name="dateOfISSC" db-name="DateOfISSC" type="Date" />
+		<column name="dateOfExpiryISSC" db-name="DateOfExpiryISSC" type="Date" />
+		<column name="securityLevelCode" db-name="SecurityLevelCode" type="String" />
+		<column name="securityFromDate" db-name="SecurityFromDate" type="Date" />
+		<column name="isAdditionalSecurityMeasures" db-name="IsAdditionalSecurityMeasures" type="int" />
+		<column name="additionalSecurityDetail" db-name="AdditionalSecurityDetail" type="String" />
+		<column name="isMaintainSecurity" db-name="IsMaintainSecurity" type="int" />
+		<column name="maintainSecurityDetail" db-name="MaintainSecurityDetail" type="String" />
+		<column name="latitude" db-name="Latitude" type="String" />
+		<column name="longitude" db-name="Longitude" type="String" />
+		<column name="hasShipSecurityPortItems" db-name="HasShipSecurityPortItems" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="arrivalPortCode" db-name="ArrivalPortCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+	<entity name="TempShipSecurityPortItems" table="TEMP_SHIP_SECURITY_PORT_ITEMS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="shipSecurityPortItemCode" db-name="ShipSecurityPortItemCode" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="dateArrival" db-name="DateArrival" type="Date" />
+		<column name="dateDeparture" db-name="DateDeparture" type="Date" />
+		<column name="securityLevelCode" db-name="SecurityLevelCode" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempNoTiceShipMessage" table="TEMP_NOTICE_SHIP_MESSAGE" local-service="true"  remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="noticeShipType" db-name="NoticeShipType" type="String" />
+		<column name="noticeShipCode" db-name="NoticeShipCode" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="confirmTime" db-name="ConfirmTime" type="int" />
+		<column name="shipName" db-name="ShipName" type="String" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="shipCaptain" db-name="ShipCaptain" type="String" />
+		<column name="imo" db-name="IMO" type="String" />
+		<column name="grt" db-name="GRT" type="double" />
+		<column name="dwt" db-name="DWT" type="double" />
+		<column name="unitGRT" db-name="UnitGRT" type="String" />
+		<column name="unitDWT" db-name="UnitDWT" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="arrivalDate" db-name="ArrivalDate" type="Date" />
+		<column name="arrivalPortCode" db-name="ArrivalPortCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+
+		<column name="portGoingToStateName" db-name="PortGoingToStateName" type="String" />
+		<column name="portGoingToCode" db-name="PortGoingToCode" type="String" />
+		<column name="nameOfShipOwners" db-name="NameOfShipOwners" type="String" />
+		<column name="addressOfShipOwners" db-name="AddressOfShipOwners" type="String" />
+		<column name="shipOwnerstateCode" db-name="ShipOwnerStateCode" type="String" />
+		<column name="shipOwnerPhone" db-name="ShipOwnerPhone" type="String" />
+		<column name="shipOwnerFax" db-name="ShipOwnerFax" type="String" />
+		<column name="shipOwnerEmail" db-name="ShipOwnerEmail" type="String" />
+		<column name="loa" db-name="LOA" type="double" />
+		<column name="breadth" db-name="Breadth" type="double" />
+		<column name="clearanceHeight" db-name="ClearanceHeight" type="double" />
+
+		<column name="shownDraftxF" db-name="ShownDraftxF" type="double" />
+		<column name="shownDraftxA" db-name="ShownDraftxA" type="double" />
+		<column name="unitLOA" db-name="UnitLOA" type="String" />
+		<column name="unitBreadth" db-name="UnitBreadth" type="String" />
+		<column name="unitClearanceHeight" db-name="UnitClearanceHeight" type="String" />
+
+		<column name="unitShownDraftxF" db-name="UnitShownDraftxF" type="String" />
+		<column name="unitShownDraftxA" db-name="UnitShownDraftxA" type="String" />
+		<column name="certificateOfRegistryNumber" db-name="CertificateOfRegistryNumber" type="String" />
+		<column name="certificateOfRegistryDate" db-name="CertificateOfRegistryDate" type="Date" />
+		<column name="certificateOfRegistryPortName" db-name="CertificateOfRegistryPortName" type="String" />
+
+		<column name="shipAgencyCode" db-name="ShipAgencyCode" type="String" />
+		<column name="shipAgencyAddress" db-name="ShipAgencyAddress" type="String" />
+		<column name="shipAgencyPhone" db-name="ShipAgencyPhone" type="String" />
+		<column name="shipAgencyFax" db-name="ShipAgencyFax" type="String" />
+		<column name="shipAgencyEmail" db-name="ShipAgencyEmail" type="String" />
+		<column name="purposeCode" db-name="PurposeCode" type="String" />
+		<column name="purposeSpecified" db-name="PurposeSpecified" type="String" />
+		<column name="crewNumber" db-name="CrewNumber" type="long" />
+		<column name="unitCrew" db-name="UnitCrew" type="String" />
+		<column name="passengerNumber" db-name="PassengerNumber" type="long" />
+		<column name="unitPassenger" db-name="UnitPassenger" type="String" />
+		<column name="quantityAndTypeOfCargo" db-name="QuantityOfCargo" type="String" />
+		<column name="unitQuantityofCargo" db-name="UnitQuantityofCargo" type="String" />
+		<column name="typeOfCargo" db-name="TypeOfCargo" type="String" />
+		<column name="otherPersons" db-name="OtherPersons" type="int" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+
+		<column name="nameOfShipAgent" db-name="NameOfShipAgent" type="String" />
+		
+		<column name="documentReference" db-name="DocumentReference" type="long" />
+		<column name="isArrival" db-name="IsArrival" type="int" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="netTonnage" db-name="NetTonnage" type="double" />
+		<column name="netTonnageUnit" db-name="NetTonnageUnit" type="String" />
+		<column name="positionOfShipInPort" db-name="PositionOfShipInPort" type="String" />
+		<column name="briefParticularsOfVoyage" db-name="BriefParticularsOfVoyage" type="String" />
+		<column name="previousPortsOfCall" db-name="PreviousPortsOfCall" type="String" />
+		<column name="subsequentPortsOfCall" db-name="SubsequentPortsOfCall" type="String" />
+		<column name="dischargedPorts" db-name="DischargedPorts" type="String" />
+		<column name="remainingCargo" db-name="RemainingCargo" type="String" />
+		<column name="shipRequirementsInTermsOfWaste" db-name="ShipRequirementsInTermsOfWaste" type="String" />
+		<column name="numberCargoDeclaration" db-name="NumberCargoDeclaration" type="int" />
+		<column name="numberShipStoreDeclaration" db-name="NumberShipStoreDeclaration" type="int" />
+		<column name="numberCrewList" db-name="NumberCrewList" type="int" />
+		<column name="numberPassengerList" db-name="NumberPassengerList" type="int" />
+		<column name="numberCrewEffectsDeclaration" db-name="NumberCrewEffectsDeclaration" type="int" />
+		<column name="numberHealthMaritimeDeclaration" db-name="NumberHealthMaritimeDeclaration" type="int" />
+		<column name="portClearanceNo" db-name="PortClearanceNo" type="String" />
+		<column name="timeOfPORTArrival" db-name="TimeOfPORTArrival" type="Date" />
+		<column name="timeOfPilotOnBoard" db-name="TimeOfPilotOnBoard" type="Date" />
+		<column name="tugBoat" db-name="TugBoat" type="String" />
+		<column name="do_" db-name="DO_" type="String" />
+		<column name="fo" db-name="FO" type="String" />
+		<column name="fw" db-name="FW" type="String" />
+		<column name="placeOfReception" db-name="PlaceOfReception" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+
+		<finder name="documentNameAndDocumentYearAndNoticeShipType" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="noticeShipType" />
+		</finder>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode"></finder-column>
+		</finder>
+	</entity>
+
+
+	<entity name="TempCargoDeclaration" table="TEMP_CARGO_DECLARATION" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="isArrival" db-name="isArrival" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callsign" db-name="Callsign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="portReport" db-name="PortReport" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="portOfLoading" db-name="PortOfLoading" type="String" />
+		<column name="listGoods" db-name="ListGoods" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+
+
+	<entity name="TempGoodsItems" table="TEMP_GOODS_ITEMS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="billOfLadingNo" db-name="BillOfLadingNo" type="String" />
+		<column name="goodItemCode" db-name="GoodItemCode" type="String" />
+		<column name="goodItemDescription" db-name="GoodItemDescription" type="String" />
+		<column name="numberOfPackage" db-name="NumberOfPackage" type="long" />
+		<column name="kindOfPackages" db-name="KindOfPackages" type="String" />
+		<column name="marksandNosofGoods" db-name="MarksandNosofGoods" type="String" />
+		<column name="grossWeight" db-name="GrossWeight" type="double" />
+		<column name="grossWeightUnit" db-name="GrossWeightUnit" type="String" />
+		<column name="measurement" db-name="Measurement" type="double" />
+		<column name="measurementUnit" db-name="MeasurementUnit" type="String" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempCrewList" table="TEMP_CREW_LIST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="isArrival" db-name="IsArrival" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="portOfArrivalCode" db-name="PortOfArrivalCode" type="String" />
+		<column name="dateOfArrival" db-name="DateOfArrival" type="Date" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="crewList" db-name="CrewList" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempCrewDetails" table="TEMP_CREW_DETAILS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="crewcode" db-name="CrewCode" type="String" />
+		<column name="familyName" db-name="FamilyName" type="String" />
+		<column name="givenName" db-name="GivenName" type="String" />
+		<column name="rankCode" db-name="RankCode" type="String" />
+		<column name="nationality" db-name="Nationality" type="String" />
+		<column name="dateOfBirth" db-name="DateOfBirth" type="Date" />
+		<column name="placeOfBirth" db-name="PlaceOfBirth" type="String" />
+		<column name="passportNumber" db-name="PassportNumber" type="String" />
+		<column name="passportTypeCode" db-name="PassportTypeCode" type="String" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		
+		<finder name="GivenNameAndPassportNumber" return-type="Collection">
+			<finder-column name="givenName" />
+			<finder-column name="passportNumber" />
+		</finder>
+		
+		<finder name="CrewCode" return-type="Collection">
+			<finder-column name="crewcode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempPassengerList" table="TEMP_PASSENGER_LIST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="isArrival" db-name="isArrival" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="portOfArrivalCode" db-name="PortOfArrivalCode" type="String" />
+		<column name="dateOfArrival" db-name="DateOfArrival" type="Date" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="listPassengers" db-name="ListPassengers" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="NumberOfLeftPassengers" db-name="NumberOfLeftPassengers" type="int" />
+		<column name="NumberOfVNmeses" db-name="NumberOfVNmeses" type="int" />
+		<column name="NumberOfForeigners" db-name="NumberOfForeigners" type="int" />
+		<column name="TotalPassengers" db-name="TotalPassengers" type="int" />
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempPassengerDetails" table="TEMP_PASSENGER_DETAILS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="passengerCode" db-name="PassengerCode" type="String" />
+		<column name="familyName" db-name="FamilyName" type="String" />
+		<column name="givenName" db-name="GivenName" type="String" />
+		<column name="nationality" db-name="Nationality" type="String" />
+		<column name="birthDay" db-name="BirthDay" type="Date" />
+		<column name="birthPlace" db-name="BirthPlace" type="String" />
+		<column name="typeOfIdentity" db-name="TypeOfIdentity" type="String" />
+		<column name="passportExpiredDate" db-name="PassportExpiredDate" type="Date" />
+		<column name="serialNumberOfIdentity" db-name="SerialNumberOfIdentity" type="String" />
+		<column name="portOfEmbarkation" db-name="PortOfEmbarkation" type="String" />
+		<column name="portOfDisembarkation" db-name="PortOfDisembarkation" type="String" />
+		<column name="isTransit" db-name="IsTransit" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		
+		<finder name="PassengerCode" return-type="Collection">
+			<finder-column name="passengerCode" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="TempDangerousGoodsNanifest" table="TEMP_DANGEROUS_GOODS_MANIFEST" local-service="true" data-source="gtDataSource"
+		remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="masterName" db-name="MasterName" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callsign" db-name="Callsign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="portOfLoadingCode" db-name="PortOfLoadingCode" type="String" />
+		<column name="portOfDischargeCode" db-name="PortOfDischargeCode" type="String" />
+		<column name="shippingAgent" db-name="ShippingAgent" type="String" />
+		<column name="additionalRemark" db-name="AdditionalRemark" type="String" />
+		<column name="listDangerousGoods" db-name="ListDangerousGoods" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempDangerousGoodsItems" table="TEMP_DANGEROUS_GOODS_ITEMS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="dangerousGoodItemCode" db-name="DangerousGoodItemCode" type="String" />
+		<column name="refNumber" db-name="RefNumber" type="String" />
+		<column name="marksContainer" db-name="MarksContainer" type="String" />
+		<column name="numberContainer" db-name="NumberContainer" type="String" />
+		<column name="numberOfPackage" db-name="NumberOfPackage" type="String" />
+		<column name="kindOfPackages" db-name="KindOfPackages" type="String" />
+		<column name="properShippingName" db-name="ProperShippingName" type="String" />
+		<column name="goodClass" db-name="GoodClass" type="String" />
+		<column name="unNumber" db-name="UNNumber" type="String" />
+		<column name="packingGroup" db-name="PackingGroup" type="String" />
+		<column name="subsidiaryRisk" db-name="SubsidiaryRisk" type="String" />
+		<column name="flashPoint" db-name="FlashPoint" type="String" />
+		<column name="marinePollutant" db-name="MarinePollutant" type="String" />
+		<column name="grossWeight" db-name="GrossWeight" type="double" />
+		<column name="ems" db-name="Ems" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempShipStoresDeclaration" table="TEMP_SHIP_STORES_DECLARATION" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="isArrival" db-name="isArrival" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callsign" db-name="Callsign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="nationalityOfShip" db-name="NationalityOfShip" type="String" />
+		<column name="portOfArrivalCode" db-name="PortOfArrivalCode" type="String" />
+		<column name="dateOfArrival" db-name="DateOfArrival" type="Date" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="numberOfPersonsOnBoat" db-name="NumberOfPersonsOnBoat" type="int" />
+		<column name="periodOfStay" db-name="PeriodOfStay" type="String" />
+		<column name="periodOfStayUnit" db-name="PeriodOfStayUnit" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="listShipsStores" db-name="ListShipsStores" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+	<entity name="TempShipStoresItems" table="TEMP_SHIP_STORES_ITEMS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="shipsstoreItemCode" db-name="ShipsStoreItemCode" type="String" />
+		<column name="nameOfArticle" db-name="NameOfArticle" type="String" />
+		<column name="quantity" db-name="Quantity" type="String" />
+		<column name="quantityUnit" db-name="QuantityUnit" type="String" />
+		<column name="locationOnBoat" db-name="LocationOnBoat" type="String" />
+		<column name="useInBoat" db-name="UseInBoat" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempCrewEffectsDeclaration" table="TEMP_CREW_EFFECTS_DECLARATION" local-service="true" data-source="gtDataSource"  cache-enabled="false"
+		remote-service="true">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callsign" db-name="Callsign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="listCrewEffects" db-name="ListCrewEffects" type="int" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempCrewEffectsItems" table="TEMP_CREW_EFFECTS_ITEMS" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="crewEffectItemcode" db-name="CrewEffectItemCode" type="String" />
+		<column name="familyName" db-name="FamilyName" type="String" />
+		<column name="givenName" db-name="GivenName" type="String" />
+		<column name="rankOrratingCode" db-name="RankOrRatingCode" type="String" />
+		<column name="effectsIneligibleForRelief" db-name="EffectsIneligibleForRelief" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="TempDeclarationForPlantQuarantine" table="temp_plant_quarantine" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="doctorName" db-name="DoctorName" type="String" />
+		<column name="numberOfCrew" db-name="NumberOfCrew" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="firstPortOfLoadingCode" db-name="FirstPortOfLoadingCode" type="String" />
+		<column name="dateOfdeparture" db-name="DateOfDeparture" type="Date" />
+		<column name="plantNameFirst" db-name="PlantNameFirst" type="String" />
+		<column name="plantNameBetween" db-name="PlantNameBetween" type="String" />
+		<column name="plantNameThis" db-name="PlantNameThis" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempDeclarationForAnimalQuarantine" table="temp_animal_quarantine" local-service="true" data-source="gtDataSource" cache-enabled="false"
+		remote-service="true">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="numberOfCrew" db-name="NumberOfCrew" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="animalNameFirst" db-name="AnimalNameFirst" type="String" />
+		<column name="animalNameBetween" db-name="AnimalNameBetween" type="String" />
+		<column name="animalNameThis" db-name="AnimalNameThis" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempDeclarationOfHealth" table="TEMP_DECLARATION_OF_HEALTH" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="submittedPortCode" db-name="SubmittedPortCode" type="String" />
+		<column name="dateSubmitted" db-name="DateSubmitted" type="Date" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="registration" db-name="Registration" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="arrivingFrom" db-name="ArrivingFrom" type="String" />
+		<column name="sailingTo" db-name="SailingTo" type="String" />
+		<column name="nationality" db-name="Nationality" type="String" />
+		<column name="masterName" db-name="MasterName" type="String" />
+		<column name="grossTonnage" db-name="GrossTonnage" type="double" />
+		<column name="grossTonnageUnit" db-name="GrossTonnageUnit" type="String" />
+		<column name="tonnage" db-name="Tonnage" type="double" />
+		<column name="tonnageUnit" db-name="TonnageUnit" type="String" />
+		<column name="certificatecarried" db-name="CertificateCarried" type="int" />
+		<column name="issuedAt" db-name="IssuedAt" type="String" />
+		<column name="issueDate" db-name="IssueDate" type="Date" />
+		<column name="reInspectionrequired" db-name="ReInspectionRequired" type="int" />
+		<column name="isShipVisitedWHO" db-name="IsShipVisitedWHO" type="int" />
+		<column name="visitedWHOPortCode" db-name="VisitedWHOPortCode" type="String" />
+		<column name="dateOfVisitedWHO" db-name="DateOfVisitedWHO" type="Date" />
+		<column name="listPortName" db-name="ListPortName" type="String" />
+		<column name="doctorName" db-name="DoctorName" type="String" />
+		<column name="doctorSigndate" db-name="DoctorSignDate" type="Date" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempHealthCrewPassengerList" table="TEMP_HEALTH_CREW_PAX_LIST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="healthCrewPassengerCode" db-name="HealthCrewPassengerCode" type="String" />
+		<column name="passengerOrCrewCode" db-name="PassengerOrCrewCode" type="String" />
+		<column name="passengerOrCrewName" db-name="PassengerOrCrewName" type="String" />
+		<column name="classOrRating" db-name="ClassOrRating" type="int" />
+		<column name="stateVisitedCode" db-name="StateVisitedCode" type="String" />
+		<column name="portVisitedCode" db-name="PortVisitedCode" type="String" />
+		<column name="fromDate" db-name="FromDate" type="Date" />
+		<column name="toDate" db-name="ToDate" type="Date" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempHealthQuestion" table="TEMP_HEALTH_QUESTION" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="healthQuestionCode" db-name="HealthQuestionCode" type="String" />
+		<column name="personDied" db-name="PersonDied" type="int" />
+		<column name="personDiedNo" db-name="PersonDiedNo" type="int" />
+		<column name="personDiedReport" db-name="PersonDiedReport" type="String" />
+		<column name="isinfectious" db-name="IsInfectious" type="int" />
+		<column name="infectiousReport" db-name="InfectiousReport" type="String" />
+		<column name="illPassengersGreaterNomal" db-name="IllPassengersGreaterNomal" type="int" />
+		<column name="illPassengersNo" db-name="IllPassengersNo" type="int" />
+		<column name="illPersonsOnBoard" db-name="IllPersonsOnBoard" type="int" />
+		<column name="illPersonsReport" db-name="IllPersonsReport" type="int" />
+		<column name="medicalPractitionerConsulted" db-name="MedicalPractitionerConsulted" type="int" />
+		<column name="medicalTreatmentOrAdvice" db-name="MedicalTreatmentOrAdvice" type="String" />
+		<column name="infectionOrSpreadOfDisease" db-name="InfectionOrSpreadOfDisease" type="int" />
+		<column name="infectionsReport" db-name="InfectionsReport" type="String" />
+		<column name="isSanitary" db-name="IsSanitary" type="int" />
+		<column name="sanitaryDes" db-name="SanitaryDes" type="String" />
+		<column name="isStowaways" db-name="IsStowaways" type="int" />
+		<column name="joinShip" db-name="JoinShip" type="String" />
+		<column name="isAnimal" db-name="IsAnimal" type="int" />
+
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="TempAttachmentDeclarationHealth" table="TEMP_ATT_DECLARATION_HEALTH" local-service="true" data-source="gtDataSource" cache-enabled="false"
+		remote-service="true">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="attachmentCode" db-name="AttachmentCode" type="String" />
+		<column name="passengerOrCrewCode" db-name="PassengerOrCrewCode" type="String" />
+		<column name="name" db-name="Name" type="String" />
+		<column name="age" db-name="Age" type="int" />
+		<column name="sex" db-name="Sex" type="int" />
+		<column name="nationality" db-name="Nationality" type="String" />
+		<column name="portJoinVesselCode" db-name="PortJoinVesselCode" type="String" />
+		<column name="dateJoinVessel" db-name="DateJoinVessel" type="Date" />
+		<column name="classOrRating" db-name="ClassOrRating" type="int" />
+		<column name="natureOfIllness" db-name="NatureOfIllness" type="String" />
+		<column name="dateOfOnsetOfSymptom" db-name="DateOfOnsetOfSymptom" type="Date" />
+		<column name="reportedMedicalOfficer" db-name="ReportedMedicalOfficer" type="int" />
+		<column name="disposalOfCase" db-name="DisposalOfCase" type="String" />
+		<column name="medicinesOrOther" db-name="MedicinesOrOther" type="String" />
+		<column name="comments" db-name="Comments" type="String" />
+
+
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+	<entity name="TempGeneralDeclaration" table="TEMP_GENERAL_DECLARATION" local-service="true"  remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentReference" db-name="DocumentReference" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="isArrival" db-name="IsArrival" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="imoNumber" db-name="IMONumber" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="voyageNumber" db-name="VoyageNumber" type="String" />
+		<column name="portOfArrivalCode" db-name="PortOfArrivalCode" type="String" />
+		<column name="dateOfArrival" db-name="DateOfArrival" type="Date" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="certificateOfRegistryNumber" db-name="CertificateOfRegistryNumber" type="String" />
+		<column name="certificateOfRegistryDate" db-name="CertificateOfRegistryDate" type="Date" />
+		<column name="certificateOfRegistryPortName" db-name="CertificateOfRegistryPortName" type="String" />
+		<column name="taxCodeOfShipownersAgents" db-name="TaxCodeOfShipownersAgents" type="String" />
+		<column name="nameOfShipownersAgents" db-name="NameOfShipownersAgents" type="String" />
+		<column name="shipAgencyAddress" db-name="ShipAgencyAddress" type="String" />
+		<column name="shipAgencyPhone" db-name="ShipAgencyPhone" type="String" />
+		<column name="shipAgencyFax" db-name="ShipAgencyFax" type="String" />
+		<column name="shipAgencyEmail" db-name="ShipAgencyEmail" type="String" />
+		<column name="grossTonnage" db-name="GrossTonnage" type="double" />
+		<column name="netTonnage" db-name="NetTonnage" type="double" />
+		<column name="positionOfShipInport" db-name="PositionOfShipInPort" type="String" />
+		<column name="briefParticularsOfVoyage" db-name="BriefParticularsOfVoyage" type="String" />
+		<column name="previousPortsOfCall" db-name="PreviousPortsOfCall" type="String" />
+		<column name="subsequentPortsOfCall" db-name="SubsequentPortsOfCall" type="String" />
+		<column name="dischargedPorts" db-name="DischargedPorts" type="String" />
+		<column name="remainingCargo" db-name="RemainingCargo" type="String" />
+		<column name="briefDescriptionOfTheCargo" db-name="BriefDescriptionOfTheCargo" type="String" />
+		<column name="numberOfCrew" db-name="NumberOfCrew" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="shipRequirementsInTermsOfWaste" db-name="ShipRequirementsInTermsOfWaste" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="numberCargoDeclaration" db-name="NumberCargoDeclaration" type="String" />
+		<column name="numberShipStoreDeclaration" db-name="NumberShipStoreDeclaration" type="String" />
+		<column name="numberCrewList" db-name="NumberCrewList" type="String" />
+		<column name="numberPassengerList" db-name="NumberPassengerList" type="String" />
+		<column name="numberCrewEffects" db-name="NumberCrewEffects" type="String" />
+		<column name="numberHealthMaritime" db-name="NumberHealthMaritime" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="CargoOnBoard" db-name="CargoOnBoard" type="String" />
+		<column name="Cargo" db-name="Cargo" type="String" />
+		<column name="VolumeCargo" db-name="VolumeCargo" type="double" />
+		<column name="CargoUnit" db-name="CargoUnit" type="String" />
+		<column name="CargoDescription" db-name="CargoDescription" type="String" />
+		<column name="ratedPower" db-name="RatedPower" type="String" />
+		<column name="seatingCapacity" db-name="SeatingCapacity" type="String" />
+		<column name="lyingCapacity" db-name="LyingCapacity" type="String" />
+		<column name="maritimePortCode" db-name="MaritimePortCode" type="String" />
+		<column name="lastProvinceCode" db-name="LastProvinceCode" type="String" />
+		<column name="nextProvinceCode" db-name="NextProvinceCode" type="String" />
+		<column name="lastMaritimePortCode" db-name="LastMaritimePortCode" type="String" />
+		<column name="lastPortRegionCode" db-name="LastPortRegionCode" type="String" />
+		<column name="lastPortHarbourCode" db-name="LastPortHarbourCode" type="String" />
+		<column name="lastPortWharfCode" db-name="LastPortWharfCode" type="String" />
+		<column name="nextMaritimePortCode" db-name="NextMaritimePortCode" type="String" />
+		<column name="nextPortRegionCode" db-name="NextPortRegionCode" type="String" />
+		<column name="nextPortHarbourCode" db-name="NextPortHarbourCode" type="String" />
+		<column name="nextPortWharfCode" db-name="NextPortWharfCode" type="String" />
+		
+		<column name="link" db-name="Link" type="String" />
+		<column name="qrCode" db-name="QCCode" type="String" />
+		<column name="portClearanceNo" db-name="PortClearanceNo" type="String" />
+		<column name="loa" db-name="LOA" type="double" />
+		<column name="unitLOA" db-name="UnitLOA" type="String" />
+		<column name="breadth" db-name="Breadth" type="double" />
+		<column name="unitBreadth" db-name="UnitBreadth" type="String" />
+		<column name="clearanceHeight" db-name="ClearanceHeight" type="double" />
+		<column name="unitClearanceHeight" db-name="UnitClearanceHeight" type="String" />
+		<column name="shownDraftxF" db-name="ShownDraftxF" type="double" />
+		<column name="unitShownDraftxF" db-name="UnitShownDraftxF" type="String" />
+		<column name="shownDraftxA" db-name="ShownDraftxA" type="double" />
+		<column name="unitShownDraftxA" db-name="UnitShownDraftxA" type="String" />
+		<column name="dwt" db-name="DWT" type="double" />
+		<column name="unitDWT" db-name="UnitDWT" type="String" />
+		<column name="timeOfPORTArrival" db-name="TimeOfPORTArrival" type="Date" />
+		<column name="timeOfPilotOnBoard" db-name="TimeOfPilotOnBoard" type="Date" />
+		<column name="tugBoat" db-name="TugBoat" type="String" />
+		<column name="do_" db-name="DO_" type="String" />
+		<column name="fo" db-name="FO" type="String" />
+		<column name="fw" db-name="FW" type="String" />
+		<column name="placeOfReception" db-name="PlaceOfReception" type="String" />
+		<column name="nameOfShipOwners" db-name="NameOfShipOwners" type="String" />
+		<column name="addressOfShipOwners" db-name="AddressOfShipOwners" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="DocumentNameAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="DocumentNameAndDocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempCargoItems" table="TEMP_CARGO_ITEMS" local-service="true" data-source="gtDataSource"
+		remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />		
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="cargoCategory" db-name="CargoCategory" type="String" />
+		<column name="cargoType" db-name="CargoType" type="String" />
+		<column name="cargoCode" db-name="CargoCode" type="String" />
+		<column name="description" db-name="Description" type="String" />
+		<column name="quantity" db-name="Quantity" type="double" />
+		<column name="unit" db-name="Unit" type="String" />
+		<column name="sequence" db-name="Sequence" type="int" />
+		<column name="modifiedDate" db-name="ModifiedDate" type="Date" />
+		
+		
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearAndRequestCode" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempUnitGeneral" table="TEMP_UNIT_GENERAL" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="grossTonnageUnit" db-name="GrossTonnageUnit" type="String" />
+		<column name="netTonnageUnit" db-name="NetTonnageUnit" type="String" />
+		<column name="unitDWT" db-name="UnitDWT" type="String" />
+		<column name="unitLOA" db-name="UnitLOA" type="String" />
+		<column name="unitBreadth" db-name="UnitBreadth" type="String" />
+		<column name="unitClearanceHeight" db-name="UnitClearanceHeight" type="String" />
+		<column name="unitShownDraft" db-name="UnitShownDraft" type="String" />
+		<column name="unitShownDraftxF" db-name="UnitShownDraftxF" type="String" />
+		<column name="unitShownDraftxA" db-name="UnitShownDraftxA" type="String" />
+		<column name="unitHorsePower" db-name="UnitHorsePower" type="String" />
+		<column name="unitRemainingOnBoardxB" db-name="UnitRemainingOnBoardxB" type="String" />
+		<column name="unitRemainingOnBoardxS" db-name="UnitRemainingOnBoardxS" type="String" />
+		<column name="unitFO" db-name="UnitFO" type="String" />
+		<column name="unitLO" db-name="UnitLO" type="String" />
+		<column name="unitFW" db-name="UnitFW" type="String" />
+		<column name="unitDO" db-name="UnitDO" type="String" />
+		<column name="unitSludgeOil" db-name="UnitSludgeOil" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="DocumentNameAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+	</entity>
+
+	<entity name="TempAnimalQuarantine" table="TEMP_ANIMAL_QUARANTINE" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="numberOfCrew" db-name="NumberOfCrew" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="animalNameFirst" db-name="AnimalNameFirst" type="String" />
+		<column name="animalNameBetween" db-name="AnimalNameBetween" type="String" />
+		<column name="animalNameThis" db-name="AnimalNameThis" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="TempPlantQuarantine" table="TEMP_PLANT_QUARANTINE" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="doctorName" db-name="DoctorName" type="String" />
+		<column name="numberOfCrew" db-name="NumberOfCrew" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="lastPortOfCallCode" db-name="LastPortOfCallCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="firstPortOfLoadingCode" db-name="FirstPortOfLoadingCode" type="String" />
+		<column name="dateOfdeparture" db-name="DateOfDeparture" type="Date" />
+		<column name="plantNameFirst" db-name="PlantNameFirst" type="String" />
+		<column name="plantNameBetween" db-name="PlantNameBetween" type="String" />
+		<column name="plantNameThis" db-name="PlantNameThis" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="masterSigned" db-name="MasterSigned" type="int" />
+		<column name="masterSignedImage" db-name="MasterSignedImage" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+
+
+	<entity name="TempDocument" table="TEMP_DOCUMENT" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="documentTypeCode" db-name="DocumentTypeCode" type="String" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="shipAgencyCode" db-name="ShipAgencyCode" type="String" />
+		<column name="shipName" db-name="ShipName" type="String" />
+		<column name="shipTypeCode" db-name="ShipTypeCode" type="String" />
+		<column name="stateCode" db-name="StateCode" type="String" />
+		<column name="shipCaptain" db-name="ShipCaptain" type="String" />
+		<column name="imo" db-name="IMO" type="String" />
+		<column name="grt" db-name="GRT" type="double" />
+		<column name="nt" db-name="NT" type="double" />
+		<column name="dwt" db-name="DWT" type="double" />
+		<column name="unitGRT" db-name="UnitGRT" type="String" />
+		<column name="unitNT" db-name="UnitNT" type="String" />
+		<column name="unitDWT" db-name="UnitDWT" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="preDocumentName" db-name="PreDocumentName" type="String" />
+		<column name="createdDate" db-name="CreatedDate" type="Date" />
+		<column name="lastModifiedDate" db-name="LastModifiedDate" type="Date" />
+
+		<column name="flowFlag" db-name="FlowFlag" type="int" />
+		<column name="documentStatusCode" db-name="DocumentStatusCode" type="int" />
+		<column name="locationCode" db-name="LocationCode" type="String" />
+		<column name="maritimeCode" db-name="MaritimeCode" type="String" />
+		<column name="portRegionCode" db-name="PortRegionCode" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="lastPortCode" db-name="LastPortCode" type="String" />
+		<column name="shipPosition" db-name="ShipPosition" type="int" />
+
+		<column name="shipOwnerCode" db-name="ShipOwnerCode" type="String" />
+		<column name="arrivalShipAgency" db-name="ArrivalShipAgency" type="String" />
+		<column name="departureShipAgency" db-name="DepartureShipAgency" type="String" />
+		<column name="shipDateFrom" db-name="ShipDateFrom" type="Date" />
+		<column name="shipDateTo" db-name="ShipDateTo" type="Date" />
+		<column name="upgradeVersion" db-name="UpgradeVersion" type="int" />
+		<column name="nameOfShipownersAgents" db-name="NameOfShipownersAgents" type="String" />
+	
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="TemDocumentByDocumentNameAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="TemDocumentByDocumentNameAndDocumentYearRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="F_B_N_Y_TYPE" return-type="TempDocument">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="documentTypeCode" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		
+		<finder name="TempDocumentByShipNameSMSAndDocumentTypeCode" return-type="Collection">
+			<finder-column name="shipName" />
+			<finder-column name="callSign" />
+			<finder-column name="shipTypeCode" />
+			<finder-column name="documentYear" />
+			<finder-column name="documentTypeCode" />
+		</finder>
+		
+		<finder name="F_documentTypeCode_maritimeCode" return-type="Collection">
+			<finder-column name="documentTypeCode" />
+			<finder-column name="maritimeCode" />
+		</finder>
+		
+	</entity>
+
+
+
+
+	<entity name="IssuePortClearance" table="ISSUE_PORT_CLEARANCE" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="numberPortClearance" db-name="NumberPortClearance" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="portofAuthority" db-name="PortofAuthority" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="numberOfCrews" db-name="NumberOfCrews" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="cargo" db-name="Cargo" type="String" />
+		<column name="volumeCargo" db-name="VolumeCargo" type="double" />
+		<column name="cargoUnit" db-name="CargoUnit" type="String" />
+		<column name="cargoDescription" db-name="CargoDescription" type="String" />
+		<column name="transitCargo" db-name="TransitCargo" type="String" />
+		<column name="volumeTransitCargo" db-name="VolumeTransitCargo" type="double" />
+		<column name="transitCargoUnit" db-name="TransitCargoUnit" type="String" />
+		<column name="timeOfDeparture" db-name="TimeOfDeparture" type="Date" />
+		
+		<column name="nextProvinceCode" db-name="NextProvinceCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="maritimePortCode" db-name="MaritimePortCode" type="String" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="validUntil" db-name="ValidUntil" type="Date" />
+		<column name="issueDate" db-name="IssueDate" type="Date" />
+		<column name="directorOfMaritime" db-name="DirectorOfMaritime" type="String" />
+		<column name="certificateNo" db-name="CertificateNo" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="gt" db-name="GT" type="double"></column>
+		<column name="dwt" db-name="DWT" type="double"></column>
+
+		<column name="nextMaritimePortCode" db-name="NextMaritimePortCode" type="String" />
+		<column name="nextPortRegionCode" db-name="NextPortRegionCode" type="String" />
+		<column name="nextPortHarbourCode" db-name="NextPortHarbourCode" type="String" />
+		<column name="nextPortWharfCode" db-name="NextPortWharfCode" type="String" />
+		
+		
+		<column name="versionNo" db-name="VersionNo" type="String" />
+		<column name="isApproval" db-name="IsApproval" type="int" />
+		<column name="approvalDate" db-name="ApprovalDate" type="Date" />
+		<column name="approvalName" db-name="ApprovalName" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="isCancel" db-name="IsCancel" type="int" />
+		<column name="cancelDate" db-name="CancelDate" type="Date" />
+		<column name="cancelName" db-name="CancelName" type="String" />
+		<column name="cancelNote" db-name="CancelNote" type="String" />
+		<column name="representative" db-name="Representative" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="signName" db-name="SignName" type="String" />
+		<column name="signTitle" db-name="SignTitle" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="stampStatus" db-name="StampStatus" type="long" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		
+		
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="findIssuePortClearanceByDocumentYearAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="findIssuePortClearanceByDocumentYearAndDocumentYearAndRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		
+		<finder name="F_LAST_numberPortClearance" return-type="Collection">
+			<finder-column name="numberPortClearance" />
+		</finder>
+		
+	</entity>
+
+	<entity name="IssueAcceptance" table="issue_acceptance" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="numberPortClearance" db-name="NumberPortClearance" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="portofAuthority" db-name="PortofAuthority" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="numberOfCrews" db-name="NumberOfCrews" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="cargo" db-name="Cargo" type="String" />
+		<column name="volumeCargo" db-name="VolumeCargo" type="double" />
+		<column name="cargoUnit" db-name="CargoUnit" type="String" />
+		<column name="cargoDescription" db-name="CargoDescription" type="String" />
+		<column name="transitCargo" db-name="TransitCargo" type="String" />
+		<column name="volumeTransitCargo" db-name="VolumeTransitCargo" type="double" />
+		<column name="transitCargoUnit" db-name="TransitCargoUnit" type="String" />
+		<column name="timeOfDeparture" db-name="TimeOfDeparture" type="Date" />
+		<column name="portCode" db-name="PortCode" type="String" />
+		<column name="portWharfCode" db-name="PortWharfCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="nextPortOfCallCode" db-name="NextPortOfCallCode" type="String" />
+		<column name="validUntil" db-name="ValidUntil" type="Date" />
+		<column name="issueDate" db-name="IssueDate" type="Date" />
+		<column name="directorOfMaritime" db-name="DirectorOfMaritime" type="String" />
+		<column name="certificateNo" db-name="CertificateNo" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="gt" db-name="GT" type="double"></column>
+		<column name="dwt" db-name="DWT" type="double"></column>
+
+		<column name="versionNo" db-name="VersionNo" type="String" />
+		<column name="isApproval" db-name="IsApproval" type="int" />
+		<column name="approvalDate" db-name="ApprovalDate" type="Date" />
+		<column name="approvalName" db-name="ApprovalName" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="isCancel" db-name="IsCancel" type="int" />
+		<column name="cancelDate" db-name="CancelDate" type="Date" />
+		<column name="cancelName" db-name="CancelName" type="String" />
+		<column name="cancelNote" db-name="CancelNote" type="String" />
+		<column name="representative" db-name="Representative" type="String" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="signName" db-name="SignName" type="String" />
+		<column name="signTitle" db-name="SignTitle" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="stampStatus" db-name="StampStatus" type="long" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="findIssuePortClearanceByDocumentYearAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="findIssuePortClearanceByDocumentYearAndDocumentYearAndRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+		<finder name="RequestCode" return-type="IssueAcceptance" unique="true">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+
+
+	<entity name="IssuePermissionForTransit" table="ISSUE_PERMISSION_FOR_TRANSIT" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="numberPermissionForTransit" db-name="NumberPermissionForTransit" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="portofAuthority" db-name="PortofAuthority" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="gt" db-name="GT" type="double" />
+		<column name="numberOfCrews" db-name="NumberOfCrews" type="int" />
+		<column name="numberOfPassengers" db-name="NumberOfPassengers" type="int" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="transitCargo" db-name="TransitCargo" type="String" />
+		<column name="volumeCargo" db-name="VolumeCargo" type="double" />
+		<column name="cargoUnit" db-name="CargoUnit" type="String" />
+		<column name="cargoDescription" db-name="CargoDescription" type="String" />
+		<column name="permittedTransitFrom" db-name="PermittedTransitFrom" type="String" />
+		<column name="permittedTransitTo" db-name="PermittedTransitTo" type="String" />
+		<column name="timeOfDeparture" db-name="TimeOfDeparture" type="Date" />
+		<column name="validUntil" db-name="ValidUntil" type="Date" />
+		<column name="dateOfSign" db-name="DateOfSign" type="Date" />
+		<column name="userCreated" db-name="UserCreated" type="String" />
+		<column name="directorOfMaritime" db-name="DirectorOfMaritime" type="String" />
+		<column name="createdDate" db-name="CreatedDate" type="Date" />
+		<column name="certificateNo" db-name="CertificateNo" type="String" />
+
+
+		<column name="versionNo" db-name="VersionNo" type="String" />
+		<column name="isApproval" db-name="IsApproval" type="int" />
+		<column name="approvalDate" db-name="ApprovalDate" type="Date" />
+		<column name="approvalName" db-name="ApprovalName" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+		<column name="isCancel" db-name="IsCancel" type="int" />
+		<column name="cancelDate" db-name="CancelDate" type="Date" />
+		<column name="cancelName" db-name="CancelName" type="String" />
+		<column name="cancelNote" db-name="CancelNote" type="String" />
+		<column name="representative" db-name="Representative" type="String" />
+		
+		<column name="digitalAttachedFile" db-name="DigitalAttachedFile" type="long" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="signName" db-name="SignName" type="String" />
+		<column name="signTitle" db-name="SignTitle" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="stampStatus" db-name="StampStatus" type="long" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="findIssuePermissionForTransitByDocumentYearAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="IssuePermissionForTransitByDocumentYearAndDocumentYearAndRequestState" return-type="IssuePermissionForTransit">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+
+		<finder name="requestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="documentNameAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+
+		<finder name="DocumentNameAndDocumentYearAndVersionNo" return-type="IssuePermissionForTransit">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="versionNo" />
+		</finder>
+		
+		<finder name="F_LAST_numberPortClearance" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="numberPermissionForTransit" />
+		</finder>
+		
+	</entity>
+
+
+	<entity name="IssueAcceptanceForTransit" table="ISSUE_ACCEPTANCE_FOR_TRANSIT" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="numberAcceptanceForTransit" db-name="NumberAcceptanceForTransit" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="callSign" db-name="CallSign" type="String" />
+		<column name="nameOfMaster" db-name="NameOfMaster" type="String" />
+		<column name="loa" db-name="LOA" type="double" />
+		<column name="unitLOA" db-name="UnitLOA" type="String" />
+		<column name="breadth" db-name="Breadth" type="double" />
+		<column name="unitBreadth" db-name="UnitBreadth" type="String" />
+		<column name="grossTonnage" db-name="GrossTonnage" type="double" />
+		<column name="grossTonnageUnit" db-name="GrossTonnageUnit" type="String" />
+		<column name="netTonnage" db-name="NetTonnage" type="double" />
+		<column name="netTonnageUnit" db-name="NetTonnageUnit" type="String" />
+		<column name="dwt" db-name="DWT" type="double" />
+		<column name="unitDWT" db-name="UnitDWT" type="String" />
+		<column name="shownDraftxF" db-name="ShownDraftxF" type="double" />
+		<column name="unitShownDraftxF" db-name="UnitShownDraftxF" type="String" />
+		<column name="shownDraftxA" db-name="ShownDraftxA" type="double" />
+		<column name="unitShownDraftxA" db-name="UnitShownDraftxA" type="String" />
+		<column name="clearanceHeight" db-name="ClearanceHeight" type="double" />
+		<column name="unitClearanceHeight" db-name="UnitClearanceHeight" type="String" />
+		<column name="permittedTransitFrom" db-name="PermittedTransitFrom" type="Date" />
+		<column name="permittedTransitTo" db-name="PermittedTransitTo" type="Date" />
+		<column name="timeOfDeparture" db-name="TimeOfDeparture" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="findIssueAcceptanceForTransitByDocumentYearAndDocumentYear" return-type="IssueAcceptanceForTransit">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+	</entity>
+
+	<entity name="IssueShiftingOrder" table="ISSUE_SHIFTING_ORDER" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="numberShiftingOrder" db-name="NumberShiftingOrder" type="String" />
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="portofAuthority" db-name="PortofAuthority" type="String" />
+		<column name="nameOfShip" db-name="NameOfShip" type="String" />
+		<column name="flagStateOfShip" db-name="FlagStateOfShip" type="String" />
+		<column name="anchoringPortCode" db-name="AnchoringPortCode" type="String" />
+		<column name="anchoringPortWharfCode" db-name="AnchoringPortWharfCode" type="String" />
+		<column name="portHarbourCode" db-name="PortHarbourCode" type="String" />
+		<column name="shiftingPortWharfCode" db-name="ShiftingPortWharfCode" type="String" />
+		<column name="shiftingDate" db-name="ShiftingDate" type="Date" />
+		<column name="reasonToShift" db-name="ReasonToShift" type="String" />
+		<column name="issueDate" db-name="IssueDate" type="Date" />
+		<column name="directorOfMaritime" db-name="DirectorOfMaritime" type="String" />
+		<column name="certificateNo" db-name="CertificateNo" type="String" />
+		<column name="requestState" db-name="RequestState" type="int" />
+
+		<column name="versionNo" db-name="VersionNo" type="String" />
+		<column name="isApproval" db-name="IsApproval" type="int" />
+		<column name="approvalDate" db-name="ApprovalDate" type="Date" />
+		<column name="approvalName" db-name="ApprovalName" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+
+		<column name="isCancel" db-name="IsCancel" type="int" />
+		<column name="cancelDate" db-name="CancelDate" type="Date" />
+		<column name="cancelName" db-name="CancelName" type="String" />
+		<column name="cancelNote" db-name="CancelNote" type="String" />
+		<column name="representative" db-name="Representative" type="String" />
+		
+		<column name="digitalAttachedFile" db-name="DigitalAttachedFile" type="long" />
+		<column name="signDate" db-name="SignDate" type="Date" />
+		<column name="signName" db-name="SignName" type="String" />
+		<column name="signTitle" db-name="SignTitle" type="String" />
+		<column name="signPlace" db-name="SignPlace" type="String" />
+		<column name="stampStatus" db-name="StampStatus" type="int" />
+		<column name="attachedFile" db-name="AttachedFile" type="long" />
+		
+		<column name="shownDraftxF" db-name="ShownDraftxF" type="double" />
+		<column name="unitShownDraftxF" db-name="UnitShownDraftxF" type="String" />
+		<column name="shownDraftxA" db-name="ShownDraftxA" type="double" />
+		<column name="unitShownDraftxA" db-name="UnitShownDraftxA" type="String" />
+		<column name="loa" db-name="LOA" type="double" />
+		<column name="loaUnit" db-name="LOAUNIT" type="String" />
+		<column name="dwt" db-name="DWT" type="double" />
+		<column name="dwtUnit" db-name="DWTUNIT" type="String" />
+		<column name="tugBoat" db-name="TugBoat" type="String" />
+		<column name="from" db-name="From_" type="String" />
+		<column name="to" db-name="To_" type="String" />
+		<column name="taxCodeOfShipownersAgents" db-name="TaxCodeOfShipownersAgents" type="String" />
+		<column name="nameOfShipownersAgents" db-name="NameOfShipownersAgents" type="String" />
+		<column name="shipAgencyAddress" db-name="ShipAgencyAddress" type="String" />
+		<column name="shipAgencyPhone" db-name="ShipAgencyPhone" type="String" />
+		<column name="shipAgencyFax" db-name="ShipAgencyFax" type="String" />
+		<column name="shipAgencyEmail" db-name="ShipAgencyEmail" type="String" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="findIssueShiftingOrderByDocumentYearAndDocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+
+		<finder name="findIssueShiftingOrderByDocumentYearAndDocumentYearAndRequestState" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestState" />
+		</finder>
+
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+
+		<finder name="DocumentNameAndDocumentYearAndVersionNo" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="versionNo" />
+		</finder>
+	</entity>
+
+
+	<entity name="InterfaceRequest" table="INTERFACE_REQUEST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="locCode" db-name="LocCode" type="String" />
+		<column name="requestDate" db-name="RequestDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+
+		<column name="requestDirection" db-name="RequestDirection" type="String" />
+
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="requestResponseTime" db-name="RequestResponseTime" type="Date" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		<column name="documentNameRef" db-name="DocumentNameRef" type="String" />
+		
+		<column name="businessType" db-name="BusinessType" type="String" />
+		<column name="functionType" db-name="FunctionType" type="String" />
+		<column name="requestContent" db-name="RequestContent" type="String" />
+
+		<column name="senderName" db-name="SenderName" type="String" />
+		<column name="requestVersion" db-name="RequestVersion" type="String" />
+		<column name="senderIdentify" db-name="SenderIdentify" type="String" />
+		<column name="receiverName" db-name="ReceiverName" type="String" />
+		<column name="sendingDate" db-name="SendingDate" type="Date" />
+		<column name="receiverIdentify" db-name="ReceiverIdentify" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="InterfaceRequest">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="OrganizationCode" return-type="Collection">
+			<finder-column name="organizationCode" />
+		</finder>
+		<finder name="LocCode" return-type="Collection">
+			<finder-column name="locCode" />
+		</finder>
+		
+		<finder name="F_BY_documentNameRef" return-type="InterfaceRequest" where=" ( requestDirection = 'OUT' ) ">
+			<finder-column name="documentNameRef" />
+			<finder-column name="businessType" />
+		</finder>
+		
+	</entity>
+	
+	
+	<entity name="InterfaceRequestField" table="INTERFACE_REQUEST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="locCode" db-name="LocCode" type="String" />
+		<column name="requestDate" db-name="RequestDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+
+		<column name="requestDirection" db-name="RequestDirection" type="String" />
+
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="requestResponseTime" db-name="RequestResponseTime" type="Date" />		
+		<column name="documentType" db-name="DocumentType" type="String" />
+		<column name="documentNameRef" db-name="DocumentNameRef" type="String" />
+		
+		<column name="businessType" db-name="BusinessType" type="String" />
+		<column name="functionType" db-name="FunctionType" type="String" />
+
+		<column name="senderName" db-name="SenderName" type="String" />
+		<column name="requestVersion" db-name="RequestVersion" type="String" />
+		<column name="senderIdentify" db-name="SenderIdentify" type="String" />
+		<column name="receiverName" db-name="ReceiverName" type="String" />
+		<column name="sendingDate" db-name="SendingDate" type="Date" />
+		<column name="receiverIdentify" db-name="ReceiverIdentify" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="InterfaceRequestField">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="OrganizationCode" return-type="Collection">
+			<finder-column name="organizationCode" />
+		</finder>
+		<finder name="LocCode" return-type="Collection">
+			<finder-column name="locCode" />
+		</finder>
+	</entity>
+	
+	<entity name="HistoryInterfaceRequest" table="HISTORY_INTERFACE_REQUEST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="locCode" db-name="LocCode" type="String" />
+		<column name="requestDate" db-name="RequestDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+
+		<column name="requestDirection" db-name="RequestDirection" type="String" />
+
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="requestResponseTime" db-name="RequestResponseTime" type="Date" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		
+		<column name="businessType" db-name="BusinessType" type="String" />
+		<column name="functionType" db-name="FunctionType" type="String" />
+		<column name="requestContent" db-name="RequestContent" type="String" />
+		<column name="senderName" db-name="SenderName" type="String" />
+		<column name="requestVersion" db-name="RequestVersion" type="String" />
+		<column name="senderIdentify" db-name="SenderIdentify" type="String" />
+		<column name="receiverName" db-name="ReceiverName" type="String" />
+		<column name="sendingDate" db-name="SendingDate" type="Date" />
+		<column name="receiverIdentify" db-name="ReceiverIdentify" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="HistoryInterfaceRequest">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="OrganizationCode" return-type="Collection">
+			<finder-column name="organizationCode" />
+		</finder>
+		<finder name="LocCode" return-type="Collection">
+			<finder-column name="locCode" />
+		</finder>
+	</entity>
+
+
+
+	<entity name="HistoryInterfaceRequestField" table="HISTORY_INTERFACE_REQUEST" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+
+		<column name="requestCode" db-name="RequestCode" type="String" />
+		<column name="organizationCode" db-name="OrganizationCode" type="String" />
+		<column name="locCode" db-name="LocCode" type="String" />
+		<column name="requestDate" db-name="RequestDate" type="Date" />
+		<column name="requestedDate" db-name="RequestedDate" type="Date" />
+
+		<column name="requestDirection" db-name="RequestDirection" type="String" />
+
+		<column name="requestState" db-name="RequestState" type="int" />
+		<column name="requestResponseTime" db-name="RequestResponseTime" type="Date" />
+		<column name="documentType" db-name="DocumentType" type="String" />
+		
+		<column name="businessType" db-name="BusinessType" type="String" />
+		<column name="functionType" db-name="FunctionType" type="String" />
+		<column name="senderName" db-name="SenderName" type="String" />
+		<column name="requestVersion" db-name="RequestVersion" type="String" />
+		<column name="senderIdentify" db-name="SenderIdentify" type="String" />
+		<column name="receiverName" db-name="ReceiverName" type="String" />
+		<column name="sendingDate" db-name="SendingDate" type="Date" />
+		<column name="receiverIdentify" db-name="ReceiverIdentify" type="String" />
+		<column name="remarks" db-name="Remarks" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<finder name="RequestCode" return-type="HistoryInterfaceRequestField">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="OrganizationCode" return-type="Collection">
+			<finder-column name="organizationCode" />
+		</finder>
+		<finder name="LocCode" return-type="Collection">
+			<finder-column name="locCode" />
+		</finder>
+	</entity>
+	
+	<entity name="Modify" table="gt_modify" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="modifyCode" db-name="modifycode" type="String" />
+		<column name="modifyDesc" db-name="modifydesc" type="String" />
+		<column name="organization" db-name="organization" type="String" />
+		<column name="division" db-name="division" type="String" />
+		<column name="name" db-name="name" type="String" />
+		<column name="modifyDate" db-name="modifydate" type="Date" />
+		<column name="documentName" db-name="documentname" type="long" />
+		<column name="documentYear" db-name="documentyear" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+
+	</entity>
+	
+	<entity name="IssueShiftingOrderChanel" table="ISSUE_SHIFTING_ORDER_CHANEL" local-service="true" data-source="gtDataSource" remote-service="false" cache-enabled="false">
+		<column name="shiftingOrderId" db-name="ShiftingOrderId" type="long" primary="true"/>
+		<column name="chanelCode" db-name="ChanelCode" type="String" primary="true"/>
+		<column name="chanelName" db-name="chanelName" type="String" />
+		<column name="order" db-name="Order_" type="int" />
+		
+		<order by="asc">
+			<order-column name="order" />
+		</order>
+		
+		<finder name="ShiftingOrderId" return-type="Collection">
+			<finder-column name="shiftingOrderId" />
+		</finder>
+		
+	</entity>
+	
+	<entity name="TempPersonList" table="TEMP_PERSON_LIST" local-service="true" data-source="gtDataSource"
+		remote-service="false" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />		
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="name" db-name="Name" type="String" />
+		<column name="age" db-name="Age" type="String" />
+		<column name="nationalCode" db-name="NationalCode" type="String" />
+		<column name="nationalName" db-name="NationalName" type="String" />
+		<column name="ilnessStatus" db-name="IlnessStatus" type="String" />
+		<column name="reasonOfDead" db-name="ReasonOfDead" type="String" />
+		<column name="personType" db-name="PersonType" type="int" />
+		
+		
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearAndRequestCode" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+	</entity>
+	
+	<entity name="TempMaritimePaymentConfig" table="TEMP_MARITIME_PAYMENT_CONFIG" local-service="true" data-source="gtDataSource"
+		remote-service="false" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="maritimeCode" db-name="MARITIMECODE" type="String" />		
+		<column name="merchantCode" db-name="MERCHANTCODE" type="String" />
+		<column name="merchantKey" db-name="MERCHANTKEY" type="String" />
+		<column name="merchantName" db-name="MERCHANTNAME" type="String" />
+		<column name="keypayDomain" db-name="KEYPAYDOMAIN" type="String" />
+		<column name="keypayVersion" db-name="KEYPAYVERSION" type="String" />
+		<column name="returnURL" db-name="RETURNURL" type="String" />
+		
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="MaritimeCode" return-type="Temp_Maritime_Payment_Config">
+			<finder-column name="maritimeCode" />
+		</finder>
+	</entity>
+	
+	<entity name="TempWasteList" table="TEMP_WASTE_LIST" local-service="true" 
+		remote-service="false" cache-enabled="false">
+
+		<column name="id" db-name="ID" type="long" primary="true" />
+		<column name="requestCode" db-name="RequestCode" type="String" />		
+		<column name="documentName" db-name="DocumentName" type="long" />
+		<column name="documentYear" db-name="DocumentYear" type="int" />
+		<column name="typeCode" db-name="TypeCode" type="String" />
+		<column name="typeName" db-name="TypeName" type="String" />
+		<column name="weight" db-name="Weight" type="double" />
+		<column name="unit" db-name="Unit" type="String" />
+		
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="documentNameAnddocumentYear" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+		</finder>
+		<finder name="documentNameAnddocumentYearAndRequestCode" return-type="Collection">
+			<finder-column name="documentName" />
+			<finder-column name="documentYear" />
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="RequestCode" return-type="Collection">
+			<finder-column name="requestCode" />
+		</finder>
+		<finder name="RequestCode_TypeCode" return-type="TempWasteList">
+			<finder-column name="requestCode" />
+			<finder-column name="typeCode" />
+		</finder>
+	</entity>
+	
+	<entity name="ViewHoanThanhThuTuc" table="viewHoanThanhThuTuc" local-service="true" remote-service="true" data-source="gtDataSource" cache-enabled="false">
+
+    <!-- PK fields -->
+    <column name="CVHH" db-name="CVHH" type="String" primary="true" />
+    <column name="MaritimeOrder" db-name="MaritimeOrder" type="int" />
+
+    <column name="NC_KYSO" db-name="NC_KYSO" type="int" />
+    <column name="XC_KYSO" db-name="XC_KYSO" type="int" />
+    <column name="QC_KYSO" db-name="QC_KYSO" type="int" />
+    <column name="VC_KYSO" db-name="VC_KYSO" type="int" />
+    <column name="RC_KYSO" db-name="RC_KYSO" type="int" />
+    <column name="CCV_KYSO" db-name="CCV_KYSO" type="int" />
+    <column name="CCR_KYSO" db-name="CCR_KYSO" type="int" />
+    <column name="VCDK_KYSO" db-name="VCDK_KYSO" type="int" />
+    <column name="RCDK_KYSO" db-name="RCDK_KYSO" type="int" />
+    <column name="NCDK_KYSO" db-name="NCDK_KYSO" type="int" />
+    <column name="XCDK_KYSO" db-name="XCDK_KYSO" type="int" />
+    <column name="VCTND_KYSO" db-name="VCTND_KYSO" type="int" />
+    <column name="RCTND_KYSO" db-name="RCTND_KYSO" type="int" />
+    <column name="NC_DUYET" db-name="NC_DUYET" type="int" />
+    <column name="XC_DUYET" db-name="XC_DUYET" type="int" />
+    <column name="QC_DUYET" db-name="QC_DUYET" type="int" />
+    <column name="VC_DUYET" db-name="VC_DUYET" type="int" />
+    <column name="RC_DUYET" db-name="RC_DUYET" type="int" />
+    <column name="CCV_DUYET" db-name="CCV_DUYET" type="int" />
+    <column name="CCR_DUYET" db-name="CCR_DUYET" type="int" />
+    <column name="VCDK_DUYET" db-name="VCDK_DUYET" type="int" />
+    <column name="RCDK_DUYET" db-name="RCDK_DUYET" type="int" />
+    <column name="NCDK_DUYET" db-name="NCDK_DUYET" type="int" />
+    <column name="XCDK_DUYET" db-name="XCDK_DUYET" type="int" />
+    <column name="VCTND_DUYET" db-name="VCTND_DUYET" type="int" />
+    <column name="RCTND_DUYET" db-name="RCTND_DUYET" type="int" />    
+    <column name="NCPTTND_DUYET" db-name="NCPTTND_DUYET" type="int" />
+    <column name="XCPTTND_DUYET" db-name="XCPTTND_DUYET" type="int" />
+    <column name="NCPTTND_KYSO" db-name="NCPTTND_KYSO" type="int" />
+    <column name="XCPTTND_KYSO" db-name="XCPTTND_KYSO" type="int" />
+        
+    <order by="asc">
+      <order-column name="MaritimeOrder" />
+    </order>
+  </entity>
+</service-builder>

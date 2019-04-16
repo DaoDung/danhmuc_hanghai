@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>Hệ thống dịch vụ hành chính công trực tuyến</title>
+
+	$theme.include($top_head_include)
+
+<body class="$css_class">
+$theme.include($body_top_include)
+
+    <div id="bgheader">
+        <div id="header">
+            <a class="logo" href="">logo</a>
+            <h1 class="slogan">slogan</h1>
+            <div id="menu">
+                
+                <ul>
+                    <li class="active"><a href="http://dichvucong.mt.gov.vn">Trang chủ</a></li>
+                    <li ><a href="/gioi-thieu">Giới thiệu</a></li>
+                    <li><a href="/thu-tuc-hanh-chinh">Thủ tục hành chính</a></li>
+                    <li><a href="/tra-cuu-thong-tin">Tra cứu thông tin</a></li>
+                    <li><a href="/ho-tro">Hỗ trợ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!--End #header-->
+
+    <div class="bgtop">
+    <div id="bannertop">
+        <div class="clum_left">
+            <p><img src="$images_folder/slogan1.png"></p>
+            <p class="tle">Hệ thống thực hiện việc tiếp nhận hồ sơ, xử lý hồ sơ và trả kết quả
+                <br>xử lý hồ sơ cho các cá nhân, doanh nghiệp thực hiện thủ tục
+                <br>hành chính công của Bộ Giao thông Vận tải.
+            </p>
+            <p>
+                #if (!$is_signed_in)
+                    <a class="btdangnhap" href="$sign_in_url">Đăng nhập</a>
+                    <a class="btdangky" href="#">Đăng ký</a>
+                #end
+                #if ($is_signed_in)
+                    <a class="btdangnhap" href="/c/portal/logout">Thoát</a>
+                    #set ($myPlaces = $user.getOrganizations())
+                    #if($listTool.size($myPlaces) > 0)
+                        #foreach ($myPlace IN $myPlaces)                                    
+                             <a class="btdangky" href="/group/$myPlace.getGroup().getFriendlyURL()">Dịch vụ công</a>
+                             #break   
+                        #end
+                    #end
+                #end
+            </p>
+        </div>
+    </div> </div><!--End #bannertop-->
+
+    <div id="footer">
+        <div class="fleft">
+			<table style="width: 100%;">
+				<tbody>
+					<tr>
+						<td>
+							<div class="boxlink_f"> 
+								<p> 
+									<b>BỘ GIAO THÔNG VẬN TẢI</b> 
+									<br>Bản quyền thuộc về Bộ Giao thông vận tải 
+									<br>80 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội. 
+								</p> 
+							</div> 
+						</td>
+						<td style="width: 65%;">
+						   <div class="box_f">
+							<a href="#"><img src="$images_folder/logo1.png"></a>
+							<a href="#"><img src="$images_folder/logo2.png"></a>
+							<a href="#"><img src="$images_folder/logo3.png"></a>
+							<a href="#"><img src="$images_folder/logo4.png"></a>
+							<a href="#"><img src="$images_folder/logo5.png"></a>
+							<a href="#"><img src="$images_folder/logo6.png"></a>
+							<a href="#"><img src="$images_folder/logo7.png"></a>
+							<a href="#"><img src="$images_folder/logo8.png"></a>
+							</div>
+						</td>
+						<td><a href="/phien-ban" style="color: white;">Phiên bản 1.0.20151005</a></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+    </div><!--End #footer-->
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>

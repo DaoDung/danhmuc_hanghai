@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CrewEffectsDeclaration" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="532a8377-0cb4-4b00-a5f2-10cb04ef0eca">
+	<property name="ireport.zoom" value="1.464100000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="tempCrewEffectsDeclarations" class="java.util.List">
+		<fieldDescription><![CDATA[tempCrewEffectsDeclarations]]></fieldDescription>
+	</field>
+	<field name="tempCrewEffectsItems" class="java.util.List">
+		<fieldDescription><![CDATA[tempCrewEffectsItems]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.lang.String">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<field name="signPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[signPlace]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="39" width="555" height="14" uuid="591355d0-6b98-47af-af81-d48b987fd1e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35" uuid="ea9f7ab3-ba37-44ea-aae0-b01359e7da6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="89" width="555" height="17" uuid="90a88d11-b939-46f8-8956-bc22065e8207"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[BẢN KHAI HÀNH LÝ THUYỀN VIÊN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="131" y="81" width="293" height="1" uuid="a81f9bb5-3476-4ca7-9088-c860696bfb38"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="53" width="555" height="14" uuid="01c5999f-e422-46bb-8645-692cc2648d72"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="555" height="17" uuid="cf19563d-5628-4c7c-b6da-a01a796e6061"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[CREW’S EFFECTS DECLARATION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="4187aff5-a2c7-46f9-822b-10369747fa73"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempCrewEffectsDeclarations})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CrewEffectsDeclaration_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="ae62c879-d742-45f1-8730-4be2d86c2692"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempCrewEffectsItems})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CrewEffectsDeclaration_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="118">
+			<textField>
+				<reportElement x="229" y="33" width="326" height="17" uuid="a96b34e0-e225-412e-a858-b5e7528d85d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isItalic="true" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{signPlace} == null) ? "........." : $F{signPlace})+ ", " + (($F{signDate} == null) ? "ngày …… tháng … năm 20 …" : $F{signDate})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="17" uuid="33d60d54-99c3-4775-a5f1-0045f4c34b3a"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[(*) Ví dụ: Rượu, cồn, thuốc lá bao, thuốc lá sợi v.v…]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="50" width="326" height="15" uuid="bc568f00-0f9a-4675-a838-1e52af38f952"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Date...................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="65" width="326" height="17" uuid="0747cfd7-34f0-404c-aa21-2f69a529fb75"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Thuyền trưởng (Đại lý hoặc sỹ quan được ủy quyền)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="82" width="326" height="15" uuid="f5f9e1e4-24d3-4ad2-b7fd-5462b9893af2"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Master (Authorized agent or officer)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="555" height="14" uuid="65631567-41b4-4c84-8d1a-3651d8e969f3"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[e.g. wines, spirits, cigarettes, tobaco, etc…]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

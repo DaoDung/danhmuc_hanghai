@@ -1,0 +1,6 @@
+#*
+This file allows you to override and define new Velocity variables.
+*#
+#set ($images_folder = "$theme_display.getPathThemeImages()")
+#set ($js_sprytabbedpanels = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/DD_belatedPNG.js")))
+

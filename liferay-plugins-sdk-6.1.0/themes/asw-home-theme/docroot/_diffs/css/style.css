@@ -1,0 +1,242 @@
+/* -----------header------------*/
+#bgheader{
+		background:url(../images/bg_header.gif) repeat left top;
+		height:119px;
+	
+}
+#header{
+	width:1000px;
+	margin:auto;
+	position:relative;
+	height:119px;
+}
+.logo{
+	position:absolute;
+	left:35px;
+	top:10px;
+	background:url(../images/logo.png) no-repeat left top;
+	height:69px;
+	width:69px;
+	text-indent:-9999px;
+}
+.slogan{
+	position:absolute;
+	top:20px;
+	left:132px;
+	width:604px;
+	height:59px;
+	text-indent:-9999px;
+	background:url(../images/slogan.png) no-repeat left top;
+}
+#menu{
+	position:absolute;
+	bottom:0;
+}
+#menu ul{
+}
+#menu ul li{
+	float:left;
+	border-left:solid 1px #c0c0c0;
+}
+#menu ul li a{
+	padding:0 20px;
+	font-size:16px;
+	color:#000;
+	text-transform:uppercase;
+	line-height:34px;
+}
+#menu ul li a:hover{
+	color:#3666c3;
+}
+.active{
+	background:#F90;
+	
+}
+
+/*------bannertop--------*/
+
+#bannertop{
+	height:750px;
+	width:1000px;
+	margin:auto;
+	
+}
+.clum_left{
+	float:left;
+	padding-top:35px;
+}
+.clum_left p{
+	margin:15px 0 15px 0;
+}
+.clum_left .tle{
+	font-size:15px;
+	font-style:normal;
+	padding:12px;
+	border-radius:5px;
+	background:url(../images/bg_p.png) repeat left top;
+	color:#FFF;
+	line-height:22px;
+	
+}
+.btdangnhap, .btdangky{
+	padding:8px 22px;
+	border-radius:6px;
+	text-transform:uppercase;
+	font-size:16px;
+	
+	
+}
+.btdangnhap{
+	color:#FFF;
+	border:solid 1px #3563c1;
+	background: #5686e8; /* Old browsers */
+background: -moz-linear-gradient(top,  #5686e8 0%, #4b7de4 47%, #3563c1 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5686e8), color-stop(47%,#4b7de4), color-stop(100%,#3563c1)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #5686e8 0%,#4b7de4 47%,#3563c1 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #5686e8 0%,#4b7de4 47%,#3563c1 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #5686e8 0%,#4b7de4 47%,#3563c1 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #5686e8 0%,#4b7de4 47%,#3563c1 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5686e8', endColorstr='#3563c1',GradientType=0 ); /* IE6-9 */
+box-shadow: 0px 0px 0px 1px #5c8bea inset;
+    -moz-box-shadow: 0px 0px 0px 1px #5c8bea inset;
+    -webkit-box-shadow: 0px 0px 0px 1px #5c8bea inset;
+    -o-box-shadow: 0px 0px 0px 1px #5c8bea inset;
+    -ms-box-shadow: 0px 0px 0px 1px #5c8bea inset;
+
+}
+.btdangky{
+	border:solid 1px #5c8bea;
+	background: #f0f9ff; /* Old browsers */
+background: -moz-linear-gradient(top,  #f0f9ff 0%, #cbebff 47%, #a1dbff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(47%,#cbebff), color-stop(100%,#a1dbff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=0 ); /* IE6-9 */
+color:#3563c1;
+box-shadow: 0px 0px 0px 1px #fff inset;
+    -moz-box-shadow: 0px 0px 0px 1px #fff inset;
+    -webkit-box-shadow: 0px 0px 0px 1px #fff inset;
+    -o-box-shadow: 0px 0px 0px 1px #fff inset;
+    -ms-box-shadow: 0px 0px 0px 1px #fff inset;
+
+}
+.btdangnhap:hover{color:#FFF;}
+.clum_left a:hover{
+	border:solid 1px #F90;
+}
+
+
+/*---------footer-------------*/
+#footer{
+	background:#3563c1;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+.fleft{
+	width:1000px;
+	margin:auto;
+	overflow:hidden;
+	padding:10px 0;
+}
+.boxlink_f{
+	float:left;
+	
+}
+
+
+
+.box_f{
+	overflow:hidden;
+	float:right;
+}
+.box_f p, .menu_footer p{
+	font-size:12px;
+	text-align:center;
+	color:#bad1ff;
+	line-height:16px;
+}
+.boxlink_f p{
+	text-align:left;
+	padding:5px 0 5px 10px;
+	color:#c3e2e3;
+}
+.box_f img{
+	float:left;
+	margin:0 10px;
+}
+/*-----------page------*/
+#main{
+	width:1000px;
+	margin:auto;
+	overflow:hidden;
+}
+.bodypage{
+	background:#FFF;
+}
+.clum1_left{
+	text-align:justify;
+	width:60%;
+	margin-top:30px;
+	float:left;
+}
+.clum1_left p{
+	line-height:18px;
+	margin-bottom:15px;
+	
+}
+.text_center{
+	text-align:center;
+	margin:30px !important;
+	display:inline-block;
+}
+i{
+	text-transform:none !important;
+	font-size:12px;
+}
+.btdangky_page{
+	display:block;
+	margin-left:165px;
+}
+h2{
+	margin-bottom:20px;
+}
+.clum_right{
+	margin-top:77px;
+	float:right;
+	margin-bottom:30px;
+}
+.clum1_left ul li{
+	margin-left:15px;
+	padding:5px 0;
+}
+.clum_full{
+	width:48%;
+	margin-bottom:30px;
+	margin-top:30px;
+}
+.clum_full ul li{
+	padding:20px 0 20px 65px;
+	margin:5px 0;
+}
+.clum_full ul li a{
+	color:#3563c1;
+	}
+
+.text_center img{
+	margin-left:178px;
+}
+.aline{
+	margin-left:250px;
+}
+.logo1{background:url(../images/logo1.png) no-repeat left top;}
+.logo2{background:url(../images/logo2.png) no-repeat left top;}
+.logo3{background:url(../images/logo3.png) no-repeat left top;}
+.logo4{background:url(../images/logo4.png) no-repeat left top;}
+.logo5{background:url(../images/logo5.png) no-repeat left top;}
+.logo6{background:url(../images/logo6.png) no-repeat left top;}
+.logo7{background:url(../images/logo7.png) no-repeat left top;}
+.logo8{background:url(../images/logo8.png) no-repeat left top;}
+.bgtop{background:url(../images/bg.jpg) no-repeat center top;}

@@ -1,0 +1,27 @@
+@charset "utf-8";
+/*********************************************** Reset Style ***********************************************/
+*{margin:0; padding:0;}
+body, html, div, blockquote, img, label, p,
+h1, h2, h3, h4, h5, h6, pre, ul,  ol, li, dl, dt,
+dd, form, select, a, fieldset, input, th, td {
+    margin:0; padding:0; border:0; outline:none;
+}
+ol, ul {list-style:none;}
+a {text-decoration:none;}
+a, img {border:none;}
+img {vertical-align:center;}
+fieldset {border: none;}
+.clear {clear:both;}
+.floatleft {float:left;}
+.floatright {float:right;}
+.aligncenter {text-align:center;}
+a{
+	color:#ff7e00;
+}
+a:hover {color:#fff;}
+body{
+    font-size:16px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#333;  
+	background:url(../images/tuvan/bg_main.jpg) no-repeat center top #3563c1; 
+}

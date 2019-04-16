@@ -1,0 +1,59 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!-- 1. Chờ tiếp nhận, 2. Yêu cầu bổ sung, THAO_TAC_BAN_KHAI_CHAP_NHAN_TU_CHOI = 2 -->
+<div v-if="(detail.requestState === 11 || detail.requestState === 27) && detailThanhPhan.state === -1">
+	<v-tabs v-model="activeTab" @input="changeTabs"  :scrollable="false" v-if="detailThanhPhan.messageType == 31">
+		<v-tabs-bar dark class="grey-opencps-panel grey-opencps-panel-group-button">
+			<v-tabs-slider color="primary"></v-tabs-slider>
+			<v-tabs-item :key="1" href="#tabthanhphan1" >
+				Tiếp nhận bản khai
+			</v-tabs-item>
+			<v-tabs-item :key="2" href="#tabthanhphan2" >
+				Bổ sung bản khai
+			</v-tabs-item>
+		</v-tabs-bar>
+		<v-tabs-items>
+			<v-tabs-content id="tabthanhphan1" reverse-transition="slide-y-transition" transition="slide-y-transition">
+				<v-card flat>
+					<v-card-text>
+							Bạn có muốn tiếp tục xử lý?
+							<v-card-actions>
+								<v-btn color="primary" v-on:click.native="callActionKeHoachAllInOneURL(detail, detailThanhPhan.messageType, -1, 4, true, 1, false)"
+									:loading="loading_process_btn"
+									:disabled="loading_process_btn"
+								>
+									Xác nhận
+									<span slot="loader">Loading...</span>
+								</v-btn>
+							</v-card-actions>
+					</v-card-text>
+				</v-card>
+			</v-tabs-content>
+			<v-tabs-content id="tabthanhphan2" reverse-transition="slide-y-transition" transition="slide-y-transition">
+				<v-card flat>
+					<v-card-text>
+						<v-form v-model="valid" :ref="activeTab">
+							Nhập lý do <span class="red--text text--darken-3">*</span>:
+							<v-text-field
+								v-model="ykienReject"
+								textarea
+								:rules="[v => !!v || 'lý do bắt buộc phải nhập']"
+								required
+							></v-text-field> 
+							<v-card-actions>
+								<v-btn color="primary" v-on:click.native="callActionKeHoachAllInOneURL(detail, detailThanhPhan.messageType, -1, 5, true, 1, true)"
+									:loading="loading_process_btn"
+									:disabled="loading_process_btn"
+									:disabled="!valid"
+								>
+									Xác nhận
+									<span slot="loader">Loading...</span>
+								</v-btn>
+							</v-card-actions>
+						</v-form>
+					</v-card-text>
+				</v-card>
+			</v-tabs-content>
+		</v-tabs-items>
+	</v-tabs>
+</div>

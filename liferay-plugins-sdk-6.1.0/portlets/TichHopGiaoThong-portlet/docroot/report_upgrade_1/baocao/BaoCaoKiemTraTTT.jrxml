@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BaoCaoKiemTraTTT" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="39f5521f-a06e-4828-87ef-b150738d9423">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="16"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MINISTRY_NAME" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="allResultCertificate" class="java.util.List">
+		<fieldDescription><![CDATA[allResultCertificate]]></fieldDescription>
+	</field>
+	<field name="allTemDocument" class="java.util.List">
+		<fieldDescription><![CDATA[allTemDocument]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="createDate" class="java.lang.String">
+		<fieldDescription><![CDATA[createDate]]></fieldDescription>
+	</field>
+	<field name="hasData" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[hasData]]></fieldDescription>
+	</field>
+	<field name="maritimeName" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeName]]></fieldDescription>
+	</field>
+	<field name="maritimeNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeNameVN]]></fieldDescription>
+	</field>
+	<field name="ministryNameVN" class="java.lang.String">
+		<fieldDescription><![CDATA[ministryNameVN]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement x="216" y="39" width="339" height="51" uuid="821f7076-b2f3-4678-a8cf-9c67878377d9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam
+Independence - Freedom - Happiness
+_________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="555" height="43" uuid="19d9c6f3-80dc-4e86-8220-ae725294aa2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[BÁO CÁO KIỂM TRA THÔNG TIN TÀU
+REPORT OF SHIP CERTIFICATE REVIEW]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="339" height="39" uuid="1113830e-654d-4232-8eb0-97dc23c01c69"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="216" height="19" uuid="4f82a669-9ab1-49b0-8d54-8fd121747db7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỤC HÀNG HẢI VIỆT NAM ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="19" width="216" height="20" uuid="567538ef-198b-4fad-9099-43b8812d3e89"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vietnam Maritime Administration]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="39" width="216" height="20" uuid="7858daeb-0140-40b7-81a8-d68f41a409dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{maritimeNameVN} == null) ? "Cảng vụ hàng hải........." : $F{maritimeNameVN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="59" width="216" height="20" uuid="312ab2f6-1f6b-4a9d-b1d7-a119fee16f7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{maritimeName} == null) ? "The Maritime Administration of......." : $F{maritimeName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="3e41e8de-a433-4862-a0b4-0da8b5d1f028"/>
+				<subreportParameter name="MINISTRY_NAME">
+					<subreportParameterExpression><![CDATA[$P{MINISTRY_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{allTemDocument})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BaoCaoKiemTraTTT_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="555" height="20" uuid="7e21a3cb-87e9-4620-99d6-7686b855dd7e"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{allResultCertificate})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BaoCaoKiemTraTTT_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="133">
+			<textField>
+				<reportElement x="216" y="36" width="301" height="18" uuid="d96f4042-8f72-4d0b-b7be-b4e176f38dc4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày …… tháng ……. năm 20……"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="216" y="54" width="301" height="24" uuid="b587074a-6209-4f1f-af47-cb82a26bf7b7"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Date..............................
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="78" width="301" height="24" uuid="450da9b8-ab2e-41fa-8b96-aee0a75493b6"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[		 GIÁM ĐỐC]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

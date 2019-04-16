@@ -1,0 +1,97 @@
+/* -----------header------------*/
+#bgheader{
+		background:url(../images/bg_header.gif) repeat left top;
+		height: 84px;
+	
+}
+#header{
+	width:1000px;
+	margin:auto;
+	position:relative;
+	height:119px;
+}
+.logo{
+	position:absolute;
+	left:35px;
+	top:10px;
+	background:url(../images/logo.png) no-repeat left top;
+	height:69px;
+	width:69px;
+	text-indent:-9999px;
+}
+.slogan{
+	position:absolute;
+	top:20px;
+	left:132px;
+	width:604px;
+	height:59px;
+	text-indent:-9999px;
+	background:url(../images/slogan.png) no-repeat left top;
+}
+#menu{
+	position:absolute;
+	bottom:0;
+}
+#menu ul{
+}
+#menu ul li{
+	float:left;
+	border-left:solid 1px #c0c0c0;
+}
+#menu ul li a{
+	padding:0 20px;
+	font-size:16px;
+	color:#000;
+	text-transform:uppercase;
+	line-height:34px;
+}
+#menu ul li a:hover{
+	color:#3666c3;
+}
+.active{
+	background:#F90;
+	
+}
+
+/*---------footer-------------*/
+#footer{
+	background:#3563c1;
+	width: 100%;
+}
+.fleft{
+	width:1000px;
+	margin:auto;
+	overflow:hidden;
+	padding:10px 0;
+}
+.boxlink_f{
+	float:left;
+	
+}
+
+.box_f{
+	overflow:hidden;
+	float:right;
+}
+.box_f p, .menu_footer p{
+	font-size:12px;
+	text-align: left;
+	color:#bad1ff;
+	line-height:16px;
+}
+.boxlink_f p{
+	text-align:left;
+	padding:5px 0 5px 10px;
+	color:#c3e2e3;
+}
+.box_f img{
+	float:left;
+	margin:0 10px;
+}
+
+.portlet-column-content.portlet-column-content-only {
+	padding-top: 0;
+}
+input[type="submit"], input[type="button"], input[type="reset"], button {
+	text-shadow: inherit;
+}

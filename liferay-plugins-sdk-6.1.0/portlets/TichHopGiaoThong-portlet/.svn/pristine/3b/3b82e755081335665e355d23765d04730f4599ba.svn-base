@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KeHoachDieuDongReport" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ce0f02a-b02a-44aa-8296-7ff5e99079eb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\baocao\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="allNoticeShipMessagesArival" class="java.util.List">
+		<fieldDescription><![CDATA[allNoticeShipMessagesArival]]></fieldDescription>
+	</field>
+	<field name="allNoticeShipMessagesLeave" class="java.util.List">
+		<fieldDescription><![CDATA[allNoticeShipMessagesLeave]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="createDate" class="java.lang.String">
+		<fieldDescription><![CDATA[createDate]]></fieldDescription>
+	</field>
+	<field name="createTime" class="java.lang.String">
+		<fieldDescription><![CDATA[createTime]]></fieldDescription>
+	</field>
+	<field name="maritimeName" class="java.lang.String">
+		<fieldDescription><![CDATA[maritimeName]]></fieldDescription>
+	</field>
+	<field name="reportCode" class="java.lang.Integer">
+		<fieldDescription><![CDATA[reportCode]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="29" width="216" height="20" uuid="94c7aef4-dfbd-42d4-a03f-3b8aedb8169b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{maritimeName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="9" width="216" height="20" uuid="63e50635-0d6f-4e8f-b11f-708a624324f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cục Hàng Hải Việt Nam]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="802" height="20" uuid="417ac59d-8840-4522-8a9f-5ccd85e8d5c4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ngày " + $F{createDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="802" height="20" uuid="3303b432-e654-4560-a7ab-68ab8e90ac49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[vn.gt.utils.GetNameFunction.getReportName($F{reportCode})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="36" uuid="56124f0d-e43c-4c87-97f5-4252172726c0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{allNoticeShipMessagesArival})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KeHoachDieuDongReport_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="36">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="36" uuid="04684e77-eb4b-4d67-ac23-1315037eec9f"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{allNoticeShipMessagesLeave})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "KeHoachDieuDongReport_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="178" splitType="Stretch">
+			<textField>
+				<reportElement x="79" y="63" width="235" height="20" uuid="3091451b-eb8d-4ed8-afed-f967a985e53c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kế hoạch lập lúc " + $F{createTime} + " ngày " + $F{createDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="576" y="83" width="139" height="20" uuid="b2cef3e2-3622-47a4-8bbc-b00223360a91"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Trực ban kế hoạch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="103" width="139" height="20" uuid="1ea79c53-342c-402a-abc7-d3bdcf6bae97"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Duyệt kế hoạch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="24" width="773" height="20" uuid="35b4e619-512a-4e4f-85fe-b864ae079d9b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Ghi chú:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

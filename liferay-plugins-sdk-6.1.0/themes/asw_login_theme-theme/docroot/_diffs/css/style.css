@@ -1,0 +1,191 @@
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.donvi img{
+	margin:0 5px !important;
+}
+} /* hacked cho chrome và safari */
+
+/* -----------header------------*/
+#bgheader{
+		background:url(../images/tuvan/Logo_png.png) no-repeat center 5px;
+		height:195px;
+		width:1000px;
+		margin:auto;
+		position:relative;
+}
+#bgheader ul{
+	position:absolute;
+	bottom:0;
+	left:213px;
+}
+#bgheader ul li{
+	float:left;
+}
+#bgheader ul li a{
+	text-transform:uppercase;
+	color:#fff200;
+	padding:6px 16px;
+	text-shadow:0px 0px 2px #000;
+}
+#bgheader ul li a:hover{
+	border:solid 1px #FFF;
+	border-radius:5px;
+	background:url(../images/tuvan/bg_li.png) repeat;
+}
+
+
+
+
+
+/*------main--------*/
+#main{
+	margin:auto;
+	width:1010px;
+}
+.formlogin{
+	width:329px;
+	padding:9px;
+	margin:35px auto;
+	text-align:center;
+	
+}
+.user {
+    background: url("../images/tuvan/user.png") no-repeat scroll left top #9ab1e0;
+}
+.pass {
+    background: url("../images/tuvan/pass.png") no-repeat scroll left top #9ab1e0;
+}
+.user, .pass {
+    border: 1px solid #eaeaea;
+    color: #4c4c4c;
+    height: 28px;
+    margin-bottom: 10px;
+    padding-left: 45px;
+    width: 280px;
+	border-radius:5px;
+}
+.dangnhap{
+	border-radius:5px;
+	padding:8px 20px;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color:#1b469d;
+	cursor:pointer;
+	background: #feffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #feffff 0%, #d2ebf9 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(100%,#d2ebf9)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #feffff 0%,#d2ebf9 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #feffff 0%,#d2ebf9 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #feffff 0%,#d2ebf9 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #feffff 0%,#d2ebf9 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+
+
+	
+}
+.dangky, .nho_mk{
+	font-size:12px;
+	color:#d1d1d1;
+}
+.dangky{
+	float:left;
+}
+.nho_mk{
+	float:right;
+}
+.formlogin p{
+	overflow:hidden;
+	margin-bottom:15px;
+}
+
+.donvi{
+	text-align:center;
+	padding-top:5px;
+}
+.donvi img{
+	margin:0 7px;
+}
+
+/*---------footer-------------*/
+#footer{
+	background:url("../images/tuvan/Footer_BG.png") repeat scroll left top #3563c1;
+	border-top:1px solid #5d82ce;
+	position:fixed;
+	bottom:0;
+	width:100%;
+	text-align:center;
+	color:#FFF;
+	padding:5px;
+}
+#footer p{
+	font-size:12px;
+}
+
+
+
+body .formlogin {
+    width: 329px;
+    text-align: center;
+    background-color: rgba(255,255,255,0.7);
+    padding: 32px;
+    border-radius: 12px;
+}
+
+body .portlet-login .formlogin > p,
+body .portlet-login .formlogin > br {
+    display: none;
+}
+
+body .portlet-login .formlogin .dangnhap {
+    border: 0;
+    color: #fff;
+    text-shadow: none;
+    background: #3562c1 !IMPORTANT;
+    border-radius: 0;
+    padding: 11px;
+    width: 100%;
+    font-weight: normal;
+}
+body .portlet-login .formlogin .user{
+    background: url(/html/portlet/login/images/user.png) left top no-repeat scroll rgba(84, 81, 81, 0.7) !important;
+}
+body .portlet-login .formlogin .pass{
+    background: url(/html/portlet/login/images/pass.png) left top no-repeat scroll rgba(84, 81, 81, 0.7) !important;
+}
+body .portlet-login .formlogin .user,
+body .portlet-login .formlogin .pass {
+    border-radius: 0;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: whitesmoke;
+    font-style: italic;
+    font-size: 13px;
+}
+body {
+    background: url(../images/tuvan/BG_Full.png) no-repeat center top #3563c1 !important;
+        padding-top: 25px;
+}
+
+
+
+.header_nav_custom {
+        background: url(/asw_login_theme-theme/images/tuvan/Menu_bar.png) no-repeat center 5px;
+    height: 36px;
+}
+
+.header_nav_custom ul {
+    list-style-type: none;
+    text-align: center;
+}
+.header_nav_custom ul li {
+    display: inline-block;
+    line-height: 43px;
+    font-size: 16px;
+    padding: 0 15px;
+    text-transform: uppercase;
+}
+.header_nav_custom ul li a {
+        color: #fff200;
+        text-shadow: 0 0 2px #000;
+}

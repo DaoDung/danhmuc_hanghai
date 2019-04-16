@@ -1,0 +1,8 @@
+INDEX VERSION 1.127+/home/hoanganh/Downloads/Telegram Desktop/Archive/liferay-plugins-sdk-6.1.0-ce-b4-20111118/.metadata/.plugins/org.eclipse.jdt.core
+1749345369.index
+3505027530.index
+1605249638.index
+491757522.index
+3286863387.index
+1331692293.index
+370302835.index

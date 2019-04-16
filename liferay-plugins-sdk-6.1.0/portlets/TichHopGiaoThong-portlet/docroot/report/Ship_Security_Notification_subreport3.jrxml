@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ship_Security_Notification_subreport3" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3e765f85-ccbc-4e97-9013-8af3827743fe">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="138"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="additionalSecurityDetail" class="java.lang.String">
+		<fieldDescription><![CDATA[additionalSecurityDetail]]></fieldDescription>
+	</field>
+	<field name="arrivalDate" class="java.util.Date">
+		<fieldDescription><![CDATA[arrivalDate]]></fieldDescription>
+	</field>
+	<field name="cachedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[cachedModel]]></fieldDescription>
+	</field>
+	<field name="crewNumber" class="java.lang.Long">
+		<fieldDescription><![CDATA[crewNumber]]></fieldDescription>
+	</field>
+	<field name="dateOfExpiryISSC" class="java.util.Date">
+		<fieldDescription><![CDATA[dateOfExpiryISSC]]></fieldDescription>
+	</field>
+	<field name="dateOfISSC" class="java.util.Date">
+		<fieldDescription><![CDATA[dateOfISSC]]></fieldDescription>
+	</field>
+	<field name="documentName" class="java.lang.Long">
+		<fieldDescription><![CDATA[documentName]]></fieldDescription>
+	</field>
+	<field name="documentYear" class="java.lang.Integer">
+		<fieldDescription><![CDATA[documentYear]]></fieldDescription>
+	</field>
+	<field name="escapedModel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[escapedModel]]></fieldDescription>
+	</field>
+	<field name="expandoBridge" class="com.liferay.portlet.expando.model.ExpandoBridge">
+		<fieldDescription><![CDATA[expandoBridge]]></fieldDescription>
+	</field>
+	<field name="grt" class="java.lang.Double">
+		<fieldDescription><![CDATA[grt]]></fieldDescription>
+	</field>
+	<field name="hasShipSecurityPortItems" class="java.lang.Integer">
+		<fieldDescription><![CDATA[hasShipSecurityPortItems]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="imo" class="java.lang.String">
+		<fieldDescription><![CDATA[imo]]></fieldDescription>
+	</field>
+	<field name="isAdditionalSecurityMeasures" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isAdditionalSecurityMeasures]]></fieldDescription>
+	</field>
+	<field name="isInternationalShipSecurity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isInternationalShipSecurity]]></fieldDescription>
+	</field>
+	<field name="isMaintainSecurity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[isMaintainSecurity]]></fieldDescription>
+	</field>
+	<field name="latitude" class="java.lang.String">
+		<fieldDescription><![CDATA[latitude]]></fieldDescription>
+	</field>
+	<field name="longitude" class="java.lang.String">
+		<fieldDescription><![CDATA[longitude]]></fieldDescription>
+	</field>
+	<field name="maintainSecurityDetail" class="java.lang.String">
+		<fieldDescription><![CDATA[maintainSecurityDetail]]></fieldDescription>
+	</field>
+	<field name="masterSigned" class="java.lang.Integer">
+		<fieldDescription><![CDATA[masterSigned]]></fieldDescription>
+	</field>
+	<field name="masterSignedImage" class="java.lang.Integer">
+		<fieldDescription><![CDATA[masterSignedImage]]></fieldDescription>
+	</field>
+	<field name="nameOfISSC" class="java.lang.String">
+		<fieldDescription><![CDATA[nameOfISSC]]></fieldDescription>
+	</field>
+	<field name="nameOfShipAgent" class="java.lang.String">
+		<fieldDescription><![CDATA[nameOfShipAgent]]></fieldDescription>
+	</field>
+	<field name="new" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[new]]></fieldDescription>
+	</field>
+	<field name="portRegionCode" class="java.lang.String">
+		<fieldDescription><![CDATA[portRegionCode]]></fieldDescription>
+	</field>
+	<field name="portWharfCode" class="java.lang.String">
+		<fieldDescription><![CDATA[portWharfCode]]></fieldDescription>
+	</field>
+	<field name="primaryKey" class="java.lang.Long">
+		<fieldDescription><![CDATA[primaryKey]]></fieldDescription>
+	</field>
+	<field name="primaryKeyObj" class="java.io.Serializable">
+		<fieldDescription><![CDATA[primaryKeyObj]]></fieldDescription>
+	</field>
+	<field name="purposeCode" class="java.lang.String">
+		<fieldDescription><![CDATA[purposeCode]]></fieldDescription>
+	</field>
+	<field name="purposeSpecified" class="java.lang.String">
+		<fieldDescription><![CDATA[purposeSpecified]]></fieldDescription>
+	</field>
+	<field name="requestCode" class="java.lang.String">
+		<fieldDescription><![CDATA[requestCode]]></fieldDescription>
+	</field>
+	<field name="requestState" class="java.lang.Integer">
+		<fieldDescription><![CDATA[requestState]]></fieldDescription>
+	</field>
+	<field name="securityFromDate" class="java.util.Date">
+		<fieldDescription><![CDATA[securityFromDate]]></fieldDescription>
+	</field>
+	<field name="securityLevelCode" class="java.lang.String">
+		<fieldDescription><![CDATA[securityLevelCode]]></fieldDescription>
+	</field>
+	<field name="shipAgencyCode" class="java.lang.String">
+		<fieldDescription><![CDATA[shipAgencyCode]]></fieldDescription>
+	</field>
+	<field name="shipAgencyFax" class="java.lang.String">
+		<fieldDescription><![CDATA[shipAgencyFax]]></fieldDescription>
+	</field>
+	<field name="shipAgencyPhone" class="java.lang.String">
+		<fieldDescription><![CDATA[shipAgencyPhone]]></fieldDescription>
+	</field>
+	<field name="shipCaptain" class="java.lang.String">
+		<fieldDescription><![CDATA[shipCaptain]]></fieldDescription>
+	</field>
+	<field name="shipName" class="java.lang.String">
+		<fieldDescription><![CDATA[shipName]]></fieldDescription>
+	</field>
+	<field name="shipSecurityCode" class="java.lang.String">
+		<fieldDescription><![CDATA[shipSecurityCode]]></fieldDescription>
+	</field>
+	<field name="shipTypeCode" class="java.lang.String">
+		<fieldDescription><![CDATA[shipTypeCode]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.util.Date">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<field name="signPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[signPlace]]></fieldDescription>
+	</field>
+	<field name="stateCode" class="java.lang.String">
+		<fieldDescription><![CDATA[stateCode]]></fieldDescription>
+	</field>
+	<field name="unitGRT" class="java.lang.String">
+		<fieldDescription><![CDATA[unitGRT]]></fieldDescription>
+	</field>
+	<field name="userCreated" class="java.lang.String">
+		<fieldDescription><![CDATA[userCreated]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="446" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="49" width="555" height="30" uuid="6c3c4004-9164-45b0-a6da-8f3bbebe9740"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Were there any special or additional security measures taken during any ship/port interface at the ports mentioned in Q17?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="49" uuid="d51bdfdd-e286-4a16-9040-d6ab08af7c30"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2" rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[18. Trong thời gian thực hiện bất kỳ giao tiếp giữa tàu biển và cảng biển được đề cập tại câu hỏi 17 trên đây,tàu biển có áp dụng biện pháp an ninh đặc biệt hoặc biện pháp an ninh bổ sung nào không?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="555" height="17" uuid="d9efc2dc-b47d-453c-8db1-06dc1295789a"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Yes / No (Delete as appropriate)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="555" height="17" uuid="071b9d82-7b66-4dee-9e72-ed9e36cecadf"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nếu câu trả lời là “Có” thì nêu chi tiết:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="555" height="17" uuid="36a89955-86dd-4999-be1b-6d75248d1999"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[If answer is “Yes”, give detail:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="222" height="17" uuid="96561313-6faa-4b1b-b5f3-4ac2f77fc0b0"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Có / Không (gạch bỏ từ thích hợp) ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="147" width="555" height="17" uuid="b3fe0afd-e04e-4cad-abee-20025906ff93"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="false" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>"+$F{additionalSecurityDetail}+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="164" width="555" height="46" uuid="3f2d58de-fe0e-4c41-8703-07ca1fadbe47"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2" rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[19. Trong thời gian thực hiện bất kỳ giao tiếp giữa tàu biển và tàu biển được đề cập tại câu hỏi 17 trên đây, tàu biển có duy trì biện pháp an ninh thích hợp không?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="210" width="555" height="30" uuid="dbb6af28-0a24-4a29-b45b-f786d946e4e1"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Were there appropriate ship security measures maintained during any ship-to-ship activity interface at the ports mentioned in Q17 ?]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="308" width="555" height="34" isPrintWhenDetailOverflows="true" uuid="6d8680b7-0742-491c-be95-6f07da6f90c7"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{maintainSecurityDetail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="240" width="205" height="17" uuid="350d5b9c-eb8c-426a-9f61-2dd8645e6100"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Có/Không (gạch bỏ từ thích hợp) ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="257" width="555" height="17" uuid="6aa50634-69e1-4c73-ba24-b6f2636dba2e"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Yes/No (Delete as appropriate)"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="274" width="555" height="17" uuid="4d28cb87-e2af-453d-bb0d-28f5ad660d64"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nếu câu trả lời là “Có” thì nêu chi tiết:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="359" width="438" height="17" uuid="9bc6db46-0e89-47fa-b6e1-8485263e6a5e"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ Signature of Master/Shipowner/Agent]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="342" width="438" height="17" uuid="0b465577-e44c-47b8-8bb8-808ba8b5e1c6"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Chữ ký của Thuyền trưởng/Chủ tàu/Đại lý tàu:<b>" + (($F{masterSigned} == 0) ? "Thuyền trưởng ký" : (($F{masterSigned} == 1) ? "Đại lý kí" : "Chủ tàu kí"))+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="393" width="438" height="17" uuid="484ed072-4adc-4a0a-94f4-d446cc918c39"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Name of master/Shipowner/Agent]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="376" width="438" height="17" uuid="0d1d0716-a667-4307-8ca4-ca0e87eb17f2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Họ tên của Thuyền trưởng/Chủ tàu/Đại lý tàu:<b>" + (($F{masterSigned} == 0) ? (($F{shipCaptain} == null) ? "" : $F{shipCaptain}) : (($F{masterSigned} == 1) ? (($F{nameOfShipAgent} == null) ? "" : $F{nameOfShipAgent}) : ""))+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="342" width="117" height="68" uuid="af10d25b-563e-42ef-a718-795d758c0eb5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="410" width="311" height="17" uuid="9e900199-b86d-4778-b83f-e51acb434607"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" Vị trí hiện tại: Vĩ độ :<b> " + $F{latitude} +"</b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="410" width="244" height="17" uuid="e4a87ded-0ec1-499e-b3d9-0bba9ef58a1e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kinh độ :<b>"+ $F{longitude} + "</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="427" width="311" height="17" uuid="a027e88d-a3c6-4858-8d38-1c74e1623bb2"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Present position: Latitude]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="427" width="244" height="17" uuid="5fc67110-abef-454c-93e0-30717603baf9"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Longitude]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="291" width="555" height="17" uuid="dbb64ec1-0eff-4f54-9766-938405657eee"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[If answer is “Yes”, give detail:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="222" y="79" width="333" height="17" uuid="9015aad7-05bd-4edb-8cf7-bebf15777f9d"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Bottom" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{isAdditionalSecurityMeasures} == 1) ? "CÓ" : "KHÔNG")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="240" width="350" height="17" uuid="226d0661-5999-476e-ba62-f382488a12b0"/>
+				<box>
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Bottom" markup="html">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfEncoding="Cp1258" isPdfEmbedded="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{isMaintainSecurity} == 1) ? "CÓ" : "KHÔNG")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Dangerous_Goods_Manifest" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8cbf7dc4-3597-4047-bfb0-b6f0bf3a61e3">
+	<property name="ireport.zoom" value="1.2100000000000004"/>
+	<property name="ireport.x" value="301"/>
+	<property name="ireport.y" value="35"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="tempDangerousGoodsNanifestsTop" class="java.util.List">
+		<fieldDescription><![CDATA[tempDangerousGoodsNanifestsTop]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="tempDangerousGoodsItemses" class="java.util.List">
+		<fieldDescription><![CDATA[tempDangerousGoodsItemses]]></fieldDescription>
+	</field>
+	<field name="additionalRemark" class="java.lang.String">
+		<fieldDescription><![CDATA[additionalRemark]]></fieldDescription>
+	</field>
+	<field name="masterSigned" class="java.lang.Integer">
+		<fieldDescription><![CDATA[masterSigned]]></fieldDescription>
+	</field>
+	<field name="signPlace" class="java.lang.String">
+		<fieldDescription><![CDATA[signPlace]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.lang.String">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="22" uuid="28ba06be-3767-4615-b250-dc51021d05f1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="802" height="21" uuid="c7116d44-01f4-4a22-919e-f4fed5e40f8d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="802" height="18" uuid="50307b69-6d94-40d9-b3a5-a2862313766b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="62" width="802" height="18" uuid="a7abccd8-d369-4aad-95a8-2e941d738d42"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<line>
+				<reportElement x="287" y="80" width="229" height="1" uuid="527c4f67-951f-4fc2-b9e9-f66a85872333"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="90" width="802" height="18" uuid="77311cc5-5bdb-434f-9ee6-fe8a93622f6b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BẢN KHAI HÀNG HÓA NGUY HIỂM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="802" height="15" uuid="9cd305f8-76fb-4572-aee4-4313a7fb9d85"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="13" isBold="true" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[DANGEROUS GOODS MANIFEST]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="20" uuid="d41dd3f9-4d45-4994-a0b9-a111455e88d7">
+					<property name="net.sf.jasperreports.export.pdf.tag.td" value="full"/>
+					<property name="net.sf.jasperreports.export.pdf.tag.tr" value="full"/>
+					<property name="net.sf.jasperreports.export.pdf.tag.th" value="full"/>
+					<property name="net.sf.jasperreports.export.pdf.tag.table" value="full"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempDangerousGoodsNanifestsTop})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Dangerous_Goods_Manifest_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="20" uuid="746e5e36-7d9a-4844-bf37-7680005ee2ba"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempDangerousGoodsItemses})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Dangerous_Goods_Manifest_subreport_Dangerous_Goods_Item.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="109">
+			<staticText>
+				<reportElement x="0" y="17" width="802" height="19" uuid="87958b3e-e862-43f8-893e-620e9f88a336"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<text><![CDATA[Additional Information]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" isPrintWhenDetailOverflows="true" uuid="d782150f-6c53-4851-96c6-641d9aed4c97"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Thông tin bổ sung: " + (($F{additionalRemark} == null) ? "" : $F{additionalRemark})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="58" width="442" height="15" uuid="e5b7d26e-070f-4e88-8ca1-73130eb77f54"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph leftIndent="4" rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[Date................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="88" width="442" height="15" uuid="c5de42cf-51b3-4a1d-be23-8989c9ec1d2a"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph leftIndent="4" rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[Master (Authorized agent or officer)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="73" width="442" height="17" uuid="67ce033f-5249-415d-8905-5ff88cb7f148"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="4" rightIndent="4"/>
+				</textElement>
+				<text><![CDATA[Thuyền trưởng (Đại lý hoặc sỹ quan được ủy quyền)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="36" width="442" height="22" uuid="1b3536cd-86f3-4c5f-8590-8f2e3949e7df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Times New Roman" size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{signPlace} == null) ? ".........." : $F{signPlace}) + ", " +
+(($F{signDate} == null) ? "ngày …… tháng … năm 20 …" : $F{signDate})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

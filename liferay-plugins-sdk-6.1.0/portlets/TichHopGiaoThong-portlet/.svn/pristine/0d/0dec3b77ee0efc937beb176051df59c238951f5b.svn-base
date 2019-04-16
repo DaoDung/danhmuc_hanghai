@@ -1,0 +1,747 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package vn.gt.dao.noticeandmessage.service.persistence;
+
+import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
+import vn.gt.dao.noticeandmessage.NoSuchViewHoanThanhThuTucException;
+import vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc;
+import vn.gt.dao.noticeandmessage.model.impl.ViewHoanThanhThuTucImpl;
+import vn.gt.dao.noticeandmessage.model.impl.ViewHoanThanhThuTucModelImpl;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * The persistence implementation for the view hoan thanh thu tuc service.
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author win_64
+ * @see ViewHoanThanhThuTucPersistence
+ * @see ViewHoanThanhThuTucUtil
+ * @generated
+ */
+public class ViewHoanThanhThuTucPersistenceImpl extends BasePersistenceImpl<ViewHoanThanhThuTuc>
+	implements ViewHoanThanhThuTucPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link ViewHoanThanhThuTucUtil} to access the view hoan thanh thu tuc persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+	public static final String FINDER_CLASS_NAME_ENTITY = ViewHoanThanhThuTucImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List1";
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List2";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucModelImpl.FINDER_CACHE_ENABLED,
+			ViewHoanThanhThuTucImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucModelImpl.FINDER_CACHE_ENABLED,
+			ViewHoanThanhThuTucImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+
+	/**
+	 * Caches the view hoan thanh thu tuc in the entity cache if it is enabled.
+	 *
+	 * @param viewHoanThanhThuTuc the view hoan thanh thu tuc
+	 */
+	public void cacheResult(ViewHoanThanhThuTuc viewHoanThanhThuTuc) {
+		EntityCacheUtil.putResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucImpl.class, viewHoanThanhThuTuc.getPrimaryKey(),
+			viewHoanThanhThuTuc);
+
+		viewHoanThanhThuTuc.resetOriginalValues();
+	}
+
+	/**
+	 * Caches the view hoan thanh thu tucs in the entity cache if it is enabled.
+	 *
+	 * @param viewHoanThanhThuTucs the view hoan thanh thu tucs
+	 */
+	public void cacheResult(List<ViewHoanThanhThuTuc> viewHoanThanhThuTucs) {
+		for (ViewHoanThanhThuTuc viewHoanThanhThuTuc : viewHoanThanhThuTucs) {
+			if (EntityCacheUtil.getResult(
+						ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+						ViewHoanThanhThuTucImpl.class,
+						viewHoanThanhThuTuc.getPrimaryKey()) == null) {
+				cacheResult(viewHoanThanhThuTuc);
+			}
+			else {
+				viewHoanThanhThuTuc.resetOriginalValues();
+			}
+		}
+	}
+
+	/**
+	 * Clears the cache for all view hoan thanh thu tucs.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	@Override
+	public void clearCache() {
+		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ViewHoanThanhThuTucImpl.class.getName());
+		}
+
+		EntityCacheUtil.clearCache(ViewHoanThanhThuTucImpl.class.getName());
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+	}
+
+	/**
+	 * Clears the cache for the view hoan thanh thu tuc.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	@Override
+	public void clearCache(ViewHoanThanhThuTuc viewHoanThanhThuTuc) {
+		EntityCacheUtil.removeResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucImpl.class, viewHoanThanhThuTuc.getPrimaryKey());
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+	}
+
+	@Override
+	public void clearCache(List<ViewHoanThanhThuTuc> viewHoanThanhThuTucs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ViewHoanThanhThuTuc viewHoanThanhThuTuc : viewHoanThanhThuTucs) {
+			EntityCacheUtil.removeResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+				ViewHoanThanhThuTucImpl.class,
+				viewHoanThanhThuTuc.getPrimaryKey());
+		}
+	}
+
+	/**
+	 * Creates a new view hoan thanh thu tuc with the primary key. Does not add the view hoan thanh thu tuc to the database.
+	 *
+	 * @param CVHH the primary key for the new view hoan thanh thu tuc
+	 * @return the new view hoan thanh thu tuc
+	 */
+	public ViewHoanThanhThuTuc create(String CVHH) {
+		ViewHoanThanhThuTuc viewHoanThanhThuTuc = new ViewHoanThanhThuTucImpl();
+
+		viewHoanThanhThuTuc.setNew(true);
+		viewHoanThanhThuTuc.setPrimaryKey(CVHH);
+
+		return viewHoanThanhThuTuc;
+	}
+
+	/**
+	 * Removes the view hoan thanh thu tuc with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param CVHH the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc that was removed
+	 * @throws vn.gt.dao.noticeandmessage.NoSuchViewHoanThanhThuTucException if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ViewHoanThanhThuTuc remove(String CVHH)
+		throws NoSuchViewHoanThanhThuTucException, SystemException {
+		return remove((Serializable)CVHH);
+	}
+
+	/**
+	 * Removes the view hoan thanh thu tuc with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc that was removed
+	 * @throws vn.gt.dao.noticeandmessage.NoSuchViewHoanThanhThuTucException if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ViewHoanThanhThuTuc remove(Serializable primaryKey)
+		throws NoSuchViewHoanThanhThuTucException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ViewHoanThanhThuTuc viewHoanThanhThuTuc = (ViewHoanThanhThuTuc)session.get(ViewHoanThanhThuTucImpl.class,
+					primaryKey);
+
+			if (viewHoanThanhThuTuc == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				}
+
+				throw new NoSuchViewHoanThanhThuTucException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					primaryKey);
+			}
+
+			return remove(viewHoanThanhThuTuc);
+		}
+		catch (NoSuchViewHoanThanhThuTucException nsee) {
+			throw nsee;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	protected ViewHoanThanhThuTuc removeImpl(
+		ViewHoanThanhThuTuc viewHoanThanhThuTuc) throws SystemException {
+		viewHoanThanhThuTuc = toUnwrappedModel(viewHoanThanhThuTuc);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			BatchSessionUtil.delete(session, viewHoanThanhThuTuc);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		clearCache(viewHoanThanhThuTuc);
+
+		return viewHoanThanhThuTuc;
+	}
+
+	@Override
+	public ViewHoanThanhThuTuc updateImpl(
+		vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc viewHoanThanhThuTuc,
+		boolean merge) throws SystemException {
+		viewHoanThanhThuTuc = toUnwrappedModel(viewHoanThanhThuTuc);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			BatchSessionUtil.update(session, viewHoanThanhThuTuc, merge);
+
+			viewHoanThanhThuTuc.setNew(false);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+
+		EntityCacheUtil.putResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+			ViewHoanThanhThuTucImpl.class, viewHoanThanhThuTuc.getPrimaryKey(),
+			viewHoanThanhThuTuc);
+
+		return viewHoanThanhThuTuc;
+	}
+
+	protected ViewHoanThanhThuTuc toUnwrappedModel(
+		ViewHoanThanhThuTuc viewHoanThanhThuTuc) {
+		if (viewHoanThanhThuTuc instanceof ViewHoanThanhThuTucImpl) {
+			return viewHoanThanhThuTuc;
+		}
+
+		ViewHoanThanhThuTucImpl viewHoanThanhThuTucImpl = new ViewHoanThanhThuTucImpl();
+
+		viewHoanThanhThuTucImpl.setNew(viewHoanThanhThuTuc.isNew());
+		viewHoanThanhThuTucImpl.setPrimaryKey(viewHoanThanhThuTuc.getPrimaryKey());
+
+		viewHoanThanhThuTucImpl.setCVHH(viewHoanThanhThuTuc.getCVHH());
+		viewHoanThanhThuTucImpl.setMaritimeOrder(viewHoanThanhThuTuc.getMaritimeOrder());
+		viewHoanThanhThuTucImpl.setNC_KYSO(viewHoanThanhThuTuc.getNC_KYSO());
+		viewHoanThanhThuTucImpl.setXC_KYSO(viewHoanThanhThuTuc.getXC_KYSO());
+		viewHoanThanhThuTucImpl.setQC_KYSO(viewHoanThanhThuTuc.getQC_KYSO());
+		viewHoanThanhThuTucImpl.setVC_KYSO(viewHoanThanhThuTuc.getVC_KYSO());
+		viewHoanThanhThuTucImpl.setRC_KYSO(viewHoanThanhThuTuc.getRC_KYSO());
+		viewHoanThanhThuTucImpl.setCCV_KYSO(viewHoanThanhThuTuc.getCCV_KYSO());
+		viewHoanThanhThuTucImpl.setCCR_KYSO(viewHoanThanhThuTuc.getCCR_KYSO());
+		viewHoanThanhThuTucImpl.setVCDK_KYSO(viewHoanThanhThuTuc.getVCDK_KYSO());
+		viewHoanThanhThuTucImpl.setRCDK_KYSO(viewHoanThanhThuTuc.getRCDK_KYSO());
+		viewHoanThanhThuTucImpl.setNCDK_KYSO(viewHoanThanhThuTuc.getNCDK_KYSO());
+		viewHoanThanhThuTucImpl.setXCDK_KYSO(viewHoanThanhThuTuc.getXCDK_KYSO());
+		viewHoanThanhThuTucImpl.setVCTND_KYSO(viewHoanThanhThuTuc.getVCTND_KYSO());
+		viewHoanThanhThuTucImpl.setRCTND_KYSO(viewHoanThanhThuTuc.getRCTND_KYSO());
+		viewHoanThanhThuTucImpl.setNC_DUYET(viewHoanThanhThuTuc.getNC_DUYET());
+		viewHoanThanhThuTucImpl.setXC_DUYET(viewHoanThanhThuTuc.getXC_DUYET());
+		viewHoanThanhThuTucImpl.setQC_DUYET(viewHoanThanhThuTuc.getQC_DUYET());
+		viewHoanThanhThuTucImpl.setVC_DUYET(viewHoanThanhThuTuc.getVC_DUYET());
+		viewHoanThanhThuTucImpl.setRC_DUYET(viewHoanThanhThuTuc.getRC_DUYET());
+		viewHoanThanhThuTucImpl.setCCV_DUYET(viewHoanThanhThuTuc.getCCV_DUYET());
+		viewHoanThanhThuTucImpl.setCCR_DUYET(viewHoanThanhThuTuc.getCCR_DUYET());
+		viewHoanThanhThuTucImpl.setVCDK_DUYET(viewHoanThanhThuTuc.getVCDK_DUYET());
+		viewHoanThanhThuTucImpl.setRCDK_DUYET(viewHoanThanhThuTuc.getRCDK_DUYET());
+		viewHoanThanhThuTucImpl.setNCDK_DUYET(viewHoanThanhThuTuc.getNCDK_DUYET());
+		viewHoanThanhThuTucImpl.setXCDK_DUYET(viewHoanThanhThuTuc.getXCDK_DUYET());
+		viewHoanThanhThuTucImpl.setVCTND_DUYET(viewHoanThanhThuTuc.getVCTND_DUYET());
+		viewHoanThanhThuTucImpl.setRCTND_DUYET(viewHoanThanhThuTuc.getRCTND_DUYET());
+
+		return viewHoanThanhThuTucImpl;
+	}
+
+	/**
+	 * Returns the view hoan thanh thu tuc with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc
+	 * @throws com.liferay.portal.NoSuchModelException if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ViewHoanThanhThuTuc findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey((String)primaryKey);
+	}
+
+	/**
+	 * Returns the view hoan thanh thu tuc with the primary key or throws a {@link vn.gt.dao.noticeandmessage.NoSuchViewHoanThanhThuTucException} if it could not be found.
+	 *
+	 * @param CVHH the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc
+	 * @throws vn.gt.dao.noticeandmessage.NoSuchViewHoanThanhThuTucException if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ViewHoanThanhThuTuc findByPrimaryKey(String CVHH)
+		throws NoSuchViewHoanThanhThuTucException, SystemException {
+		ViewHoanThanhThuTuc viewHoanThanhThuTuc = fetchByPrimaryKey(CVHH);
+
+		if (viewHoanThanhThuTuc == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + CVHH);
+			}
+
+			throw new NoSuchViewHoanThanhThuTucException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				CVHH);
+		}
+
+		return viewHoanThanhThuTuc;
+	}
+
+	/**
+	 * Returns the view hoan thanh thu tuc with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc, or <code>null</code> if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ViewHoanThanhThuTuc fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey((String)primaryKey);
+	}
+
+	/**
+	 * Returns the view hoan thanh thu tuc with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param CVHH the primary key of the view hoan thanh thu tuc
+	 * @return the view hoan thanh thu tuc, or <code>null</code> if a view hoan thanh thu tuc with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ViewHoanThanhThuTuc fetchByPrimaryKey(String CVHH)
+		throws SystemException {
+		ViewHoanThanhThuTuc viewHoanThanhThuTuc = (ViewHoanThanhThuTuc)EntityCacheUtil.getResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+				ViewHoanThanhThuTucImpl.class, CVHH);
+
+		if (viewHoanThanhThuTuc == _nullViewHoanThanhThuTuc) {
+			return null;
+		}
+
+		if (viewHoanThanhThuTuc == null) {
+			Session session = null;
+
+			boolean hasException = false;
+
+			try {
+				session = openSession();
+
+				viewHoanThanhThuTuc = (ViewHoanThanhThuTuc)session.get(ViewHoanThanhThuTucImpl.class,
+						CVHH);
+			}
+			catch (Exception e) {
+				hasException = true;
+
+				throw processException(e);
+			}
+			finally {
+				if (viewHoanThanhThuTuc != null) {
+					cacheResult(viewHoanThanhThuTuc);
+				}
+				else if (!hasException) {
+					EntityCacheUtil.putResult(ViewHoanThanhThuTucModelImpl.ENTITY_CACHE_ENABLED,
+						ViewHoanThanhThuTucImpl.class, CVHH,
+						_nullViewHoanThanhThuTuc);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return viewHoanThanhThuTuc;
+	}
+
+	/**
+	 * Returns all the view hoan thanh thu tucs.
+	 *
+	 * @return the view hoan thanh thu tucs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ViewHoanThanhThuTuc> findAll() throws SystemException {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the view hoan thanh thu tucs.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of view hoan thanh thu tucs
+	 * @param end the upper bound of the range of view hoan thanh thu tucs (not inclusive)
+	 * @return the range of view hoan thanh thu tucs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ViewHoanThanhThuTuc> findAll(int start, int end)
+		throws SystemException {
+		return findAll(start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the view hoan thanh thu tucs.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of view hoan thanh thu tucs
+	 * @param end the upper bound of the range of view hoan thanh thu tucs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of view hoan thanh thu tucs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ViewHoanThanhThuTuc> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = new Object[] { start, end, orderByComparator };
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
+			finderArgs = FINDER_ARGS_EMPTY;
+		}
+		else {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderArgs = new Object[] { start, end, orderByComparator };
+		}
+
+		List<ViewHoanThanhThuTuc> list = (List<ViewHoanThanhThuTuc>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_VIEWHOANTHANHTHUTUC);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_VIEWHOANTHANHTHUTUC.concat(ViewHoanThanhThuTucModelImpl.ORDER_BY_JPQL);
+			}
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				if (orderByComparator == null) {
+					list = (List<ViewHoanThanhThuTuc>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+				}
+				else {
+					list = (List<ViewHoanThanhThuTuc>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Removes all the view hoan thanh thu tucs from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeAll() throws SystemException {
+		for (ViewHoanThanhThuTuc viewHoanThanhThuTuc : findAll()) {
+			remove(viewHoanThanhThuTuc);
+		}
+	}
+
+	/**
+	 * Returns the number of view hoan thanh thu tucs.
+	 *
+	 * @return the number of view hoan thanh thu tucs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countAll() throws SystemException {
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				FINDER_ARGS_EMPTY, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(_SQL_COUNT_VIEWHOANTHANHTHUTUC);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL,
+					FINDER_ARGS_EMPTY, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Initializes the view hoan thanh thu tuc persistence.
+	 */
+	public void afterPropertiesSet() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					com.liferay.util.service.ServiceProps.get(
+						"value.object.listener.vn.gt.dao.noticeandmessage.model.ViewHoanThanhThuTuc")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener<ViewHoanThanhThuTuc>> listenersList = new ArrayList<ModelListener<ViewHoanThanhThuTuc>>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listenersList.add((ModelListener<ViewHoanThanhThuTuc>)InstanceFactory.newInstance(
+							listenerClassName));
+				}
+
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+	}
+
+	public void destroy() {
+		EntityCacheUtil.removeCache(ViewHoanThanhThuTucImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+	}
+
+	@BeanReference(type = HistoryInterfaceRequestPersistence.class)
+	protected HistoryInterfaceRequestPersistence historyInterfaceRequestPersistence;
+	@BeanReference(type = HistoryInterfaceRequestFieldPersistence.class)
+	protected HistoryInterfaceRequestFieldPersistence historyInterfaceRequestFieldPersistence;
+	@BeanReference(type = InterfaceRequestPersistence.class)
+	protected InterfaceRequestPersistence interfaceRequestPersistence;
+	@BeanReference(type = InterfaceRequestFieldPersistence.class)
+	protected InterfaceRequestFieldPersistence interfaceRequestFieldPersistence;
+	@BeanReference(type = IssueAcceptancePersistence.class)
+	protected IssueAcceptancePersistence issueAcceptancePersistence;
+	@BeanReference(type = IssueAcceptanceForTransitPersistence.class)
+	protected IssueAcceptanceForTransitPersistence issueAcceptanceForTransitPersistence;
+	@BeanReference(type = IssuePermissionForTransitPersistence.class)
+	protected IssuePermissionForTransitPersistence issuePermissionForTransitPersistence;
+	@BeanReference(type = IssuePortClearancePersistence.class)
+	protected IssuePortClearancePersistence issuePortClearancePersistence;
+	@BeanReference(type = IssueShiftingOrderPersistence.class)
+	protected IssueShiftingOrderPersistence issueShiftingOrderPersistence;
+	@BeanReference(type = IssueShiftingOrderChanelPersistence.class)
+	protected IssueShiftingOrderChanelPersistence issueShiftingOrderChanelPersistence;
+	@BeanReference(type = ModifyPersistence.class)
+	protected ModifyPersistence modifyPersistence;
+	@BeanReference(type = NoticeShipMessagePersistence.class)
+	protected NoticeShipMessagePersistence noticeShipMessagePersistence;
+	@BeanReference(type = TempAnimalQuarantinePersistence.class)
+	protected TempAnimalQuarantinePersistence tempAnimalQuarantinePersistence;
+	@BeanReference(type = TempAttachmentDeclarationHealthPersistence.class)
+	protected TempAttachmentDeclarationHealthPersistence tempAttachmentDeclarationHealthPersistence;
+	@BeanReference(type = TempCargoDeclarationPersistence.class)
+	protected TempCargoDeclarationPersistence tempCargoDeclarationPersistence;
+	@BeanReference(type = TempCargoItemsPersistence.class)
+	protected TempCargoItemsPersistence tempCargoItemsPersistence;
+	@BeanReference(type = TempCrewDetailsPersistence.class)
+	protected TempCrewDetailsPersistence tempCrewDetailsPersistence;
+	@BeanReference(type = TempCrewEffectsDeclarationPersistence.class)
+	protected TempCrewEffectsDeclarationPersistence tempCrewEffectsDeclarationPersistence;
+	@BeanReference(type = TempCrewEffectsItemsPersistence.class)
+	protected TempCrewEffectsItemsPersistence tempCrewEffectsItemsPersistence;
+	@BeanReference(type = TempCrewListPersistence.class)
+	protected TempCrewListPersistence tempCrewListPersistence;
+	@BeanReference(type = TempDangerousGoodsItemsPersistence.class)
+	protected TempDangerousGoodsItemsPersistence tempDangerousGoodsItemsPersistence;
+	@BeanReference(type = TempDangerousGoodsNanifestPersistence.class)
+	protected TempDangerousGoodsNanifestPersistence tempDangerousGoodsNanifestPersistence;
+	@BeanReference(type = TempDeclarationForAnimalQuarantinePersistence.class)
+	protected TempDeclarationForAnimalQuarantinePersistence tempDeclarationForAnimalQuarantinePersistence;
+	@BeanReference(type = TempDeclarationForPlantQuarantinePersistence.class)
+	protected TempDeclarationForPlantQuarantinePersistence tempDeclarationForPlantQuarantinePersistence;
+	@BeanReference(type = TempDeclarationOfHealthPersistence.class)
+	protected TempDeclarationOfHealthPersistence tempDeclarationOfHealthPersistence;
+	@BeanReference(type = TempDocumentPersistence.class)
+	protected TempDocumentPersistence tempDocumentPersistence;
+	@BeanReference(type = TempGeneralDeclarationPersistence.class)
+	protected TempGeneralDeclarationPersistence tempGeneralDeclarationPersistence;
+	@BeanReference(type = TempGoodsItemsPersistence.class)
+	protected TempGoodsItemsPersistence tempGoodsItemsPersistence;
+	@BeanReference(type = TempHealthCrewPassengerListPersistence.class)
+	protected TempHealthCrewPassengerListPersistence tempHealthCrewPassengerListPersistence;
+	@BeanReference(type = TempHealthQuestionPersistence.class)
+	protected TempHealthQuestionPersistence tempHealthQuestionPersistence;
+	@BeanReference(type = TempMaritimePaymentConfigPersistence.class)
+	protected TempMaritimePaymentConfigPersistence tempMaritimePaymentConfigPersistence;
+	@BeanReference(type = TempNoTiceShipMessagePersistence.class)
+	protected TempNoTiceShipMessagePersistence tempNoTiceShipMessagePersistence;
+	@BeanReference(type = TempPassengerDetailsPersistence.class)
+	protected TempPassengerDetailsPersistence tempPassengerDetailsPersistence;
+	@BeanReference(type = TempPassengerListPersistence.class)
+	protected TempPassengerListPersistence tempPassengerListPersistence;
+	@BeanReference(type = TempPersonListPersistence.class)
+	protected TempPersonListPersistence tempPersonListPersistence;
+	@BeanReference(type = TempPlantQuarantinePersistence.class)
+	protected TempPlantQuarantinePersistence tempPlantQuarantinePersistence;
+	@BeanReference(type = TempShipSecurityMessagePersistence.class)
+	protected TempShipSecurityMessagePersistence tempShipSecurityMessagePersistence;
+	@BeanReference(type = TempShipSecurityPortItemsPersistence.class)
+	protected TempShipSecurityPortItemsPersistence tempShipSecurityPortItemsPersistence;
+	@BeanReference(type = TempShipStoresDeclarationPersistence.class)
+	protected TempShipStoresDeclarationPersistence tempShipStoresDeclarationPersistence;
+	@BeanReference(type = TempShipStoresItemsPersistence.class)
+	protected TempShipStoresItemsPersistence tempShipStoresItemsPersistence;
+	@BeanReference(type = TempUnitGeneralPersistence.class)
+	protected TempUnitGeneralPersistence tempUnitGeneralPersistence;
+	@BeanReference(type = TempWasteListPersistence.class)
+	protected TempWasteListPersistence tempWasteListPersistence;
+	@BeanReference(type = ViewHoanThanhThuTucPersistence.class)
+	protected ViewHoanThanhThuTucPersistence viewHoanThanhThuTucPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	private static final String _SQL_SELECT_VIEWHOANTHANHTHUTUC = "SELECT viewHoanThanhThuTuc FROM ViewHoanThanhThuTuc viewHoanThanhThuTuc";
+	private static final String _SQL_COUNT_VIEWHOANTHANHTHUTUC = "SELECT COUNT(viewHoanThanhThuTuc) FROM ViewHoanThanhThuTuc viewHoanThanhThuTuc";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "viewHoanThanhThuTuc.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ViewHoanThanhThuTuc exists with the primary key ";
+	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
+	private static Log _log = LogFactoryUtil.getLog(ViewHoanThanhThuTucPersistenceImpl.class);
+	private static ViewHoanThanhThuTuc _nullViewHoanThanhThuTuc = new ViewHoanThanhThuTucImpl() {
+			@Override
+			public Object clone() {
+				return this;
+			}
+
+			@Override
+			public CacheModel<ViewHoanThanhThuTuc> toCacheModel() {
+				return _nullViewHoanThanhThuTucCacheModel;
+			}
+		};
+
+	private static CacheModel<ViewHoanThanhThuTuc> _nullViewHoanThanhThuTucCacheModel =
+		new CacheModel<ViewHoanThanhThuTuc>() {
+			public ViewHoanThanhThuTuc toEntityModel() {
+				return _nullViewHoanThanhThuTuc;
+			}
+		};
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+    <title>Hệ thống dịch vụ hành chính công trực tuyến</title>
+
+    $theme.include($top_head_include)
+</head>
+
+<body>
+$theme.include($body_top_include)
+
+    <div id="bgheader">
+        <div id="header">
+            <a class="logo" href="">logo</a>
+            <h1 class="slogan">slogan</h1>
+        </div>
+    </div><!--End #header-->
+            
+            
+    #if ($selectable)
+                     $theme.include($content_include)
+                #else
+                     $portletDisplay.recycle()
+                     $portletDisplay.setTitle($the_title)
+                     $theme.wrapPortlet("portlet.vm", $content_include)
+   #end
+
+    <div id="footer">
+        <div class="fleft">
+            <div class="boxlink_f">
+                <p>
+                    <b>BỘ GIAO THÔNG VẬN TẢI</b>
+                    </br>Bản quyền thuộc về Bộ Giao thông vận tải
+                    </br>80 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội.
+                </p>
+            </div>
+            <div class="box_f">
+                <p>
+                    <b>MINISTRY OF TRANSPORT OF VIETNAM</b>
+                    </br>Copyright by Ministry of Transport of Vietnam
+                    </br>Address : 80 Tran Hung Dao St, Hoan Kiem Dist, Ha Noi, Viet Nam
+                </p>
+            </div>
+        </div>
+    </div><!--End #footer-->
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>

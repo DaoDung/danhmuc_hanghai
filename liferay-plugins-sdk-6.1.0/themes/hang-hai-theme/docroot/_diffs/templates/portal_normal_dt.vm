@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>Hệ thống dịch vụ hành chính công trực tuyến</title>
+
+	$theme.include($top_head_include)
+	
+	<base href="/">
+	
+	<style href="$css_folder/orgin.css"></style>
+	
+	<script type="application/javascript;charset=utf-8" src="http://kiemthuhanghai.mt.gov.vn/TichHopGiaoThong-portlet/json/source_state.json"></script>
+	
+</head>
+
+<body class="$css_class mBody">
+
+$theme.include($body_top_include)
+
+#if ($is_signed_in && $permissionChecker.isOmniadmin())
+    #dockbar()
+#end
+
+<div id="wrapper">
+	<header id="banner">
+		<div class="container-fluid align-center">
+			<div class="logo align-middle">
+				<a href="$site_default_url">
+					<img src="$images_folder/logo_dtnd.png">
+				</a>
+			</div>
+			
+			<div class="banner-home" style="padding-left: auto;">
+				<span id="note" style="color: white; font-weight: bold; font-size: 20px;"></span>
+			</div>
+			
+			#if (!$is_signed_in)
+				<div class="sub-info">
+					<a href="/login" class="signin">Đăng nhập</a>
+					<a href="/register" class="register">Đăng ký</a>			
+				</div>
+			#end
+			
+			#if ($is_signed_in)
+				<div class="actions-group">
+					<a href="/group/guest/doipass" class="username" style="margin-right: 15px;"><i class="fa fa-user-circle"></i> $user_name</a>
+					<a href="/c/portal/logout" class="signout"><i class="fa fa-sign-out"></i> Thoát</a>
+				</div>
+			#end
+		</div>
+	
+		#if ($has_navigation || $is_signed_in)
+			#parse ("$full_templates_path/navigation.vm")
+		#end
+	</header>
+
+	<div id="content">
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+		
+	</div>
+
+	<footer id="footer">  <div class="owner"> <ul style="
+    list-style-type: none;
+    text-align: center;
+"> <li style="
+    display: inline-block;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 15px;
+    
+"><a href="#" style="
+    color: #0d2434 !important;
+"> Cục Đường thủy nội địa Việt Nam - Bộ Giao Thông vận tải</a></li> <li style="
+    display: inline-block;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 15px;
+    
+"><a href="#" style="
+    color: #0d2434 !important;
+">05 Tôn Thất Thuyết - Q.Cầu Giấy - Thành phố Hà Nội</a></li> <li style="
+    display: inline-block;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 15px;
+    
+"><a href="#" style="
+    color: #0d2434 !important;
+"> 04 39421887</a></li><li style="
+    display: inline-block;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0 15px;
+    
+"><a href="/web/guest/huong-dan-su-dung" style="
+    background: #3563C1;
+    padding: 8px 15px;
+    border-radius: 6px;
+    color: whitesmoke;
+">Hướng dẫn sử dụng</a></li>   </ul> </div> </footer>
+</div>
+
+	<script src="$javascript_folder/axios.min.js"></script>
+	<script src="$javascript_folder/vue.min.js"></script>
+	<script src="$javascript_folder/vue-jx-lib.js?t=1231231111323232121212"></script>
+	<script src="$javascript_folder/vuejx_dev.js?t=998712399222"></script>
+	<script src="$javascript_folder/orgin.js"></script>
+
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.1.0//EN" "http://www.liferay.com/dtd/liferay-display_6_1_0.dtd">
+
+<display>
+	<category name="GT">
+		<portlet id="TichHopGiaoThong" />
+		<portlet id="kehoachaction"></portlet>
+		<portlet id="paygateaction"></portlet>
+		<portlet id="vanthuaction"></portlet>
+		<portlet id="lanhdaoaction"></portlet>
+		<portlet id="configuseraction"></portlet>
+		<portlet id="baocaoaction"></portlet>
+		<portlet id="thongtintauaction"></portlet>
+		<portlet id="danhmucaction"></portlet>
+		<portlet id="tracuuaction"></portlet>
+		<portlet id="baocaotichhopaction"></portlet>
+		<portlet id="quanlynguoidungaction"></portlet>
+		<portlet id="monitoraction"></portlet>
+	</category>
+</display>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="vn.gt.dao.nhapcanh">
+	<author>win_64</author>
+	<namespace>gt</namespace>
+	<entity name="ResponseBo" table="responsebo" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="isSuccess" db-name="issuccess" type="int" />
+		<column name="errorMessage" db-name="errormessage" type="String" />
+	</entity>
+
+	<entity name="DocumentGeneral" table="document_general" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+		<column name="documentNo" db-name="documentno" type="String" />
+
+		<column name="documentFunction" db-name="documentfunction" type="String" />
+		<column name="isArrival" db-name="isarrival" type="int" />
+		<column name="isDeparture" db-name="isdeparture" type="int" />
+		<column name="shipCode" db-name="shipcode" type="String" />
+		<column name="arrivalOrDeparturePortCode" db-name="arrivalordepartureportcode" type="String" />
+		<column name="timeArrivalOrDeparture" db-name="timearrivalordeparture" type="Date" />
+		<column name="imoNumber" db-name="imonumber" type="String" />
+		<column name="callSign" db-name="callsign" type="String" />
+		<column name="voyageNumber" db-name="voyagenumber" type="int" />
+		<column name="shipNationCode" db-name="shipnationcode" type="String" />
+		<column name="nameOfMaster" db-name="nameofmaster" type="String" />
+		<column name="lastPort" db-name="lastport" type="String" />
+		<column name="contactDetailShipAgent" db-name="contactdetailshipagent" type="String" />
+		<column name="grossTonnage" db-name="grosstonnage" type="double" />
+		<column name="netTonnage" db-name="nettonnage" type="double" />
+		<column name="positionShipInPort" db-name="positionshipinport" type="int" />
+		<column name="briefParticularsVoyage" db-name="briefparticularsvoyage" type="String" />
+		<column name="briefDescriptionCargo" db-name="briefdescriptioncargo" type="String" />
+		<column name="crewNumber" db-name="crewnumber" type="int" />
+		<column name="passengerNumber" db-name="passengernumber" type="int" />
+		<column name="remarks" db-name="remarks" type="String" />
+		<column name="cargoDeclaration" db-name="cargodeclaration" type="String" />
+		<column name="shipStoresDeclaration" db-name="shipstoresdeclaration" type="String" />
+		<column name="crewList" db-name="crewlist" type="String" />
+		<column name="passengerList" db-name="passengerlist" type="String" />
+		<column name="shipRequirements" db-name="shiprequirements" type="String" />
+		<column name="isCrewEffectDeclaration" db-name="iscreweffectdeclaration" type="int" />
+		<column name="isMaritimeDeclarationHealth" db-name="ismaritimedeclarationhealth" type="int" />
+		<column name="createDate" db-name="createdate" type="Date" />
+		<column name="modifyDate" db-name="modifydate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+	</entity>
+	<entity name="CrewList" table="crew_list" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="crewCode" db-name="crewcode" type="String" />
+		<column name="documentNo" db-name="documentno" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="birthDay" db-name="birthday" type="Date" />
+		<column name="birthPlace" db-name="birthplace" type="String" />
+		<column name="familyName" db-name="familyname" type="String" />
+		<column name="fullName" db-name="fullname" type="String" />
+		<column name="givenName" db-name="givenname" type="String" />
+		<column name="passportNumber" db-name="passportnumber" type="String" />
+		<column name="passportType" db-name="passporttype" type="String" />
+		<column name="rankCode" db-name="rankcode" type="String" />
+
+		<column name="createDate" db-name="createdate" type="Date" />
+		<column name="modifyDate" db-name="modifydate" type="Date" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+	</entity>
+
+	<entity name="PassengerList" table="passenger_list" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<!-- PK fields -->
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="passengerCode" db-name="passengercode" type="String" />
+
+		<column name="documentNo" db-name="documentno" type="String" />
+		<column name="fullName" db-name="fullname" type="String" />
+		<column name="stateCode" db-name="statecode" type="String" />
+		<column name="birthDay" db-name="birthday" type="Date" />
+		<column name="birthPlace" db-name="birthplace" type="String" />
+		<column name="passportTypeCode" db-name="passporttypecode" type="String" />
+		<column name="passPortNo" db-name="passportno" type="String" />
+		<column name="portCheckInCode" db-name="portcheckincode" type="String" />
+		<column name="portCheckOutCode" db-name="portcheckoutcode" type="String" />
+		<column name="isTransit" db-name="istransit" type="boolean" />
+
+		<column name="createDate" db-name="createdate" type="Date" />
+		<column name="modifyDate" db-name="modifydate" type="Date" />
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+	</entity>
+
+	<entity name="Document" table="document" local-service="true" data-source="gtDataSource" remote-service="true" cache-enabled="false">
+
+		<!-- PK fields -->
+
+		<column name="id" db-name="id" type="long" primary="true" />
+
+		<column name="documentName" db-name="documentname" type="long" />
+		<column name="userCreated" db-name="usercreated" type="String" />
+		<column name="documentTypeCode" db-name="documenttypecode" type="String" />
+		<column name="callSign" db-name="callsign" type="String" />
+		<column name="preDocumentName" db-name="predocumentname" type="String" />
+
+		<column name="createdDate" db-name="createddate" type="Date" />
+		<column name="lastModifiedDate" db-name="lastmodifieddate" type="Date" />
+
+	</entity>
+</service-builder>

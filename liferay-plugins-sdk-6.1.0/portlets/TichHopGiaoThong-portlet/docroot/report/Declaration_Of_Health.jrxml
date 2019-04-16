@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Declaration_Of_Health" pageWidth="595" pageHeight="1092" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="134c5fc9-1f1c-437c-9d25-a129b7716b89">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="94"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\DNG6_7\\liferay-plugins-sdk-6.1.0-ce-b4-20111118\\portlets\\TichHopGiaoThong-portlet\\docroot\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="tempDeclarationOfHealths" class="java.util.List">
+		<fieldDescription><![CDATA[tempDeclarationOfHealths]]></fieldDescription>
+	</field>
+	<field name="tempHealthCrewPassengerLists" class="java.util.List">
+		<fieldDescription><![CDATA[tempHealthCrewPassengerLists]]></fieldDescription>
+	</field>
+	<field name="tempHealthQuestions" class="java.util.List">
+		<fieldDescription><![CDATA[tempHealthQuestions]]></fieldDescription>
+	</field>
+	<field name="masterName" class="java.lang.String">
+		<fieldDescription><![CDATA[masterName]]></fieldDescription>
+	</field>
+	<field name="doctorName" class="java.lang.String">
+		<fieldDescription><![CDATA[doctorName]]></fieldDescription>
+	</field>
+	<field name="signDate" class="java.lang.String">
+		<fieldDescription><![CDATA[signDate]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="135" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="57" width="555" height="15" uuid="733e8c2d-8d96-4acd-a147-3079d2c76305"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Independence - Freedom - Happiness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="18" uuid="a49467e6-4aa0-42bb-9591-9f53de251cf3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="555" height="17" uuid="dbd88fbc-75b5-44ef-80ca-57a17e84536b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL OF MARITIME DECLARATION OF HEALTH]]></text>
+			</staticText>
+			<line>
+				<reportElement x="163" y="78" width="229" height="1" uuid="ed87bec7-e8bc-42f9-81b1-8e01c269244b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="90" width="555" height="18" uuid="4651cd4e-34b4-4f44-be87-cf6ef0c2910d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GIẤY KHAI BÁO Y TẾ HÀNG HẢI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="555" height="15" uuid="592dfacf-b182-4710-ac12-2a9b32635eba"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Socialist Republic of Vietnam]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="18" width="555" height="18" uuid="e0d4c58f-21d6-4126-8421-f3d52e11b51f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Immediate">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="69e81b5a-80ec-475b-becc-7e9a95d5d498"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempDeclarationOfHealths})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Declaration_Of_Health_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="14c1b2be-ee3e-48cc-aaf7-0cf58610fbb3"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempHealthCrewPassengerLists})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Declaration_Of_Health_subreport_HealthCrewPassenger.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="3b45ca2b-971c-4a0c-b405-9200e0be7a26"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{tempHealthQuestions})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Declaration_Of_Health_subreport_Attachment_Declaration_Health.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="455">
+			<textField>
+				<reportElement x="17" y="340" width="538" height="20" uuid="0bd0cbd0-2bd4-4393-a8a2-1925f6f96e89"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-size:12px'>Ký tên</span> / Signed: ………………………………………………………………"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="400" width="538" height="20" uuid="86366f5b-8b1e-4f1a-b7ac-d17f10ee04e4"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-size:12px'>Bác sĩ trên tàu (nếu có)</span> / Ship’s Surgeon (if carried)  " +  (($F{doctorName} == null) ?  "……………………………."  : $F{doctorName} + "…………………………….")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="360" width="538" height="20" uuid="e82503ee-8096-4f32-a4cd-f795779c52c5"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-size:12px'>Thuyền trưởng/Master  "  + (($F{masterName} == null) ? "………………………………………………………" : $F{masterName} + "………………………………………………………")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="380" width="538" height="20" uuid="acbbf850-7839-48d5-b219-3b21e9d1001f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-size:12px'>Ký xác nhận/</span>Countersigned ……………………………………………………….."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="80" width="555" height="92" uuid="0e4a9bec-5c61-43ca-87b8-bcc9d04c4231"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>(a) sốt kéo dài một vài ngày hoặc kèm theo (i) mệt mỏi, (ii) kém tỉnh táo; (iii) nổi hạch; (iv) vàng da; (v) ho hoặc thở nông; (vi) chảy máu bất thường hoặc; (vii) liệt cục bộ</span>/(a) fever, persisting for several days or accompanied by (i) prostration; (ii) decreased consciousness; (iii) glandular swelling; (iv) jaundice; (v) cough or shortness of breath; (vi) unusual bleeding; or (vii) paralysis"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="11" width="555" height="69" uuid="d4554232-3882-4e30-8f98-a14202f9414d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Chú ý: Nếu không có bác sỹ, chủ tàu cần chú ý những triệu chứng hoặc có dấu hiệu mắc bệnh truyền nhiễm trên tàu như sau:</span> Note: In the absence of surgeon, the master should regard the following symptoms as grounds for suspecting the existence or a disease of an infectious nature:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="420" width="538" height="20" uuid="07435121-46ad-47e1-92f2-8d8f4df12c18"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<span style='font-size:12px'>Ngày tháng</span> / Date  " + (($F{signDate} == null) ? "……………………………………………………………"  : $F{signDate} + "……………………………………………………………")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="248" width="555" height="92" uuid="9d3f719a-72f5-455e-9760-a282ef43ebc9"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>Tôi xin cam đoan những thông tin, những câu trả lời và các báo cáo chi tiết kèm theo là sự thật và đúng với sự hiểu biết và tin tưởng của tôi</span>/I hereby declare that the particulars and answers to the questions given in this Declaration of Health (including the schedule) are true and correct to the best of my knowledge and belief"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="172" width="555" height="76" uuid="76893111-83d8-48d3-8cf1-29117a37165f"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA["&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:12px'>(b) có hoặc không có sốt: (i) phát ban cấp tính trên da; (ii) nôn dữ dội (không phải do say sóng); (iii) ỉa chảy dữ dội; hoặc (iv) co giật</span>/(b) with or without fever: (i) any acute skin rash or eruption, (ii) severe vomiting (other than sea sickness), (iii) severe diarrhoea; or (iv) recurrent convulsions."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

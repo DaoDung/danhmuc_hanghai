@@ -1,0 +1,73 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<div id="menu_template" class="hidden">
+	<div class="layout row wrap" v-show="screen_state === 0">
+		
+		<div class="flex xs12" >
+			<jx-hanghai-filter-left
+				:document_type_api="document_type_api"
+				@filteraction="filteraction"
+				@document-lists="getDocumentTypes"
+				ref="filterleft"
+			>
+			
+			</jx-hanghai-filter-left>
+		</div>
+		<div style="width: 100%;" class="ml-3" v-if="!loadingroleUserFilter">
+			<content-placeholders>
+				<content-placeholders-text :lines="4" />
+			</content-placeholders>
+		</div>
+		<div class="flex xs12" v-else>
+			<div v-show="documentType != 0" class="flex xs12" jx-bind="roleUserFilter"></div>
+			<div v-show="documentType == 0" class="flex xs12" >
+		
+				<ul class="list list--group" style="display: block;">
+				    <li v-for="(item, index) in documentTypes" v-if="item.typeCode > 0" @click.prevent.stop="pickHoSo(item, index)">
+				        <a class="list__tile list__tile--link">
+				            <div class="list__tile__action">
+				                <i aria-hidden="true" class="material-icons icon">description</i>
+				            </div>
+				            <div class="list__tile__content">
+				                <div class="list__tile__title"> {{item.name}} </div>
+				                <span :id="'tt_count_'+item.code" class="status__counter"><v-progress-circular indeterminate color="red"></v-progress-circular></span>
+				            </div>
+				        </a>
+				    </li>
+				</ul>
+				
+			</div>
+		</div>
+
+	</div>
+
+	<div class="flex xs12 px-3" v-show="screen_state === 0">
+		<v-menu
+			:close-on-content-click="false"
+			:nudge-width="200"
+			v-model="menu"
+			offset-x
+			style="display: block;"
+			>
+			<v-btn block slot="activator" v-on:click.native="showTinMoi" color="primary" dark>Tin Mới</v-btn>
+			<v-card>
+				<v-list>
+					<v-list-tile class="pl-3 py-2">
+						Danh sách thông báo mới
+					</v-list-tile>
+				</v-list>
+				<v-divider></v-divider>
+				<div style="width: 100%;" v-if="loadingTinMoi">
+					<content-placeholders>
+						<content-placeholders-text :lines="4" />
+					</content-placeholders>
+				</div>
+				<div v-else>
+					<div class="px-3 py-2" v-for="(item, index) in tinMois" v-bind:key="index" style="border-bottom: 1px dashed #e0e0e0;"> 
+						<span style="cursor: pointer;" class="text-bold primary--text" @click="filterTinMoi(item.documentName)">{{item.documentName}}</span> - {{item.latestDate | datetime}}
+					</div>
+				</div>
+			</v-card>
+		</v-menu>
+	</div>
+</div>

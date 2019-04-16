@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>Hệ thống dịch vụ hành chính công trực tuyến</title>
+
+	$theme.include($top_head_include)
+</head>
+
+<body>
+$theme.include($body_top_include)
+
+    <div id="bgheader">
+        <div id="header">
+            <a class="logo" href="">logo</a>
+            <h1 class="slogan">slogan</h1>
+            <div id="menu">
+                
+                <ul>
+                    <li><a href="http://dichvucong.mt.gov.vn">Trang chủ</a></li>
+                    #if($theme_display.getURLCurrent().contains("/gioi-thieu"))
+                    <li class="active" ><a href="/gioi-thieu">Giới thiệu</a></li>
+                    #else
+                    <li ><a href="/gioi-thieu">Giới thiệu</a></li>
+                    #end
+                    #if($theme_display.getURLCurrent().contains("/thu-tuc-hanh-chinh"))
+                    <li class="active"><a href="/thu-tuc-hanh-chinh">Thủ tục hành chính</a></li>
+                    #else
+                    <li><a href="/thu-tuc-hanh-chinh">Thủ tục hành chính</a></li>
+                    #end
+                    #if($theme_display.getURLCurrent().contains("/tra-cuu-thong-tin"))
+                    <li class="active"><a href="/tra-cuu-thong-tin">Tra cứu thông tin</a></li>
+                    #else
+                    <li><a href="/tra-cuu-thong-tin">Tra cứu thông tin</a></li>
+                    #end
+                    #if($theme_display.getURLCurrent().contains("/ho-tro"))
+                    <li class="active"><a href="/ho-tro">Hỗ trợ</a></li>
+                    #else
+                    <li><a href="/ho-tro">Hỗ trợ</a></li>
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div><!--End #header-->
+
+
+    #if ($selectable)
+                     $theme.include($content_include)
+                #else
+                     $portletDisplay.recycle()
+                     $portletDisplay.setTitle($the_title)
+                     $theme.wrapPortlet("portlet.vm", $content_include)
+   #end
+
+    <div id="footer">
+        <div class="fleft">
+            <div class="boxlink_f">
+                <p>
+                    <b>BỘ GIAO THÔNG VẬN TẢI</b>
+                    </br>Bản quyền thuộc về Bộ Giao thông vận tải
+                    </br>80 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội.
+                </p>
+            </div>
+            <div class="box_f">
+                <a href="#"><img src="$images_folder/logo1.png"></a>
+                <a href="#"><img src="$images_folder/logo2.png"></a>
+                <a href="#"><img src="$images_folder/logo3.png"></a>
+                <a href="#"><img src="$images_folder/logo4.png"></a>
+                <a href="#"><img src="$images_folder/logo5.png"></a>
+                <a href="#"><img src="$images_folder/logo6.png"></a>
+                <a href="#"><img src="$images_folder/logo7.png"></a>
+                <a href="#"><img src="$images_folder/logo8.png"></a>
+            </div>
+        </div>
+    </div><!--End #footer-->
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>

@@ -1,0 +1,1190 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="vn.gt.dao.nhapcanh.service.CrewListLocalService" class="vn.gt.dao.nhapcanh.service.impl.CrewListLocalServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.CrewListLocalServiceUtil" class="vn.gt.dao.nhapcanh.service.CrewListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.CrewListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.CrewListService" class="vn.gt.dao.nhapcanh.service.impl.CrewListServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.CrewListServiceUtil" class="vn.gt.dao.nhapcanh.service.CrewListServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.CrewListService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.persistence.CrewListPersistence" class="vn.gt.dao.nhapcanh.service.persistence.CrewListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentLocalService" class="vn.gt.dao.nhapcanh.service.impl.DocumentLocalServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentLocalServiceUtil" class="vn.gt.dao.nhapcanh.service.DocumentLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.DocumentLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentService" class="vn.gt.dao.nhapcanh.service.impl.DocumentServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentServiceUtil" class="vn.gt.dao.nhapcanh.service.DocumentServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.DocumentService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.persistence.DocumentPersistence" class="vn.gt.dao.nhapcanh.service.persistence.DocumentPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentGeneralLocalService" class="vn.gt.dao.nhapcanh.service.impl.DocumentGeneralLocalServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentGeneralLocalServiceUtil" class="vn.gt.dao.nhapcanh.service.DocumentGeneralLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.DocumentGeneralLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentGeneralService" class="vn.gt.dao.nhapcanh.service.impl.DocumentGeneralServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.DocumentGeneralServiceUtil" class="vn.gt.dao.nhapcanh.service.DocumentGeneralServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.DocumentGeneralService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.persistence.DocumentGeneralPersistence" class="vn.gt.dao.nhapcanh.service.persistence.DocumentGeneralPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.PassengerListLocalService" class="vn.gt.dao.nhapcanh.service.impl.PassengerListLocalServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.PassengerListLocalServiceUtil" class="vn.gt.dao.nhapcanh.service.PassengerListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.PassengerListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.PassengerListService" class="vn.gt.dao.nhapcanh.service.impl.PassengerListServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.PassengerListServiceUtil" class="vn.gt.dao.nhapcanh.service.PassengerListServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.PassengerListService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.persistence.PassengerListPersistence" class="vn.gt.dao.nhapcanh.service.persistence.PassengerListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.ResponseBoLocalService" class="vn.gt.dao.nhapcanh.service.impl.ResponseBoLocalServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.ResponseBoLocalServiceUtil" class="vn.gt.dao.nhapcanh.service.ResponseBoLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.ResponseBoLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.ResponseBoService" class="vn.gt.dao.nhapcanh.service.impl.ResponseBoServiceImpl" />
+	<bean id="vn.gt.dao.nhapcanh.service.ResponseBoServiceUtil" class="vn.gt.dao.nhapcanh.service.ResponseBoServiceUtil">
+		<property name="service" ref="vn.gt.dao.nhapcanh.service.ResponseBoService" />
+	</bean>
+	<bean id="vn.gt.dao.nhapcanh.service.persistence.ResponseBoPersistence" class="vn.gt.dao.nhapcanh.service.persistence.ResponseBoPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmArrivalPurposeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmArrivalPurposeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmArrivalPurposeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmArrivalPurposeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmArrivalPurposeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmArrivalPurposePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmArrivalPurposePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmDataItemLocalService" class="vn.gt.dao.danhmuc.service.impl.DmDataItemLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmDataItemLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmDataItemLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmDataItemLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmDataItemPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmDataItemPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmDataItemFinder" class="vn.gt.dao.danhmuc.service.persistence.DmDataItemFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmDocTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmDocTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmDocTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmDocTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmDocTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmDocTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmDocTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmEnterriseLocalService" class="vn.gt.dao.danhmuc.service.impl.DmEnterriseLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmEnterriseLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmEnterriseLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmEnterriseLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmEnterrisePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmEnterrisePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmGoodsLocalService" class="vn.gt.dao.danhmuc.service.impl.DmGoodsLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmGoodsLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmGoodsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmGoodsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmGoodsPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmGoodsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmGoodsTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmGoodsTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmGoodsTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmGoodsTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmGoodsTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmGoodsTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmGoodsTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryArrivalPurposeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryArrivalPurposeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryArrivalPurposeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryArrivalPurposeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryArrivalPurposeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryArrivalPurposePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryArrivalPurposePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryDocTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryDocTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryDocTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryDocTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryDocTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryDocTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryDocTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryEnterriseLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryEnterriseLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryEnterriseLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryEnterriseLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryEnterriseLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryEnterrisePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryEnterrisePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryGoodsLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryGoodsLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryGoodsLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryGoodsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryGoodsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryGoodsPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryGoodsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryGoodsTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryGoodsTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryGoodsTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryGoodsTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryGoodsTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryGoodsTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryGoodsTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryMaritimeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryMaritimeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryMaritimeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryMaritimeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryMaritimeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryMaritimePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryMaritimePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryMaritimeFinder" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryMaritimeFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPackageLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPackageLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPackageLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPackageLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPackageLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPackagePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPackagePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPassportTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPassportTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPassportTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPassportTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPassportTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPassportTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPassportTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPortLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPortLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPortLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortHarbourLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPortHarbourLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortHarbourLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPortHarbourLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPortHarbourLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortHarbourPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortHarbourPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortRegionLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPortRegionLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortRegionLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPortRegionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPortRegionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortRegionPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortRegionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortWharfLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryPortWharfLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryPortWharfLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryPortWharfLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryPortWharfLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortWharfPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryPortWharfPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryRankRatingLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryRankRatingLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryRankRatingLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryRankRatingLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryRankRatingLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryRankRatingPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryRankRatingPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryRepresentativeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryRepresentativeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryRepresentativeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryRepresentativeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryRepresentativeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryRepresentativePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryRepresentativePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistorySecurityLevelLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistorySecurityLevelLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistorySecurityLevelLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistorySecurityLevelLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistorySecurityLevelLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistorySecurityLevelPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistorySecurityLevelPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryShipAgencyLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryShipAgencyLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryShipAgencyLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryShipAgencyLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryShipAgencyLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryShipAgencyPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryShipAgencyPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryShipTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryShipTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryShipTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryShipTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryShipTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryShipTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryShipTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryStateLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryStateLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryStateLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryStateLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryStateLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryStatePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryStatePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryUnitGeneralLocalService" class="vn.gt.dao.danhmuc.service.impl.DmHistoryUnitGeneralLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmHistoryUnitGeneralLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmHistoryUnitGeneralLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmHistoryUnitGeneralLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmHistoryUnitGeneralPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmHistoryUnitGeneralPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmMaritimeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmMaritimeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmMaritimeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmMaritimeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmMaritimeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmMaritimePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmMaritimePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmMaritimeFinder" class="vn.gt.dao.danhmuc.service.persistence.DmMaritimeFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPackageLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPackageLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPackageLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPackageLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPackageLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPackagePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPackagePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPassportTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPassportTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPassportTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPassportTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPassportTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPassportTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPassportTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPortLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPortLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPortLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPortLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPortLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPortPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPortHarbourLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPortHarbourLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPortHarbourLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPortHarbourLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPortHarbourLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortHarbourPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPortHarbourPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortHarbourFinder" class="vn.gt.dao.danhmuc.service.persistence.DmPortHarbourFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPortRegionLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPortRegionLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPortRegionLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPortRegionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPortRegionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortRegionPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPortRegionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortRegionFinder" class="vn.gt.dao.danhmuc.service.persistence.DmPortRegionFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmPortWharfLocalService" class="vn.gt.dao.danhmuc.service.impl.DmPortWharfLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmPortWharfLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmPortWharfLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmPortWharfLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortWharfPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmPortWharfPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmPortWharfFinder" class="vn.gt.dao.danhmuc.service.persistence.DmPortWharfFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmRankRatingLocalService" class="vn.gt.dao.danhmuc.service.impl.DmRankRatingLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmRankRatingLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmRankRatingLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmRankRatingLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmRankRatingPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmRankRatingPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmRepresentativeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmRepresentativeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmRepresentativeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmRepresentativeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmRepresentativeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmRepresentativePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmRepresentativePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmRepresentativeFinder" class="vn.gt.dao.danhmuc.service.persistence.DmRepresentativeFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmSecurityLevelLocalService" class="vn.gt.dao.danhmuc.service.impl.DmSecurityLevelLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmSecurityLevelLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmSecurityLevelLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmSecurityLevelLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmSecurityLevelPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmSecurityLevelPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmShipAgencyLocalService" class="vn.gt.dao.danhmuc.service.impl.DmShipAgencyLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmShipAgencyLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmShipAgencyLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmShipAgencyLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmShipAgencyPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmShipAgencyPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmShipTypeLocalService" class="vn.gt.dao.danhmuc.service.impl.DmShipTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmShipTypeLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmShipTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmShipTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmShipTypePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmShipTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmStateLocalService" class="vn.gt.dao.danhmuc.service.impl.DmStateLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmStateLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmStateLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmStateLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmStatePersistence" class="vn.gt.dao.danhmuc.service.persistence.DmStatePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmStateFinder" class="vn.gt.dao.danhmuc.service.persistence.DmStateFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmSyncCategoryLocalService" class="vn.gt.dao.danhmuc.service.impl.DmSyncCategoryLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmSyncCategoryLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmSyncCategoryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmSyncCategoryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmSyncCategoryPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmSyncCategoryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmTestN01RequestLocalService" class="vn.gt.dao.danhmuc.service.impl.DmTestN01RequestLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmTestN01RequestLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmTestN01RequestLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmTestN01RequestLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmTestN01RequestPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmTestN01RequestPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.DmUnitGeneralLocalService" class="vn.gt.dao.danhmuc.service.impl.DmUnitGeneralLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.DmUnitGeneralLocalServiceUtil" class="vn.gt.dao.danhmuc.service.DmUnitGeneralLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.DmUnitGeneralLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.DmUnitGeneralPersistence" class="vn.gt.dao.danhmuc.service.persistence.DmUnitGeneralPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.HistoryRmdcShipLocalService" class="vn.gt.dao.danhmuc.service.impl.HistoryRmdcShipLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.HistoryRmdcShipLocalServiceUtil" class="vn.gt.dao.danhmuc.service.HistoryRmdcShipLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.HistoryRmdcShipLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.HistoryRmdcShipService" class="vn.gt.dao.danhmuc.service.impl.HistoryRmdcShipServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.HistoryRmdcShipServiceUtil" class="vn.gt.dao.danhmuc.service.HistoryRmdcShipServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.HistoryRmdcShipService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.HistoryRmdcShipPersistence" class="vn.gt.dao.danhmuc.service.persistence.HistoryRmdcShipPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.HistorySyncVersionLocalService" class="vn.gt.dao.danhmuc.service.impl.HistorySyncVersionLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.HistorySyncVersionLocalServiceUtil" class="vn.gt.dao.danhmuc.service.HistorySyncVersionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.HistorySyncVersionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.HistorySyncVersionPersistence" class="vn.gt.dao.danhmuc.service.persistence.HistorySyncVersionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.HistorySyncVersionFinder" class="vn.gt.dao.danhmuc.service.persistence.HistorySyncVersionFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.RmdcShipLocalService" class="vn.gt.dao.danhmuc.service.impl.RmdcShipLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.RmdcShipLocalServiceUtil" class="vn.gt.dao.danhmuc.service.RmdcShipLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.RmdcShipLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.RmdcShipService" class="vn.gt.dao.danhmuc.service.impl.RmdcShipServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.RmdcShipServiceUtil" class="vn.gt.dao.danhmuc.service.RmdcShipServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.RmdcShipService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.RmdcShipPersistence" class="vn.gt.dao.danhmuc.service.persistence.RmdcShipPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.ThamSoHeThongLocalService" class="vn.gt.dao.danhmuc.service.impl.ThamSoHeThongLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.ThamSoHeThongLocalServiceUtil" class="vn.gt.dao.danhmuc.service.ThamSoHeThongLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.ThamSoHeThongLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.ThamSoHeThongService" class="vn.gt.dao.danhmuc.service.impl.ThamSoHeThongServiceImpl" />
+	<bean id="vn.gt.dao.danhmuc.service.ThamSoHeThongServiceUtil" class="vn.gt.dao.danhmuc.service.ThamSoHeThongServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmuc.service.ThamSoHeThongService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.ThamSoHeThongPersistence" class="vn.gt.dao.danhmuc.service.persistence.ThamSoHeThongPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmuc.service.persistence.ThamSoHeThongFinder" class="vn.gt.dao.danhmuc.service.persistence.ThamSoHeThongFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestLocalService" class="vn.gt.dao.noticeandmessage.service.impl.HistoryInterfaceRequestLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestService" class="vn.gt.dao.noticeandmessage.service.impl.HistoryInterfaceRequestServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestServiceUtil" class="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestFinder" class="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldLocalService" class="vn.gt.dao.noticeandmessage.service.impl.HistoryInterfaceRequestFieldLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldService" class="vn.gt.dao.noticeandmessage.service.impl.HistoryInterfaceRequestFieldServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldServiceUtil" class="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.HistoryInterfaceRequestFieldService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestFieldPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.HistoryInterfaceRequestFieldPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalService" class="vn.gt.dao.noticeandmessage.service.impl.InterfaceRequestLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestService" class="vn.gt.dao.noticeandmessage.service.impl.InterfaceRequestServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestServiceUtil" class="vn.gt.dao.noticeandmessage.service.InterfaceRequestServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.InterfaceRequestService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestFinder" class="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldLocalService" class="vn.gt.dao.noticeandmessage.service.impl.InterfaceRequestFieldLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldService" class="vn.gt.dao.noticeandmessage.service.impl.InterfaceRequestFieldServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldServiceUtil" class="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.InterfaceRequestFieldService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestFieldPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.InterfaceRequestFieldPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssueAcceptanceLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueAcceptanceLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueAcceptanceLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceService" class="vn.gt.dao.noticeandmessage.service.impl.IssueAcceptanceServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueAcceptanceServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueAcceptanceService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptancePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptancePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptanceFinder" class="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptanceFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssueAcceptanceForTransitLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitService" class="vn.gt.dao.noticeandmessage.service.impl.IssueAcceptanceForTransitServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueAcceptanceForTransitService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptanceForTransitPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssueAcceptanceForTransitPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssuePermissionForTransitLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitService" class="vn.gt.dao.noticeandmessage.service.impl.IssuePermissionForTransitServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssuePermissionForTransitService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssuePermissionForTransitPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssuePermissionForTransitPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssuePermissionForTransitFinder" class="vn.gt.dao.noticeandmessage.service.persistence.IssuePermissionForTransitFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePortClearanceLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssuePortClearanceLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePortClearanceLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssuePortClearanceLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssuePortClearanceLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePortClearanceService" class="vn.gt.dao.noticeandmessage.service.impl.IssuePortClearanceServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssuePortClearanceServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssuePortClearanceServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssuePortClearanceService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssuePortClearancePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssuePortClearancePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssuePortClearanceFinder" class="vn.gt.dao.noticeandmessage.service.persistence.IssuePortClearanceFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssueShiftingOrderLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderService" class="vn.gt.dao.noticeandmessage.service.impl.IssueShiftingOrderServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderFinder" class="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderChanelLocalService" class="vn.gt.dao.noticeandmessage.service.impl.IssueShiftingOrderChanelLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderChanelLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderChanelLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.IssueShiftingOrderChanelLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderChanelPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.IssueShiftingOrderChanelPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.ModifyLocalService" class="vn.gt.dao.noticeandmessage.service.impl.ModifyLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.ModifyLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.ModifyLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.ModifyLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.ModifyService" class="vn.gt.dao.noticeandmessage.service.impl.ModifyServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.ModifyServiceUtil" class="vn.gt.dao.noticeandmessage.service.ModifyServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.ModifyService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.ModifyPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.ModifyPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.NoticeShipMessageLocalService" class="vn.gt.dao.noticeandmessage.service.impl.NoticeShipMessageLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.NoticeShipMessageLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.NoticeShipMessageLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.NoticeShipMessageLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.NoticeShipMessageService" class="vn.gt.dao.noticeandmessage.service.impl.NoticeShipMessageServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.NoticeShipMessageServiceUtil" class="vn.gt.dao.noticeandmessage.service.NoticeShipMessageServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.NoticeShipMessageService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.NoticeShipMessagePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.NoticeShipMessagePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempAnimalQuarantineLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineService" class="vn.gt.dao.noticeandmessage.service.impl.TempAnimalQuarantineServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempAnimalQuarantineService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempAnimalQuarantinePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempAnimalQuarantinePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempAnimalQuarantineFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempAnimalQuarantineFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempAttachmentDeclarationHealthLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthService" class="vn.gt.dao.noticeandmessage.service.impl.TempAttachmentDeclarationHealthServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempAttachmentDeclarationHealthService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempAttachmentDeclarationHealthPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempAttachmentDeclarationHealthPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCargoDeclarationLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationService" class="vn.gt.dao.noticeandmessage.service.impl.TempCargoDeclarationServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCargoDeclarationService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCargoDeclarationPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCargoDeclarationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCargoDeclarationFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempCargoDeclarationFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCargoItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCargoItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCargoItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempCargoItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCargoItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCargoItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCargoItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCargoItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCargoItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewDetailsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewDetailsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewDetailsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewDetailsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewDetailsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewDetailsService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewDetailsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewDetailsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewDetailsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewDetailsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewDetailsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewDetailsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewEffectsDeclarationLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewEffectsDeclarationServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewEffectsDeclarationService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsDeclarationPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsDeclarationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsDeclarationFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsDeclarationFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewEffectsItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewEffectsItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewEffectsItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsItemsFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewEffectsItemsFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewListLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewListLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewListLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewListService" class="vn.gt.dao.noticeandmessage.service.impl.TempCrewListServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempCrewListServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempCrewListServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempCrewListService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewListPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempCrewListFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempCrewListFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDangerousGoodsItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempDangerousGoodsItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDangerousGoodsNanifestLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestService" class="vn.gt.dao.noticeandmessage.service.impl.TempDangerousGoodsNanifestServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDangerousGoodsNanifestService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsNanifestPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsNanifestPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsNanifestFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempDangerousGoodsNanifestFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationForAnimalQuarantineLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationForAnimalQuarantineServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationForAnimalQuarantineService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationForAnimalQuarantinePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationForAnimalQuarantinePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationForPlantQuarantineLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationForPlantQuarantineServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationForPlantQuarantineService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationForPlantQuarantinePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationForPlantQuarantinePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationOfHealthLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthService" class="vn.gt.dao.noticeandmessage.service.impl.TempDeclarationOfHealthServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDeclarationOfHealthService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationOfHealthPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationOfHealthPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationOfHealthFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempDeclarationOfHealthFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDocumentLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempDocumentLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDocumentLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDocumentLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDocumentLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDocumentService" class="vn.gt.dao.noticeandmessage.service.impl.TempDocumentServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempDocumentServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempDocumentServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempDocumentService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDocumentPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempDocumentPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempDocumentFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempDocumentFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempGeneralDeclarationLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationService" class="vn.gt.dao.noticeandmessage.service.impl.TempGeneralDeclarationServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempGeneralDeclarationService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempGeneralDeclarationPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempGeneralDeclarationPersistenceImpl" parent="basePersistence" />
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempGeneralDeclarationFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempGeneralDeclarationFinderImpl" parent="basePersistence" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGoodsItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempGoodsItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGoodsItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempGoodsItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempGoodsItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGoodsItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempGoodsItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempGoodsItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempGoodsItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempGoodsItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempGoodsItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempGoodsItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempHealthCrewPassengerListLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListService" class="vn.gt.dao.noticeandmessage.service.impl.TempHealthCrewPassengerListServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempHealthCrewPassengerListService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempHealthCrewPassengerListPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempHealthCrewPassengerListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthQuestionLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempHealthQuestionLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthQuestionLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempHealthQuestionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempHealthQuestionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthQuestionService" class="vn.gt.dao.noticeandmessage.service.impl.TempHealthQuestionServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempHealthQuestionServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempHealthQuestionServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempHealthQuestionService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempHealthQuestionPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempHealthQuestionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempMaritimePaymentConfigLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempMaritimePaymentConfigLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempMaritimePaymentConfigLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempMaritimePaymentConfigLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempMaritimePaymentConfigLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempMaritimePaymentConfigPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempMaritimePaymentConfigPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempNoTiceShipMessageLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageService" class="vn.gt.dao.noticeandmessage.service.impl.TempNoTiceShipMessageServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempNoTiceShipMessagePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempNoTiceShipMessagePersistenceImpl" parent="basePersistence" />
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempNoTiceShipMessageFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempNoTiceShipMessageFinderImpl" parent="basePersistence" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempPassengerDetailsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsService" class="vn.gt.dao.noticeandmessage.service.impl.TempPassengerDetailsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPassengerDetailsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerDetailsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerDetailsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerListLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempPassengerListLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerListLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPassengerListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPassengerListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerListService" class="vn.gt.dao.noticeandmessage.service.impl.TempPassengerListServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPassengerListServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPassengerListServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPassengerListService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerListPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerListFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempPassengerListFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPersonListLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempPersonListLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPersonListLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPersonListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPersonListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPersonListPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempPersonListPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempPlantQuarantineLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineService" class="vn.gt.dao.noticeandmessage.service.impl.TempPlantQuarantineServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempPlantQuarantineService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPlantQuarantinePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempPlantQuarantinePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempPlantQuarantineFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempPlantQuarantineFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipSecurityMessageLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipSecurityMessageServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityMessagePersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityMessagePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityMessageFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityMessageFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipSecurityPortItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipSecurityPortItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipSecurityPortItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityPortItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityPortItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityPortItemsFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipSecurityPortItemsFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipStoresDeclarationLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipStoresDeclarationServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipStoresDeclarationService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresDeclarationPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresDeclarationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresDeclarationFinder" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresDeclarationFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipStoresItemsLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsService" class="vn.gt.dao.noticeandmessage.service.impl.TempShipStoresItemsServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempShipStoresItemsService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresItemsPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempShipStoresItemsPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempUnitGeneralLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempUnitGeneralLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempUnitGeneralLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempUnitGeneralLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempUnitGeneralLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempUnitGeneralService" class="vn.gt.dao.noticeandmessage.service.impl.TempUnitGeneralServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempUnitGeneralServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempUnitGeneralServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempUnitGeneralService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempUnitGeneralPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempUnitGeneralPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.TempWasteListLocalService" class="vn.gt.dao.noticeandmessage.service.impl.TempWasteListLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.TempWasteListLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.TempWasteListLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.TempWasteListLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.TempWasteListPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.TempWasteListPersistenceImpl" parent="basePersistence" />
+	<bean id="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucLocalService" class="vn.gt.dao.noticeandmessage.service.impl.ViewHoanThanhThuTucLocalServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucLocalServiceUtil" class="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucService" class="vn.gt.dao.noticeandmessage.service.impl.ViewHoanThanhThuTucServiceImpl" />
+	<bean id="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucServiceUtil" class="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucServiceUtil">
+		<property name="service" ref="vn.gt.dao.noticeandmessage.service.ViewHoanThanhThuTucService" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.ViewHoanThanhThuTucPersistence" class="vn.gt.dao.noticeandmessage.service.persistence.ViewHoanThanhThuTucPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.noticeandmessage.service.persistence.ViewHoanThanhThuTucFinder" class="vn.gt.dao.noticeandmessage.service.persistence.ViewHoanThanhThuTucFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.LogMessageValidationLocalService" class="vn.gt.dao.common.service.impl.LogMessageValidationLocalServiceImpl" />
+	<bean id="vn.gt.dao.common.service.LogMessageValidationLocalServiceUtil" class="vn.gt.dao.common.service.LogMessageValidationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.common.service.LogMessageValidationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.persistence.LogMessageValidationPersistence" class="vn.gt.dao.common.service.persistence.LogMessageValidationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.UserPortLocalService" class="vn.gt.dao.common.service.impl.UserPortLocalServiceImpl" />
+	<bean id="vn.gt.dao.common.service.UserPortLocalServiceUtil" class="vn.gt.dao.common.service.UserPortLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.common.service.UserPortLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.persistence.UserPortPersistence" class="vn.gt.dao.common.service.persistence.UserPortPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.UserSignLocalService" class="vn.gt.dao.common.service.impl.UserSignLocalServiceImpl" />
+	<bean id="vn.gt.dao.common.service.UserSignLocalServiceUtil" class="vn.gt.dao.common.service.UserSignLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.common.service.UserSignLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.common.service.persistence.UserSignPersistence" class="vn.gt.dao.common.service.persistence.UserSignPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmCertificateLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmCertificateLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmCertificateLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmCertificateLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmCertificateLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmCertificateService" class="vn.gt.dao.danhmucgt.service.impl.DmCertificateServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmCertificateServiceUtil" class="vn.gt.dao.danhmucgt.service.DmCertificateServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmCertificateService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmCertificatePersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmCertificatePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGTBusinessTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeService" class="vn.gt.dao.danhmucgt.service.impl.DmGTBusinessTypeServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTBusinessTypeService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGTBusinessTypePersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGTBusinessTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGTFunctionTypeLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeService" class="vn.gt.dao.danhmucgt.service.impl.DmGTFunctionTypeServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGTFunctionTypePersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGTFunctionTypePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtOrganizationLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtOrganizationLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtOrganizationLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtOrganizationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtOrganizationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtOrganizationService" class="vn.gt.dao.danhmucgt.service.impl.DmGtOrganizationServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtOrganizationServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtOrganizationServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtOrganizationService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtOrganizationPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtOrganizationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportCategoryLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtReportCategoryLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportCategoryLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtReportCategoryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtReportCategoryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportCategoryService" class="vn.gt.dao.danhmucgt.service.impl.DmGtReportCategoryServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportCategoryServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtReportCategoryServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtReportCategoryService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtReportCategoryPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtReportCategoryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportTemplateLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtReportTemplateLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportTemplateLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtReportTemplateLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtReportTemplateLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportTemplateService" class="vn.gt.dao.danhmucgt.service.impl.DmGtReportTemplateServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtReportTemplateServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtReportTemplateServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtReportTemplateService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtReportTemplatePersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtReportTemplatePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtRouteConfigLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtRouteConfigLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtRouteConfigLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtRouteConfigLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtRouteConfigLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtRouteConfigService" class="vn.gt.dao.danhmucgt.service.impl.DmGtRouteConfigServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtRouteConfigServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtRouteConfigServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtRouteConfigService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtRouteConfigPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtRouteConfigPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTShipPositionLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGTShipPositionLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTShipPositionLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTShipPositionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTShipPositionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTShipPositionService" class="vn.gt.dao.danhmucgt.service.impl.DmGTShipPositionServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGTShipPositionServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGTShipPositionServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGTShipPositionService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGTShipPositionPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGTShipPositionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGTShipPositionFinder" class="vn.gt.dao.danhmucgt.service.persistence.DmGTShipPositionFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtStatusLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtStatusLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtStatusLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtStatusLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtStatusLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtStatusService" class="vn.gt.dao.danhmucgt.service.impl.DmGtStatusServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtStatusServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtStatusServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtStatusService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtStatusPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtStatusPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtStatusFinder" class="vn.gt.dao.danhmucgt.service.persistence.DmGtStatusFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtVersionLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmGtVersionLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmGtVersionLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmGtVersionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmGtVersionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmGtVersionPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmGtVersionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmHistoryMinistryLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmHistoryMinistryLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmHistoryMinistryLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmHistoryMinistryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmHistoryMinistryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmHistoryMinistryService" class="vn.gt.dao.danhmucgt.service.impl.DmHistoryMinistryServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmHistoryMinistryServiceUtil" class="vn.gt.dao.danhmucgt.service.DmHistoryMinistryServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmHistoryMinistryService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmHistoryMinistryPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmHistoryMinistryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmMinistryLocalService" class="vn.gt.dao.danhmucgt.service.impl.DmMinistryLocalServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmMinistryLocalServiceUtil" class="vn.gt.dao.danhmucgt.service.DmMinistryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmMinistryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.DmMinistryService" class="vn.gt.dao.danhmucgt.service.impl.DmMinistryServiceImpl" />
+	<bean id="vn.gt.dao.danhmucgt.service.DmMinistryServiceUtil" class="vn.gt.dao.danhmucgt.service.DmMinistryServiceUtil">
+		<property name="service" ref="vn.gt.dao.danhmucgt.service.DmMinistryService" />
+	</bean>
+	<bean id="vn.gt.dao.danhmucgt.service.persistence.DmMinistryPersistence" class="vn.gt.dao.danhmucgt.service.persistence.DmMinistryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultCertificateLocalService" class="vn.gt.dao.result.service.impl.ResultCertificateLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultCertificateLocalServiceUtil" class="vn.gt.dao.result.service.ResultCertificateLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultCertificateLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultCertificateService" class="vn.gt.dao.result.service.impl.ResultCertificateServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultCertificateServiceUtil" class="vn.gt.dao.result.service.ResultCertificateServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultCertificateService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultCertificatePersistence" class="vn.gt.dao.result.service.persistence.ResultCertificatePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultCompetionLocalService" class="vn.gt.dao.result.service.impl.ResultCompetionLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultCompetionLocalServiceUtil" class="vn.gt.dao.result.service.ResultCompetionLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultCompetionLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultCompetionService" class="vn.gt.dao.result.service.impl.ResultCompetionServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultCompetionServiceUtil" class="vn.gt.dao.result.service.ResultCompetionServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultCompetionService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultCompetionPersistence" class="vn.gt.dao.result.service.persistence.ResultCompetionPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultDeclarationLocalService" class="vn.gt.dao.result.service.impl.ResultDeclarationLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultDeclarationLocalServiceUtil" class="vn.gt.dao.result.service.ResultDeclarationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultDeclarationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultDeclarationService" class="vn.gt.dao.result.service.impl.ResultDeclarationServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultDeclarationServiceUtil" class="vn.gt.dao.result.service.ResultDeclarationServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultDeclarationService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultDeclarationPersistence" class="vn.gt.dao.result.service.persistence.ResultDeclarationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultDeclarationFinder" class="vn.gt.dao.result.service.persistence.ResultDeclarationFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultHistoryMinistryLocalService" class="vn.gt.dao.result.service.impl.ResultHistoryMinistryLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultHistoryMinistryLocalServiceUtil" class="vn.gt.dao.result.service.ResultHistoryMinistryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultHistoryMinistryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultHistoryMinistryService" class="vn.gt.dao.result.service.impl.ResultHistoryMinistryServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultHistoryMinistryServiceUtil" class="vn.gt.dao.result.service.ResultHistoryMinistryServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultHistoryMinistryService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultHistoryMinistryPersistence" class="vn.gt.dao.result.service.persistence.ResultHistoryMinistryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultHistoryMinistryFinder" class="vn.gt.dao.result.service.persistence.ResultHistoryMinistryFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultMinistryLocalService" class="vn.gt.dao.result.service.impl.ResultMinistryLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultMinistryLocalServiceUtil" class="vn.gt.dao.result.service.ResultMinistryLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultMinistryLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultMinistryService" class="vn.gt.dao.result.service.impl.ResultMinistryServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultMinistryServiceUtil" class="vn.gt.dao.result.service.ResultMinistryServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultMinistryService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultMinistryPersistence" class="vn.gt.dao.result.service.persistence.ResultMinistryPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultMinistryFinder" class="vn.gt.dao.result.service.persistence.ResultMinistryFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultNotificationLocalService" class="vn.gt.dao.result.service.impl.ResultNotificationLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultNotificationLocalServiceUtil" class="vn.gt.dao.result.service.ResultNotificationLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultNotificationLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.ResultNotificationService" class="vn.gt.dao.result.service.impl.ResultNotificationServiceImpl" />
+	<bean id="vn.gt.dao.result.service.ResultNotificationServiceUtil" class="vn.gt.dao.result.service.ResultNotificationServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.ResultNotificationService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultNotificationPersistence" class="vn.gt.dao.result.service.persistence.ResultNotificationPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.ResultNotificationFinder" class="vn.gt.dao.result.service.persistence.ResultNotificationFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.TempDebitNoteLocalService" class="vn.gt.dao.result.service.impl.TempDebitNoteLocalServiceImpl" />
+	<bean id="vn.gt.dao.result.service.TempDebitNoteLocalServiceUtil" class="vn.gt.dao.result.service.TempDebitNoteLocalServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.TempDebitNoteLocalService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.TempDebitNoteService" class="vn.gt.dao.result.service.impl.TempDebitNoteServiceImpl" />
+	<bean id="vn.gt.dao.result.service.TempDebitNoteServiceUtil" class="vn.gt.dao.result.service.TempDebitNoteServiceUtil">
+		<property name="service" ref="vn.gt.dao.result.service.TempDebitNoteService" />
+	</bean>
+	<bean id="vn.gt.dao.result.service.persistence.TempDebitNotePersistence" class="vn.gt.dao.result.service.persistence.TempDebitNotePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.dao.gt.asw.service.AswmsgMessageQueueLocalService" class="vn.dao.gt.asw.service.impl.AswmsgMessageQueueLocalServiceImpl" />
+	<bean id="vn.dao.gt.asw.service.AswmsgMessageQueueLocalServiceUtil" class="vn.dao.gt.asw.service.AswmsgMessageQueueLocalServiceUtil">
+		<property name="service" ref="vn.dao.gt.asw.service.AswmsgMessageQueueLocalService" />
+	</bean>
+	<bean id="vn.dao.gt.asw.service.persistence.AswmsgMessageQueuePersistence" class="vn.dao.gt.asw.service.persistence.AswmsgMessageQueuePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.dao.gt.asw.service.persistence.AswmsgMessageQueueFinder" class="vn.dao.gt.asw.service.persistence.AswmsgMessageQueueFinderImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+	<bean id="vn.dao.gt.asw.service.MonitorMessageQueueLocalService" class="vn.dao.gt.asw.service.impl.MonitorMessageQueueLocalServiceImpl" />
+	<bean id="vn.dao.gt.asw.service.MonitorMessageQueueLocalServiceUtil" class="vn.dao.gt.asw.service.MonitorMessageQueueLocalServiceUtil">
+		<property name="service" ref="vn.dao.gt.asw.service.MonitorMessageQueueLocalService" />
+	</bean>
+	<bean id="vn.dao.gt.asw.service.persistence.MonitorMessageQueuePersistence" class="vn.dao.gt.asw.service.persistence.MonitorMessageQueuePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="gtDataSource" />
+	</bean>
+</beans>

@@ -1,0 +1,83 @@
+<%@page import="vn.gt.dao.result.service.ResultDeclarationLocalServiceUtil"%>
+<%@page import="vn.gt.dao.result.model.ResultDeclaration"%>
+<%@page import="vn.gt.utils.PageType"%>
+<%@page import="vn.gt.utils.CheckBusinessUtil"%>
+<%@page import="vn.gt.tichhop.message.MessageType"%>
+<%@page import="vn.gt.dao.danhmucgt.service.DmGtStatusLocalServiceUtil"%>
+<%@page import="vn.gt.dao.danhmucgt.service.DmGTFunctionTypeLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page pageEncoding="UTF-8"%>
+
+<tr <%=CheckBusinessUtil.checkDisplayColumnLichSu(renderRequest.getParameter(PageType.REQUEST_CODE), requestCodeThuTucDetail, i + 1, results.size()) %>>
+	<td class="text-center"><%= i + 1%></td>
+	<!-- -----------------PHIEN BAN---------------------- -->
+	<%
+	String versionPhienBan = interfaceRequest.getRequestVersion();
+	if ((messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_BO_GTVT_CAP_KHI_XUAT_CANH)) == 0) ||
+		(messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_QUA_CANH)) == 0) ||
+		(messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0)
+		|| (messageType.compareTo(String.valueOf(MessageType.PTTND_GIAY_PHEP_VAO_CANG)) == 0)
+		|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_CHO_TAU_DEN)) == 0) ) {
+		
+		versionPhienBan = versionNo;
+	}
+	String phienBan = versionPhienBan + " - " + (Validator.isNotNull(interfaceRequest) ? DmGTFunctionTypeLocalServiceUtil.findNameByFunctionTypeCode(interfaceRequest.getFunctionType()) : "");		
+	%>
+	<td class="text-center"><a href="<%=requestCodeThuTuc %>"><%=phienBan%></a></td>	
+	<!-- -----------------TRANG THAI---------------------- -->
+	<%
+	if (requestStateThuTuc == 4 || requestStateThuTuc == 9) {
+		if (((messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_BO_GTVT_CAP_KHI_XUAT_CANH)) == 0)
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_QUA_CANH)) == 0)
+				|| (messageType.compareTo(String.valueOf(MessageType.PTTND_GIAY_PHEP_VAO_CANG)) == 0)
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_CHO_TAU_DEN)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0)) && requestStateThuTuc == 4 && isApproval == 1 ){
+			%>
+			<td class="text-center"><span style="color:#0054FF;"><label>Đã duyệt</label></span></td>
+			<%
+		} else {
+			%>
+			<td class="text-center"><span style="color:#0054FF;"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateThuTuc, MessageType.TRANG_THAI_BAN_KHAI) %></span></td>
+			<%
+		}
+	} else if (requestStateThuTuc == 5 || requestStateThuTuc == 6) {
+		%>
+		<td class="text-center"><span style="color:#FF0000;"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateThuTuc, MessageType.TRANG_THAI_BAN_KHAI) %></span></td>
+		<%
+	} else {
+		%>
+		<td class="text-center"><%=DmGtStatusLocalServiceUtil.findNameByStatusCode(requestStateThuTuc, MessageType.TRANG_THAI_BAN_KHAI) %></td>
+		<%
+	}
+	%>	
+	<!-- --------------------Ngày nộp/ sửa------------- -->
+	<td class="text-center"><%=FormatData.parseDateToTringType3(interfaceRequest.getRequestedDate()) %></td>	
+	<!-- -------------------Người làm thủ tục--------------- -->
+	<td class="text-center"><%=interfaceRequest.getSenderName() %></td>	
+	<!-- -------------------Người nộp/ Cán bộ--------------- -->
+	<td class="text-center"><%=(messageType.compareTo(String.valueOf(MessageType.LENH_DIEU_DONG)) == 0) ? "Cán bộ kế hoạch" : 
+		(((messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_BO_GTVT_CAP_KHI_XUAT_CANH)) == 0) 
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_QUA_CANH)) == 0)
+				|| (messageType.compareTo(String.valueOf(MessageType.PTTND_GIAY_PHEP_VAO_CANG)) == 0)
+				|| (messageType.compareTo(String.valueOf(MessageType.GIAY_PHEP_ROI_CANG_CHO_TAU_DEN)) == 0)) ? "Cán bộ thủ tục" : "NLTT nộp")%></td>	
+	<!-- -------------------Ghi chú--------------------- -->
+	<%
+	String interfaceReq = interfaceRequest.getRemarks();
+	ResultDeclaration resultDeclaration =  ResultDeclarationLocalServiceUtil.findbyDocumentNameAndBusinessTypeCodeAndDocumentYearRequestCode(Integer.valueOf(messageType) , Long.valueOf(documentName), Integer.valueOf(documentYear), results.get(i).getRequestCode());
+	if (interfaceReq.trim().length() > 0) {
+		%>
+		<td class="text-left"><%=interfaceReq %></td>
+		<%
+	} else {
+		if(resultDeclaration != null) {
+		%>
+		<td class="text-left"><%=resultDeclaration.getRemarks() %></td>
+		<%
+		} else {
+		%>
+		<td class="text-left"></td>
+		<%
+		}
+	}
+	%>
+</tr>
