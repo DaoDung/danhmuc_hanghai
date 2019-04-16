@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="374" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="669" key="dialogHeight"/>
+		<item value="829" key="dialogWidth"/>
+		<list key="textEntries">
+			<item value="1"/>
+		</list>
+		<list key="orderedElements">
+			<item value="com.liferay.ide.eclipse.ui.perspective.liferayworkspace"/>
+		</list>
+		<list key="orderedProviders">
+			<item value="org.eclipse.ui.perspectives"/>
+		</list>
+		<list key="textArray">
+			<item value="liferay"/>
+		</list>
+	</section>
+	<section name="ImportExportAction">
+		<item value="com.liferay.ide.project.ui.parentSDKProjectImportWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="com.liferay.ide.projects.import"/>
+		</list>
+	</section>
+</section>
