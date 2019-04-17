@@ -1,0 +1,7 @@
+.text-center {
+    text-align: center;
+}
+.application .theme--light.subheader, .theme--light .subheader {
+    height: 32px;
+    color: black;
+}
