@@ -7,10 +7,12 @@ import HomeDataTableKeToan from '@/components/Home_data_table_ke_toan.vue'
 import NotFound from '@/components/NotFound.vue'
 import Detail from '@/components/Detail.vue'
 import DetailHoSo from '@/components/DetailHoSo.vue'
+import DetailTauBien from '@/components/DetailTauBien.vue'
 import MessageType from '@/components/MessageType.vue'
 import DetailHoSoAction from '@/components/DetailHoSoAction.vue'
 import MessageTypeAction from '@/components/MessageTypeAction.vue'
 import NoPermission from '@/components/NoPermission.vue'
+import HomeDataTableQLTB from '@/components/Home_data_quanly_tau_bien.vue'
 
 Vue.use(Router)
 
@@ -23,6 +25,30 @@ export default new Router({
         {
           path: '/danh-sach-ho-so/:type/:documentTypeCode/:documentStatusCode',
           component: HomeDataTable,
+          props: true
+        }
+      ],
+      props: true
+    },
+    {
+      path: '/quan-ly-tau-bien',
+      component: Home,
+      children: [
+        {
+          path: '/quan-ly-tau-bien/:code/:type/:documentTypeCode/:documentStatusCode',
+          component: HomeDataTableQLTB,
+          props: true
+        }
+      ],
+      props: true
+    },
+    {
+      path: '/tau-bien/:code/:type/:documentName/:documentYear/:documentTypeCode',
+      component: Detail,
+      children: [
+        {
+          path: '/tau-bien/:code/:type/:documentName/:documentYear/:documentTypeCode',
+          component: DetailTauBien,
           props: true
         }
       ],

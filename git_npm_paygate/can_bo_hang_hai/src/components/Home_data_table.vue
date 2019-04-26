@@ -381,7 +381,53 @@
         </div>
       </div>
     </v-flex>
+    
+    <v-flex>
+      <content-placeholders v-if="loading">
+        <content-placeholders-img />
+        <content-placeholders-heading />
+      </content-placeholders>
 
+      <v-data-table
+        v-else
+        :headers="headersPayment"
+        :items="loadHomeDataTablePayment.data"
+        class="table-bordered danhSachHoSoTable__class"
+        hide-actions
+        :no-data-text="'Không tìm thấy phiếu thanh toán'"
+        :no-results-text="'Không tìm thấy phiếu thanh toán'"
+      >
+        <template slot="items" slot-scope="props">
+          <td class="text-xs-left">
+            {{ loadHomeDataTablePagePayment * 15 - 15 + props.index + 1 }}
+          </td>
+          <td class="text-xs-center">
+          {{props.item.documentName}} <br/>
+          <small v-if="props.item.paymenttype > 0" style="
+              color: #0e70bc;
+          ">( {{paymentTypeData[props.item.paymenttype]}} {{paymentMarkDelete[props.item.markasdeleted]}})</small>
+          </td>
+          <td class="text-xs-center">
+          {{props.item.tenTau}}
+          </td>
+          <td class="text-xs-center">
+          {{props.item.hoHieu}}
+          </td>
+          <td class="text-xs-center">
+          {{props.item.imo}}
+          </td>
+          <td class="text-xs-center">
+          {{supportData.data_state[props.item.quocTich]}}
+          </td>
+          <td class="text-xs-center">
+          {{props.item.daiLy}}
+          </td>
+          <td class="text-xs-center">{{props.item.debitnotenumber}}</td>
+          <td class="text-xs-center"> {{props.item.reportdate | moment("DD/MM/YYYY | HH:mm")}}</td>
+          <td class="text-xs-center red--text">{{props.item.totalpayment | money}}</td>
+        </template>
+      </v-data-table>
+    </v-flex>
   </v-layout>
 
 </template>

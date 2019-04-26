@@ -672,3 +672,32 @@ body .absolute__btn_panel {
 .active--left--filter {
   background-color: #dad9d9;
 }
+
+.search-top {
+  display: flex;
+  flex-grow: 1;
+}
+
+.search-top>span, i.v-icon {
+  display: flex;
+  align-items: center;
+}
+
+.search-top-right {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.search-top-right>span {
+  display: flex;
+  align-items: center;
+}
+
+.search-top-right button {
+  align-self: center;
+}
+
+.v-btn {
+  text-transform: none;
+}

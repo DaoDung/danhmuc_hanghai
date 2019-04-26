@@ -86,6 +86,44 @@ export const store = new Vuex.Store({
         })
       })
     },
+    loadDanhSachTauBien ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: data
+          }
+          // if (data.type === 'ke_hoach') {
+          //   param.params['requestState'] = data.documentStatusCode
+          // } else if (data.type === 'thu_tuc') {
+          //   param.params['documentStatusCode'] = data.documentStatusCode
+          // }
+          // param.params['isDTND'] = state.initData.user.isDTND
+          // param.params['isDTNDCam'] = state.initData.user.isDTNDCam
+          let urlRequest = state.initData.getHoSoKeHoachTable
+          // if (data.type === 'ke_hoach') {
+          //   urlRequest = state.initData.getHoSoKeHoachTable
+          // } else if (data.type === 'thu_tuc') {
+          //   urlRequest = state.initData.getHoSoThuTucTable
+          // } else if (data.type === 'lanh_dao') {
+          //   urlRequest = state.initData.getHistoryTable
+          //   param.params['documentTypeCode'] = 'document_sign'
+          // } else if (data.type === 'van_thu') {
+          //   urlRequest = state.initData.getHistoryTable
+          //   param.params['documentTypeCode'] = 'document_approve'
+          // } else {
+          //   urlRequest = state.initData.getHoSoKeHoachTable
+          // }
+          axios.get(urlRequest, param).then(function (response) {
+            let serializable = response.data
+            console.log(serializable)
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
     loadHomeDataPaymentTable ({commit, state}, data) {
       return new Promise((resolve, reject) => {
         store.dispatch('loadInitResource').then(function (result) {
@@ -148,6 +186,27 @@ export const store = new Vuex.Store({
             }
           }
           axios.get(state.initData.getDetailByDocumentName, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadDetailTauBien ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'documentType': filter.documentType,
+              'documentName': filter.documentName,
+              'documentYear': filter.documentYear,
+              'type': filter.type
+            }
+          }
+          axios.get(state.initData.getDetailPhuongTienByDocumentName, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {

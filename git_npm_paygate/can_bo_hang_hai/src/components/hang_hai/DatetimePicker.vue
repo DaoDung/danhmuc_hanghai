@@ -10,7 +10,7 @@
             cursor: pointer;
         ">event</v-icon>
         <div v-show="showMyself" class="bootstrap-datetimepicker-widget dropdown-menu">
-            <ul style="padding: 0px;z-index: 20;" >
+            <ul style="padding: 0px;z-index: 20;">
                 <li>
                     <div class="datepicker">
                         <div class="datepicker-days">
@@ -36,7 +36,7 @@
                                             day.isToday? 'today': null,
                                             !day.isCurrentMonth? 'not-present': null]"
                                         @click="selectDate(day.date)"
-                                    >{{ (showDst && day.date.isDST()?'*':'')+day.date.format('D') }}</td>
+                                    >{{ (showDst && day.date.isDST()?'*':'') + day.date.format('D') }}</td>
                                 </tr>
                                 </tbody>
                             </table>

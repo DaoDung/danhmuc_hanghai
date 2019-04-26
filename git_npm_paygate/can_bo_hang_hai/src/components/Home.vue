@@ -121,6 +121,7 @@ export default {
         }
         if (allLoad) {
           vm.$store.getters.roleFilterStatus(filter).then(function (result) {
+            // TODO
             vm.roleFilterStatus = result
             if (vm.type === 'ke_hoach') {
               setTimeout(() => {

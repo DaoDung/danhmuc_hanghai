@@ -40,6 +40,7 @@
       <v-list v-if="document_type_code != 0" class="py-0 nav_trang_thai_ho_so"> 
         <v-list-group v-for="(item, index) in role_filter_status" 
           :value="item.id_active === type" 
+          v-if="item.id_active !== 'quan_ly_tau'"
           v-bind:key="index" >
           <v-list-tile slot="activator"
           :to="'/danh-sach-ho-so/' + item.id_active + '/' + document_type_code + '/' + 0">
@@ -231,6 +232,51 @@
 
       </v-list-tile>
     </div>
+
+    <div class="flex xs12" v-if="type === 'ke_hoach' || type === 'thu_tuc' || type === 'quan_ly_tau'">
+      <v-list v-if="document_type_code != 0" class="py-0 nav_trang_thai_ho_so"> 
+        <v-list-group v-for="(item, index) in role_filter_status" v-if="item.id_active === 'quan_ly_tau'"
+          :value="item.id_active === type" 
+          v-bind:key="index" >
+          <v-list-tile slot="activator"
+          :to="'/quan-ly-tau-bien/DanhSachTauBien/' + item.id_active + '/' + document_type_code + '/' + 0">
+            <v-list-tile-action> 
+              <v-icon color="primary">{{ item.action }}</v-icon> 
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <span class="status__counter">{{ item.counter }}</span> 
+            </v-list-tile-content>
+          </v-list-tile>
+
+          <v-list-tile v-for="(subItem, subIndex) in item.items"
+            v-bind:key="subIndex"
+            :to="{path: '/quan-ly-tau-bien/' + subItem.type + '/' + item.id_active + '/' + document_type_code + '/' + subItem.code, 
+                  query: {
+                    'page': 1
+                  }
+                  }">
+
+            <v-list-tile-action> 
+             <v-icon v-if="subItem.code == document_status_code">play_arrow</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content> 
+              <v-list-tile-title> {{ subItem.title }} </v-list-tile-title>  
+              <span v-if="subItem.counter > -1" class="status__counter">
+                {{subItem.counter}}
+              </span>
+              <span v-else class="status__counter">
+                <v-progress-circular :width="1" :size="16" indeterminate color="red"></v-progress-circular>
+              </span>
+            </v-list-tile-content>
+
+          </v-list-tile>
+
+        </v-list-group> 
+      </v-list>
+    </div>
+
   </div>
 </template>
 
