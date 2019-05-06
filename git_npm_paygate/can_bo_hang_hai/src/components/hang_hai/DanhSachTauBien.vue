@@ -1,241 +1,251 @@
 <template>
     <div>
-      <div style="display: flex; background-color: #fff;">
-        <div class="search-top">
-          <span style="margin: 0 10px;">
-            Ngày: 
-          </span>
-          <v-menu
-            ref="menuTopNeoTau"
-            :close-on-content-click="false"
-            v-model="menuTopNeoTau"
-            :nudge-right="40"
-            lazy
-            transition="scale-transition"
-            offset-y
-            full-width
-            max-width="290px"
-            min-width="290px"
-          >
-            <v-text-field
-              slot="activator"
-              v-model="searchTopNeoTau"
-              persistent-hint
-              class="pb-0 my-0"
-            ></v-text-field>
-            <v-date-picker v-model="dateSearchTopNeoTau" no-title @input="menuTopNeoTau = false"></v-date-picker>
-          </v-menu>
-          <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
-        </div>
-        <div class="search-top-right">
-           <v-btn flat small class="mx-0" @click="refreshSearch()"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
-           <span>|</span>
-           <v-btn flat small class="mx-0"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
-        </div>
-      </div>
-      <v-data-table
-        :headers="headersDsTauBien"
-        :items="itemsDsTauBien"
-        class="table-bordered danhSachHoSoTable__class"
-        hide-actions
-        :no-data-text="'Không tìm thấy kế hoạch nào'"
-        :no-results-text="'Không tìm thấy kế hoạch nào'"
-      >
-        <template slot="headers" slot-scope="props">
-          <tr style="background: #eaeaea;">
-            <th
-              v-for="header in props.headers"
-              :key="header.text"
-              v-html="header.text"
+      <content-placeholders v-if="loading">
+        <content-placeholders-img />
+        <content-placeholders-heading />
+      </content-placeholders>
+      <div v-else>
+        <div style="display: flex; background-color: #fff;">
+          <div class="search-top">
+            <span style="margin: 0 10px;">
+              Ngày: 
+            </span>
+            <v-menu
+              ref="menuTopNeoTau"
+              :close-on-content-click="false"
+              v-model="menuTopNeoTau"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
             >
-            </th>
-          </tr>
-          <tr class="" style="border-bottom: 1px solid #ccc;">
-            <th>
-            </th>
-            <th>
               <v-text-field
-              v-model="adv.tenTauDSTB"
-              class="px-0 py-0 mx-0 my-0"
+                slot="activator"
+                v-model="searchTopNeoTau"
+                persistent-hint
+                class="pb-0 my-0"
               ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.daiLyDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.shipDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.quocTichDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.hoHieuDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.chuTauDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.ngKhaiThacDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.loaiTauDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.capDoAnNinhDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.gtDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.dwtDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.phanLoaiDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.ntDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.loaDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.breadthDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.drafDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.chieuCaoDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.monNuocMuiDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.monNuocTkeDSTB"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-          </tr>
-        </template>
-        <template slot="items" slot-scope="props">
-          <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
-            {{ loadDataTablePageDSTB * 15 - 15 + props.index + 1 }}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.tenTauDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.daiLyDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.shipDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.quocTichDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.hoHieuDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.chuTauDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">        
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.ngKhaiThacDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.loaiTauDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.capDoAnNinhDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.gtDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.dwtDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.phanLoaiDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.ntDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.loaDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.breadthDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">        
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.drafDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.chieuCaoDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.monNuocMuiDSTB}}</a>
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.monNuocTkeDSTB}}</a>
-          </td>
-        </template>
-      </v-data-table>
-      <div class="text-xs-right layout wrap" style="position: relative;">
-        <div class="flex pagging-table px-2"> 
-          <tiny-pagination :total="totalDsTauBien" :page="loadDataTablePageDSTB" custom-class="custom-tiny-class" 
-            @tiny:change-page="paggingData" ></tiny-pagination> 
+              <v-date-picker v-model="dateSearchTopNeoTau" no-title @input="menuTopNeoTau = false"></v-date-picker>
+            </v-menu>
+            <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
+          </div>
+          <div class="search-top-right">
+             <v-btn flat small class="mx-0" @click="themMoi()"> <v-icon size="17">add</v-icon> Thêm mới</v-btn>
+             <span>|</span>
+             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
+             <span>|</span>
+             <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
+          </div>
+        </div>
+        <v-data-table
+          :headers="headersDsTauBien"
+          :items="itemsDsTauBien"
+          class="table-bordered danhSachHoSoTable__class table-tau-bien"
+          hide-actions
+          style="max-width: 1095px;"
+          :no-data-text="'Không tìm thấy kế hoạch nào'"
+          :no-results-text="'Không tìm thấy kế hoạch nào'"
+        >
+          <template slot="headers" slot-scope="props">
+            <tr style="background: #eaeaea;">
+              <th
+                v-for="header in props.headers"
+                :key="header.text"
+                v-html="header.text"
+              >
+              </th>
+            </tr>
+            <tr class="" style="border-bottom: 1px solid #ccc;">
+              <th>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.tenTauDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.daiLyDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.shipDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.quocTichDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.hoHieuDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.chuTauDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.ngKhaiThacDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.loaiTauDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.capDoAnNinhDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.gtDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.dwtDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-select
+                  :items="phanLoaiItems"
+                  v-model="adv.phanLoaiDSTB"
+                  class="px-0 py-0 mx-0 my-0"
+                ></v-select>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.ntDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.loaDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.breadthDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.drafDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.chieuCaoDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.monNuocMuiDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.monNuocTkeDSTB"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+            </tr>
+          </template>
+          <template slot="items" slot-scope="props">
+            <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
+              {{ loadDataTablePageDSTB * 15 - 15 + props.index + 1 }}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.tenTauDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.daiLyDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.shipDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.quocTichDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.hoHieuDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.chuTauDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">        
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.ngKhaiThacDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.loaiTauDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.capDoAnNinhDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.gtDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.dwtDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.phanLoaiDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.ntDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.loaDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.breadthDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">        
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.drafDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.chieuCaoDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.monNuocMuiDSTB}}</a>
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              <a href="javascript:;" @click="toDetailTauBien(props.item)">{{props.item.monNuocTkeDSTB}}</a>
+            </td>
+          </template>
+        </v-data-table>
+        <div class="text-xs-right layout wrap" style="position: relative;">
+          <div class="flex pagging-table px-2"> 
+            <tiny-pagination :total="totalDsTauBien" :page="loadDataTablePageDSTB" custom-class="custom-tiny-class" 
+              @tiny:change-page="paggingData" ></tiny-pagination> 
+          </div>
         </div>
       </div>
     </div>
@@ -277,6 +287,7 @@ export default {
       monNuocMuiDSTB: '',
       monNuocTkeDSTB: ''
     },
+    phanLoaiItems: [],
     headersDsTauBien: [
       {
         'text': 'STT',
@@ -297,7 +308,7 @@ export default {
         'id': 'stt'
       },
       {
-        'text': 'Ship ID CHH',
+        'text': 'Ship <br> ID CHH',
         'align': 'center',
         'sortable': false,
         'id': 'stt'
@@ -321,7 +332,7 @@ export default {
         'id': 'stt'
       },
       {
-        'text': 'Người khai thác',
+        'text': 'Người <br> khai thác',
         'align': 'center',
         'sortable': false,
         'id': 'stt'
@@ -402,12 +413,10 @@ export default {
     itemsDsTauBien: [
     ],
     loadDataTablePageDSTB: 1,
-    totalDsTauBien: 0
+    totalDsTauBien: 0,
+    loading: false
   }),
   computed: {
-    loading () {
-      return this.$store.getters.loading
-    }
   },
   created () {
     var vm = this
@@ -432,8 +441,8 @@ export default {
       }
     }
     vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
-      vm.itemsDsTauBien = result.data
-      vm.totalDsTauBien = result.total
+      // vm.itemsDsTauBien = result.data
+      // vm.totalDsTauBien = result.total
       vm.loading = false
     })
   },
@@ -469,13 +478,15 @@ export default {
         }
       }
       vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
-        vm.itemsDsTauBien = result.data
-        vm.totalDsTauBien = result.total
+        // vm.itemsDsTauBien = result.data
+        // vm.totalDsTauBien = result.total
         vm.loading = false
       })
     }
   },
   methods: {
+    themMoi () {
+    },
     searchAdvTable () {
       var vm = this
       let current = vm.$router.history.current

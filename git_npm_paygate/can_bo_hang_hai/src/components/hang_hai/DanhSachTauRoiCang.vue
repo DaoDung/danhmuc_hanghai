@@ -28,16 +28,17 @@
             <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
           </div>
           <div class="search-top-right">
-             <v-btn flat small class="mx-0" @click="refreshSearch()"> <v-icon size="17">refresh</v-icon> Refresh</v-btn>
+             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn>
              <span>|</span>
-             <v-btn flat small class="mx-0"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
+             <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
           </div>
         </div>
         <v-data-table
         :headers="headersTauRoiCang"
         :items="itemsTauRoiCang"
-        class="table-bordered danhSachHoSoTable__class pb-4"
+        class="table-bordered danhSachHoSoTable__class table-tau-bien"
         hide-actions
+        style="max-width: 1095px;"
         :no-data-text="'Không tìm thấy kế hoạch nào'"
         :no-results-text="'Không tìm thấy kế hoạch nào'"
       >
@@ -130,7 +131,7 @@
         </template>
         <template slot="items" slot-scope="props">
           <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
-            {{ loadHomeDataTablePageNeoTau * 15 - 15 + props.index + 1 }}
+            {{ loadDataTablePageTauRoiCang * 15 - 15 + props.index + 1 }}
           </td>
           <td class="text-xs-center" style="padding-top: 5px;">
           {{props.item.tenTau}}

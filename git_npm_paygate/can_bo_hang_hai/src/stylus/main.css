@@ -701,3 +701,7 @@ body .absolute__btn_panel {
 .v-btn {
   text-transform: none;
 }
+
+.table-bordered.danhSachHoSoTable__class.table-tau-bien>div>table>thead>tr>th {
+  padding: 0 4px !important;
+}

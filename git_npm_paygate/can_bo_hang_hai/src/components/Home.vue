@@ -24,6 +24,7 @@
       :khu_cuc_cangs="khu_cuc_cangs"
       ref="filteradvF"
     ></jx-hanghai-filter-adv>
+    
     <router-view></router-view>
     
   </div>

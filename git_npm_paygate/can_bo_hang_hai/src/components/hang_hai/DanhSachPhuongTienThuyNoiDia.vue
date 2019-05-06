@@ -1,232 +1,241 @@
 <template>
     <div>
-      <div style="display: flex; background-color: #fff;">
-        <div class="search-top">
-          <span style="margin: 0 10px;">
-            Ngày: 
-          </span>
-          <v-menu
-            ref="menuTopNeoTau"
-            :close-on-content-click="false"
-            v-model="menuTopNeoTau"
-            :nudge-right="40"
-            lazy
-            transition="scale-transition"
-            offset-y
-            full-width
-            max-width="290px"
-            min-width="290px"
-          >
-            <v-text-field
-              slot="activator"
-              v-model="searchTopNeoTau"
-              persistent-hint
-              class="pb-0 my-0"
-            ></v-text-field>
-            <v-date-picker v-model="dateSearchTopNeoTau" no-title @input="menuTopNeoTau = false"></v-date-picker>
-          </v-menu>
-          <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
-        </div>
-        <div class="search-top-right">
-           <v-btn flat small class="mx-0" @click="refreshSearch()"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
-           <span>|</span>
-           <v-btn flat small class="mx-0"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
-        </div>
-      </div>
-      <v-data-table
-        :headers="headersDsThuyNoiDia"
-        :items="itemsDsThuyNoiDia"
-        class="table-bordered danhSachHoSoTable__class"
-        hide-actions
-        :no-data-text="'Không tìm thấy kế hoạch nào'"
-        :no-results-text="'Không tìm thấy kế hoạch nào'"
-      >
-        <template slot="headers" slot-scope="props">
-          <tr style="background: #eaeaea;">
-            <th
-              v-for="header in props.headers"
-              :key="header.text"
-              v-html="header.text"
+      <content-placeholders v-if="loading">
+        <content-placeholders-img />
+        <content-placeholders-heading />
+      </content-placeholders>
+      <div v-else>
+        <div style="display: flex; background-color: #fff;">
+          <div class="search-top">
+            <span style="margin: 0 10px;">
+              Ngày: 
+            </span>
+            <v-menu
+              ref="menuTopNeoTau"
+              :close-on-content-click="false"
+              v-model="menuTopNeoTau"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
             >
-            </th>
-          </tr>
-          <tr class="" style="border-bottom: 1px solid #ccc;">
-            <th>
-            </th>
-            <th>
               <v-text-field
-              v-model="adv.tenPtDSTND"
-              class="px-0 py-0 mx-0 my-0"
+                slot="activator"
+                v-model="searchTopNeoTau"
+                persistent-hint
+                class="pb-0 my-0"
               ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.loaiTauDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.tauKeoDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.gtDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.dwtDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.soNgToiDaDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.loaDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.soBangDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.breadthDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.soBangNtDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.capPtDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.congSuatMayDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.chuTauDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.diaChiDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.thuyenTruongDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.hangBangDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.mayTruongDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-            <th>
-              <v-text-field
-              v-model="adv.hangBangMtDSTND"
-              class="px-0 py-0 mx-0 my-0"
-              ></v-text-field>
-            </th>
-          </tr>
-        </template>
-        <template slot="items" slot-scope="props">
-          <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
-            {{ loadDataTablePageDSTND * 15 - 15 + props.index + 1 }}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.tenPtDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.loaiTauDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.tauKeoDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.gtDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.dwtDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.soNgToiDaDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">        
-            {{props.item.loaDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.soBangDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            {{props.item.breadthDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            {{props.item.soBangNtDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.capPtDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.congSuatMayDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.chuTauDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.diaChiDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">        
-            {{props.item.thuyenTruongDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-          {{props.item.hangBangDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            {{props.item.mayTruongDSTND}}
-          </td>
-          <td class="text-xs-center" style="padding-top: 5px;">
-            {{props.item.hangBangMtDSTND}}
-          </td>
-        </template>
-      </v-data-table>
-      <div class="text-xs-right layout wrap" style="position: relative;">
-        <div class="flex pagging-table px-2"> 
-          <tiny-pagination :total="totalDsThuyNoiDia" :page="loadDataTablePageDSTND" custom-class="custom-tiny-class" 
-            @tiny:change-page="paggingData" ></tiny-pagination> 
+              <v-date-picker v-model="dateSearchTopNeoTau" no-title @input="menuTopNeoTau = false"></v-date-picker>
+            </v-menu>
+            <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
+          </div>
+          <div class="search-top-right">
+             <v-btn flat small class="mx-0" @click="themMoi()"> <v-icon size="17">add</v-icon> Thêm mới</v-btn>
+             <span>|</span>
+             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn>
+             <span>|</span>
+             <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
+          </div>
+        </div>
+        <v-data-table
+          :headers="headersDsThuyNoiDia"
+          :items="itemsDsThuyNoiDia"
+          class="table-bordered danhSachHoSoTable__class table-tau-bien"
+          hide-actions
+          style="max-width: 1095px;"
+          :no-data-text="'Không tìm thấy kế hoạch nào'"
+          :no-results-text="'Không tìm thấy kế hoạch nào'"
+        >
+          <template slot="headers" slot-scope="props">
+            <tr style="background: #eaeaea;">
+              <th
+                v-for="header in props.headers"
+                :key="header.text"
+                v-html="header.text"
+              >
+              </th>
+            </tr>
+            <tr class="" style="border-bottom: 1px solid #ccc;">
+              <th>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.tenPtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.loaiTauDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.tauKeoDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.gtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.dwtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.soNgToiDaDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.loaDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.soBangDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.breadthDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.soBangNtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.capPtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.congSuatMayDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.chuTauDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.diaChiDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.thuyenTruongDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.hangBangDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.mayTruongDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+              <th>
+                <v-text-field
+                v-model="adv.hangBangMtDSTND"
+                class="px-0 py-0 mx-0 my-0"
+                ></v-text-field>
+              </th>
+            </tr>
+          </template>
+          <template slot="items" slot-scope="props">
+            <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
+              {{ loadDataTablePageDSTND * 15 - 15 + props.index + 1 }}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.tenPtDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.loaiTauDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.tauKeoDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.gtDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.dwtDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.soNgToiDaDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">        
+              {{props.item.loaDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.soBangDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              {{props.item.breadthDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              {{props.item.soBangNtDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.capPtDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.congSuatMayDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.chuTauDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.diaChiDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">        
+              {{props.item.thuyenTruongDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+            {{props.item.hangBangDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              {{props.item.mayTruongDSTND}}
+            </td>
+            <td class="text-xs-center" style="padding-top: 5px;">
+              {{props.item.hangBangMtDSTND}}
+            </td>
+          </template>
+        </v-data-table>
+        <div class="text-xs-right layout wrap" style="position: relative;">
+          <div class="flex pagging-table px-2"> 
+            <tiny-pagination :total="totalDsThuyNoiDia" :page="loadDataTablePageDSTND" custom-class="custom-tiny-class" 
+              @tiny:change-page="paggingData" ></tiny-pagination> 
+          </div>
         </div>
       </div>
     </div>
@@ -247,6 +256,7 @@ export default {
     'datetime-picker': DatetimePicker
   },
   data: () => ({
+    loading: false,
     adv: {
       tenPtDSTND: '',
       loaiTauDSTND: '',
@@ -341,7 +351,7 @@ export default {
         'id': 'stt'
       },
       {
-        'text': 'Công suất máy',
+        'text': 'Công suất <br> máy',
         'align': 'center',
         'sortable': false,
         'id': 'stt'
@@ -365,7 +375,7 @@ export default {
         'id': 'stt'
       },
       {
-        'text': 'Hạng bằng TT',
+        'text': 'Hạng bằng <br> TT',
         'align': 'center',
         'sortable': false,
         'id': 'stt'
@@ -377,7 +387,7 @@ export default {
         'id': 'stt'
       },
       {
-        'text': 'Hạng bằng MT',
+        'text': 'Hạng bằng <br> MT',
         'align': 'center',
         'sortable': false,
         'id': 'stt'
@@ -389,9 +399,6 @@ export default {
     totalDsThuyNoiDia: 0
   }),
   computed: {
-    loading () {
-      return this.$store.getters.loading
-    }
   },
   created () {
     var vm = this
@@ -460,6 +467,8 @@ export default {
     }
   },
   methods: {
+    themMoi () {
+    },
     searchAdvTable () {
       var vm = this
       let current = vm.$router.history.current

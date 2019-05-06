@@ -26,7 +26,7 @@ import HangHaiDetailThongTinTauBien from './hang_hai/hanghai_detail_thong_tin_ta
 import HangHaiDetailHanhTrinhPhuongTien from './hang_hai/hanghai_detail_hanh_trinh_phuong_tien.vue'
 
 export default {
-  props: ['code', 'type', 'documentName', 'documentYear', 'documentTypeCode', 'documentStatusCode'],
+  props: ['code', 'type', 'documentName', 'documentYear', 'documentTypeCode'],
   components: {
     'hang-hai-detail-thong-tin-tau-bien': HangHaiDetailThongTinTauBien,
     'hang-hai-detail-hanh-trinh-phuong-tien': HangHaiDetailHanhTrinhPhuongTien

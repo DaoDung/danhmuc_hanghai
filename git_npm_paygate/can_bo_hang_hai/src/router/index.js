@@ -13,6 +13,7 @@ import DetailHoSoAction from '@/components/DetailHoSoAction.vue'
 import MessageTypeAction from '@/components/MessageTypeAction.vue'
 import NoPermission from '@/components/NoPermission.vue'
 import HomeDataTableQLTB from '@/components/Home_data_quanly_tau_bien.vue'
+import DetailTB from '@/components/DetailTB.vue'
 
 Vue.use(Router)
 
@@ -44,7 +45,7 @@ export default new Router({
     },
     {
       path: '/tau-bien/:code/:type/:documentName/:documentYear/:documentTypeCode',
-      component: Detail,
+      component: DetailTB,
       children: [
         {
           path: '/tau-bien/:code/:type/:documentName/:documentYear/:documentTypeCode',

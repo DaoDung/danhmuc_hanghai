@@ -2,12 +2,9 @@
 
   <v-layout wrap>
     <v-flex>
-      <content-placeholders v-if="loading">
-        <content-placeholders-img />
-        <content-placeholders-heading />
-      </content-placeholders>
+      
       <danh-sach-du-tau
-        v-else-if="code === 'DanhSachDuTau'"
+        v-if="code === 'DanhSachDuTau'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
@@ -15,7 +12,7 @@
       </danh-sach-du-tau>
 
       <danh-sach-ghi-chu-canh-bao
-        v-else-if="code === 'DanhSachGhiChuCanhBao'"
+        v-if="code === 'DanhSachGhiChuCanhBao'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
@@ -23,14 +20,14 @@
       </danh-sach-ghi-chu-canh-bao>
 
       <danh-sach-ha-xuong
-        v-else-if="code === 'DanhSachHaXuong'"
+        v-if="code === 'DanhSachHaXuong'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-ha-xuong>
   
       <danh-sach-hoa-tieu-dan-tau
-        v-else-if="code === 'DanhSachHoaTieuDanTau'"
+        v-if="code === 'DanhSachHoaTieuDanTau'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
@@ -38,7 +35,7 @@
       </danh-sach-hoa-tieu-dan-tau>
       
       <danh-sach-ke-hoach-chuyen-tuyen
-        v-else-if="code === 'DanhSachKeHoachChuyenTuyen'"
+        v-if="code === 'DanhSachKeHoachChuyenTuyen'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
@@ -46,21 +43,21 @@
       </danh-sach-ke-hoach-chuyen-tuyen>
 
       <danh-sach-kien-nghi-hang-hai
-        v-else-if="code === 'DanhSachKhangNghiHangHai'"
+        v-if="code === 'DanhSachKhangNghiHangHai'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-kien-nghi-hang-hai>
 
       <danh-sach-neo-tau
-        v-else-if="code === 'DanhSachNeoTau'"
+        v-if="code === 'DanhSachNeoTau'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-neo-tau>
 
       <danh-sach-phuong-tien-thuy-noi-dia
-        v-else-if="code === 'DanhSachPhuongTienThuyNoiDia'"
+        v-if="code === 'DanhSachPhuongTienThuyNoiDia'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
@@ -69,63 +66,63 @@
       
 
       <danh-sach-sua-chua-tau
-        v-else-if="code === 'DanhSachSuaChuaTau'"
+        v-if="code === 'DanhSachSuaChuaTau'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-sua-chua-tau>
 
       <danh-sach-tau-bien
-        v-else-if="code === 'DanhSachTauBien'"
+        v-if="code === 'DanhSachTauBien'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-tau-bien>
 
       <danh-sach-tau-den-cang
-        v-else-if="code === 'DanhSachTauDenCang'"
+        v-if="code === 'DanhSachTauDenCang'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-tau-den-cang>
 
       <danh-sach-tau-di-chuyen
-        v-else-if="code === 'DanhSachTauDiChuyen'"
+        v-if="code === 'DanhSachTauDiChuyen'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-tau-di-chuyen>
 
       <danh-sach-tau-lai-ho-tro
-        v-else-if="code === 'DanhSachTauLaiHoTro'"
+        v-if="code === 'DanhSachTauLaiHoTro'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-tau-lai-ho-tro>
 
       <danh-sach-tau-roi-cang
-        v-else-if="code === 'DanhSachTauRoiCang'"
+        v-if="code === 'DanhSachTauRoiCang'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-tau-roi-cang>
 
       <danh-sach-thu-tau
-        v-else-if="code === 'DanhSachThuTau'"
+        v-if="code === 'DanhSachThuTau'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-thu-tau>
 
       <danh-sach-vi-tri-tau-roi-cang
-        v-else-if="code === 'DanhSachViTriTauRoiCang'"
+        v-if="code === 'DanhSachViTriTauRoiCang'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       ></danh-sach-vi-tri-tau-roi-cang>
 
       <danh-sach-xep-do-hang
-        v-else-if="code === 'DanhSachXepDoHang'"
+        v-if="code === 'DanhSachXepDoHang'"
         :type="type"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"

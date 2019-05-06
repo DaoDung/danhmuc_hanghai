@@ -36,7 +36,7 @@
 				<content-placeholders-text :lines="4" />
 			</content-placeholders>
 		</div>
-		<div class="flex xs12" v-else-if="type === 'ke_hoach' || type === 'thu_tuc'">
+		<div class="flex xs12" v-else-if="type === 'ke_hoach' || type === 'thu_tuc' || type === 'quan_ly_tau'">
       <v-list v-if="document_type_code != 0" class="py-0 nav_trang_thai_ho_so"> 
         <v-list-group v-for="(item, index) in role_filter_status" 
           :value="item.id_active === type" 
@@ -237,7 +237,7 @@
       <v-list v-if="document_type_code != 0" class="py-0 nav_trang_thai_ho_so"> 
         <v-list-group v-for="(item, index) in role_filter_status" v-if="item.id_active === 'quan_ly_tau'"
           :value="item.id_active === type" 
-          v-bind:key="index" >
+          v-bind:key="index">
           <v-list-tile slot="activator"
           :to="'/quan-ly-tau-bien/DanhSachTauBien/' + item.id_active + '/' + document_type_code + '/' + 0">
             <v-list-tile-action> 

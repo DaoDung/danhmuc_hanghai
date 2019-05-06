@@ -28,9 +28,9 @@
             <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopNeoTau = !menuTopNeoTau">date_range</v-icon>
           </div>
           <div class="search-top-right">
-             <v-btn flat small class="mx-0" @click="refreshSearch()"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
+             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
              <span>|</span>
-             <v-btn flat small class="mx-0"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
+             <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
           </div>
         </div>
         <v-data-table
@@ -40,7 +40,8 @@
           hide-actions
           item-key="name"
           ref="dTable"
-          class="pb-4 table-bordered danhSachHoSoTable__class"
+          style="max-width: 1095px;"
+          class="pb-4 table-bordered danhSachHoSoTable__class table-tau-bien"
           :no-data-text="'Không tìm thấy thông tin nào'"
           :no-results-text="'Không tìm thấy thông tin nào'"
         >
