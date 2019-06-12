@@ -705,3 +705,18 @@ body .absolute__btn_panel {
 .table-bordered.danhSachHoSoTable__class.table-tau-bien>div>table>thead>tr>th {
   padding: 0 4px !important;
 }
+
+table.freezeFirstColumn thead tr,
+table.freezeFirstColumn tbody tr {
+  display: block;
+  width: min-content;
+}
+
+table.freezeFirstColumn thead td:first-child,
+table.freezeFirstColumn tbody td:first-child,
+table.freezeFirstColumn thead th:first-child,
+table.freezeFirstColumn tbody th:first-child {
+  position: sticky;
+  position: -webkit-sticky;
+  left: 0;
+}

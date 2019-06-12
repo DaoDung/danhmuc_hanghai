@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sun.awt.geom.AreaOp.CAGOp;
 import vn.gt.dao.danhmucgt.model.DmGtStatus;
 import vn.gt.dao.danhmucgt.service.DmGtStatusLocalServiceUtil;
 import vn.gt.dao.noticeandmessage.model.IssuePermissionForTransit;
@@ -71,6 +72,7 @@ import vn.gt.tichhop.message.TrangThaiBanKhaiQuaCanh;
 import vn.gt.tichhop.message.TrangThaiBanKhaiXuatCanh;
 import vn.gt.utils.config.ConfigurationManager;
 import vn.nsw.Header;
+import vn.nsw.model.ConfirmationOfArrival;
 import vn.nsw.model.ShipSecurityNotification;
 import vn.nsw.model.GeneralDeclaration;
 import vn.nsw.model.NoticeOfArrival;
@@ -2730,6 +2732,72 @@ public class CheckBusinessUtil {
 							}
 						}
 					}
+
+				} else if (object instanceof ConfirmationOfArrival) {
+					log.info("====checkValidateDocument==ConfirmationOfArrival, GeneralDeclaration, ShipSecurityNotification==********* "
+							+ object.getClass().getName());
+					flagCheckValidate = true;
+					documentName = Long.valueOf(ConfirmationOfArrival.class.cast(
+							object).getDocumentName()
+							+ "");
+					documentYear = Integer.valueOf(ConfirmationOfArrival.class.cast(
+							object).getDocumentYear()
+							+ "");
+					imo = ConfirmationOfArrival.class.cast(object).getIMONumber();
+					maritimeCode = StringPool.BLANK;
+					ShipAgencyCode = ConfirmationOfArrival.class.cast(object)
+							.getUserCreated();
+
+					DmPortRegion dmPortRegion = DmPortRegionLocalServiceUtil
+							.getByPortRegionCode(ConfirmationOfArrival.class.cast(
+									object).getPortRegionCode());
+					if (dmPortRegion != null) {
+						maritimeCode = dmPortRegion.getPortRegionRef();
+					} else {
+						DmPort dmPort = DmPortLocalServiceUtil
+								.getByPortCode(ConfirmationOfArrival.class.cast(
+										object).getPortOfArrivalCode());
+						if (dmPort != null) {
+							maritimeCode = dmPort.getLoCode();
+						} else {
+							DmPortWharf dmPortWharf = DmPortWharfLocalServiceUtil
+									.getByPortWharfCode(ConfirmationOfArrival.class
+											.cast(object).getPortRegionCode());
+							if (dmPortWharf != null) {
+								DmPortRegion dmPortRegion12 = DmPortRegionLocalServiceUtil
+										.getByPortRegionCode(dmPortWharf
+												.getPortRegionCode());
+								if (dmPortRegion12 != null) {
+									maritimeCode = dmPortRegion12
+											.getPortRegionRef();
+								}
+							} else {
+								DmPortHarbour dmPortHarbour = DmPortHarbourLocalServiceUtil
+										.getByPortHarbourCode(ConfirmationOfArrival.class
+												.cast(object)
+												.getPortHarbourCode());
+								if (dmPortHarbour != null) {
+									maritimeCode = dmPortHarbour
+											.getPortRegionCode();
+								}
+							}
+						}
+					}
+
+				} else if (object instanceof TempCargoDeclaration) {
+					log.info("====checkValidateDocument==TempCargoDeclaration, GeneralDeclaration, ShipSecurityNotification==********* "
+							+ object.getClass().getName());
+					flagCheckValidate = true;
+					documentName = Long.valueOf(TempCargoDeclaration.class.cast(
+							object).getDocumentName()
+							+ "");
+					documentYear = Integer.valueOf(TempCargoDeclaration.class.cast(
+							object).getDocumentYear()
+							+ "");
+					imo = TempCargoDeclaration.class.cast(object).getImoNumber();
+					maritimeCode = StringPool.BLANK;
+					ShipAgencyCode = TempCargoDeclaration.class.cast(object)
+							.getUserCreated();
 
 				} else if (object instanceof GeneralDeclaration) {
 

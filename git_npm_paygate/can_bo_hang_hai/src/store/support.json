@@ -1,3 +1,1371 @@
 {
-	"renderURLInit": "?p_p_id=kehoachaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit"
+  "renderURLInit": "?p_p_id=kehoachaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit",
+  "headersDsDuTau": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauDSDT",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDenDSDT",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian đi",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDiDSDT",
+      "type": "time"
+    },
+    {
+      "text": "Ngày bắt giữ",
+      "align": "center",
+      "sortable": false,
+      "id": "ngayBatDuDSDT",
+      "type": "time"
+    },
+    {
+      "text": "Ngày giải tỏa",
+      "align": "center",
+      "sortable": false,
+      "id": "ngayGiaiToaDSDT",
+      "type": "time"
+    },
+    {
+      "text": "Lý do bắt giữ",
+      "align": "center",
+      "sortable": false,
+      "id": "lyDoBatDuDSDT",
+      "type": "text"
+    },
+    {
+      "text": "Cơ quan ra quyết định <br> bắt giữ",
+      "align": "center",
+      "sortable": false,
+      "id": "coQuanRaQuyetDinhBatDuDSDT",
+      "type": "text"
+    },
+    {
+      "text": "Địa điểm <br> bắt dữ",
+      "align": "center",
+      "sortable": false,
+      "id": "diaDiemBatDuDSDT",
+      "type": "text"
+    },
+    {
+      "text": "Cơ quan ra quyết định <br> giải tỏa",
+      "align": "center",
+      "sortable": false,
+      "id": "coQuanRaQuyetDinhGiaiToaDSDT",
+      "type": "text"
+    },
+    {
+      "text": "SQĐ bắt giữ",
+      "align": "center",
+      "sortable": false,
+      "id": "sqdBatDuDSDT",
+      "type": "text"
+    },
+    {
+      "text": "SQĐ giải tỏa",
+      "align": "center",
+      "sortable": false,
+      "id": "sqdGiaiToaDSDT",
+      "type": "text"
+    }
+  ],
+  "headersDsGhiChu": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Ghi chú tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "ghiChuTauDSGC",
+      "type": "text"
+    },
+    {
+      "text": "Có hiển thị cảnh báo",
+      "align": "center",
+      "sortable": false,
+      "id": "coHienThiCanhBaoDSGC",
+      "type": "select",
+      "items": "coHienThiCanhBaoItems"
+    },
+    {
+      "text": "Ngày ghi chú",
+      "align": "center",
+      "sortable": false,
+      "id": "ngayGhiChuDSGC",
+      "type": "time"
+    },
+    {
+      "text": "Ngày hết hiệu lực ghi chú",
+      "align": "center",
+      "sortable": false,
+      "id": "ngayHetHieuLucDSGC",
+      "type": "time"
+    },
+    {
+      "text": "Không giải quyết rời cảng",
+      "align": "center",
+      "sortable": false,
+      "id": "khongGiaiQuyetDSGC",
+      "type": "select",
+      "items": "coHienThiCanhBaoItems"
+    }
+  ],
+  "headersDsHaXuong": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauDSHX",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDenDSHX",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian đi",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDiDSHX",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian bắt đầu <br> thả xuồng",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianBDTX",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian kết thúc <br> thả xuồng",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianKTTX",
+      "type": "time"
+    },
+    {
+      "text": "Mục đích thả xuồng",
+      "align": "center",
+      "sortable": false,
+      "id": "mucDichTX",
+      "type": "text"
+    },
+    {
+      "text": "Khu vực thả xuồng",
+      "align": "center",
+      "sortable": false,
+      "id": "khuVucThaXuong",
+      "type": "text"
+    }
+  ],
+  "headersHoaTieuDanTau": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tau",
+      "type": "text"
+    },
+    {
+      "text": "Lượt",
+      "align": "center",
+      "sortable": false,
+      "id": "luot",
+      "type": "text"
+    },
+    {
+      "text": "Hoa tiêu",
+      "align": "center",
+      "sortable": false,
+      "id": "hoaTieu",
+      "type": "text"
+    },
+    {
+      "text": "",
+      "align": "center",
+      "sortable": false,
+      "id": "unknow",
+      "type": "text"
+    },
+    {
+      "text": "Bến cảng <br> lên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "benCangLenTau",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí <br> lên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriLenTau",
+      "type": "text"
+    },
+    {
+      "text": "Bến cảng <br> rời tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "benCangRoiTau",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí <br> rời tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriRoiTau",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian <br> lên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianLenTau",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian <br> rời tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianRoiTau",
+      "type": "time"
+    }
+  ],
+  "headersDsKeHoachChuyenTuyen": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Đơn vị khai thác",
+      "align": "center",
+      "sortable": false,
+      "id": "donViKhaiThacKHCT",
+      "type": "text"
+    },
+    {
+      "text": "Tháng",
+      "align": "center",
+      "sortable": false,
+      "id": "thangKHCT",
+      "type": "select",
+      "items": "thangItems"
+    },
+    {
+      "text": "Số chuyến trong tháng",
+      "align": "center",
+      "sortable": false,
+      "id": "soChuyenKHCT",
+      "type": "text"
+    }
+  ],
+  "headersDsKhangNghi": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauDSKN",
+      "type": "text"
+    },
+    {
+      "text": "Nội dung",
+      "align": "center",
+      "sortable": false,
+      "id": "noiDUngDSKN",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian nhận <br> kháng cáo",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianNhanKhangCaoDSKN",
+      "type": "time"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "daiLyDSKN",
+      "type": "text"
+    },
+    {
+      "text": "Chủ tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "chuTauDSKN",
+      "type": "text"
+    },
+    {
+      "text": "Khai thác",
+      "align": "center",
+      "sortable": false,
+      "id": "khaiThacDSKN",
+      "type": "text"
+    }
+  ],
+  "headersNeoTau": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "type": "select",
+      "id": "tenTau"
+    },
+    {
+      "text": "Thời gian <br> bắt đầu",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "thoiGianBatDau"
+    },
+    {
+      "text": "Mục đích neo",
+      "align": "center",
+      "sortable": false,
+      "type": "text",
+      "id": "mucDichNeo"
+    },
+    {
+      "text": "Thời gian <br> kết thúc",
+      "align": "left",
+      "sortable": false,
+      "type": "select",
+      "id": "thoiGianKetThuc"
+    },
+    {
+      "text": "Vị trí neo",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "viTriNeo"
+    },
+    {
+      "text": "Giờ neo",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "gioNeo"
+    },
+    {
+      "text": "Neo bổ sung",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "neoBoSung",
+      "items": "neoBoSungItems"
+    },
+    {
+      "text": "Phao",
+      "align": "left",
+      "sortable": false,
+      "type": "select",
+      "id": "phao",
+      "items": "phaoItems"
+    },
+    {
+      "text": "Hoạt động <br> nội thủy",
+      "align": "left",
+      "sortable": false,
+      "type": "select",
+      "id": "hoatDongNoiThuy",
+      "items": "hoatDongNoiThuyItems"
+    },
+    {
+      "text": "Hàng trên tàu",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "hangTrenTau"
+    },
+    {
+      "text": "Đại lý",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "daiLy"
+    },
+    {
+      "text": "Chủ tàu",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "chuTau"
+    },
+    {
+      "text": "Khai thác",
+      "align": "left",
+      "sortable": false,
+      "type": "text",
+      "id": "khaiThac"
+    }
+  ],
+  "headersDsSuaChuaTau": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauDSSCT",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDenDSSCT",
+      "type": "time"
+    },
+    {
+      "text": "Số quyết định",
+      "align": "center",
+      "sortable": false,
+      "id": "soQuyetDinhDSSCT",
+      "type": "text"
+    },
+    {
+      "text": "Đơn vị sửa chữa",
+      "align": "center",
+      "sortable": false,
+      "id": "donViSuaChuaDSSCT",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đi",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDiDSSCT",
+      "type": "time"
+    },
+    {
+      "text": "Lý do sửa",
+      "align": "center",
+      "sortable": false,
+      "id": "lyDoSuaDSSCT",
+      "type": "text"
+    },
+    {
+      "text": "Từ ngày",
+      "align": "center",
+      "sortable": false,
+      "id": "tuNgayDSSCT",
+      "type": "time"
+    },
+    {
+      "text": "Đến ngày",
+      "align": "center",
+      "sortable": false,
+      "id": "denNgayDSSCT",
+      "type": "time"
+    }
+  ],
+  "headersDsTauBien": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "daiLyDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Ship <br> ID CHH",
+      "align": "center",
+      "sortable": false,
+      "id": "shipDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "quocTichDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "hoHieuDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Chủ tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "chuTauDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Người <br> khai thác",
+      "align": "center",
+      "sortable": false,
+      "id": "ngKhaiThacDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Loại tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "loaiTauDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Cấp độ <br> an ninh",
+      "align": "center",
+      "sortable": false,
+      "id": "capDoAnNinhDSTB",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gtDSTB",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwtDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Phân loại",
+      "align": "center",
+      "sortable": false,
+      "id": "phanLoaiDSTB",
+      "type": "select",
+      "items": "phanLoaiItems"
+    },
+    {
+      "text": "NT",
+      "align": "center",
+      "sortable": false,
+      "id": "ntDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Loa (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "loaDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Breadth (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "breadthDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Draft",
+      "align": "center",
+      "sortable": false,
+      "id": "drafDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Chiều cao <br> t.không (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "chieuCaoDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước mũi <br> (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "monNuocMuiDSTB",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước t.kế <br> (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "monNuocTkeDSTB",
+      "type": "text"
+    }
+  ],
+  "headersTauDenCang": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTau3",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "quocTich2",
+      "type": "text"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "hoHieu2",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gt2",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwt2",
+      "type": "text"
+    },
+    {
+      "text": "Chiều dài",
+      "align": "center",
+      "sortable": false,
+      "id": "chieuDai2",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước",
+      "align": "center",
+      "sortable": false,
+      "id": "monNuoc2",
+      "type": "text"
+    },
+    {
+      "text": "Loại hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "loaiHangHoa2",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriNeoDau2",
+      "type": "text"
+    },
+    {
+      "text": "Dự kiến đến VT",
+      "align": "center",
+      "sortable": false,
+      "id": "duKienDenVt2",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến VT",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianRoiVt2",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "daiLy3",
+      "type": "text"
+    },
+    {
+      "text": "Tuyến luồng",
+      "align": "center",
+      "sortable": false,
+      "id": "tuyenLuong2",
+      "type": "text"
+    }
+  ],
+  "headersKHTauDiChuyen": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTauKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "quocTichKHDD",
+      "type": "select",
+      "items": "quocTichItems"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "hoHieuKHDD",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gtKHDD",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwtKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Chiều dài",
+      "align": "center",
+      "sortable": false,
+      "id": "chieuDaiKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước",
+      "align": "center",
+      "sortable": false,
+      "id": "monNuocKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Loại hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "loaiHangHoaKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu <br> từ",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriNeoDauTuKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu <br> đến",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriNeoDauDenKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Giờ rời",
+      "align": "center",
+      "sortable": false,
+      "id": "gioRoiKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "daiLyKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Tuyến luồng",
+      "align": "center",
+      "sortable": false,
+      "id": "tuyenLuongKHDD",
+      "type": "text"
+    }
+  ],
+  "headersTauRoiCang": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTau2",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "quocTich",
+      "type": "select",
+      "items": "quocTichItems"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "hoHieu",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gt",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwt",
+      "type": "text"
+    },
+    {
+      "text": "Chiều dài",
+      "align": "center",
+      "sortable": false,
+      "id": "chieuDai",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước",
+      "align": "center",
+      "sortable": false,
+      "id": "monNuoc",
+      "type": "text"
+    },
+    {
+      "text": "Loại hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "loaiHangHoa",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriNeoDau",
+      "type": "text"
+    },
+    {
+      "text": "Dự kiến rời SG",
+      "align": "center",
+      "sortable": false,
+      "id": "duKienRoiSg",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "daiLy3",
+      "type": "text"
+    },
+    {
+      "text": "Tuyến luồng",
+      "align": "center",
+      "sortable": false,
+      "id": "tuyenLuong",
+      "type": "text"
+    }
+  ],
+  "headerTauLaiHoTro": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tau",
+      "type": "text"
+    },
+    {
+      "text": "Lượt",
+      "align": "center",
+      "sortable": false,
+      "id": "luot",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 1",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai1",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 2",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai2",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 3",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai3",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 4",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai4",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 5",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai5",
+      "type": "text"
+    },
+    {
+      "text": "Tàu lai 6",
+      "align": "center",
+      "sortable": false,
+      "id": "tauLai6",
+      "type": "text"
+    },
+    {
+      "text": "Bến cảng",
+      "align": "center",
+      "sortable": false,
+      "id": "benCang",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí",
+      "align": "center",
+      "sortable": false,
+      "id": "viTri",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian <br> bắt đầu",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianBatDau",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian <br> kết thúc",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianKetThuc",
+      "type": "time"
+    }
+  ],
+  "headersXepDoHang": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "tenTau4",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDen",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian đi",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianDi",
+      "type": "time"
+    },
+    {
+      "text": "Thời gian <br> làm hàng",
+      "align": "center",
+      "sortable": false,
+      "id": "thoiGianLamHang",
+      "type": "time"
+    },
+    {
+      "text": "Hình thức H.H <br> qua cảng",
+      "align": "center",
+      "sortable": false,
+      "id": "htHangHoaQuaCanh",
+      "type": "text"
+    },
+    {
+      "text": "Bến cảng <br> làm hàng",
+      "align": "center",
+      "sortable": false,
+      "id": "benCangLamHang",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí làm hàng",
+      "align": "center",
+      "sortable": false,
+      "id": "viTriLamHang",
+      "type": "text"
+    },
+    {
+      "text": "Hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "hangHoa",
+      "type": "text"
+    },
+    {
+      "text": "Số Container",
+      "align": "center",
+      "sortable": false,
+      "id": "soContainer",
+      "type": "text"
+    },
+    {
+      "text": "Số TEU",
+      "align": "center",
+      "sortable": false,
+      "id": "soTEU",
+      "type": "text"
+    },
+    {
+      "text": "Số TEU rỗng",
+      "align": "center",
+      "sortable": false,
+      "id": "soTEURong",
+      "type": "text"
+    },
+    {
+      "text": "Số tấn",
+      "align": "center",
+      "sortable": false,
+      "id": "soTan",
+      "type": "text"
+    },
+    {
+      "text": "Có hàng <br> nguy hiểm",
+      "align": "center",
+      "sortable": false,
+      "id": "coHangNguyHiem",
+      "type": "select",
+      "items": "coHangNguyHiemItems"
+    },
+    {
+      "text": "Ghi chú",
+      "align": "center",
+      "sortable": false,
+      "id": "ghiChu",
+      "type": "text"
+    }
+  ],
+  "headersDsThuyNoiDia": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên phương tiện",
+      "align": "center",
+      "sortable": false,
+      "id": "tenPtDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Loại tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "loaiTauDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Tàu kéo",
+      "align": "center",
+      "sortable": false,
+      "id": "tauKeoDSTND",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gtDSTND",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwtDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Số người <br> tối đa",
+      "align": "center",
+      "sortable": false,
+      "id": "soNgToiDaDSTND",
+      "type": "text"
+    },
+    {
+      "text": "LOA <br> (m)",
+      "align": "center",
+      "sortable": false,
+      "id": "loaDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Số bằng TT",
+      "align": "center",
+      "sortable": false,
+      "id": "soBangDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Breadth",
+      "align": "center",
+      "sortable": false,
+      "id": "breadthDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Số bằng <br> MT",
+      "align": "center",
+      "sortable": false,
+      "id": "soBangNtDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Cấp PT",
+      "align": "center",
+      "sortable": false,
+      "id": "capPtDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Công suất <br> máy",
+      "align": "center",
+      "sortable": false,
+      "id": "congSuatMayDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Chủ tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "chuTauDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Địa chỉ",
+      "align": "center",
+      "sortable": false,
+      "id": "diaChiDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Thuyền trưởng",
+      "align": "center",
+      "sortable": false,
+      "id": "thuyenTruongDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Hạng bằng <br> TT",
+      "align": "center",
+      "sortable": false,
+      "id": "hangBangDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Máy trưởng",
+      "align": "center",
+      "sortable": false,
+      "id": "mayTruongDSTND",
+      "type": "text"
+    },
+    {
+      "text": "Hạng bằng <br> MT",
+      "align": "center",
+      "sortable": false,
+      "id": "hangBangMtDSTND",
+      "type": "text"
+    }
+  ]
 }

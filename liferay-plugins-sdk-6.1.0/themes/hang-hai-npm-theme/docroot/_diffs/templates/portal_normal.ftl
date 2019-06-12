@@ -14,17 +14,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	
-	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/app.6884c2200dcff6eea32578c472a2c737.css" rel="stylesheet">
+	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/app.141aed186f600c66d0284a9a0bc7be97.css" rel="stylesheet">
 	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/base-style.css?t=123132211" rel="stylesheet">
 
 </head>
 
 <body class="mBody">
-	<header id="banner" style="height: inherit !important;">
-		<div class="container-fluid align-center" style=" padding: 0px 30px !important;">
+	<header id="banner">
+		<div class="container-fluid align-center">
 			<div class="logo align-middle">
 				<a href="$site_default_url">
-					<img src="${themeDisplay.getPathThemeRoot()}/images/logo_dtnd.png">
+					<img src="${themeDisplay.getPathThemeRoot()}/images/logo_hanghai.png">
 				</a>
 			</div>
 			
@@ -55,16 +55,16 @@
         ${theme.wrapPortlet("portlet.ftl", content_include)}
     </#if>
 	<div id="app"></div>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/manifest.7a61aca07ef7696619de.js"></script>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/vendor.856f027bc808ea1fc2b1.js"></script>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/app.f3ef777843cfc7b334e2.js"></script>
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/manifest.07d498c5ca0f8b124b82.js"></script>
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/vendor.1ecf1e12ddef5b65aa5a.js"></script>
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/app.96948868d9ce9417216a.js"></script>
 	
 	<footer id="footer"> 
 		<div class="owner">
 			<ul>
-				<li>Cục Đường thủy nội địa Việt Nam - Bộ Giao Thông vận tải</li>
-				<li><i class="fa fa-map-marker" aria-hidden="true"></i> 05 Tôn Thất Thuyết - Q.Cầu Giấy - Thành phố Hà Nội</li>
-				<li></i> 04 39421887</li>
+				<li>Cục Hàng Hải Việt Nam - Bộ Giao Thông vận tải</li>
+				<li><i class="fa fa-map-marker" aria-hidden="true"></i> 8 Phạm Hùng, Mai Dịch, Cầu Giấy, Hà Nội</li>
+				<li></i> (024) 3768 3065</li>
 				<li>
 					<a href="/web/guest/huong-dan-su-dung" class="manual">Hướng dẫn sử dụng</a>
 				</li>

@@ -780,7 +780,13 @@ public class LanhDaoAction extends TransportationMVCAction {
 			UploadPortletRequest requestUpload = PortalUtil.getUploadPortletRequest(actionRequest);
 
 			String documentType = ParamUtil.getString(requestUpload, ChuyenDichTrangThaiUtils.DOCUMENT_TYPE, "");
+			
+			int documentName = ParamUtil.getInteger(requestUpload, ChuyenDichTrangThaiUtils.DOCUMENT_NAME);
+			int documentYear = ParamUtil.getInteger(requestUpload, ChuyenDichTrangThaiUtils.DOCUMENT_YEAR);
 
+			TempDocument tempDocument = TempDocumentLocalServiceUtil.getByDocumentNameAndDocumentYear(documentName, documentYear);
+			documentType = tempDocument.getDocumentTypeCode();
+			
 			if (actionName.equals("actionKeHoach")) {
 
 				if (documentType.equalsIgnoreCase(ChuyenDichTrangThaiUtils.TAU_THUYEN_NHAP_CANH)) {

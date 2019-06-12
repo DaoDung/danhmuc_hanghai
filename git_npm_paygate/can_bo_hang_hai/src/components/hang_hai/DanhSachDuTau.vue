@@ -212,24 +212,17 @@ export default {
   },
   data: () => ({
     adv: {
-      tenPtDSTND: '',
-      loaiTauDSTND: '',
-      tauKeoDSTND: '',
-      gtDSTND: '',
-      dwtDSTND: '',
-      soNgToiDaDSTND: '',
-      loaDSTND: '',
-      soBangDSTND: '',
-      breadthDSTND: '',
-      soBangNtDSTND: '',
-      capPtDSTND: '',
-      congSuatMayDSTND: '',
-      chuTauDSTND: '',
-      diaChiDSTND: '',
-      thuyenTruongDSTND: '',
-      hangBangDSTND: '',
-      mayTruongDSTND: '',
-      hangBangMtDSTND: ''
+      tenTauDSDT
+      thoiGianDenDSDT: '',
+      thoiGianDiDSDT: '',
+      ngayBatDuDSDT: '',
+      ngayGiaiToaDSDT: '',
+      lyDoBatDuDSDT: '',
+      coQuanRaQuyetDinhBatDuDSDT: '',
+      diaDiemBatDuDSDT: '',
+      coQuanRaQuyetDinhGiaiToaDSDT: '',
+      sqdBatDuDSDT: '',
+      sqdGiaiToaDSDT: ''
     },
     headersDsDuTau: [
       {

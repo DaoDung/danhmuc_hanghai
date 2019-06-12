@@ -221,6 +221,178 @@ public class TT2JSONProvider {
 					// end build thu tuc
 				}
 			}
+			
+//			childs = JSONFactoryUtil.createJSONArray();
+//			object = JSONFactoryUtil.createJSONObject();
+//			
+//			object.put("action", "folder");
+//			object.put("action_active", "folder_open");
+//			object.put("id", -1);
+//			object.put("id_active", "quan_ly_tau");
+//			object.put("type", -1);
+//			object.put("title", "Quản lý tàu biển & PTTNĐ");
+//			object.put("active", false);
+//			object.put("index", 2);
+//			
+//			// TODO order
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//
+//			objectChilds.put("id", 4);
+//			objectChilds.put("code", 11);
+//			objectChilds.put("title", "Tàu biển");
+//			objectChilds.put("type", "DanhSachTauBien");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//
+//			objectChilds.put("id", 30);
+//			objectChilds.put("code", 27);
+//			objectChilds.put("title", "Phương tiện thủy nội địa");
+//			objectChilds.put("type", "DanhSachPhuongTienThuyNoiDia");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//
+//			objectChilds.put("id", 7);
+//			objectChilds.put("code", 14);
+//			objectChilds.put("title", "Kế hoạch tàu rời cảng");
+//			objectChilds.put("type", "DanhSachTauRoiCang");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//
+//			objectChilds.put("id", 41);
+//			objectChilds.put("code", 114);
+//			objectChilds.put("title", "Kế hoạch tàu đến cảng");
+//			objectChilds.put("type", "DanhSachTauDenCang");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 8);
+//			objectChilds.put("code", 15);
+//			objectChilds.put("title", "Kế hoạch tàu di chuyển");
+//			objectChilds.put("type", -1);
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 8);
+//			objectChilds.put("code", 15);
+//			objectChilds.put("title", "Tàu neo đậu");
+//			objectChilds.put("type", "DanhSachNeoTau");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 8);
+//			objectChilds.put("code", 15);
+//			objectChilds.put("title", "Tàu lai hỗ trợ");
+//			objectChilds.put("type", "DanhSachTauLaiHoTro");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 8);
+//			objectChilds.put("code", 15);
+//			objectChilds.put("title", "Hoa tiêu dẫn tàu");
+//			objectChilds.put("type", "DanhSachHoaTieuDanTau");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 9);
+//			objectChilds.put("code", 16);
+//			objectChilds.put("title", "Xếp, dỡ hàng");
+//			objectChilds.put("type", "DanhSachXepDoHang");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Nhập tách đoàn");
+//			objectChilds.put("type", -1);
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Sửa chữa");
+//			objectChilds.put("type", "DanhSachSuaChuaTau");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Hạ xuồng");
+//			objectChilds.put("type", "DanhSachHaXuong");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Thử tàu");
+//			objectChilds.put("type", "DanhSachThuTau");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Giữ tàu");
+//			objectChilds.put("type", "DanhSachDuTau");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Ghi chú, cảnh báo");
+//			objectChilds.put("type", "DanhSachGhiChuCanhBao");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Kháng nghị hàng hải");
+//			objectChilds.put("type", "DanhSachKhangNghiHangHai");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//			
+//			objectChilds = JSONFactoryUtil.createJSONObject();
+//			objectChilds.put("id", 2);
+//			objectChilds.put("code", 13);
+//			objectChilds.put("title", "Kế hoạch tàu chạy chuyên tuyến");
+//			objectChilds.put("type", "DanhSachKeHoachChuyenTuyen");
+//			objectChilds.put("counter", "_ _");
+//			childs.put(objectChilds);
+//			object.put("items", childs);
+//
+//			result.put(object);
 		} catch (Exception e) {
 			_log.error(e);
 		}

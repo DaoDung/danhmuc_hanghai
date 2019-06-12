@@ -878,11 +878,23 @@ public class BanKhaiGiayPhepQuaCangBoGTVTUtils {
 								+ ", " + DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_TEN_HANG_HOA, details.getCargoCode()).getName()
 								+ "  " + details.getDescription()  + "  " + details.getQuantity()
 								+ " " + DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_DON_VI_TINH, details.getUnit()).getName()
+								
+								+ " (" +
+								DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_NHOM_HANG_HOA, details.getCargoType()).getDescription()
+								+ ", " + DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_TEN_HANG_HOA, details.getCargoCode()).getDescription()
+								+ "  "  + details.getQuantity()
+								+ " " + DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_DON_VI_TINH, details.getUnit()).getDescription()
+								+ ") "
+								
 								+ " \n ";
 						}
 						else if (Validator.isNotNull(details.getCargoType()) && details.getCargoType().equalsIgnoreCase("11"))  // NIL-KHONG CHO HANG
 						{	
-							tmp = DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_NHOM_HANG_HOA, details.getCargoType()).getName() + " \n ";
+							tmp = DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_NHOM_HANG_HOA, details.getCargoType()).getName() 
+									+ " (" +
+									DmDataItemLocalServiceUtil.findByDataGroupIdAndCode0(Constants.DM_NHOM_HANG_HOA, details.getCargoType()).getDescription()
+									+ ") "
+									+ " \n ";
 						}
 						cargoDescription_C1_XEP.append(tmp);
 //						if (cargoCategory.equalsIgnoreCase("C1_XEP"))

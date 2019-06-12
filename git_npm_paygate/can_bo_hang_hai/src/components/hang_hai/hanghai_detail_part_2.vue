@@ -58,7 +58,79 @@ export default {
   },
   data () {
     return {
-      thanhPhanLists: [],
+      thanhPhanLists: [
+        {
+          'name': 'Bản khai an ninh tàu biển',
+          'documentName': 1800816,
+          'code': 'NC_1',
+          'messageType': 10,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Thông báo',
+          'documentName': 1800816,
+          'available': false,
+          'code': 'NC_3',
+          'messageType': 30,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Xác báo',
+          'documentName': 1800816,
+          'available': false,
+          'code': 'NC_4',
+          'messageType': 40,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Kế hoạch điều động',
+          'documentName': 1800816,
+          'available': false,
+          'code': 'lenh_dieu_dong',
+          'messageType': 70,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Bản khai chung',
+          'documentName': 1800816,
+          'available': true,
+          'code': 'NC_6',
+          'messageType': 50,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Danh sách thuyền viên',
+          'documentName': 1800816,
+          'available': true,
+          'code': 'NC_7',
+          'messageType': 51,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Danh sách hành khách',
+          'documentName': 1800816,
+          'available': true,
+          'code': 'NC_8',
+          'messageType': 52,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Bản khai hàng hóa nguy hiểm',
+          'documentName': 1800816,
+          'available': false,
+          'code': 'NC_9',
+          'messageType': 53,
+          'documentYear': 2018
+        },
+        {
+          'name': 'Giấy phép rời cảng cuối cùng',
+          'documentName': 1800816,
+          'available': false,
+          'code': 'NC_2018',
+          'messageType': 2018,
+          'documentYear': 2018
+        }
+      ],
       thanhPhanSelected: '',
       loadingList: true,
       messageTypeTemp: 0

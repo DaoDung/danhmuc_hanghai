@@ -6228,8 +6228,10 @@ public class TempDocumentFinderImpl extends BasePersistenceImpl<TempDocument> im
 					query.append(" and (temp.ShipAgencyCode = "
 							+ ShipAgencyCode
 							+ " OR LENGTH(temp.ShipAgencyCode) = 0 ) ");
-					query.append(" and (MaritimeCode = " + maritimeCode
-							+ " OR LENGTH(MaritimeCode) = 0 ) ");
+					if (Validator.isNotNull(maritimeCode)) {
+						query.append(" and (MaritimeCode = " + maritimeCode
+								+ " OR LENGTH(MaritimeCode) = 0 ) ");
+					}
 					query.append(" and   ");
 					query.append(" ((temp.RequestState in (14,114, 15,16,12,13) and (temp.IMO = '" + imo.trim() + "'" + " OR LENGTH(temp.IMO) = 0 ) "+" ) ");
 					query.append(" OR  ");

@@ -35,7 +35,7 @@
          </div>
 
         <v-data-table
-        :headers="headersTauRoiCang"
+        :headers="headerTauLaiHoTro"
         :items="itemsTauRoiCang"
         class="table-bordered danhSachHoSoTable__class table-tau-bien"
         hide-actions
