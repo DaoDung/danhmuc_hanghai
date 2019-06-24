@@ -38,63 +38,6 @@
              <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
           </div>
         </div>
-        <!-- <v-data-table
-          :headers="headersDsTauAll"
-          :items="itemsDsTauAll"
-          class="table-bordered danhSachHoSoTable__class table-tau-bien"
-          hide-actions
-          :no-data-text="'Không tìm thấy kế hoạch nào'"
-          :no-results-text="'Không tìm thấy kế hoạch nào'"
-          style="max-width: 1095px;"
-        >
-          <template slot="headers" slot-scope="props">
-            <tr style="background: #eaeaea;">
-              <th
-                v-for="header in props.headers"
-                :key="header.text"
-                v-html="header.text"
-              >
-              </th>
-            </tr>
-            <tr class="" style="border-bottom: 1px solid #ccc;">
-              <th>
-              </th>
-              <th v-for="(item, index) in headersDsTauAll" v-if="item.id !== 'stt'">
-                <v-text-field
-                  v-if="item['type'] === 'text'"
-                  v-model="adv[item.id]"
-                  class="px-0 py-0 mx-0 my-0"
-                ></v-text-field>
-                <v-select
-                  v-else-if="item['type'] === 'select'"
-                  item-text="itemText"
-                  item-value="itemValue"
-                  :items="itemsSup[item.items]"
-                  v-model="adv[item.id]"
-                  class="px-0 py-0 mx-0 my-0"
-                ></v-select>
-                <datetime-picker
-                  v-else
-                  v-model="adv[item.id]"
-                  :first-day="1"
-                  :show-dst="false"
-                  :show-hours="false"
-                  :show-minutes="false"
-                  :show-seconds="false"
-                  class="px-0 py-0 mx-0 my-0"
-                ></datetime-picker>
-              </th>
-            </tr>
-          </template>
-          <template slot="items" slot-scope="props">
-            <td class="text-xs-left" style="padding-top: 5px; width: 2%;">
-              {{ pageDataTableAll * 15 - 15 + props.index + 1 }}
-            </td>
-            <td class="text-xs-center" v-for="key in props.item" style="padding-top: 5px;">
-              {{props.item[key]}}
-            </td>
-          </template>
-        </v-data-table> -->
 
         <vue-scrolling-table
           class="ml-2"
@@ -105,6 +48,8 @@
           :include-footer="includeFooter"
           :dead-area-color="deadAreaColor"
           :class="{ freezeFirstColumn: freezeFirstColumn }"
+          style="max-width: 1095px;"
+          v-if="code !== 'ViTriTauRoiCang'"
         >
           <template slot="thead">
             <tr style="background: #eaeaea;">
@@ -162,6 +107,17 @@
           </template>
         </vue-scrolling-table>
 
+        <ejs-grid v-else :dataSource='groupData' :allowGrouping='true' :groupSettings='groupOptions' height='150px'>
+            <e-columns>
+                <e-column field='tenTau' headerText='Tên tàu' textAlign='Center' width=120></e-column>
+                <e-column field='benCang' headerText='Bến cảng' textAlign='Center' width=120></e-column>
+                <e-column field='quocTich' headerText='Quốc tịch' textAlign='Center' width=150></e-column>
+                <e-column field='cauPhao' headerText='Cầu/ phao' textAlign='Center' width=150></e-column>
+                <e-column field='ngayDen' headerText='Ngày đến' textAlign='Center' width=150></e-column>
+                <e-column field='ngaygioVaoCau' headerText='Ngày/ giờ vào cầu' textAlign='Center' width=150></e-column>
+            </e-columns>
+        </ejs-grid>
+
         <div class="text-xs-right layout wrap" style="position: relative;">
           <div class="flex pagging-table px-2"> 
             <tiny-pagination :total="totalDsAll" :page="pageDataTableAll" custom-class="custom-tiny-class" 
@@ -171,17 +127,24 @@
       </div>
     </div>
 </template>
+
 <script>
+import Vue from 'vue'
+import { GridPlugin, Group } from '@syncfusion/ej2-vue-grids'
 import TinyPagination from './hanghai_pagination.vue'
 import DatetimePicker from './DatetimePicker.vue'
 import support from '@/store/support.json'
 import VueScrollingTable from 'vue-scrolling-table'
+Vue.use(GridPlugin)
 export default {
   props: ['code', 'type', 'documentTypeCode', 'documentStatusCode'],
   components: {
     'tiny-pagination': TinyPagination,
     'datetime-picker': DatetimePicker,
     'vue-scrolling-table': VueScrollingTable
+  },
+  provide: {
+    grid: [Group]
   },
   data: () => ({
     scrollHorizontal: true,
@@ -284,7 +247,34 @@ export default {
     pageDataTableAll: 1,
     menuTopTauAll: false,
     searchTopTauAll: '',
-    dateSearchTopTauAll: ''
+    dateSearchTopTauAll: '',
+    groupData: [
+      {
+        tenTau: 'qqqeqe',
+        quocTich: 'eqeqe',
+        cauPhao: 'eeee',
+        ngayDen: '11/10/2018',
+        ngaygioVaoCau: '11/10/2018 06:00',
+        benCang: 'bến cảng 1'
+      },
+      {
+        tenTau: 'qqqeqe',
+        quocTich: 'eqeqe',
+        cauPhao: 'eeee',
+        ngayDen: '11/10/2018',
+        ngaygioVaoCau: '11/10/2018 06:00',
+        benCang: 'bến cảng 2'
+      },
+      {
+        tenTau: 'qqqeqe',
+        quocTich: 'eqeqe',
+        cauPhao: 'eeee',
+        ngayDen: '11/10/2018',
+        ngaygioVaoCau: '11/10/2018 06:00',
+        benCang: 'bến cảng 3'
+      }
+    ],
+    groupOptions: { columns: ['benCang'] }
   }),
   computed: {
     loading () {
@@ -465,3 +455,7 @@ export default {
   }
 }
 </script>
+<style>
+  /*@import '../../../node_modules/@syncfusion/ej2-base/styles/material.css'*/
+  @import "../../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css"
+</style>
