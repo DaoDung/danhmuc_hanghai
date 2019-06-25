@@ -254,6 +254,25 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(resultHistoryMinistry);
+	}
+
+	@Override
+	public void clearCache(List<ResultHistoryMinistry> resultHistoryMinistries) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResultHistoryMinistry resultHistoryMinistry : resultHistoryMinistries) {
+			EntityCacheUtil.removeResult(ResultHistoryMinistryModelImpl.ENTITY_CACHE_ENABLED,
+				ResultHistoryMinistryImpl.class,
+				resultHistoryMinistry.getPrimaryKey());
+
+			clearUniqueFindersCache(resultHistoryMinistry);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		ResultHistoryMinistry resultHistoryMinistry) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
 			new Object[] { resultHistoryMinistry.getRequestCode() });
 	}
@@ -276,20 +295,6 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 	/**
 	 * Removes the result history ministry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the result history ministry
-	 * @return the result history ministry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a result history ministry with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultHistoryMinistry remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the result history ministry with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the result history ministry
 	 * @return the result history ministry that was removed
 	 * @throws vn.gt.dao.result.NoSuchResultHistoryMinistryException if a result history ministry with the primary key could not be found
@@ -297,24 +302,38 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 	 */
 	public ResultHistoryMinistry remove(long id)
 		throws NoSuchResultHistoryMinistryException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the result history ministry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the result history ministry
+	 * @return the result history ministry that was removed
+	 * @throws vn.gt.dao.result.NoSuchResultHistoryMinistryException if a result history ministry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResultHistoryMinistry remove(Serializable primaryKey)
+		throws NoSuchResultHistoryMinistryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResultHistoryMinistry resultHistoryMinistry = (ResultHistoryMinistry)session.get(ResultHistoryMinistryImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (resultHistoryMinistry == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResultHistoryMinistryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+			return remove(resultHistoryMinistry);
 		}
 		catch (NoSuchResultHistoryMinistryException nsee) {
 			throw nsee;
@@ -325,19 +344,6 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the result history ministry from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param resultHistoryMinistry the result history ministry
-	 * @return the result history ministry that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultHistoryMinistry remove(
-		ResultHistoryMinistry resultHistoryMinistry) throws SystemException {
-		return super.remove(resultHistoryMinistry);
 	}
 
 	@Override
@@ -359,17 +365,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		ResultHistoryMinistryModelImpl resultHistoryMinistryModelImpl = (ResultHistoryMinistryModelImpl)resultHistoryMinistry;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
-			new Object[] { resultHistoryMinistryModelImpl.getRequestCode() });
-
-		EntityCacheUtil.removeResult(ResultHistoryMinistryModelImpl.ENTITY_CACHE_ENABLED,
-			ResultHistoryMinistryImpl.class,
-			resultHistoryMinistry.getPrimaryKey());
+		clearCache(resultHistoryMinistry);
 
 		return resultHistoryMinistry;
 	}
@@ -2090,7 +2086,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		throws NoSuchResultHistoryMinistryException, SystemException {
 		ResultHistoryMinistry resultHistoryMinistry = findByRequestCode(requestCode);
 
-		resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+		remove(resultHistoryMinistry);
 	}
 
 	/**
@@ -2104,7 +2100,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		int documentYear) throws SystemException {
 		for (ResultHistoryMinistry resultHistoryMinistry : findByDocumentNameAnddocumentYear(
 				documentName, documentYear)) {
-			resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+			remove(resultHistoryMinistry);
 		}
 	}
 
@@ -2121,7 +2117,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		throws SystemException {
 		for (ResultHistoryMinistry resultHistoryMinistry : findByDocumentNameAnddocumentYearAndMinistryCode(
 				documentName, documentYear, ministryCode)) {
-			resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+			remove(resultHistoryMinistry);
 		}
 	}
 
@@ -2135,7 +2131,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 		throws SystemException {
 		for (ResultHistoryMinistry resultHistoryMinistry : findByMinistryCode(
 				ministryCode)) {
-			resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+			remove(resultHistoryMinistry);
 		}
 	}
 
@@ -2146,7 +2142,7 @@ public class ResultHistoryMinistryPersistenceImpl extends BasePersistenceImpl<Re
 	 */
 	public void removeAll() throws SystemException {
 		for (ResultHistoryMinistry resultHistoryMinistry : findAll()) {
-			resultHistoryMinistryPersistence.remove(resultHistoryMinistry);
+			remove(resultHistoryMinistry);
 		}
 	}
 

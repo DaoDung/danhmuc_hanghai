@@ -95,14 +95,6 @@ public class DmDocTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmDocType remove(DmDocType dmDocType)
-		throws SystemException {
-		return getPersistence().remove(dmDocType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmDocType update(DmDocType dmDocType, boolean merge)

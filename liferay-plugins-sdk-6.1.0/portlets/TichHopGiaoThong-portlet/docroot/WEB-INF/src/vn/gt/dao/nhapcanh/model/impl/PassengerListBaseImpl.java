@@ -39,6 +39,11 @@ public abstract class PassengerListBaseImpl extends PassengerListModelImpl
 	 * Never modify or reference this class directly. All methods that expect a passenger list model instance should use the {@link PassengerList} interface instead.
 	 */
 	public void persist() throws SystemException {
-		PassengerListLocalServiceUtil.updatePassengerList(this);
+		if (this.isNew()) {
+			PassengerListLocalServiceUtil.addPassengerList(this);
+		}
+		else {
+			PassengerListLocalServiceUtil.updatePassengerList(this);
+		}
 	}
 }

@@ -221,6 +221,25 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPortHarbour);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPortHarbour> dmHistoryPortHarbours) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPortHarbour dmHistoryPortHarbour : dmHistoryPortHarbours) {
+			EntityCacheUtil.removeResult(DmHistoryPortHarbourModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPortHarbourImpl.class,
+				dmHistoryPortHarbour.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPortHarbour);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryPortHarbour dmHistoryPortHarbour) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTHARBOURCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPortHarbour.getPortHarbourCode(),
@@ -247,20 +266,6 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 	/**
 	 * Removes the dm history port harbour with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history port harbour
-	 * @return the dm history port harbour that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history port harbour with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortHarbour remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history port harbour with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history port harbour
 	 * @return the dm history port harbour that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortHarbourException if a dm history port harbour with the primary key could not be found
@@ -268,24 +273,38 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 	 */
 	public DmHistoryPortHarbour remove(int id)
 		throws NoSuchDmHistoryPortHarbourException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history port harbour with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history port harbour
+	 * @return the dm history port harbour that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortHarbourException if a dm history port harbour with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPortHarbour remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPortHarbourException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPortHarbour dmHistoryPortHarbour = (DmHistoryPortHarbour)session.get(DmHistoryPortHarbourImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPortHarbour == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPortHarbourException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPortHarbourPersistence.remove(dmHistoryPortHarbour);
+			return remove(dmHistoryPortHarbour);
 		}
 		catch (NoSuchDmHistoryPortHarbourException nsee) {
 			throw nsee;
@@ -296,19 +315,6 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history port harbour from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPortHarbour the dm history port harbour
-	 * @return the dm history port harbour that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortHarbour remove(
-		DmHistoryPortHarbour dmHistoryPortHarbour) throws SystemException {
-		return super.remove(dmHistoryPortHarbour);
 	}
 
 	@Override
@@ -330,20 +336,7 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPortHarbourModelImpl dmHistoryPortHarbourModelImpl = (DmHistoryPortHarbourModelImpl)dmHistoryPortHarbour;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTHARBOURCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPortHarbourModelImpl.getPortHarbourCode(),
-				
-			dmHistoryPortHarbourModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPortHarbourModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPortHarbourImpl.class, dmHistoryPortHarbour.getPrimaryKey());
+		clearCache(dmHistoryPortHarbour);
 
 		return dmHistoryPortHarbour;
 	}
@@ -1647,7 +1640,7 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 		throws SystemException {
 		for (DmHistoryPortHarbour dmHistoryPortHarbour : findByPortHarbourCode(
 				portHarbourCode)) {
-			dmHistoryPortHarbourPersistence.remove(dmHistoryPortHarbour);
+			remove(dmHistoryPortHarbour);
 		}
 	}
 
@@ -1664,7 +1657,7 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 		DmHistoryPortHarbour dmHistoryPortHarbour = findByPortHarbourCodeAndSyncVersion(portHarbourCode,
 				syncVersion);
 
-		dmHistoryPortHarbourPersistence.remove(dmHistoryPortHarbour);
+		remove(dmHistoryPortHarbour);
 	}
 
 	/**
@@ -1677,7 +1670,7 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 		throws SystemException {
 		for (DmHistoryPortHarbour dmHistoryPortHarbour : findByPortRegionCode(
 				portRegionCode)) {
-			dmHistoryPortHarbourPersistence.remove(dmHistoryPortHarbour);
+			remove(dmHistoryPortHarbour);
 		}
 	}
 
@@ -1688,7 +1681,7 @@ public class DmHistoryPortHarbourPersistenceImpl extends BasePersistenceImpl<DmH
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPortHarbour dmHistoryPortHarbour : findAll()) {
-			dmHistoryPortHarbourPersistence.remove(dmHistoryPortHarbour);
+			remove(dmHistoryPortHarbour);
 		}
 	}
 

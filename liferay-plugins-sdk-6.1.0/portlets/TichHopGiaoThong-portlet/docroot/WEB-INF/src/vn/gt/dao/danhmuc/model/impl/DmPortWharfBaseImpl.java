@@ -39,6 +39,11 @@ public abstract class DmPortWharfBaseImpl extends DmPortWharfModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm port wharf model instance should use the {@link DmPortWharf} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPortWharfLocalServiceUtil.updateDmPortWharf(this);
+		if (this.isNew()) {
+			DmPortWharfLocalServiceUtil.addDmPortWharf(this);
+		}
+		else {
+			DmPortWharfLocalServiceUtil.updateDmPortWharf(this);
+		}
 	}
 }

@@ -174,6 +174,8 @@ public class ResultDeclarationModelImpl extends BaseModelImpl<ResultDeclaration>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

@@ -39,6 +39,11 @@ public abstract class DmHistoryRankRatingBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history rank rating model instance should use the {@link DmHistoryRankRating} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryRankRatingLocalServiceUtil.updateDmHistoryRankRating(this);
+		if (this.isNew()) {
+			DmHistoryRankRatingLocalServiceUtil.addDmHistoryRankRating(this);
+		}
+		else {
+			DmHistoryRankRatingLocalServiceUtil.updateDmHistoryRankRating(this);
+		}
 	}
 }

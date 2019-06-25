@@ -130,6 +130,8 @@ public class DmDataItemModelImpl extends BaseModelImpl<DmDataItem>
 	}
 
 	public void setId(long Id) {
+		_columnBitmask = -1L;
+
 		_Id = Id;
 	}
 

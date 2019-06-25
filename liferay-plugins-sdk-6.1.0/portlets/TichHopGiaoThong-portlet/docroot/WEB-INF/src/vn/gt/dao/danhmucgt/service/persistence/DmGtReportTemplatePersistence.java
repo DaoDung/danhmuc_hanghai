@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmucgt.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmucgt.model.DmGtReportTemplate;
@@ -341,7 +340,4 @@ public interface DmGtReportTemplatePersistence extends BasePersistence<DmGtRepor
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmGtReportTemplate remove(DmGtReportTemplate dmGtReportTemplate)
-		throws SystemException;
 }

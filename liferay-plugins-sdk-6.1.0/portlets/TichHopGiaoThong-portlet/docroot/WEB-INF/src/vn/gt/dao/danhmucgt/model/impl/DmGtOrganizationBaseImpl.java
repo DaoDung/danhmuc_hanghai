@@ -39,6 +39,11 @@ public abstract class DmGtOrganizationBaseImpl extends DmGtOrganizationModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt organization model instance should use the {@link DmGtOrganization} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtOrganizationLocalServiceUtil.updateDmGtOrganization(this);
+		if (this.isNew()) {
+			DmGtOrganizationLocalServiceUtil.addDmGtOrganization(this);
+		}
+		else {
+			DmGtOrganizationLocalServiceUtil.updateDmGtOrganization(this);
+		}
 	}
 }

@@ -39,6 +39,11 @@ public abstract class DmHistoryMaritimeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history maritime model instance should use the {@link DmHistoryMaritime} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryMaritimeLocalServiceUtil.updateDmHistoryMaritime(this);
+		if (this.isNew()) {
+			DmHistoryMaritimeLocalServiceUtil.addDmHistoryMaritime(this);
+		}
+		else {
+			DmHistoryMaritimeLocalServiceUtil.updateDmHistoryMaritime(this);
+		}
 	}
 }

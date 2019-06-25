@@ -39,6 +39,11 @@ public abstract class HistorySyncVersionBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a history sync version model instance should use the {@link HistorySyncVersion} interface instead.
 	 */
 	public void persist() throws SystemException {
-		HistorySyncVersionLocalServiceUtil.updateHistorySyncVersion(this);
+		if (this.isNew()) {
+			HistorySyncVersionLocalServiceUtil.addHistorySyncVersion(this);
+		}
+		else {
+			HistorySyncVersionLocalServiceUtil.updateHistorySyncVersion(this);
+		}
 	}
 }

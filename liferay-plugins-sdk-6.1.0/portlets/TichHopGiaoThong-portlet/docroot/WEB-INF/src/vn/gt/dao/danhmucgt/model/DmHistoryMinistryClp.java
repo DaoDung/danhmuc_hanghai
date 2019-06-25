@@ -140,7 +140,12 @@ public class DmHistoryMinistryClp extends BaseModelImpl<DmHistoryMinistry>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryMinistryLocalServiceUtil.updateDmHistoryMinistry(this);
+		if (this.isNew()) {
+			DmHistoryMinistryLocalServiceUtil.addDmHistoryMinistry(this);
+		}
+		else {
+			DmHistoryMinistryLocalServiceUtil.updateDmHistoryMinistry(this);
+		}
 	}
 
 	@Override

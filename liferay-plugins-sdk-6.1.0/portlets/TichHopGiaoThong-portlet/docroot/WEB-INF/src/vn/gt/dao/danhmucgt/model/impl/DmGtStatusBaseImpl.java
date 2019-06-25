@@ -39,6 +39,11 @@ public abstract class DmGtStatusBaseImpl extends DmGtStatusModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt status model instance should use the {@link DmGtStatus} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtStatusLocalServiceUtil.updateDmGtStatus(this);
+		if (this.isNew()) {
+			DmGtStatusLocalServiceUtil.addDmGtStatus(this);
+		}
+		else {
+			DmGtStatusLocalServiceUtil.updateDmGtStatus(this);
+		}
 	}
 }

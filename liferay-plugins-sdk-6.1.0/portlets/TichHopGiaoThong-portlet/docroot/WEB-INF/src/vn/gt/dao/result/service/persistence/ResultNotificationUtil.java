@@ -95,14 +95,6 @@ public class ResultNotificationUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultNotification remove(
-		ResultNotification resultNotification) throws SystemException {
-		return getPersistence().remove(resultNotification);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultNotification update(

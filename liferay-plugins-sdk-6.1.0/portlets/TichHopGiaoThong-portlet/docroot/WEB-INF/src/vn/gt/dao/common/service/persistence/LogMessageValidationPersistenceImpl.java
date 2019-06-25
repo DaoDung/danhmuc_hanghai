@@ -184,6 +184,18 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<LogMessageValidation> logMessageValidations) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (LogMessageValidation logMessageValidation : logMessageValidations) {
+			EntityCacheUtil.removeResult(LogMessageValidationModelImpl.ENTITY_CACHE_ENABLED,
+				LogMessageValidationImpl.class,
+				logMessageValidation.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new log message validation with the primary key. Does not add the log message validation to the database.
 	 *
@@ -202,20 +214,6 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 	/**
 	 * Removes the log message validation with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the log message validation
-	 * @return the log message validation that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a log message validation with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public LogMessageValidation remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the log message validation with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the log message validation
 	 * @return the log message validation that was removed
 	 * @throws vn.gt.dao.common.NoSuchLogMessageValidationException if a log message validation with the primary key could not be found
@@ -223,24 +221,38 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 	 */
 	public LogMessageValidation remove(long id)
 		throws NoSuchLogMessageValidationException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the log message validation with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the log message validation
+	 * @return the log message validation that was removed
+	 * @throws vn.gt.dao.common.NoSuchLogMessageValidationException if a log message validation with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LogMessageValidation remove(Serializable primaryKey)
+		throws NoSuchLogMessageValidationException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			LogMessageValidation logMessageValidation = (LogMessageValidation)session.get(LogMessageValidationImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (logMessageValidation == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchLogMessageValidationException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return logMessageValidationPersistence.remove(logMessageValidation);
+			return remove(logMessageValidation);
 		}
 		catch (NoSuchLogMessageValidationException nsee) {
 			throw nsee;
@@ -251,19 +263,6 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the log message validation from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param logMessageValidation the log message validation
-	 * @return the log message validation that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public LogMessageValidation remove(
-		LogMessageValidation logMessageValidation) throws SystemException {
-		return super.remove(logMessageValidation);
 	}
 
 	@Override
@@ -285,11 +284,7 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(LogMessageValidationModelImpl.ENTITY_CACHE_ENABLED,
-			LogMessageValidationImpl.class, logMessageValidation.getPrimaryKey());
+		clearCache(logMessageValidation);
 
 		return logMessageValidation;
 	}
@@ -986,7 +981,7 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 		int documentYear) throws SystemException {
 		for (LogMessageValidation logMessageValidation : findByDocumentNameDocumentYear(
 				documentName, documentYear)) {
-			logMessageValidationPersistence.remove(logMessageValidation);
+			remove(logMessageValidation);
 		}
 	}
 
@@ -997,7 +992,7 @@ public class LogMessageValidationPersistenceImpl extends BasePersistenceImpl<Log
 	 */
 	public void removeAll() throws SystemException {
 		for (LogMessageValidation logMessageValidation : findAll()) {
-			logMessageValidationPersistence.remove(logMessageValidation);
+			remove(logMessageValidation);
 		}
 	}
 

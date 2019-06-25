@@ -166,6 +166,8 @@ public class DmMinistryModelImpl extends BaseModelImpl<DmMinistry>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

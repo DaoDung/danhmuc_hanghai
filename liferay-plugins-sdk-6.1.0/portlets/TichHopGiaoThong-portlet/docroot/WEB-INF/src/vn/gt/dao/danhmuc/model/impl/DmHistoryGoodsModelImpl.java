@@ -117,6 +117,8 @@ public class DmHistoryGoodsModelImpl extends BaseModelImpl<DmHistoryGoods>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

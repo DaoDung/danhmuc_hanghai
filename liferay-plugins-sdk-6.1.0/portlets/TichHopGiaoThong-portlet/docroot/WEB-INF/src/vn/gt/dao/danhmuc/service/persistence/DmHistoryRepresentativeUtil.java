@@ -96,15 +96,6 @@ public class DmHistoryRepresentativeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryRepresentative remove(
-		DmHistoryRepresentative dmHistoryRepresentative)
-		throws SystemException {
-		return getPersistence().remove(dmHistoryRepresentative);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryRepresentative update(

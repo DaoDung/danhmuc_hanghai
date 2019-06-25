@@ -140,7 +140,12 @@ public class DmGTShipPositionClp extends BaseModelImpl<DmGTShipPosition>
 	}
 
 	public void persist() throws SystemException {
-		DmGTShipPositionLocalServiceUtil.updateDmGTShipPosition(this);
+		if (this.isNew()) {
+			DmGTShipPositionLocalServiceUtil.addDmGTShipPosition(this);
+		}
+		else {
+			DmGTShipPositionLocalServiceUtil.updateDmGTShipPosition(this);
+		}
 	}
 
 	@Override

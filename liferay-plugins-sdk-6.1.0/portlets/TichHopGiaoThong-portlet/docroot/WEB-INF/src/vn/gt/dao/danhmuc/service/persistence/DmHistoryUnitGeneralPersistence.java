@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmHistoryUnitGeneral;
@@ -348,7 +347,4 @@ public interface DmHistoryUnitGeneralPersistence extends BasePersistence<DmHisto
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmHistoryUnitGeneral remove(
-		DmHistoryUnitGeneral dmHistoryUnitGeneral) throws SystemException;
 }

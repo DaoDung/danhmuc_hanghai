@@ -172,7 +172,12 @@ public class DmPortHarbourClp extends BaseModelImpl<DmPortHarbour>
 	}
 
 	public void persist() throws SystemException {
-		DmPortHarbourLocalServiceUtil.updateDmPortHarbour(this);
+		if (this.isNew()) {
+			DmPortHarbourLocalServiceUtil.addDmPortHarbour(this);
+		}
+		else {
+			DmPortHarbourLocalServiceUtil.updateDmPortHarbour(this);
+		}
 	}
 
 	@Override

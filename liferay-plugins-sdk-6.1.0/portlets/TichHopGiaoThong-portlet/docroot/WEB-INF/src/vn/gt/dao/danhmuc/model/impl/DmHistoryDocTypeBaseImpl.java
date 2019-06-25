@@ -39,6 +39,11 @@ public abstract class DmHistoryDocTypeBaseImpl extends DmHistoryDocTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history doc type model instance should use the {@link DmHistoryDocType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryDocTypeLocalServiceUtil.updateDmHistoryDocType(this);
+		if (this.isNew()) {
+			DmHistoryDocTypeLocalServiceUtil.addDmHistoryDocType(this);
+		}
+		else {
+			DmHistoryDocTypeLocalServiceUtil.updateDmHistoryDocType(this);
+		}
 	}
 }

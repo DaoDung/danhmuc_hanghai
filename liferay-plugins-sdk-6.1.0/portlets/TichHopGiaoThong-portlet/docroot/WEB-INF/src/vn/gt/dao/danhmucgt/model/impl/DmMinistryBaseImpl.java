@@ -39,6 +39,11 @@ public abstract class DmMinistryBaseImpl extends DmMinistryModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm ministry model instance should use the {@link DmMinistry} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmMinistryLocalServiceUtil.updateDmMinistry(this);
+		if (this.isNew()) {
+			DmMinistryLocalServiceUtil.addDmMinistry(this);
+		}
+		else {
+			DmMinistryLocalServiceUtil.updateDmMinistry(this);
+		}
 	}
 }

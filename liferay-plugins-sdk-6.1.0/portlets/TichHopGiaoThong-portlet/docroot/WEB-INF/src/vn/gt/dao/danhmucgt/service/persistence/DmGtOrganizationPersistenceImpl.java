@@ -169,6 +169,23 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmGtOrganization);
+	}
+
+	@Override
+	public void clearCache(List<DmGtOrganization> dmGtOrganizations) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtOrganization dmGtOrganization : dmGtOrganizations) {
+			EntityCacheUtil.removeResult(DmGtOrganizationModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtOrganizationImpl.class, dmGtOrganization.getPrimaryKey());
+
+			clearUniqueFindersCache(dmGtOrganization);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmGtOrganization dmGtOrganization) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ORGANIZATIONCODE,
 			new Object[] { dmGtOrganization.getOrganizationCode() });
 	}
@@ -191,20 +208,6 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 	/**
 	 * Removes the dm gt organization with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt organization
-	 * @return the dm gt organization that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt organization with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtOrganization remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm gt organization with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt organization
 	 * @return the dm gt organization that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtOrganizationException if a dm gt organization with the primary key could not be found
@@ -212,24 +215,38 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 	 */
 	public DmGtOrganization remove(long id)
 		throws NoSuchDmGtOrganizationException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt organization with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt organization
+	 * @return the dm gt organization that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtOrganizationException if a dm gt organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtOrganization remove(Serializable primaryKey)
+		throws NoSuchDmGtOrganizationException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtOrganization dmGtOrganization = (DmGtOrganization)session.get(DmGtOrganizationImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGtOrganization == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtOrganizationException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtOrganizationPersistence.remove(dmGtOrganization);
+			return remove(dmGtOrganization);
 		}
 		catch (NoSuchDmGtOrganizationException nsee) {
 			throw nsee;
@@ -240,19 +257,6 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt organization from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtOrganization the dm gt organization
-	 * @return the dm gt organization that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtOrganization remove(DmGtOrganization dmGtOrganization)
-		throws SystemException {
-		return super.remove(dmGtOrganization);
 	}
 
 	@Override
@@ -274,16 +278,7 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmGtOrganizationModelImpl dmGtOrganizationModelImpl = (DmGtOrganizationModelImpl)dmGtOrganization;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ORGANIZATIONCODE,
-			new Object[] { dmGtOrganizationModelImpl.getOrganizationCode() });
-
-		EntityCacheUtil.removeResult(DmGtOrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtOrganizationImpl.class, dmGtOrganization.getPrimaryKey());
+		clearCache(dmGtOrganization);
 
 		return dmGtOrganization;
 	}
@@ -743,7 +738,7 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 		throws NoSuchDmGtOrganizationException, SystemException {
 		DmGtOrganization dmGtOrganization = findByOrganizationCode(organizationCode);
 
-		dmGtOrganizationPersistence.remove(dmGtOrganization);
+		remove(dmGtOrganization);
 	}
 
 	/**
@@ -753,7 +748,7 @@ public class DmGtOrganizationPersistenceImpl extends BasePersistenceImpl<DmGtOrg
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtOrganization dmGtOrganization : findAll()) {
-			dmGtOrganizationPersistence.remove(dmGtOrganization);
+			remove(dmGtOrganization);
 		}
 	}
 

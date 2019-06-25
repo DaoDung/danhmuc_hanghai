@@ -39,6 +39,11 @@ public abstract class ResultNotificationBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a result notification model instance should use the {@link ResultNotification} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultNotificationLocalServiceUtil.updateResultNotification(this);
+		if (this.isNew()) {
+			ResultNotificationLocalServiceUtil.addResultNotification(this);
+		}
+		else {
+			ResultNotificationLocalServiceUtil.updateResultNotification(this);
+		}
 	}
 }

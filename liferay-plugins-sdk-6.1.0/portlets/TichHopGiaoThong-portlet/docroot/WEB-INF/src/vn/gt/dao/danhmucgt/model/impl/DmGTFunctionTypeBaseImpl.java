@@ -39,6 +39,11 @@ public abstract class DmGTFunctionTypeBaseImpl extends DmGTFunctionTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm g t function type model instance should use the {@link DmGTFunctionType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGTFunctionTypeLocalServiceUtil.updateDmGTFunctionType(this);
+		if (this.isNew()) {
+			DmGTFunctionTypeLocalServiceUtil.addDmGTFunctionType(this);
+		}
+		else {
+			DmGTFunctionTypeLocalServiceUtil.updateDmGTFunctionType(this);
+		}
 	}
 }

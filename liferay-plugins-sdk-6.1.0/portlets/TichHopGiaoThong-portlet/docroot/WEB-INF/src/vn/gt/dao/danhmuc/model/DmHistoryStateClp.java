@@ -132,7 +132,12 @@ public class DmHistoryStateClp extends BaseModelImpl<DmHistoryState>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryStateLocalServiceUtil.updateDmHistoryState(this);
+		if (this.isNew()) {
+			DmHistoryStateLocalServiceUtil.addDmHistoryState(this);
+		}
+		else {
+			DmHistoryStateLocalServiceUtil.updateDmHistoryState(this);
+		}
 	}
 
 	@Override

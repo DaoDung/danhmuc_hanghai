@@ -14,7 +14,6 @@
 
 package vn.gt.dao.result.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.result.model.ResultNotification;
@@ -437,7 +436,4 @@ public interface ResultNotificationPersistence extends BasePersistence<ResultNot
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public ResultNotification remove(ResultNotification resultNotification)
-		throws SystemException;
 }

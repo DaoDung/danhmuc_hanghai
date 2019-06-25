@@ -124,6 +124,8 @@ public class DmHistoryPortModelImpl extends BaseModelImpl<DmHistoryPort>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

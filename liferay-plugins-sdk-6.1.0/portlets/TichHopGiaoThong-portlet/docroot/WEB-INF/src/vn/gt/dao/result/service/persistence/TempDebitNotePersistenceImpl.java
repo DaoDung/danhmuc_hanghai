@@ -390,6 +390,23 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(tempDebitNote);
+	}
+
+	@Override
+	public void clearCache(List<TempDebitNote> tempDebitNotes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (TempDebitNote tempDebitNote : tempDebitNotes) {
+			EntityCacheUtil.removeResult(TempDebitNoteModelImpl.ENTITY_CACHE_ENABLED,
+				TempDebitNoteImpl.class, tempDebitNote.getPrimaryKey());
+
+			clearUniqueFindersCache(tempDebitNote);
+		}
+	}
+
+	protected void clearUniqueFindersCache(TempDebitNote tempDebitNote) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_DEBITNOTENUMBER,
 			new Object[] { tempDebitNote.getDebitnotenumber() });
 
@@ -415,20 +432,6 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 	/**
 	 * Removes the temp debit note with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the temp debit note
-	 * @return the temp debit note that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a temp debit note with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public TempDebitNote remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the temp debit note with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the temp debit note
 	 * @return the temp debit note that was removed
 	 * @throws vn.gt.dao.result.NoSuchTempDebitNoteException if a temp debit note with the primary key could not be found
@@ -436,24 +439,38 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 	 */
 	public TempDebitNote remove(long id)
 		throws NoSuchTempDebitNoteException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the temp debit note with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the temp debit note
+	 * @return the temp debit note that was removed
+	 * @throws vn.gt.dao.result.NoSuchTempDebitNoteException if a temp debit note with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TempDebitNote remove(Serializable primaryKey)
+		throws NoSuchTempDebitNoteException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			TempDebitNote tempDebitNote = (TempDebitNote)session.get(TempDebitNoteImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (tempDebitNote == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchTempDebitNoteException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return tempDebitNotePersistence.remove(tempDebitNote);
+			return remove(tempDebitNote);
 		}
 		catch (NoSuchTempDebitNoteException nsee) {
 			throw nsee;
@@ -464,19 +481,6 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the temp debit note from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param tempDebitNote the temp debit note
-	 * @return the temp debit note that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public TempDebitNote remove(TempDebitNote tempDebitNote)
-		throws SystemException {
-		return super.remove(tempDebitNote);
 	}
 
 	@Override
@@ -498,19 +502,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		TempDebitNoteModelImpl tempDebitNoteModelImpl = (TempDebitNoteModelImpl)tempDebitNote;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_DEBITNOTENUMBER,
-			new Object[] { tempDebitNoteModelImpl.getDebitnotenumber() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_TRANSACTIONID,
-			new Object[] { tempDebitNoteModelImpl.getTransactionid() });
-
-		EntityCacheUtil.removeResult(TempDebitNoteModelImpl.ENTITY_CACHE_ENABLED,
-			TempDebitNoteImpl.class, tempDebitNote.getPrimaryKey());
+		clearCache(tempDebitNote);
 
 		return tempDebitNote;
 	}
@@ -5047,7 +5039,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		int documentYear, int markasdeleted) throws SystemException {
 		for (TempDebitNote tempDebitNote : findByDocumentNameAnddocumentYearDone(
 				documentName, documentYear, markasdeleted)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5062,7 +5054,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		int documentYear) throws SystemException {
 		for (TempDebitNote tempDebitNote : findByDocumentNameAnddocumentYear(
 				documentName, documentYear)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5080,7 +5072,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		throws SystemException {
 		for (TempDebitNote tempDebitNote : findByDocumentNameAnddocumentYearMarkasdeleted(
 				mariTimeCode, documentName, documentYear, markasdeleted)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5097,7 +5089,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		long documentName, String documentTypeCode) throws SystemException {
 		for (TempDebitNote tempDebitNote : findBydocumentNameSearch(
 				mariTimeCode, markasdeleted, documentName, documentTypeCode)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5115,7 +5107,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		throws SystemException {
 		for (TempDebitNote tempDebitNote : findBydebitnotenumberSearch(
 				mariTimeCode, markasdeleted, debitnotenumber, documentTypeCode)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5131,7 +5123,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		String documentTypeCode) throws SystemException {
 		for (TempDebitNote tempDebitNote : findByMarkasdeleted(markasdeleted,
 				mariTimeCode, documentTypeCode)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5144,7 +5136,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 	public void removeByMarkasdeletedAll(int markasdeleted)
 		throws SystemException {
 		for (TempDebitNote tempDebitNote : findByMarkasdeletedAll(markasdeleted)) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 
@@ -5158,7 +5150,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		throws NoSuchTempDebitNoteException, SystemException {
 		TempDebitNote tempDebitNote = findByF_debitnotenumber(debitnotenumber);
 
-		tempDebitNotePersistence.remove(tempDebitNote);
+		remove(tempDebitNote);
 	}
 
 	/**
@@ -5171,7 +5163,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 		throws NoSuchTempDebitNoteException, SystemException {
 		TempDebitNote tempDebitNote = findByTransactionId(transactionid);
 
-		tempDebitNotePersistence.remove(tempDebitNote);
+		remove(tempDebitNote);
 	}
 
 	/**
@@ -5181,7 +5173,7 @@ public class TempDebitNotePersistenceImpl extends BasePersistenceImpl<TempDebitN
 	 */
 	public void removeAll() throws SystemException {
 		for (TempDebitNote tempDebitNote : findAll()) {
-			tempDebitNotePersistence.remove(tempDebitNote);
+			remove(tempDebitNote);
 		}
 	}
 

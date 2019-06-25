@@ -39,6 +39,11 @@ public abstract class DmGtReportCategoryBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt report category model instance should use the {@link DmGtReportCategory} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtReportCategoryLocalServiceUtil.updateDmGtReportCategory(this);
+		if (this.isNew()) {
+			DmGtReportCategoryLocalServiceUtil.addDmGtReportCategory(this);
+		}
+		else {
+			DmGtReportCategoryLocalServiceUtil.updateDmGtReportCategory(this);
+		}
 	}
 }

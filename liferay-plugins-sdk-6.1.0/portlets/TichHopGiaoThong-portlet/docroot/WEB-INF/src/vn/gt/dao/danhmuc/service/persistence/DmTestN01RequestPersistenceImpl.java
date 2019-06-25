@@ -155,6 +155,17 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmTestN01Request> dmTestN01Requests) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmTestN01Request dmTestN01Request : dmTestN01Requests) {
+			EntityCacheUtil.removeResult(DmTestN01RequestModelImpl.ENTITY_CACHE_ENABLED,
+				DmTestN01RequestImpl.class, dmTestN01Request.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm test n01 request with the primary key. Does not add the dm test n01 request to the database.
 	 *
@@ -173,20 +184,6 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 	/**
 	 * Removes the dm test n01 request with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm test n01 request
-	 * @return the dm test n01 request that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm test n01 request with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmTestN01Request remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm test n01 request with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param requestID the primary key of the dm test n01 request
 	 * @return the dm test n01 request that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmTestN01RequestException if a dm test n01 request with the primary key could not be found
@@ -194,24 +191,38 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 	 */
 	public DmTestN01Request remove(int requestID)
 		throws NoSuchDmTestN01RequestException, SystemException {
+		return remove(Integer.valueOf(requestID));
+	}
+
+	/**
+	 * Removes the dm test n01 request with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm test n01 request
+	 * @return the dm test n01 request that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmTestN01RequestException if a dm test n01 request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmTestN01Request remove(Serializable primaryKey)
+		throws NoSuchDmTestN01RequestException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmTestN01Request dmTestN01Request = (DmTestN01Request)session.get(DmTestN01RequestImpl.class,
-					Integer.valueOf(requestID));
+					primaryKey);
 
 			if (dmTestN01Request == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + requestID);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmTestN01RequestException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					requestID);
+					primaryKey);
 			}
 
-			return dmTestN01RequestPersistence.remove(dmTestN01Request);
+			return remove(dmTestN01Request);
 		}
 		catch (NoSuchDmTestN01RequestException nsee) {
 			throw nsee;
@@ -222,19 +233,6 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm test n01 request from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmTestN01Request the dm test n01 request
-	 * @return the dm test n01 request that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmTestN01Request remove(DmTestN01Request dmTestN01Request)
-		throws SystemException {
-		return super.remove(dmTestN01Request);
 	}
 
 	@Override
@@ -256,11 +254,7 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmTestN01RequestModelImpl.ENTITY_CACHE_ENABLED,
-			DmTestN01RequestImpl.class, dmTestN01Request.getPrimaryKey());
+		clearCache(dmTestN01Request);
 
 		return dmTestN01Request;
 	}
@@ -547,7 +541,7 @@ public class DmTestN01RequestPersistenceImpl extends BasePersistenceImpl<DmTestN
 	 */
 	public void removeAll() throws SystemException {
 		for (DmTestN01Request dmTestN01Request : findAll()) {
-			dmTestN01RequestPersistence.remove(dmTestN01Request);
+			remove(dmTestN01Request);
 		}
 	}
 

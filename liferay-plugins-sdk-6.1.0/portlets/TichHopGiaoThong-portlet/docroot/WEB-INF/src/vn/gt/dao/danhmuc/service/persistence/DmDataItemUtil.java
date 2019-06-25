@@ -95,14 +95,6 @@ public class DmDataItemUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmDataItem remove(DmDataItem dmDataItem)
-		throws SystemException {
-		return getPersistence().remove(dmDataItem);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmDataItem update(DmDataItem dmDataItem, boolean merge)

@@ -172,7 +172,12 @@ public class DmTestN01RequestClp extends BaseModelImpl<DmTestN01Request>
 	}
 
 	public void persist() throws SystemException {
-		DmTestN01RequestLocalServiceUtil.updateDmTestN01Request(this);
+		if (this.isNew()) {
+			DmTestN01RequestLocalServiceUtil.addDmTestN01Request(this);
+		}
+		else {
+			DmTestN01RequestLocalServiceUtil.updateDmTestN01Request(this);
+		}
 	}
 
 	@Override

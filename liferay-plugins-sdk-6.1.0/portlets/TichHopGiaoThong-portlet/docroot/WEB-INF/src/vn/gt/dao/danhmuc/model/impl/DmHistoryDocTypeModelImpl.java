@@ -116,6 +116,8 @@ public class DmHistoryDocTypeModelImpl extends BaseModelImpl<DmHistoryDocType>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

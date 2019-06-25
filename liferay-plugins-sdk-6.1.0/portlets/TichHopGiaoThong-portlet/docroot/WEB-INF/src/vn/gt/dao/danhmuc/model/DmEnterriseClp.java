@@ -236,7 +236,12 @@ public class DmEnterriseClp extends BaseModelImpl<DmEnterrise>
 	}
 
 	public void persist() throws SystemException {
-		DmEnterriseLocalServiceUtil.updateDmEnterrise(this);
+		if (this.isNew()) {
+			DmEnterriseLocalServiceUtil.addDmEnterrise(this);
+		}
+		else {
+			DmEnterriseLocalServiceUtil.updateDmEnterrise(this);
+		}
 	}
 
 	@Override

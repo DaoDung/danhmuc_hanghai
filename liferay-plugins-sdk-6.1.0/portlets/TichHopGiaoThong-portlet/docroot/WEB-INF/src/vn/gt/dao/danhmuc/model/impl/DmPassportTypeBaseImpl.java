@@ -39,6 +39,11 @@ public abstract class DmPassportTypeBaseImpl extends DmPassportTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm passport type model instance should use the {@link DmPassportType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPassportTypeLocalServiceUtil.updateDmPassportType(this);
+		if (this.isNew()) {
+			DmPassportTypeLocalServiceUtil.addDmPassportType(this);
+		}
+		else {
+			DmPassportTypeLocalServiceUtil.updateDmPassportType(this);
+		}
 	}
 }

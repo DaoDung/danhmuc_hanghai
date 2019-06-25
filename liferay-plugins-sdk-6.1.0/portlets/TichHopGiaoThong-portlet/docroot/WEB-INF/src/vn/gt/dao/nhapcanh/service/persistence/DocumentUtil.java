@@ -95,13 +95,6 @@ public class DocumentUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static Document remove(Document document) throws SystemException {
-		return getPersistence().remove(document);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static Document update(Document document, boolean merge)

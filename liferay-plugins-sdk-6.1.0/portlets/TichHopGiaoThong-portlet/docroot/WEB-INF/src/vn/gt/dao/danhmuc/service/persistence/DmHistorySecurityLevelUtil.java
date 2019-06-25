@@ -95,15 +95,6 @@ public class DmHistorySecurityLevelUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistorySecurityLevel remove(
-		DmHistorySecurityLevel dmHistorySecurityLevel)
-		throws SystemException {
-		return getPersistence().remove(dmHistorySecurityLevel);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistorySecurityLevel update(

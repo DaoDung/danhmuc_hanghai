@@ -324,7 +324,12 @@ public class ResultCompetionClp extends BaseModelImpl<ResultCompetion>
 	}
 
 	public void persist() throws SystemException {
-		ResultCompetionLocalServiceUtil.updateResultCompetion(this);
+		if (this.isNew()) {
+			ResultCompetionLocalServiceUtil.addResultCompetion(this);
+		}
+		else {
+			ResultCompetionLocalServiceUtil.updateResultCompetion(this);
+		}
 	}
 
 	@Override

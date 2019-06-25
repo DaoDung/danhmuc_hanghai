@@ -39,6 +39,11 @@ public abstract class DmHistorySecurityLevelBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history security level model instance should use the {@link DmHistorySecurityLevel} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistorySecurityLevelLocalServiceUtil.updateDmHistorySecurityLevel(this);
+		if (this.isNew()) {
+			DmHistorySecurityLevelLocalServiceUtil.addDmHistorySecurityLevel(this);
+		}
+		else {
+			DmHistorySecurityLevelLocalServiceUtil.updateDmHistorySecurityLevel(this);
+		}
 	}
 }

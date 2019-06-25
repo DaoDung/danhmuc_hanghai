@@ -211,6 +211,23 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmGtRouteConfig);
+	}
+
+	@Override
+	public void clearCache(List<DmGtRouteConfig> dmGtRouteConfigs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtRouteConfig dmGtRouteConfig : dmGtRouteConfigs) {
+			EntityCacheUtil.removeResult(DmGtRouteConfigModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtRouteConfigImpl.class, dmGtRouteConfig.getPrimaryKey());
+
+			clearUniqueFindersCache(dmGtRouteConfig);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmGtRouteConfig dmGtRouteConfig) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROUTECODE,
 			new Object[] { dmGtRouteConfig.getRouteCode() });
 	}
@@ -233,20 +250,6 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 	/**
 	 * Removes the dm gt route config with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt route config
-	 * @return the dm gt route config that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt route config with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtRouteConfig remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm gt route config with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt route config
 	 * @return the dm gt route config that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtRouteConfigException if a dm gt route config with the primary key could not be found
@@ -254,24 +257,38 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 	 */
 	public DmGtRouteConfig remove(long id)
 		throws NoSuchDmGtRouteConfigException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt route config with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt route config
+	 * @return the dm gt route config that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtRouteConfigException if a dm gt route config with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtRouteConfig remove(Serializable primaryKey)
+		throws NoSuchDmGtRouteConfigException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtRouteConfig dmGtRouteConfig = (DmGtRouteConfig)session.get(DmGtRouteConfigImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGtRouteConfig == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtRouteConfigException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtRouteConfigPersistence.remove(dmGtRouteConfig);
+			return remove(dmGtRouteConfig);
 		}
 		catch (NoSuchDmGtRouteConfigException nsee) {
 			throw nsee;
@@ -282,19 +299,6 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt route config from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtRouteConfig the dm gt route config
-	 * @return the dm gt route config that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtRouteConfig remove(DmGtRouteConfig dmGtRouteConfig)
-		throws SystemException {
-		return super.remove(dmGtRouteConfig);
 	}
 
 	@Override
@@ -316,16 +320,7 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmGtRouteConfigModelImpl dmGtRouteConfigModelImpl = (DmGtRouteConfigModelImpl)dmGtRouteConfig;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROUTECODE,
-			new Object[] { dmGtRouteConfigModelImpl.getRouteCode() });
-
-		EntityCacheUtil.removeResult(DmGtRouteConfigModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtRouteConfigImpl.class, dmGtRouteConfig.getPrimaryKey());
+		clearCache(dmGtRouteConfig);
 
 		return dmGtRouteConfig;
 	}
@@ -1568,7 +1563,7 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 		throws NoSuchDmGtRouteConfigException, SystemException {
 		DmGtRouteConfig dmGtRouteConfig = findByRouteCode(routeCode);
 
-		dmGtRouteConfigPersistence.remove(dmGtRouteConfig);
+		remove(dmGtRouteConfig);
 	}
 
 	/**
@@ -1579,7 +1574,7 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 	 */
 	public void removeByIsDelete(int isDelete) throws SystemException {
 		for (DmGtRouteConfig dmGtRouteConfig : findByIsDelete(isDelete)) {
-			dmGtRouteConfigPersistence.remove(dmGtRouteConfig);
+			remove(dmGtRouteConfig);
 		}
 	}
 
@@ -1593,7 +1588,7 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 	public void removeByLocCode(String locCode, int isDelete)
 		throws SystemException {
 		for (DmGtRouteConfig dmGtRouteConfig : findByLocCode(locCode, isDelete)) {
-			dmGtRouteConfigPersistence.remove(dmGtRouteConfig);
+			remove(dmGtRouteConfig);
 		}
 	}
 
@@ -1604,7 +1599,7 @@ public class DmGtRouteConfigPersistenceImpl extends BasePersistenceImpl<DmGtRout
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtRouteConfig dmGtRouteConfig : findAll()) {
-			dmGtRouteConfigPersistence.remove(dmGtRouteConfig);
+			remove(dmGtRouteConfig);
 		}
 	}
 

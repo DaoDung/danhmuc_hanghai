@@ -14,7 +14,6 @@
 
 package vn.gt.dao.common.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.common.model.UserSign;
@@ -335,6 +334,4 @@ public interface UserSignPersistence extends BasePersistence<UserSign> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public UserSign remove(UserSign userSign) throws SystemException;
 }

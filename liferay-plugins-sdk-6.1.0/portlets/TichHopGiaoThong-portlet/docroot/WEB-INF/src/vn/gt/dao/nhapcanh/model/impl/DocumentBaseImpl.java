@@ -39,6 +39,11 @@ public abstract class DocumentBaseImpl extends DocumentModelImpl
 	 * Never modify or reference this class directly. All methods that expect a document model instance should use the {@link Document} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DocumentLocalServiceUtil.updateDocument(this);
+		if (this.isNew()) {
+			DocumentLocalServiceUtil.addDocument(this);
+		}
+		else {
+			DocumentLocalServiceUtil.updateDocument(this);
+		}
 	}
 }

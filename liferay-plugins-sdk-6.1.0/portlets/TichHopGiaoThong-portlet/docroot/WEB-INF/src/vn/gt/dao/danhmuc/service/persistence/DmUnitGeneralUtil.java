@@ -95,14 +95,6 @@ public class DmUnitGeneralUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmUnitGeneral remove(DmUnitGeneral dmUnitGeneral)
-		throws SystemException {
-		return getPersistence().remove(dmUnitGeneral);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmUnitGeneral update(DmUnitGeneral dmUnitGeneral,

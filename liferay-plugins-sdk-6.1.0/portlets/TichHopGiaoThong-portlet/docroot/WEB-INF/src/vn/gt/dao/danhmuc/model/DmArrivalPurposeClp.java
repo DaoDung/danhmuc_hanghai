@@ -132,7 +132,12 @@ public class DmArrivalPurposeClp extends BaseModelImpl<DmArrivalPurpose>
 	}
 
 	public void persist() throws SystemException {
-		DmArrivalPurposeLocalServiceUtil.updateDmArrivalPurpose(this);
+		if (this.isNew()) {
+			DmArrivalPurposeLocalServiceUtil.addDmArrivalPurpose(this);
+		}
+		else {
+			DmArrivalPurposeLocalServiceUtil.updateDmArrivalPurpose(this);
+		}
 	}
 
 	@Override

@@ -95,14 +95,6 @@ public class DmHistoryMinistryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryMinistry remove(DmHistoryMinistry dmHistoryMinistry)
-		throws SystemException {
-		return getPersistence().remove(dmHistoryMinistry);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryMinistry update(

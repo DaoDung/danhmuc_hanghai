@@ -39,6 +39,11 @@ public abstract class DmHistoryShipTypeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history ship type model instance should use the {@link DmHistoryShipType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryShipTypeLocalServiceUtil.updateDmHistoryShipType(this);
+		if (this.isNew()) {
+			DmHistoryShipTypeLocalServiceUtil.addDmHistoryShipType(this);
+		}
+		else {
+			DmHistoryShipTypeLocalServiceUtil.updateDmHistoryShipType(this);
+		}
 	}
 }

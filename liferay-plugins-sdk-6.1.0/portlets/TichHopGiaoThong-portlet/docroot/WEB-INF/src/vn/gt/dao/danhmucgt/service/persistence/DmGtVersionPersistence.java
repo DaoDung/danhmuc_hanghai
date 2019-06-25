@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmucgt.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmucgt.model.DmGtVersion;
@@ -158,7 +157,4 @@ public interface DmGtVersionPersistence extends BasePersistence<DmGtVersion> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmGtVersion remove(DmGtVersion dmGtVersion)
-		throws SystemException;
 }

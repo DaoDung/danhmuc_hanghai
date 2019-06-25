@@ -14,7 +14,6 @@
 
 package vn.gt.dao.result.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.result.model.ResultHistoryMinistry;
@@ -620,7 +619,4 @@ public interface ResultHistoryMinistryPersistence extends BasePersistence<Result
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public ResultHistoryMinistry remove(
-		ResultHistoryMinistry resultHistoryMinistry) throws SystemException;
 }

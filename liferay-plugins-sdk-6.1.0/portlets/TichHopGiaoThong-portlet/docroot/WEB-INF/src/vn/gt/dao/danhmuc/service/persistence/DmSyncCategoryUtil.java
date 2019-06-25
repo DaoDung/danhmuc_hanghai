@@ -95,14 +95,6 @@ public class DmSyncCategoryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmSyncCategory remove(DmSyncCategory dmSyncCategory)
-		throws SystemException {
-		return getPersistence().remove(dmSyncCategory);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmSyncCategory update(DmSyncCategory dmSyncCategory,

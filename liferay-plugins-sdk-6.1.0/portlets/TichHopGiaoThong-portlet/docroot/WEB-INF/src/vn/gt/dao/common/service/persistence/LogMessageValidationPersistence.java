@@ -14,7 +14,6 @@
 
 package vn.gt.dao.common.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.common.model.LogMessageValidation;
@@ -294,7 +293,4 @@ public interface LogMessageValidationPersistence extends BasePersistence<LogMess
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public LogMessageValidation remove(
-		LogMessageValidation logMessageValidation) throws SystemException;
 }

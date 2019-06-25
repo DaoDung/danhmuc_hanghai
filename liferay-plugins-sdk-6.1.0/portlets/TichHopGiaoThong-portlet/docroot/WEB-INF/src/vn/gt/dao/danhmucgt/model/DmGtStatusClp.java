@@ -140,7 +140,12 @@ public class DmGtStatusClp extends BaseModelImpl<DmGtStatus>
 	}
 
 	public void persist() throws SystemException {
-		DmGtStatusLocalServiceUtil.updateDmGtStatus(this);
+		if (this.isNew()) {
+			DmGtStatusLocalServiceUtil.addDmGtStatus(this);
+		}
+		else {
+			DmGtStatusLocalServiceUtil.updateDmGtStatus(this);
+		}
 	}
 
 	@Override

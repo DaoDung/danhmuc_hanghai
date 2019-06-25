@@ -39,6 +39,11 @@ public abstract class ResultCompetionBaseImpl extends ResultCompetionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a result competion model instance should use the {@link ResultCompetion} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultCompetionLocalServiceUtil.updateResultCompetion(this);
+		if (this.isNew()) {
+			ResultCompetionLocalServiceUtil.addResultCompetion(this);
+		}
+		else {
+			ResultCompetionLocalServiceUtil.updateResultCompetion(this);
+		}
 	}
 }

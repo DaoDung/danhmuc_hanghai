@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmucgt.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmucgt.model.DmGtRouteConfig;
@@ -471,7 +470,4 @@ public interface DmGtRouteConfigPersistence extends BasePersistence<DmGtRouteCon
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmGtRouteConfig remove(DmGtRouteConfig dmGtRouteConfig)
-		throws SystemException;
 }

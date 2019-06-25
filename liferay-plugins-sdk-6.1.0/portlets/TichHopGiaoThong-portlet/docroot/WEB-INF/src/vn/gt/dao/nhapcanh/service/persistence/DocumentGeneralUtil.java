@@ -95,14 +95,6 @@ public class DocumentGeneralUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DocumentGeneral remove(DocumentGeneral documentGeneral)
-		throws SystemException {
-		return getPersistence().remove(documentGeneral);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DocumentGeneral update(DocumentGeneral documentGeneral,

@@ -95,14 +95,6 @@ public class DmGtRouteConfigUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGtRouteConfig remove(DmGtRouteConfig dmGtRouteConfig)
-		throws SystemException {
-		return getPersistence().remove(dmGtRouteConfig);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGtRouteConfig update(DmGtRouteConfig dmGtRouteConfig,

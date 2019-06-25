@@ -95,14 +95,6 @@ public class PassengerListUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static PassengerList remove(PassengerList passengerList)
-		throws SystemException {
-		return getPersistence().remove(passengerList);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static PassengerList update(PassengerList passengerList,

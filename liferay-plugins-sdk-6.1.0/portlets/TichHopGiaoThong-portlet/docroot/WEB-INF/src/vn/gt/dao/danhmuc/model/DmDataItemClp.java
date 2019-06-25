@@ -180,7 +180,12 @@ public class DmDataItemClp extends BaseModelImpl<DmDataItem>
 	}
 
 	public void persist() throws SystemException {
-		DmDataItemLocalServiceUtil.updateDmDataItem(this);
+		if (this.isNew()) {
+			DmDataItemLocalServiceUtil.addDmDataItem(this);
+		}
+		else {
+			DmDataItemLocalServiceUtil.updateDmDataItem(this);
+		}
 	}
 
 	@Override

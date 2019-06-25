@@ -95,14 +95,6 @@ public class DmArrivalPurposeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmArrivalPurpose remove(DmArrivalPurpose dmArrivalPurpose)
-		throws SystemException {
-		return getPersistence().remove(dmArrivalPurpose);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmArrivalPurpose update(DmArrivalPurpose dmArrivalPurpose,

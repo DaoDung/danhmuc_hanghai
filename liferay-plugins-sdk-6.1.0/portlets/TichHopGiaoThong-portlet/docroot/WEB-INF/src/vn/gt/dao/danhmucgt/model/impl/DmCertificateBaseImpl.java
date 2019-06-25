@@ -39,6 +39,11 @@ public abstract class DmCertificateBaseImpl extends DmCertificateModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm certificate model instance should use the {@link DmCertificate} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmCertificateLocalServiceUtil.updateDmCertificate(this);
+		if (this.isNew()) {
+			DmCertificateLocalServiceUtil.addDmCertificate(this);
+		}
+		else {
+			DmCertificateLocalServiceUtil.updateDmCertificate(this);
+		}
 	}
 }

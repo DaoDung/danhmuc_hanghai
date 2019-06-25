@@ -179,6 +179,17 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmGTShipPosition> dmGTShipPositions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGTShipPosition dmGTShipPosition : dmGTShipPositions) {
+			EntityCacheUtil.removeResult(DmGTShipPositionModelImpl.ENTITY_CACHE_ENABLED,
+				DmGTShipPositionImpl.class, dmGTShipPosition.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm g t ship position with the primary key. Does not add the dm g t ship position to the database.
 	 *
@@ -197,20 +208,6 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 	/**
 	 * Removes the dm g t ship position with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm g t ship position
-	 * @return the dm g t ship position that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm g t ship position with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTShipPosition remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm g t ship position with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm g t ship position
 	 * @return the dm g t ship position that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTShipPositionException if a dm g t ship position with the primary key could not be found
@@ -218,24 +215,38 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 	 */
 	public DmGTShipPosition remove(long id)
 		throws NoSuchDmGTShipPositionException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm g t ship position with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm g t ship position
+	 * @return the dm g t ship position that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTShipPositionException if a dm g t ship position with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGTShipPosition remove(Serializable primaryKey)
+		throws NoSuchDmGTShipPositionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGTShipPosition dmGTShipPosition = (DmGTShipPosition)session.get(DmGTShipPositionImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGTShipPosition == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGTShipPositionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGTShipPositionPersistence.remove(dmGTShipPosition);
+			return remove(dmGTShipPosition);
 		}
 		catch (NoSuchDmGTShipPositionException nsee) {
 			throw nsee;
@@ -246,19 +257,6 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm g t ship position from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGTShipPosition the dm g t ship position
-	 * @return the dm g t ship position that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTShipPosition remove(DmGTShipPosition dmGTShipPosition)
-		throws SystemException {
-		return super.remove(dmGTShipPosition);
 	}
 
 	@Override
@@ -280,11 +278,7 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmGTShipPositionModelImpl.ENTITY_CACHE_ENABLED,
-			DmGTShipPositionImpl.class, dmGTShipPosition.getPrimaryKey());
+		clearCache(dmGTShipPosition);
 
 		return dmGTShipPosition;
 	}
@@ -974,7 +968,7 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 		throws SystemException {
 		for (DmGTShipPosition dmGTShipPosition : findByPositionCode(
 				positionCode)) {
-			dmGTShipPositionPersistence.remove(dmGTShipPosition);
+			remove(dmGTShipPosition);
 		}
 	}
 
@@ -985,7 +979,7 @@ public class DmGTShipPositionPersistenceImpl extends BasePersistenceImpl<DmGTShi
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGTShipPosition dmGTShipPosition : findAll()) {
-			dmGTShipPositionPersistence.remove(dmGTShipPosition);
+			remove(dmGTShipPosition);
 		}
 	}
 

@@ -200,6 +200,25 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPassportType);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPassportType> dmHistoryPassportTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPassportType dmHistoryPassportType : dmHistoryPassportTypes) {
+			EntityCacheUtil.removeResult(DmHistoryPassportTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPassportTypeImpl.class,
+				dmHistoryPassportType.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPassportType);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryPassportType dmHistoryPassportType) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PASSPORTTYPECODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPassportType.getPassportTypeCode(),
@@ -226,20 +245,6 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 	/**
 	 * Removes the dm history passport type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history passport type
-	 * @return the dm history passport type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history passport type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPassportType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history passport type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history passport type
 	 * @return the dm history passport type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPassportTypeException if a dm history passport type with the primary key could not be found
@@ -247,24 +252,38 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 	 */
 	public DmHistoryPassportType remove(int id)
 		throws NoSuchDmHistoryPassportTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history passport type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history passport type
+	 * @return the dm history passport type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPassportTypeException if a dm history passport type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPassportType remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPassportTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPassportType dmHistoryPassportType = (DmHistoryPassportType)session.get(DmHistoryPassportTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPassportType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPassportTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPassportTypePersistence.remove(dmHistoryPassportType);
+			return remove(dmHistoryPassportType);
 		}
 		catch (NoSuchDmHistoryPassportTypeException nsee) {
 			throw nsee;
@@ -275,19 +294,6 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history passport type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPassportType the dm history passport type
-	 * @return the dm history passport type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPassportType remove(
-		DmHistoryPassportType dmHistoryPassportType) throws SystemException {
-		return super.remove(dmHistoryPassportType);
 	}
 
 	@Override
@@ -309,21 +315,7 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPassportTypeModelImpl dmHistoryPassportTypeModelImpl = (DmHistoryPassportTypeModelImpl)dmHistoryPassportType;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PASSPORTTYPECODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPassportTypeModelImpl.getPassportTypeCode(),
-				
-			dmHistoryPassportTypeModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPassportTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPassportTypeImpl.class,
-			dmHistoryPassportType.getPrimaryKey());
+		clearCache(dmHistoryPassportType);
 
 		return dmHistoryPassportType;
 	}
@@ -1223,7 +1215,7 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 		throws SystemException {
 		for (DmHistoryPassportType dmHistoryPassportType : findByPassportTypeCode(
 				passportTypeCode)) {
-			dmHistoryPassportTypePersistence.remove(dmHistoryPassportType);
+			remove(dmHistoryPassportType);
 		}
 	}
 
@@ -1240,7 +1232,7 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 		DmHistoryPassportType dmHistoryPassportType = findByPassportTypeCodeAndSyncVersion(passportTypeCode,
 				syncVersion);
 
-		dmHistoryPassportTypePersistence.remove(dmHistoryPassportType);
+		remove(dmHistoryPassportType);
 	}
 
 	/**
@@ -1250,7 +1242,7 @@ public class DmHistoryPassportTypePersistenceImpl extends BasePersistenceImpl<Dm
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPassportType dmHistoryPassportType : findAll()) {
-			dmHistoryPassportTypePersistence.remove(dmHistoryPassportType);
+			remove(dmHistoryPassportType);
 		}
 	}
 

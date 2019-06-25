@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmTestN01Request;
@@ -161,7 +160,4 @@ public interface DmTestN01RequestPersistence extends BasePersistence<DmTestN01Re
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmTestN01Request remove(DmTestN01Request dmTestN01Request)
-		throws SystemException;
 }

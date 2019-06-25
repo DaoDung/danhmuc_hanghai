@@ -115,6 +115,8 @@ public class DmUnitGeneralModelImpl extends BaseModelImpl<DmUnitGeneral>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

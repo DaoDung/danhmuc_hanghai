@@ -118,6 +118,8 @@ public class UserPortModelImpl extends BaseModelImpl<UserPort>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

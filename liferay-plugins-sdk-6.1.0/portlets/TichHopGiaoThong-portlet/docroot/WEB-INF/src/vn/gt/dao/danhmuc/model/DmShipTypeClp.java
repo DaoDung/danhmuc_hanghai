@@ -140,7 +140,12 @@ public class DmShipTypeClp extends BaseModelImpl<DmShipType>
 	}
 
 	public void persist() throws SystemException {
-		DmShipTypeLocalServiceUtil.updateDmShipType(this);
+		if (this.isNew()) {
+			DmShipTypeLocalServiceUtil.addDmShipType(this);
+		}
+		else {
+			DmShipTypeLocalServiceUtil.updateDmShipType(this);
+		}
 	}
 
 	@Override

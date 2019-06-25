@@ -39,6 +39,11 @@ public abstract class DmGoodsTypeBaseImpl extends DmGoodsTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm goods type model instance should use the {@link DmGoodsType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGoodsTypeLocalServiceUtil.updateDmGoodsType(this);
+		if (this.isNew()) {
+			DmGoodsTypeLocalServiceUtil.addDmGoodsType(this);
+		}
+		else {
+			DmGoodsTypeLocalServiceUtil.updateDmGoodsType(this);
+		}
 	}
 }

@@ -156,7 +156,12 @@ public class DmGtRouteConfigClp extends BaseModelImpl<DmGtRouteConfig>
 	}
 
 	public void persist() throws SystemException {
-		DmGtRouteConfigLocalServiceUtil.updateDmGtRouteConfig(this);
+		if (this.isNew()) {
+			DmGtRouteConfigLocalServiceUtil.addDmGtRouteConfig(this);
+		}
+		else {
+			DmGtRouteConfigLocalServiceUtil.updateDmGtRouteConfig(this);
+		}
 	}
 
 	@Override

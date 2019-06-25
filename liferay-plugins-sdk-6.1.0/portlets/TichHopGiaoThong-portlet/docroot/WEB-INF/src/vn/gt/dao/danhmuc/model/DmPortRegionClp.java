@@ -148,7 +148,12 @@ public class DmPortRegionClp extends BaseModelImpl<DmPortRegion>
 	}
 
 	public void persist() throws SystemException {
-		DmPortRegionLocalServiceUtil.updateDmPortRegion(this);
+		if (this.isNew()) {
+			DmPortRegionLocalServiceUtil.addDmPortRegion(this);
+		}
+		else {
+			DmPortRegionLocalServiceUtil.updateDmPortRegion(this);
+		}
 	}
 
 	@Override

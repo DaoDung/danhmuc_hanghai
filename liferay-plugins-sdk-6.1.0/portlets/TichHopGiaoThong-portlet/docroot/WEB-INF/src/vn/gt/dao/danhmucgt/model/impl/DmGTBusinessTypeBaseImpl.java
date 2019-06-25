@@ -39,6 +39,11 @@ public abstract class DmGTBusinessTypeBaseImpl extends DmGTBusinessTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm g t business type model instance should use the {@link DmGTBusinessType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGTBusinessTypeLocalServiceUtil.updateDmGTBusinessType(this);
+		if (this.isNew()) {
+			DmGTBusinessTypeLocalServiceUtil.addDmGTBusinessType(this);
+		}
+		else {
+			DmGTBusinessTypeLocalServiceUtil.updateDmGTBusinessType(this);
+		}
 	}
 }

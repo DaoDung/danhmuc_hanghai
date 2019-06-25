@@ -39,6 +39,11 @@ public abstract class DmHistoryPortHarbourBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history port harbour model instance should use the {@link DmHistoryPortHarbour} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPortHarbourLocalServiceUtil.updateDmHistoryPortHarbour(this);
+		if (this.isNew()) {
+			DmHistoryPortHarbourLocalServiceUtil.addDmHistoryPortHarbour(this);
+		}
+		else {
+			DmHistoryPortHarbourLocalServiceUtil.updateDmHistoryPortHarbour(this);
+		}
 	}
 }

@@ -194,6 +194,23 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(resultCompetion);
+	}
+
+	@Override
+	public void clearCache(List<ResultCompetion> resultCompetions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResultCompetion resultCompetion : resultCompetions) {
+			EntityCacheUtil.removeResult(ResultCompetionModelImpl.ENTITY_CACHE_ENABLED,
+				ResultCompetionImpl.class, resultCompetion.getPrimaryKey());
+
+			clearUniqueFindersCache(resultCompetion);
+		}
+	}
+
+	protected void clearUniqueFindersCache(ResultCompetion resultCompetion) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
 			new Object[] { resultCompetion.getRequestCode() });
 	}
@@ -216,20 +233,6 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 	/**
 	 * Removes the result competion with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the result competion
-	 * @return the result competion that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a result competion with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultCompetion remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the result competion with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the result competion
 	 * @return the result competion that was removed
 	 * @throws vn.gt.dao.result.NoSuchResultCompetionException if a result competion with the primary key could not be found
@@ -237,24 +240,38 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 	 */
 	public ResultCompetion remove(long id)
 		throws NoSuchResultCompetionException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the result competion with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the result competion
+	 * @return the result competion that was removed
+	 * @throws vn.gt.dao.result.NoSuchResultCompetionException if a result competion with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResultCompetion remove(Serializable primaryKey)
+		throws NoSuchResultCompetionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResultCompetion resultCompetion = (ResultCompetion)session.get(ResultCompetionImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (resultCompetion == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResultCompetionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return resultCompetionPersistence.remove(resultCompetion);
+			return remove(resultCompetion);
 		}
 		catch (NoSuchResultCompetionException nsee) {
 			throw nsee;
@@ -265,19 +282,6 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the result competion from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param resultCompetion the result competion
-	 * @return the result competion that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultCompetion remove(ResultCompetion resultCompetion)
-		throws SystemException {
-		return super.remove(resultCompetion);
 	}
 
 	@Override
@@ -299,16 +303,7 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		ResultCompetionModelImpl resultCompetionModelImpl = (ResultCompetionModelImpl)resultCompetion;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
-			new Object[] { resultCompetionModelImpl.getRequestCode() });
-
-		EntityCacheUtil.removeResult(ResultCompetionModelImpl.ENTITY_CACHE_ENABLED,
-			ResultCompetionImpl.class, resultCompetion.getPrimaryKey());
+		clearCache(resultCompetion);
 
 		return resultCompetion;
 	}
@@ -1191,7 +1186,7 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 		throws NoSuchResultCompetionException, SystemException {
 		ResultCompetion resultCompetion = findByRequestCode(requestCode);
 
-		resultCompetionPersistence.remove(resultCompetion);
+		remove(resultCompetion);
 	}
 
 	/**
@@ -1205,7 +1200,7 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 		int documentYear) throws SystemException {
 		for (ResultCompetion resultCompetion : findByDocumentNameAndDocumentYear(
 				documentName, documentYear)) {
-			resultCompetionPersistence.remove(resultCompetion);
+			remove(resultCompetion);
 		}
 	}
 
@@ -1216,7 +1211,7 @@ public class ResultCompetionPersistenceImpl extends BasePersistenceImpl<ResultCo
 	 */
 	public void removeAll() throws SystemException {
 		for (ResultCompetion resultCompetion : findAll()) {
-			resultCompetionPersistence.remove(resultCompetion);
+			remove(resultCompetion);
 		}
 	}
 

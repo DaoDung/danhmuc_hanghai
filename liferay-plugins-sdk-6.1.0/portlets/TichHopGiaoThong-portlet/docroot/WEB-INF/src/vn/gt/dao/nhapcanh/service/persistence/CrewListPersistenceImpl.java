@@ -151,6 +151,17 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<CrewList> crewLists) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (CrewList crewList : crewLists) {
+			EntityCacheUtil.removeResult(CrewListModelImpl.ENTITY_CACHE_ENABLED,
+				CrewListImpl.class, crewList.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new crew list with the primary key. Does not add the crew list to the database.
 	 *
@@ -169,20 +180,6 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 	/**
 	 * Removes the crew list with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the crew list
-	 * @return the crew list that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a crew list with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public CrewList remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the crew list with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the crew list
 	 * @return the crew list that was removed
 	 * @throws vn.gt.dao.nhapcanh.NoSuchCrewListException if a crew list with the primary key could not be found
@@ -190,24 +187,38 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 	 */
 	public CrewList remove(long id)
 		throws NoSuchCrewListException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the crew list with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the crew list
+	 * @return the crew list that was removed
+	 * @throws vn.gt.dao.nhapcanh.NoSuchCrewListException if a crew list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CrewList remove(Serializable primaryKey)
+		throws NoSuchCrewListException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			CrewList crewList = (CrewList)session.get(CrewListImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (crewList == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchCrewListException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return crewListPersistence.remove(crewList);
+			return remove(crewList);
 		}
 		catch (NoSuchCrewListException nsee) {
 			throw nsee;
@@ -218,18 +229,6 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the crew list from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param crewList the crew list
-	 * @return the crew list that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public CrewList remove(CrewList crewList) throws SystemException {
-		return super.remove(crewList);
 	}
 
 	@Override
@@ -250,11 +249,7 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(CrewListModelImpl.ENTITY_CACHE_ENABLED,
-			CrewListImpl.class, crewList.getPrimaryKey());
+		clearCache(crewList);
 
 		return crewList;
 	}
@@ -535,7 +530,7 @@ public class CrewListPersistenceImpl extends BasePersistenceImpl<CrewList>
 	 */
 	public void removeAll() throws SystemException {
 		for (CrewList crewList : findAll()) {
-			crewListPersistence.remove(crewList);
+			remove(crewList);
 		}
 	}
 

@@ -39,6 +39,11 @@ public abstract class ResultDeclarationBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a result declaration model instance should use the {@link ResultDeclaration} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultDeclarationLocalServiceUtil.updateResultDeclaration(this);
+		if (this.isNew()) {
+			ResultDeclarationLocalServiceUtil.addResultDeclaration(this);
+		}
+		else {
+			ResultDeclarationLocalServiceUtil.updateResultDeclaration(this);
+		}
 	}
 }

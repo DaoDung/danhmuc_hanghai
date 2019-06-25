@@ -95,14 +95,6 @@ public class DmCertificateUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmCertificate remove(DmCertificate dmCertificate)
-		throws SystemException {
-		return getPersistence().remove(dmCertificate);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmCertificate update(DmCertificate dmCertificate,

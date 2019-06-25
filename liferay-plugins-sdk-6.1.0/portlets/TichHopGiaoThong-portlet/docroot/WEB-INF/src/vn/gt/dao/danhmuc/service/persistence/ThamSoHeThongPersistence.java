@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.ThamSoHeThong;
@@ -278,7 +277,4 @@ public interface ThamSoHeThongPersistence extends BasePersistence<ThamSoHeThong>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public ThamSoHeThong remove(ThamSoHeThong thamSoHeThong)
-		throws SystemException;
 }

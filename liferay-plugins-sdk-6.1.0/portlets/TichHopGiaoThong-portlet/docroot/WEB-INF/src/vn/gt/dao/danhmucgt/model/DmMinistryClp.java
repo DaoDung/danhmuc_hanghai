@@ -140,7 +140,12 @@ public class DmMinistryClp extends BaseModelImpl<DmMinistry>
 	}
 
 	public void persist() throws SystemException {
-		DmMinistryLocalServiceUtil.updateDmMinistry(this);
+		if (this.isNew()) {
+			DmMinistryLocalServiceUtil.addDmMinistry(this);
+		}
+		else {
+			DmMinistryLocalServiceUtil.updateDmMinistry(this);
+		}
 	}
 
 	@Override

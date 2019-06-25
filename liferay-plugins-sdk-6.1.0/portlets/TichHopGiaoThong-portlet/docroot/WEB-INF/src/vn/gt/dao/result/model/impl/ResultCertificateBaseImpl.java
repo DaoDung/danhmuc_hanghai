@@ -39,6 +39,11 @@ public abstract class ResultCertificateBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a result certificate model instance should use the {@link ResultCertificate} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultCertificateLocalServiceUtil.updateResultCertificate(this);
+		if (this.isNew()) {
+			ResultCertificateLocalServiceUtil.addResultCertificate(this);
+		}
+		else {
+			ResultCertificateLocalServiceUtil.updateResultCertificate(this);
+		}
 	}
 }

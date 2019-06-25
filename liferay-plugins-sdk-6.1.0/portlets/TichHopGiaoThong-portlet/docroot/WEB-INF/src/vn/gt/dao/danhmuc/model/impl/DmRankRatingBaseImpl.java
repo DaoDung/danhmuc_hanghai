@@ -39,6 +39,11 @@ public abstract class DmRankRatingBaseImpl extends DmRankRatingModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm rank rating model instance should use the {@link DmRankRating} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmRankRatingLocalServiceUtil.updateDmRankRating(this);
+		if (this.isNew()) {
+			DmRankRatingLocalServiceUtil.addDmRankRating(this);
+		}
+		else {
+			DmRankRatingLocalServiceUtil.updateDmRankRating(this);
+		}
 	}
 }

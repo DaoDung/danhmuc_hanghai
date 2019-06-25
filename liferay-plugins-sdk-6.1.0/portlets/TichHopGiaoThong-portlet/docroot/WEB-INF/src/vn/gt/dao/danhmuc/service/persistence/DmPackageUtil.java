@@ -95,14 +95,6 @@ public class DmPackageUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmPackage remove(DmPackage dmPackage)
-		throws SystemException {
-		return getPersistence().remove(dmPackage);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmPackage update(DmPackage dmPackage, boolean merge)

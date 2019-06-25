@@ -14,7 +14,6 @@
 
 package vn.gt.dao.common.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.common.model.UserPort;
@@ -335,6 +334,4 @@ public interface UserPortPersistence extends BasePersistence<UserPort> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public UserPort remove(UserPort userPort) throws SystemException;
 }

@@ -39,6 +39,11 @@ public abstract class DmDocTypeBaseImpl extends DmDocTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm doc type model instance should use the {@link DmDocType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmDocTypeLocalServiceUtil.updateDmDocType(this);
+		if (this.isNew()) {
+			DmDocTypeLocalServiceUtil.addDmDocType(this);
+		}
+		else {
+			DmDocTypeLocalServiceUtil.updateDmDocType(this);
+		}
 	}
 }

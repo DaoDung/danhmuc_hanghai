@@ -95,14 +95,6 @@ public class ResultCompetionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultCompetion remove(ResultCompetion resultCompetion)
-		throws SystemException {
-		return getPersistence().remove(resultCompetion);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultCompetion update(ResultCompetion resultCompetion,

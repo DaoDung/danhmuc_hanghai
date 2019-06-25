@@ -347,6 +347,23 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(resultDeclaration);
+	}
+
+	@Override
+	public void clearCache(List<ResultDeclaration> resultDeclarations) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResultDeclaration resultDeclaration : resultDeclarations) {
+			EntityCacheUtil.removeResult(ResultDeclarationModelImpl.ENTITY_CACHE_ENABLED,
+				ResultDeclarationImpl.class, resultDeclaration.getPrimaryKey());
+
+			clearUniqueFindersCache(resultDeclaration);
+		}
+	}
+
+	protected void clearUniqueFindersCache(ResultDeclaration resultDeclaration) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
 			new Object[] { resultDeclaration.getRequestCode() });
 
@@ -378,20 +395,6 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 	/**
 	 * Removes the result declaration with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the result declaration
-	 * @return the result declaration that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a result declaration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultDeclaration remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the result declaration with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the result declaration
 	 * @return the result declaration that was removed
 	 * @throws vn.gt.dao.result.NoSuchResultDeclarationException if a result declaration with the primary key could not be found
@@ -399,24 +402,38 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 	 */
 	public ResultDeclaration remove(long id)
 		throws NoSuchResultDeclarationException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the result declaration with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the result declaration
+	 * @return the result declaration that was removed
+	 * @throws vn.gt.dao.result.NoSuchResultDeclarationException if a result declaration with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResultDeclaration remove(Serializable primaryKey)
+		throws NoSuchResultDeclarationException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResultDeclaration resultDeclaration = (ResultDeclaration)session.get(ResultDeclarationImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (resultDeclaration == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResultDeclarationException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return resultDeclarationPersistence.remove(resultDeclaration);
+			return remove(resultDeclaration);
 		}
 		catch (NoSuchResultDeclarationException nsee) {
 			throw nsee;
@@ -427,19 +444,6 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the result declaration from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param resultDeclaration the result declaration
-	 * @return the result declaration that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultDeclaration remove(ResultDeclaration resultDeclaration)
-		throws SystemException {
-		return super.remove(resultDeclaration);
 	}
 
 	@Override
@@ -461,26 +465,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		ResultDeclarationModelImpl resultDeclarationModelImpl = (ResultDeclarationModelImpl)resultDeclaration;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REQUESTCODE,
-			new Object[] { resultDeclarationModelImpl.getRequestCode() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FNDDOCUMENTNAMEANDBUSINESSTYPECODEANDDOCUMENTYEARREQUESTCODE,
-			new Object[] {
-				Integer.valueOf(
-					resultDeclarationModelImpl.getBusinessTypeCode()),
-				Long.valueOf(resultDeclarationModelImpl.getDocumentName()),
-				Integer.valueOf(resultDeclarationModelImpl.getDocumentYear()),
-				
-			resultDeclarationModelImpl.getRequestCode()
-			});
-
-		EntityCacheUtil.removeResult(ResultDeclarationModelImpl.ENTITY_CACHE_ENABLED,
-			ResultDeclarationImpl.class, resultDeclaration.getPrimaryKey());
+		clearCache(resultDeclaration);
 
 		return resultDeclaration;
 	}
@@ -3280,7 +3265,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		throws NoSuchResultDeclarationException, SystemException {
 		ResultDeclaration resultDeclaration = findByRequestCode(requestCode);
 
-		resultDeclarationPersistence.remove(resultDeclaration);
+		remove(resultDeclaration);
 	}
 
 	/**
@@ -3293,7 +3278,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		throws SystemException {
 		for (ResultDeclaration resultDeclaration : findByBusinessTypeCode(
 				businessTypeCode)) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 
@@ -3310,7 +3295,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		throws SystemException {
 		for (ResultDeclaration resultDeclaration : findByDocumentNameAndBusinessTypeCodeAndDocumentYear(
 				businessTypeCode, documentName, documentYear)) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 
@@ -3328,7 +3313,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		String requestCode) throws SystemException {
 		for (ResultDeclaration resultDeclaration : findByDocumentNameAndBusinessTypeCodeAndDocumentYearRequestCode(
 				businessTypeCode, documentName, documentYear, requestCode)) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 
@@ -3348,7 +3333,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		ResultDeclaration resultDeclaration = findByfndDocumentNameAndBusinessTypeCodeAndDocumentYearRequestCode(businessTypeCode,
 				documentName, documentYear, requestCode);
 
-		resultDeclarationPersistence.remove(resultDeclaration);
+		remove(resultDeclaration);
 	}
 
 	/**
@@ -3362,7 +3347,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		int documentYear) throws SystemException {
 		for (ResultDeclaration resultDeclaration : findByDocumentNameAndDocumentYear(
 				documentName, documentYear)) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 
@@ -3377,7 +3362,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 		int businessTypeCode) throws SystemException {
 		for (ResultDeclaration resultDeclaration : findByRequestCodeAndBusinessTypeCode(
 				requestCode, businessTypeCode)) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 
@@ -3388,7 +3373,7 @@ public class ResultDeclarationPersistenceImpl extends BasePersistenceImpl<Result
 	 */
 	public void removeAll() throws SystemException {
 		for (ResultDeclaration resultDeclaration : findAll()) {
-			resultDeclarationPersistence.remove(resultDeclaration);
+			remove(resultDeclaration);
 		}
 	}
 

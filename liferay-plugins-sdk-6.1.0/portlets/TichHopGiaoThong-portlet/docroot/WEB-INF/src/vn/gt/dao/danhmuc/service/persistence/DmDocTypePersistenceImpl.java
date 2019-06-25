@@ -173,6 +173,17 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmDocType> dmDocTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmDocType dmDocType : dmDocTypes) {
+			EntityCacheUtil.removeResult(DmDocTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmDocTypeImpl.class, dmDocType.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm doc type with the primary key. Does not add the dm doc type to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 	/**
 	 * Removes the dm doc type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm doc type
-	 * @return the dm doc type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm doc type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmDocType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm doc type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm doc type
 	 * @return the dm doc type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmDocTypeException if a dm doc type with the primary key could not be found
@@ -212,24 +209,38 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 	 */
 	public DmDocType remove(int id)
 		throws NoSuchDmDocTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm doc type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm doc type
+	 * @return the dm doc type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmDocTypeException if a dm doc type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmDocType remove(Serializable primaryKey)
+		throws NoSuchDmDocTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmDocType dmDocType = (DmDocType)session.get(DmDocTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmDocType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmDocTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmDocTypePersistence.remove(dmDocType);
+			return remove(dmDocType);
 		}
 		catch (NoSuchDmDocTypeException nsee) {
 			throw nsee;
@@ -240,18 +251,6 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm doc type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmDocType the dm doc type
-	 * @return the dm doc type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmDocType remove(DmDocType dmDocType) throws SystemException {
-		return super.remove(dmDocType);
 	}
 
 	@Override
@@ -273,11 +272,7 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmDocTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmDocTypeImpl.class, dmDocType.getPrimaryKey());
+		clearCache(dmDocType);
 
 		return dmDocType;
 	}
@@ -961,7 +956,7 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 	public void removeByDocumentTypeCode(String documentTypeCode)
 		throws SystemException {
 		for (DmDocType dmDocType : findByDocumentTypeCode(documentTypeCode)) {
-			dmDocTypePersistence.remove(dmDocType);
+			remove(dmDocType);
 		}
 	}
 
@@ -972,7 +967,7 @@ public class DmDocTypePersistenceImpl extends BasePersistenceImpl<DmDocType>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmDocType dmDocType : findAll()) {
-			dmDocTypePersistence.remove(dmDocType);
+			remove(dmDocType);
 		}
 	}
 

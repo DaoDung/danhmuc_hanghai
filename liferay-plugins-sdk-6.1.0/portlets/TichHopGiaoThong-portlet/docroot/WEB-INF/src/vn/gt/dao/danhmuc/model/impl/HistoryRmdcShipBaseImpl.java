@@ -39,6 +39,11 @@ public abstract class HistoryRmdcShipBaseImpl extends HistoryRmdcShipModelImpl
 	 * Never modify or reference this class directly. All methods that expect a history rmdc ship model instance should use the {@link HistoryRmdcShip} interface instead.
 	 */
 	public void persist() throws SystemException {
-		HistoryRmdcShipLocalServiceUtil.updateHistoryRmdcShip(this);
+		if (this.isNew()) {
+			HistoryRmdcShipLocalServiceUtil.addHistoryRmdcShip(this);
+		}
+		else {
+			HistoryRmdcShipLocalServiceUtil.updateHistoryRmdcShip(this);
+		}
 	}
 }

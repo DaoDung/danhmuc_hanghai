@@ -132,7 +132,12 @@ public class DmHistoryDocTypeClp extends BaseModelImpl<DmHistoryDocType>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryDocTypeLocalServiceUtil.updateDmHistoryDocType(this);
+		if (this.isNew()) {
+			DmHistoryDocTypeLocalServiceUtil.addDmHistoryDocType(this);
+		}
+		else {
+			DmHistoryDocTypeLocalServiceUtil.updateDmHistoryDocType(this);
+		}
 	}
 
 	@Override

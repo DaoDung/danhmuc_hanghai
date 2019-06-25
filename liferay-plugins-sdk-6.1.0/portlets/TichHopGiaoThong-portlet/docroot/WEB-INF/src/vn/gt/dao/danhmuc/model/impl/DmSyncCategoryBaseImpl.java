@@ -39,6 +39,11 @@ public abstract class DmSyncCategoryBaseImpl extends DmSyncCategoryModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm sync category model instance should use the {@link DmSyncCategory} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmSyncCategoryLocalServiceUtil.updateDmSyncCategory(this);
+		if (this.isNew()) {
+			DmSyncCategoryLocalServiceUtil.addDmSyncCategory(this);
+		}
+		else {
+			DmSyncCategoryLocalServiceUtil.updateDmSyncCategory(this);
+		}
 	}
 }

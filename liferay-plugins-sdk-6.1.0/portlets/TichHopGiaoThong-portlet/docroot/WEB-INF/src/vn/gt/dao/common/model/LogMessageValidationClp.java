@@ -132,7 +132,12 @@ public class LogMessageValidationClp extends BaseModelImpl<LogMessageValidation>
 	}
 
 	public void persist() throws SystemException {
-		LogMessageValidationLocalServiceUtil.updateLogMessageValidation(this);
+		if (this.isNew()) {
+			LogMessageValidationLocalServiceUtil.addLogMessageValidation(this);
+		}
+		else {
+			LogMessageValidationLocalServiceUtil.updateLogMessageValidation(this);
+		}
 	}
 
 	@Override

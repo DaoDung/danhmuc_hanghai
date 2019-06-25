@@ -195,7 +195,12 @@ public class DmPortClp extends BaseModelImpl<DmPort> implements DmPort {
 	}
 
 	public void persist() throws SystemException {
-		DmPortLocalServiceUtil.updateDmPort(this);
+		if (this.isNew()) {
+			DmPortLocalServiceUtil.addDmPort(this);
+		}
+		else {
+			DmPortLocalServiceUtil.updateDmPort(this);
+		}
 	}
 
 	@Override

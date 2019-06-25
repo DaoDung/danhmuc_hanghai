@@ -39,6 +39,11 @@ public abstract class DmHistoryPortWharfBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history port wharf model instance should use the {@link DmHistoryPortWharf} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPortWharfLocalServiceUtil.updateDmHistoryPortWharf(this);
+		if (this.isNew()) {
+			DmHistoryPortWharfLocalServiceUtil.addDmHistoryPortWharf(this);
+		}
+		else {
+			DmHistoryPortWharfLocalServiceUtil.updateDmHistoryPortWharf(this);
+		}
 	}
 }

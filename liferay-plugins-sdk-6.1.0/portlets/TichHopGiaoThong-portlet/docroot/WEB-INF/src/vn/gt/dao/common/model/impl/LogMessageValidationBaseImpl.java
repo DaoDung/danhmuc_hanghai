@@ -39,6 +39,11 @@ public abstract class LogMessageValidationBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a log message validation model instance should use the {@link LogMessageValidation} interface instead.
 	 */
 	public void persist() throws SystemException {
-		LogMessageValidationLocalServiceUtil.updateLogMessageValidation(this);
+		if (this.isNew()) {
+			LogMessageValidationLocalServiceUtil.addLogMessageValidation(this);
+		}
+		else {
+			LogMessageValidationLocalServiceUtil.updateLogMessageValidation(this);
+		}
 	}
 }

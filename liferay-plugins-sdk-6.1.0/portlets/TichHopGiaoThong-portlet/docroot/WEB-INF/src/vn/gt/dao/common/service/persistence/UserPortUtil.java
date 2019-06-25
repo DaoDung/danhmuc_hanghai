@@ -95,13 +95,6 @@ public class UserPortUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static UserPort remove(UserPort userPort) throws SystemException {
-		return getPersistence().remove(userPort);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static UserPort update(UserPort userPort, boolean merge)

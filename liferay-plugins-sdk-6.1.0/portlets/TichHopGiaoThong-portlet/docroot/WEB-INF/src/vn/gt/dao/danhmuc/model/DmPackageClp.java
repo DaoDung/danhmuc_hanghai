@@ -139,7 +139,12 @@ public class DmPackageClp extends BaseModelImpl<DmPackage> implements DmPackage 
 	}
 
 	public void persist() throws SystemException {
-		DmPackageLocalServiceUtil.updateDmPackage(this);
+		if (this.isNew()) {
+			DmPackageLocalServiceUtil.addDmPackage(this);
+		}
+		else {
+			DmPackageLocalServiceUtil.updateDmPackage(this);
+		}
 	}
 
 	@Override

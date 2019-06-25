@@ -39,6 +39,11 @@ public abstract class ResultMinistryBaseImpl extends ResultMinistryModelImpl
 	 * Never modify or reference this class directly. All methods that expect a result ministry model instance should use the {@link ResultMinistry} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultMinistryLocalServiceUtil.updateResultMinistry(this);
+		if (this.isNew()) {
+			ResultMinistryLocalServiceUtil.addResultMinistry(this);
+		}
+		else {
+			ResultMinistryLocalServiceUtil.updateResultMinistry(this);
+		}
 	}
 }

@@ -192,6 +192,17 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<RmdcShip> rmdcShips) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (RmdcShip rmdcShip : rmdcShips) {
+			EntityCacheUtil.removeResult(RmdcShipModelImpl.ENTITY_CACHE_ENABLED,
+				RmdcShipImpl.class, rmdcShip.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new rmdc ship with the primary key. Does not add the rmdc ship to the database.
 	 *
@@ -210,20 +221,6 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 	/**
 	 * Removes the rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the rmdc ship
-	 * @return the rmdc ship that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a rmdc ship with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public RmdcShip remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the rmdc ship
 	 * @return the rmdc ship that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchRmdcShipException if a rmdc ship with the primary key could not be found
@@ -231,24 +228,38 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 	 */
 	public RmdcShip remove(long id)
 		throws NoSuchRmdcShipException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the rmdc ship
+	 * @return the rmdc ship that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchRmdcShipException if a rmdc ship with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public RmdcShip remove(Serializable primaryKey)
+		throws NoSuchRmdcShipException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			RmdcShip rmdcShip = (RmdcShip)session.get(RmdcShipImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (rmdcShip == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchRmdcShipException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return rmdcShipPersistence.remove(rmdcShip);
+			return remove(rmdcShip);
 		}
 		catch (NoSuchRmdcShipException nsee) {
 			throw nsee;
@@ -259,18 +270,6 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the rmdc ship from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param rmdcShip the rmdc ship
-	 * @return the rmdc ship that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public RmdcShip remove(RmdcShip rmdcShip) throws SystemException {
-		return super.remove(rmdcShip);
 	}
 
 	@Override
@@ -291,11 +290,7 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(RmdcShipModelImpl.ENTITY_CACHE_ENABLED,
-			RmdcShipImpl.class, rmdcShip.getPrimaryKey());
+		clearCache(rmdcShip);
 
 		return rmdcShip;
 	}
@@ -1362,7 +1357,7 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 	 */
 	public void removeByShipId(int shipId) throws SystemException {
 		for (RmdcShip rmdcShip : findByShipId(shipId)) {
-			rmdcShipPersistence.remove(rmdcShip);
+			remove(rmdcShip);
 		}
 	}
 
@@ -1375,7 +1370,7 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 	public void removeByShipTypeCode(String shipTypeCode)
 		throws SystemException {
 		for (RmdcShip rmdcShip : findByShipTypeCode(shipTypeCode)) {
-			rmdcShipPersistence.remove(rmdcShip);
+			remove(rmdcShip);
 		}
 	}
 
@@ -1386,7 +1381,7 @@ public class RmdcShipPersistenceImpl extends BasePersistenceImpl<RmdcShip>
 	 */
 	public void removeAll() throws SystemException {
 		for (RmdcShip rmdcShip : findAll()) {
-			rmdcShipPersistence.remove(rmdcShip);
+			remove(rmdcShip);
 		}
 	}
 

@@ -179,6 +179,17 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmArrivalPurpose> dmArrivalPurposes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmArrivalPurpose dmArrivalPurpose : dmArrivalPurposes) {
+			EntityCacheUtil.removeResult(DmArrivalPurposeModelImpl.ENTITY_CACHE_ENABLED,
+				DmArrivalPurposeImpl.class, dmArrivalPurpose.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm arrival purpose with the primary key. Does not add the dm arrival purpose to the database.
 	 *
@@ -197,20 +208,6 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 	/**
 	 * Removes the dm arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm arrival purpose
-	 * @return the dm arrival purpose that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm arrival purpose with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmArrivalPurpose remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm arrival purpose
 	 * @return the dm arrival purpose that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmArrivalPurposeException if a dm arrival purpose with the primary key could not be found
@@ -218,24 +215,38 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 	 */
 	public DmArrivalPurpose remove(int id)
 		throws NoSuchDmArrivalPurposeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm arrival purpose
+	 * @return the dm arrival purpose that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmArrivalPurposeException if a dm arrival purpose with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmArrivalPurpose remove(Serializable primaryKey)
+		throws NoSuchDmArrivalPurposeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmArrivalPurpose dmArrivalPurpose = (DmArrivalPurpose)session.get(DmArrivalPurposeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmArrivalPurpose == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmArrivalPurposeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmArrivalPurposePersistence.remove(dmArrivalPurpose);
+			return remove(dmArrivalPurpose);
 		}
 		catch (NoSuchDmArrivalPurposeException nsee) {
 			throw nsee;
@@ -246,19 +257,6 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm arrival purpose from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmArrivalPurpose the dm arrival purpose
-	 * @return the dm arrival purpose that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmArrivalPurpose remove(DmArrivalPurpose dmArrivalPurpose)
-		throws SystemException {
-		return super.remove(dmArrivalPurpose);
 	}
 
 	@Override
@@ -280,11 +278,7 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmArrivalPurposeModelImpl.ENTITY_CACHE_ENABLED,
-			DmArrivalPurposeImpl.class, dmArrivalPurpose.getPrimaryKey());
+		clearCache(dmArrivalPurpose);
 
 		return dmArrivalPurpose;
 	}
@@ -967,7 +961,7 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 	public void removeByPurposeCode(String purposeCode)
 		throws SystemException {
 		for (DmArrivalPurpose dmArrivalPurpose : findByPurposeCode(purposeCode)) {
-			dmArrivalPurposePersistence.remove(dmArrivalPurpose);
+			remove(dmArrivalPurpose);
 		}
 	}
 
@@ -978,7 +972,7 @@ public class DmArrivalPurposePersistenceImpl extends BasePersistenceImpl<DmArriv
 	 */
 	public void removeAll() throws SystemException {
 		for (DmArrivalPurpose dmArrivalPurpose : findAll()) {
-			dmArrivalPurposePersistence.remove(dmArrivalPurpose);
+			remove(dmArrivalPurpose);
 		}
 	}
 

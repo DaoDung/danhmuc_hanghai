@@ -177,6 +177,8 @@ public class ResultHistoryMinistryModelImpl extends BaseModelImpl<ResultHistoryM
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

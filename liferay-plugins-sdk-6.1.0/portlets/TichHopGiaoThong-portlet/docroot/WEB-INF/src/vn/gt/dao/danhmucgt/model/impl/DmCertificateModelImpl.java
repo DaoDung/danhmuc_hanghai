@@ -167,6 +167,8 @@ public class DmCertificateModelImpl extends BaseModelImpl<DmCertificate>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

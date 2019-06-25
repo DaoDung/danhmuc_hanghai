@@ -94,13 +94,6 @@ public class DmPortUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmPort remove(DmPort dmPort) throws SystemException {
-		return getPersistence().remove(dmPort);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmPort update(DmPort dmPort, boolean merge)

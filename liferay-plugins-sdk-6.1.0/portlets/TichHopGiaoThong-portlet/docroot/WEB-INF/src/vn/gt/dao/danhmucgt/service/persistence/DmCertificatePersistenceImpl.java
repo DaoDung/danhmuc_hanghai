@@ -244,6 +244,17 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmCertificate> dmCertificates) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmCertificate dmCertificate : dmCertificates) {
+			EntityCacheUtil.removeResult(DmCertificateModelImpl.ENTITY_CACHE_ENABLED,
+				DmCertificateImpl.class, dmCertificate.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm certificate with the primary key. Does not add the dm certificate to the database.
 	 *
@@ -262,20 +273,6 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 	/**
 	 * Removes the dm certificate with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm certificate
-	 * @return the dm certificate that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm certificate with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmCertificate remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm certificate with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm certificate
 	 * @return the dm certificate that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmCertificateException if a dm certificate with the primary key could not be found
@@ -283,24 +280,38 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 	 */
 	public DmCertificate remove(long id)
 		throws NoSuchDmCertificateException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm certificate with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm certificate
+	 * @return the dm certificate that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmCertificateException if a dm certificate with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmCertificate remove(Serializable primaryKey)
+		throws NoSuchDmCertificateException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmCertificate dmCertificate = (DmCertificate)session.get(DmCertificateImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmCertificate == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmCertificateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmCertificatePersistence.remove(dmCertificate);
+			return remove(dmCertificate);
 		}
 		catch (NoSuchDmCertificateException nsee) {
 			throw nsee;
@@ -311,19 +322,6 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm certificate from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmCertificate the dm certificate
-	 * @return the dm certificate that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmCertificate remove(DmCertificate dmCertificate)
-		throws SystemException {
-		return super.remove(dmCertificate);
 	}
 
 	@Override
@@ -345,11 +343,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmCertificateModelImpl.ENTITY_CACHE_ENABLED,
-			DmCertificateImpl.class, dmCertificate.getPrimaryKey());
+		clearCache(dmCertificate);
 
 		return dmCertificate;
 	}
@@ -2282,7 +2276,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 		throws SystemException {
 		for (DmCertificate dmCertificate : findByCertificateCode(
 				certificateCode)) {
-			dmCertificatePersistence.remove(dmCertificate);
+			remove(dmCertificate);
 		}
 	}
 
@@ -2298,7 +2292,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 		throws SystemException {
 		for (DmCertificate dmCertificate : findByCertificateCodeAndCertificateName(
 				certificateCode, certificateName)) {
-			dmCertificatePersistence.remove(dmCertificate);
+			remove(dmCertificate);
 		}
 	}
 
@@ -2311,7 +2305,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 	public void removeByF_LCODE_GT(String certificateCode)
 		throws SystemException {
 		for (DmCertificate dmCertificate : findByF_LCODE_GT(certificateCode)) {
-			dmCertificatePersistence.remove(dmCertificate);
+			remove(dmCertificate);
 		}
 	}
 
@@ -2324,7 +2318,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 	public void removeByF_LCODE_LT(String certificateCode)
 		throws SystemException {
 		for (DmCertificate dmCertificate : findByF_LCODE_LT(certificateCode)) {
-			dmCertificatePersistence.remove(dmCertificate);
+			remove(dmCertificate);
 		}
 	}
 
@@ -2335,7 +2329,7 @@ public class DmCertificatePersistenceImpl extends BasePersistenceImpl<DmCertific
 	 */
 	public void removeAll() throws SystemException {
 		for (DmCertificate dmCertificate : findAll()) {
-			dmCertificatePersistence.remove(dmCertificate);
+			remove(dmCertificate);
 		}
 	}
 

@@ -95,14 +95,6 @@ public class ResultMinistryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultMinistry remove(ResultMinistry resultMinistry)
-		throws SystemException {
-		return getPersistence().remove(resultMinistry);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultMinistry update(ResultMinistry resultMinistry,

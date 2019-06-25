@@ -140,7 +140,12 @@ public class DmPassportTypeClp extends BaseModelImpl<DmPassportType>
 	}
 
 	public void persist() throws SystemException {
-		DmPassportTypeLocalServiceUtil.updateDmPassportType(this);
+		if (this.isNew()) {
+			DmPassportTypeLocalServiceUtil.addDmPassportType(this);
+		}
+		else {
+			DmPassportTypeLocalServiceUtil.updateDmPassportType(this);
+		}
 	}
 
 	@Override

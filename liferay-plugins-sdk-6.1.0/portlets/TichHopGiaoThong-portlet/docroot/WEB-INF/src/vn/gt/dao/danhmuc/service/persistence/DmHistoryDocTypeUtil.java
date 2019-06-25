@@ -95,14 +95,6 @@ public class DmHistoryDocTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryDocType remove(DmHistoryDocType dmHistoryDocType)
-		throws SystemException {
-		return getPersistence().remove(dmHistoryDocType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryDocType update(DmHistoryDocType dmHistoryDocType,

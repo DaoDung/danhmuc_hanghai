@@ -167,6 +167,8 @@ public class DmHistoryMinistryModelImpl extends BaseModelImpl<DmHistoryMinistry>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

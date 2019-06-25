@@ -167,6 +167,8 @@ public class DmGTFunctionTypeModelImpl extends BaseModelImpl<DmGTFunctionType>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

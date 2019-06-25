@@ -131,7 +131,12 @@ public class DmStateClp extends BaseModelImpl<DmState> implements DmState {
 	}
 
 	public void persist() throws SystemException {
-		DmStateLocalServiceUtil.updateDmState(this);
+		if (this.isNew()) {
+			DmStateLocalServiceUtil.addDmState(this);
+		}
+		else {
+			DmStateLocalServiceUtil.updateDmState(this);
+		}
 	}
 
 	@Override

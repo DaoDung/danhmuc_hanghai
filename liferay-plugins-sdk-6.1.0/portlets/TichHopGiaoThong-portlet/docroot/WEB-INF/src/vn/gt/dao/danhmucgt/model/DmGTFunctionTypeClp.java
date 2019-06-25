@@ -140,7 +140,12 @@ public class DmGTFunctionTypeClp extends BaseModelImpl<DmGTFunctionType>
 	}
 
 	public void persist() throws SystemException {
-		DmGTFunctionTypeLocalServiceUtil.updateDmGTFunctionType(this);
+		if (this.isNew()) {
+			DmGTFunctionTypeLocalServiceUtil.addDmGTFunctionType(this);
+		}
+		else {
+			DmGTFunctionTypeLocalServiceUtil.updateDmGTFunctionType(this);
+		}
 	}
 
 	@Override

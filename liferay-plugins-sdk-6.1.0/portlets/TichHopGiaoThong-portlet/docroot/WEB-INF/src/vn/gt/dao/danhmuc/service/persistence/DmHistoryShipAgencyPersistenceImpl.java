@@ -199,6 +199,25 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryShipAgency);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryShipAgency> dmHistoryShipAgencies) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryShipAgency dmHistoryShipAgency : dmHistoryShipAgencies) {
+			EntityCacheUtil.removeResult(DmHistoryShipAgencyModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryShipAgencyImpl.class,
+				dmHistoryShipAgency.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryShipAgency);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryShipAgency dmHistoryShipAgency) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SHIPAGENCYCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryShipAgency.getShipAgencyCode(),
@@ -225,20 +244,6 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 	/**
 	 * Removes the dm history ship agency with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history ship agency
-	 * @return the dm history ship agency that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history ship agency with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryShipAgency remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history ship agency with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history ship agency
 	 * @return the dm history ship agency that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryShipAgencyException if a dm history ship agency with the primary key could not be found
@@ -246,24 +251,38 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public DmHistoryShipAgency remove(int id)
 		throws NoSuchDmHistoryShipAgencyException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history ship agency with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history ship agency
+	 * @return the dm history ship agency that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryShipAgencyException if a dm history ship agency with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryShipAgency remove(Serializable primaryKey)
+		throws NoSuchDmHistoryShipAgencyException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryShipAgency dmHistoryShipAgency = (DmHistoryShipAgency)session.get(DmHistoryShipAgencyImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryShipAgency == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryShipAgencyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryShipAgencyPersistence.remove(dmHistoryShipAgency);
+			return remove(dmHistoryShipAgency);
 		}
 		catch (NoSuchDmHistoryShipAgencyException nsee) {
 			throw nsee;
@@ -274,19 +293,6 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history ship agency from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryShipAgency the dm history ship agency
-	 * @return the dm history ship agency that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryShipAgency remove(DmHistoryShipAgency dmHistoryShipAgency)
-		throws SystemException {
-		return super.remove(dmHistoryShipAgency);
 	}
 
 	@Override
@@ -308,20 +314,7 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryShipAgencyModelImpl dmHistoryShipAgencyModelImpl = (DmHistoryShipAgencyModelImpl)dmHistoryShipAgency;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SHIPAGENCYCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryShipAgencyModelImpl.getShipAgencyCode(),
-				
-			dmHistoryShipAgencyModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryShipAgencyModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryShipAgencyImpl.class, dmHistoryShipAgency.getPrimaryKey());
+		clearCache(dmHistoryShipAgency);
 
 		return dmHistoryShipAgency;
 	}
@@ -1231,7 +1224,7 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 		throws SystemException {
 		for (DmHistoryShipAgency dmHistoryShipAgency : findByShipAgencyCode(
 				shipAgencyCode)) {
-			dmHistoryShipAgencyPersistence.remove(dmHistoryShipAgency);
+			remove(dmHistoryShipAgency);
 		}
 	}
 
@@ -1248,7 +1241,7 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 		DmHistoryShipAgency dmHistoryShipAgency = findByShipAgencyCodeAndSyncVersion(shipAgencyCode,
 				syncVersion);
 
-		dmHistoryShipAgencyPersistence.remove(dmHistoryShipAgency);
+		remove(dmHistoryShipAgency);
 	}
 
 	/**
@@ -1258,7 +1251,7 @@ public class DmHistoryShipAgencyPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryShipAgency dmHistoryShipAgency : findAll()) {
-			dmHistoryShipAgencyPersistence.remove(dmHistoryShipAgency);
+			remove(dmHistoryShipAgency);
 		}
 	}
 

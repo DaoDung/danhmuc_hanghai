@@ -129,6 +129,8 @@ public class DmEnterriseModelImpl extends BaseModelImpl<DmEnterrise>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

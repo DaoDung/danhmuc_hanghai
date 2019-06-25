@@ -95,14 +95,6 @@ public class DmHistoryGoodsTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryGoodsType remove(
-		DmHistoryGoodsType dmHistoryGoodsType) throws SystemException {
-		return getPersistence().remove(dmHistoryGoodsType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryGoodsType update(

@@ -140,7 +140,12 @@ public class DmRankRatingClp extends BaseModelImpl<DmRankRating>
 	}
 
 	public void persist() throws SystemException {
-		DmRankRatingLocalServiceUtil.updateDmRankRating(this);
+		if (this.isNew()) {
+			DmRankRatingLocalServiceUtil.addDmRankRating(this);
+		}
+		else {
+			DmRankRatingLocalServiceUtil.updateDmRankRating(this);
+		}
 	}
 
 	@Override

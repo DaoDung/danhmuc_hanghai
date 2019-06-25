@@ -194,6 +194,23 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPort);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPort> dmHistoryPorts) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPort dmHistoryPort : dmHistoryPorts) {
+			EntityCacheUtil.removeResult(DmHistoryPortModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPortImpl.class, dmHistoryPort.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPort);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryPort dmHistoryPort) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPort.getPortCode(),
@@ -220,20 +237,6 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 	/**
 	 * Removes the dm history port with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history port
-	 * @return the dm history port that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history port with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPort remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history port with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history port
 	 * @return the dm history port that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortException if a dm history port with the primary key could not be found
@@ -241,24 +244,38 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 	 */
 	public DmHistoryPort remove(int id)
 		throws NoSuchDmHistoryPortException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history port with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history port
+	 * @return the dm history port that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortException if a dm history port with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPort remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPortException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPort dmHistoryPort = (DmHistoryPort)session.get(DmHistoryPortImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPort == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPortException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPortPersistence.remove(dmHistoryPort);
+			return remove(dmHistoryPort);
 		}
 		catch (NoSuchDmHistoryPortException nsee) {
 			throw nsee;
@@ -269,19 +286,6 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history port from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPort the dm history port
-	 * @return the dm history port that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPort remove(DmHistoryPort dmHistoryPort)
-		throws SystemException {
-		return super.remove(dmHistoryPort);
 	}
 
 	@Override
@@ -303,20 +307,7 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPortModelImpl dmHistoryPortModelImpl = (DmHistoryPortModelImpl)dmHistoryPort;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPortModelImpl.getPortCode(),
-				
-			dmHistoryPortModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPortModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPortImpl.class, dmHistoryPort.getPrimaryKey());
+		clearCache(dmHistoryPort);
 
 		return dmHistoryPort;
 	}
@@ -1203,7 +1194,7 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 	 */
 	public void removeByPortCode(String portCode) throws SystemException {
 		for (DmHistoryPort dmHistoryPort : findByPortCode(portCode)) {
-			dmHistoryPortPersistence.remove(dmHistoryPort);
+			remove(dmHistoryPort);
 		}
 	}
 
@@ -1220,7 +1211,7 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 		DmHistoryPort dmHistoryPort = findByPortCodeAndSyncVersion(portCode,
 				syncVersion);
 
-		dmHistoryPortPersistence.remove(dmHistoryPort);
+		remove(dmHistoryPort);
 	}
 
 	/**
@@ -1230,7 +1221,7 @@ public class DmHistoryPortPersistenceImpl extends BasePersistenceImpl<DmHistoryP
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPort dmHistoryPort : findAll()) {
-			dmHistoryPortPersistence.remove(dmHistoryPort);
+			remove(dmHistoryPort);
 		}
 	}
 

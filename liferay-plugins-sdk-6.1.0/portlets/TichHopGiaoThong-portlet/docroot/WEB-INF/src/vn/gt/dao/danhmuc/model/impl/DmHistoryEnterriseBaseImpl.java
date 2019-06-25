@@ -39,6 +39,11 @@ public abstract class DmHistoryEnterriseBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history enterrise model instance should use the {@link DmHistoryEnterrise} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryEnterriseLocalServiceUtil.updateDmHistoryEnterrise(this);
+		if (this.isNew()) {
+			DmHistoryEnterriseLocalServiceUtil.addDmHistoryEnterrise(this);
+		}
+		else {
+			DmHistoryEnterriseLocalServiceUtil.updateDmHistoryEnterrise(this);
+		}
 	}
 }

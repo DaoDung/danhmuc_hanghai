@@ -95,14 +95,6 @@ public class DmHistoryRankRatingUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryRankRating remove(
-		DmHistoryRankRating dmHistoryRankRating) throws SystemException {
-		return getPersistence().remove(dmHistoryRankRating);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryRankRating update(

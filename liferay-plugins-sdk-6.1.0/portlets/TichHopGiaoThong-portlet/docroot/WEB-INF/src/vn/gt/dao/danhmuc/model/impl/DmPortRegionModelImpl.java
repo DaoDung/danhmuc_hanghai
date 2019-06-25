@@ -119,6 +119,8 @@ public class DmPortRegionModelImpl extends BaseModelImpl<DmPortRegion>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

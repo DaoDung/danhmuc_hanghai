@@ -190,6 +190,23 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryDocType);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryDocType> dmHistoryDocTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryDocType dmHistoryDocType : dmHistoryDocTypes) {
+			EntityCacheUtil.removeResult(DmHistoryDocTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryDocTypeImpl.class, dmHistoryDocType.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryDocType);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryDocType dmHistoryDocType) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DOCUMENTTYPE,
 			new Object[] { dmHistoryDocType.getDocumentType() });
 
@@ -219,20 +236,6 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 	/**
 	 * Removes the dm history doc type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history doc type
-	 * @return the dm history doc type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history doc type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryDocType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history doc type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history doc type
 	 * @return the dm history doc type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryDocTypeException if a dm history doc type with the primary key could not be found
@@ -240,24 +243,38 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 	 */
 	public DmHistoryDocType remove(int id)
 		throws NoSuchDmHistoryDocTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history doc type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history doc type
+	 * @return the dm history doc type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryDocTypeException if a dm history doc type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryDocType remove(Serializable primaryKey)
+		throws NoSuchDmHistoryDocTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryDocType dmHistoryDocType = (DmHistoryDocType)session.get(DmHistoryDocTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryDocType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryDocTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryDocTypePersistence.remove(dmHistoryDocType);
+			return remove(dmHistoryDocType);
 		}
 		catch (NoSuchDmHistoryDocTypeException nsee) {
 			throw nsee;
@@ -268,19 +285,6 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history doc type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryDocType the dm history doc type
-	 * @return the dm history doc type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryDocType remove(DmHistoryDocType dmHistoryDocType)
-		throws SystemException {
-		return super.remove(dmHistoryDocType);
 	}
 
 	@Override
@@ -302,23 +306,7 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryDocTypeModelImpl dmHistoryDocTypeModelImpl = (DmHistoryDocTypeModelImpl)dmHistoryDocType;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DOCUMENTTYPE,
-			new Object[] { dmHistoryDocTypeModelImpl.getDocumentType() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DOCUMENTTYPEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryDocTypeModelImpl.getDocumentType(),
-				
-			dmHistoryDocTypeModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryDocTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryDocTypeImpl.class, dmHistoryDocType.getPrimaryKey());
+		clearCache(dmHistoryDocType);
 
 		return dmHistoryDocType;
 	}
@@ -976,7 +964,7 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 		throws NoSuchDmHistoryDocTypeException, SystemException {
 		DmHistoryDocType dmHistoryDocType = findByDocumentType(documentType);
 
-		dmHistoryDocTypePersistence.remove(dmHistoryDocType);
+		remove(dmHistoryDocType);
 	}
 
 	/**
@@ -992,7 +980,7 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 		DmHistoryDocType dmHistoryDocType = findByDocumentTypeAndSyncVersion(documentType,
 				syncVersion);
 
-		dmHistoryDocTypePersistence.remove(dmHistoryDocType);
+		remove(dmHistoryDocType);
 	}
 
 	/**
@@ -1002,7 +990,7 @@ public class DmHistoryDocTypePersistenceImpl extends BasePersistenceImpl<DmHisto
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryDocType dmHistoryDocType : findAll()) {
-			dmHistoryDocTypePersistence.remove(dmHistoryDocType);
+			remove(dmHistoryDocType);
 		}
 	}
 

@@ -95,14 +95,6 @@ public class DmTestN01RequestUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmTestN01Request remove(DmTestN01Request dmTestN01Request)
-		throws SystemException {
-		return getPersistence().remove(dmTestN01Request);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmTestN01Request update(DmTestN01Request dmTestN01Request,

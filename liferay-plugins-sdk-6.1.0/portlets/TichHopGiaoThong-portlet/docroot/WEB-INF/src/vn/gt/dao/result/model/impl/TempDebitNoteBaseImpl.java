@@ -39,6 +39,11 @@ public abstract class TempDebitNoteBaseImpl extends TempDebitNoteModelImpl
 	 * Never modify or reference this class directly. All methods that expect a temp debit note model instance should use the {@link TempDebitNote} interface instead.
 	 */
 	public void persist() throws SystemException {
-		TempDebitNoteLocalServiceUtil.updateTempDebitNote(this);
+		if (this.isNew()) {
+			TempDebitNoteLocalServiceUtil.addTempDebitNote(this);
+		}
+		else {
+			TempDebitNoteLocalServiceUtil.updateTempDebitNote(this);
+		}
 	}
 }

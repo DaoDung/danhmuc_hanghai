@@ -39,6 +39,11 @@ public abstract class UserPortBaseImpl extends UserPortModelImpl
 	 * Never modify or reference this class directly. All methods that expect a user port model instance should use the {@link UserPort} interface instead.
 	 */
 	public void persist() throws SystemException {
-		UserPortLocalServiceUtil.updateUserPort(this);
+		if (this.isNew()) {
+			UserPortLocalServiceUtil.addUserPort(this);
+		}
+		else {
+			UserPortLocalServiceUtil.updateUserPort(this);
+		}
 	}
 }

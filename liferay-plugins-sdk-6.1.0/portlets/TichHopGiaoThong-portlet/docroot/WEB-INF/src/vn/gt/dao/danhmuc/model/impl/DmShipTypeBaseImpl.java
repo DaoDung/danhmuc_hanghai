@@ -39,6 +39,11 @@ public abstract class DmShipTypeBaseImpl extends DmShipTypeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm ship type model instance should use the {@link DmShipType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmShipTypeLocalServiceUtil.updateDmShipType(this);
+		if (this.isNew()) {
+			DmShipTypeLocalServiceUtil.addDmShipType(this);
+		}
+		else {
+			DmShipTypeLocalServiceUtil.updateDmShipType(this);
+		}
 	}
 }

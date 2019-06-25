@@ -116,6 +116,8 @@ public class DmPackageModelImpl extends BaseModelImpl<DmPackage>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

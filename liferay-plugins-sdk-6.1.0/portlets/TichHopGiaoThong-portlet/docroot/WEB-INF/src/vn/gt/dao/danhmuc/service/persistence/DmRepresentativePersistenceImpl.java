@@ -190,6 +190,23 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmRepresentative);
+	}
+
+	@Override
+	public void clearCache(List<DmRepresentative> dmRepresentatives) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmRepresentative dmRepresentative : dmRepresentatives) {
+			EntityCacheUtil.removeResult(DmRepresentativeModelImpl.ENTITY_CACHE_ENABLED,
+				DmRepresentativeImpl.class, dmRepresentative.getPrimaryKey());
+
+			clearUniqueFindersCache(dmRepresentative);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmRepresentative dmRepresentative) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPCODE,
 			new Object[] { dmRepresentative.getRepCode() });
 	}
@@ -212,20 +229,6 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 	/**
 	 * Removes the dm representative with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm representative
-	 * @return the dm representative that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm representative with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmRepresentative remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm representative with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm representative
 	 * @return the dm representative that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmRepresentativeException if a dm representative with the primary key could not be found
@@ -233,24 +236,38 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 	 */
 	public DmRepresentative remove(int id)
 		throws NoSuchDmRepresentativeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm representative with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm representative
+	 * @return the dm representative that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmRepresentativeException if a dm representative with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmRepresentative remove(Serializable primaryKey)
+		throws NoSuchDmRepresentativeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmRepresentative dmRepresentative = (DmRepresentative)session.get(DmRepresentativeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmRepresentative == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmRepresentativeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmRepresentativePersistence.remove(dmRepresentative);
+			return remove(dmRepresentative);
 		}
 		catch (NoSuchDmRepresentativeException nsee) {
 			throw nsee;
@@ -261,19 +278,6 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm representative from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmRepresentative the dm representative
-	 * @return the dm representative that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmRepresentative remove(DmRepresentative dmRepresentative)
-		throws SystemException {
-		return super.remove(dmRepresentative);
 	}
 
 	@Override
@@ -295,16 +299,7 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmRepresentativeModelImpl dmRepresentativeModelImpl = (DmRepresentativeModelImpl)dmRepresentative;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPCODE,
-			new Object[] { dmRepresentativeModelImpl.getRepCode() });
-
-		EntityCacheUtil.removeResult(DmRepresentativeModelImpl.ENTITY_CACHE_ENABLED,
-			DmRepresentativeImpl.class, dmRepresentative.getPrimaryKey());
+		clearCache(dmRepresentative);
 
 		return dmRepresentative;
 	}
@@ -1158,7 +1153,7 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 		throws NoSuchDmRepresentativeException, SystemException {
 		DmRepresentative dmRepresentative = findByRepCode(repCode);
 
-		dmRepresentativePersistence.remove(dmRepresentative);
+		remove(dmRepresentative);
 	}
 
 	/**
@@ -1171,7 +1166,7 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 		throws SystemException {
 		for (DmRepresentative dmRepresentative : findByMaritimeCode(
 				maritimeCode)) {
-			dmRepresentativePersistence.remove(dmRepresentative);
+			remove(dmRepresentative);
 		}
 	}
 
@@ -1182,7 +1177,7 @@ public class DmRepresentativePersistenceImpl extends BasePersistenceImpl<DmRepre
 	 */
 	public void removeAll() throws SystemException {
 		for (DmRepresentative dmRepresentative : findAll()) {
-			dmRepresentativePersistence.remove(dmRepresentative);
+			remove(dmRepresentative);
 		}
 	}
 

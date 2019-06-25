@@ -172,7 +172,12 @@ public class CrewListClp extends BaseModelImpl<CrewList> implements CrewList {
 	}
 
 	public void persist() throws SystemException {
-		CrewListLocalServiceUtil.updateCrewList(this);
+		if (this.isNew()) {
+			CrewListLocalServiceUtil.addCrewList(this);
+		}
+		else {
+			CrewListLocalServiceUtil.updateCrewList(this);
+		}
 	}
 
 	@Override

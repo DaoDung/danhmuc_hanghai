@@ -95,14 +95,6 @@ public class DmGoodsTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGoodsType remove(DmGoodsType dmGoodsType)
-		throws SystemException {
-		return getPersistence().remove(dmGoodsType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGoodsType update(DmGoodsType dmGoodsType, boolean merge)

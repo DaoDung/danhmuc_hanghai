@@ -39,6 +39,11 @@ public abstract class DmHistoryPassportTypeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history passport type model instance should use the {@link DmHistoryPassportType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPassportTypeLocalServiceUtil.updateDmHistoryPassportType(this);
+		if (this.isNew()) {
+			DmHistoryPassportTypeLocalServiceUtil.addDmHistoryPassportType(this);
+		}
+		else {
+			DmHistoryPassportTypeLocalServiceUtil.updateDmHistoryPassportType(this);
+		}
 	}
 }

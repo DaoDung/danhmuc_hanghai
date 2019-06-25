@@ -39,6 +39,11 @@ public abstract class DmHistoryGoodsBaseImpl extends DmHistoryGoodsModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history goods model instance should use the {@link DmHistoryGoods} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryGoodsLocalServiceUtil.updateDmHistoryGoods(this);
+		if (this.isNew()) {
+			DmHistoryGoodsLocalServiceUtil.addDmHistoryGoods(this);
+		}
+		else {
+			DmHistoryGoodsLocalServiceUtil.updateDmHistoryGoods(this);
+		}
 	}
 }

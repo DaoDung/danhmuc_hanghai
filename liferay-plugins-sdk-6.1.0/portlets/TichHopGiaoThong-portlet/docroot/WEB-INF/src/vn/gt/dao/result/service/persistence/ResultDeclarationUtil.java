@@ -95,14 +95,6 @@ public class ResultDeclarationUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultDeclaration remove(ResultDeclaration resultDeclaration)
-		throws SystemException {
-		return getPersistence().remove(resultDeclaration);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultDeclaration update(

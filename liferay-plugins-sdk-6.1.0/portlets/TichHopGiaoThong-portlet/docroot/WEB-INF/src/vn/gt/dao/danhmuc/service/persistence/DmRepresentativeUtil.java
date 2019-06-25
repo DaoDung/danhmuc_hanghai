@@ -95,14 +95,6 @@ public class DmRepresentativeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmRepresentative remove(DmRepresentative dmRepresentative)
-		throws SystemException {
-		return getPersistence().remove(dmRepresentative);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmRepresentative update(DmRepresentative dmRepresentative,

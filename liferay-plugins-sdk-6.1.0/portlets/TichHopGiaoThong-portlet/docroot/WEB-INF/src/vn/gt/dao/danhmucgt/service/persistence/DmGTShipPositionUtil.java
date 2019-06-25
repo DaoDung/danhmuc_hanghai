@@ -95,14 +95,6 @@ public class DmGTShipPositionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGTShipPosition remove(DmGTShipPosition dmGTShipPosition)
-		throws SystemException {
-		return getPersistence().remove(dmGTShipPosition);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGTShipPosition update(DmGTShipPosition dmGTShipPosition,

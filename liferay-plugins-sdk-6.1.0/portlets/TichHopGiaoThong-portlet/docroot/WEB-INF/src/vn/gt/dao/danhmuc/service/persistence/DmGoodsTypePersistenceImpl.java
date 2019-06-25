@@ -173,6 +173,17 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmGoodsType> dmGoodsTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGoodsType dmGoodsType : dmGoodsTypes) {
+			EntityCacheUtil.removeResult(DmGoodsTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmGoodsTypeImpl.class, dmGoodsType.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm goods type with the primary key. Does not add the dm goods type to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 	/**
 	 * Removes the dm goods type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm goods type
-	 * @return the dm goods type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm goods type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGoodsType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm goods type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm goods type
 	 * @return the dm goods type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmGoodsTypeException if a dm goods type with the primary key could not be found
@@ -212,24 +209,38 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 	 */
 	public DmGoodsType remove(int id)
 		throws NoSuchDmGoodsTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm goods type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm goods type
+	 * @return the dm goods type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmGoodsTypeException if a dm goods type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGoodsType remove(Serializable primaryKey)
+		throws NoSuchDmGoodsTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGoodsType dmGoodsType = (DmGoodsType)session.get(DmGoodsTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmGoodsType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGoodsTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGoodsTypePersistence.remove(dmGoodsType);
+			return remove(dmGoodsType);
 		}
 		catch (NoSuchDmGoodsTypeException nsee) {
 			throw nsee;
@@ -240,19 +251,6 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm goods type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGoodsType the dm goods type
-	 * @return the dm goods type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGoodsType remove(DmGoodsType dmGoodsType)
-		throws SystemException {
-		return super.remove(dmGoodsType);
 	}
 
 	@Override
@@ -274,11 +272,7 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmGoodsTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmGoodsTypeImpl.class, dmGoodsType.getPrimaryKey());
+		clearCache(dmGoodsType);
 
 		return dmGoodsType;
 	}
@@ -964,7 +958,7 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 	public void removeByGoodsTypeCode(String goodsTypeCode)
 		throws SystemException {
 		for (DmGoodsType dmGoodsType : findByGoodsTypeCode(goodsTypeCode)) {
-			dmGoodsTypePersistence.remove(dmGoodsType);
+			remove(dmGoodsType);
 		}
 	}
 
@@ -975,7 +969,7 @@ public class DmGoodsTypePersistenceImpl extends BasePersistenceImpl<DmGoodsType>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGoodsType dmGoodsType : findAll()) {
-			dmGoodsTypePersistence.remove(dmGoodsType);
+			remove(dmGoodsType);
 		}
 	}
 

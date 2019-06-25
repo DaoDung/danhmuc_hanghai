@@ -95,14 +95,6 @@ public class DmHistoryEnterriseUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryEnterrise remove(
-		DmHistoryEnterrise dmHistoryEnterrise) throws SystemException {
-		return getPersistence().remove(dmHistoryEnterrise);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryEnterrise update(

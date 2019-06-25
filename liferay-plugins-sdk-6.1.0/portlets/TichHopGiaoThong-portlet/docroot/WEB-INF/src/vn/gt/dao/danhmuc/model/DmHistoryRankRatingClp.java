@@ -140,7 +140,12 @@ public class DmHistoryRankRatingClp extends BaseModelImpl<DmHistoryRankRating>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryRankRatingLocalServiceUtil.updateDmHistoryRankRating(this);
+		if (this.isNew()) {
+			DmHistoryRankRatingLocalServiceUtil.addDmHistoryRankRating(this);
+		}
+		else {
+			DmHistoryRankRatingLocalServiceUtil.updateDmHistoryRankRating(this);
+		}
 	}
 
 	@Override

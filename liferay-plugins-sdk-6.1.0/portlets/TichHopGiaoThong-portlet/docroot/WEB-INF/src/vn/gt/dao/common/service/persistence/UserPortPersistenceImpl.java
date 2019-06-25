@@ -183,6 +183,23 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(userPort);
+	}
+
+	@Override
+	public void clearCache(List<UserPort> userPorts) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (UserPort userPort : userPorts) {
+			EntityCacheUtil.removeResult(UserPortModelImpl.ENTITY_CACHE_ENABLED,
+				UserPortImpl.class, userPort.getPrimaryKey());
+
+			clearUniqueFindersCache(userPort);
+		}
+	}
+
+	protected void clearUniqueFindersCache(UserPort userPort) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
 			new Object[] { Long.valueOf(userPort.getUserId()) });
 	}
@@ -205,20 +222,6 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 	/**
 	 * Removes the user port with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user port
-	 * @return the user port that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user port with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public UserPort remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the user port with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the user port
 	 * @return the user port that was removed
 	 * @throws vn.gt.dao.common.NoSuchUserPortException if a user port with the primary key could not be found
@@ -226,24 +229,38 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 	 */
 	public UserPort remove(long id)
 		throws NoSuchUserPortException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the user port with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the user port
+	 * @return the user port that was removed
+	 * @throws vn.gt.dao.common.NoSuchUserPortException if a user port with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UserPort remove(Serializable primaryKey)
+		throws NoSuchUserPortException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			UserPort userPort = (UserPort)session.get(UserPortImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (userPort == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserPortException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return userPortPersistence.remove(userPort);
+			return remove(userPort);
 		}
 		catch (NoSuchUserPortException nsee) {
 			throw nsee;
@@ -254,18 +271,6 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the user port from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param userPort the user port
-	 * @return the user port that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public UserPort remove(UserPort userPort) throws SystemException {
-		return super.remove(userPort);
 	}
 
 	@Override
@@ -286,16 +291,7 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		UserPortModelImpl userPortModelImpl = (UserPortModelImpl)userPort;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { Long.valueOf(userPortModelImpl.getUserId()) });
-
-		EntityCacheUtil.removeResult(UserPortModelImpl.ENTITY_CACHE_ENABLED,
-			UserPortImpl.class, userPort.getPrimaryKey());
+		clearCache(userPort);
 
 		return userPort;
 	}
@@ -1114,7 +1110,7 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 	 */
 	public void removeByPortCode(String portCode) throws SystemException {
 		for (UserPort userPort : findByPortCode(portCode)) {
-			userPortPersistence.remove(userPort);
+			remove(userPort);
 		}
 	}
 
@@ -1128,7 +1124,7 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 		throws NoSuchUserPortException, SystemException {
 		UserPort userPort = findByUserId(userId);
 
-		userPortPersistence.remove(userPort);
+		remove(userPort);
 	}
 
 	/**
@@ -1138,7 +1134,7 @@ public class UserPortPersistenceImpl extends BasePersistenceImpl<UserPort>
 	 */
 	public void removeAll() throws SystemException {
 		for (UserPort userPort : findAll()) {
-			userPortPersistence.remove(userPort);
+			remove(userPort);
 		}
 	}
 

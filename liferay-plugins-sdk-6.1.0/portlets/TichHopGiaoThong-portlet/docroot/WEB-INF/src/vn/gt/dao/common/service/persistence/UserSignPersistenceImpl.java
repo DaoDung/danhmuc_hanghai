@@ -183,6 +183,23 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(userSign);
+	}
+
+	@Override
+	public void clearCache(List<UserSign> userSigns) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (UserSign userSign : userSigns) {
+			EntityCacheUtil.removeResult(UserSignModelImpl.ENTITY_CACHE_ENABLED,
+				UserSignImpl.class, userSign.getPrimaryKey());
+
+			clearUniqueFindersCache(userSign);
+		}
+	}
+
+	protected void clearUniqueFindersCache(UserSign userSign) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
 			new Object[] { Long.valueOf(userSign.getUserId()) });
 	}
@@ -205,20 +222,6 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 	/**
 	 * Removes the user sign with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user sign
-	 * @return the user sign that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user sign with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public UserSign remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the user sign with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the user sign
 	 * @return the user sign that was removed
 	 * @throws vn.gt.dao.common.NoSuchUserSignException if a user sign with the primary key could not be found
@@ -226,24 +229,38 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 	 */
 	public UserSign remove(long id)
 		throws NoSuchUserSignException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the user sign with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the user sign
+	 * @return the user sign that was removed
+	 * @throws vn.gt.dao.common.NoSuchUserSignException if a user sign with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UserSign remove(Serializable primaryKey)
+		throws NoSuchUserSignException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			UserSign userSign = (UserSign)session.get(UserSignImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (userSign == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchUserSignException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return userSignPersistence.remove(userSign);
+			return remove(userSign);
 		}
 		catch (NoSuchUserSignException nsee) {
 			throw nsee;
@@ -254,18 +271,6 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the user sign from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param userSign the user sign
-	 * @return the user sign that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public UserSign remove(UserSign userSign) throws SystemException {
-		return super.remove(userSign);
 	}
 
 	@Override
@@ -286,16 +291,7 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		UserSignModelImpl userSignModelImpl = (UserSignModelImpl)userSign;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { Long.valueOf(userSignModelImpl.getUserId()) });
-
-		EntityCacheUtil.removeResult(UserSignModelImpl.ENTITY_CACHE_ENABLED,
-			UserSignImpl.class, userSign.getPrimaryKey());
+		clearCache(userSign);
 
 		return userSign;
 	}
@@ -1119,7 +1115,7 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 	 */
 	public void removeByPortCode(String portCode) throws SystemException {
 		for (UserSign userSign : findByPortCode(portCode)) {
-			userSignPersistence.remove(userSign);
+			remove(userSign);
 		}
 	}
 
@@ -1133,7 +1129,7 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 		throws NoSuchUserSignException, SystemException {
 		UserSign userSign = findByUserId(userId);
 
-		userSignPersistence.remove(userSign);
+		remove(userSign);
 	}
 
 	/**
@@ -1143,7 +1139,7 @@ public class UserSignPersistenceImpl extends BasePersistenceImpl<UserSign>
 	 */
 	public void removeAll() throws SystemException {
 		for (UserSign userSign : findAll()) {
-			userSignPersistence.remove(userSign);
+			remove(userSign);
 		}
 	}
 

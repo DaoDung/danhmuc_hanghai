@@ -192,6 +192,17 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmGtStatus> dmGtStatuses) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtStatus dmGtStatus : dmGtStatuses) {
+			EntityCacheUtil.removeResult(DmGtStatusModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtStatusImpl.class, dmGtStatus.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm gt status with the primary key. Does not add the dm gt status to the database.
 	 *
@@ -210,20 +221,6 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 	/**
 	 * Removes the dm gt status with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt status
-	 * @return the dm gt status that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt status with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtStatus remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm gt status with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt status
 	 * @return the dm gt status that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtStatusException if a dm gt status with the primary key could not be found
@@ -231,24 +228,38 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 	 */
 	public DmGtStatus remove(long id)
 		throws NoSuchDmGtStatusException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt status with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt status
+	 * @return the dm gt status that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtStatusException if a dm gt status with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtStatus remove(Serializable primaryKey)
+		throws NoSuchDmGtStatusException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtStatus dmGtStatus = (DmGtStatus)session.get(DmGtStatusImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGtStatus == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtStatusException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtStatusPersistence.remove(dmGtStatus);
+			return remove(dmGtStatus);
 		}
 		catch (NoSuchDmGtStatusException nsee) {
 			throw nsee;
@@ -259,18 +270,6 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt status from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtStatus the dm gt status
-	 * @return the dm gt status that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtStatus remove(DmGtStatus dmGtStatus) throws SystemException {
-		return super.remove(dmGtStatus);
 	}
 
 	@Override
@@ -292,11 +291,7 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmGtStatusModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtStatusImpl.class, dmGtStatus.getPrimaryKey());
+		clearCache(dmGtStatus);
 
 		return dmGtStatus;
 	}
@@ -1344,7 +1339,7 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 	 */
 	public void removeByType(int type) throws SystemException {
 		for (DmGtStatus dmGtStatus : findByType(type)) {
-			dmGtStatusPersistence.remove(dmGtStatus);
+			remove(dmGtStatus);
 		}
 	}
 
@@ -1358,7 +1353,7 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 	public void removeByStatusCode(int statusCode, int type)
 		throws SystemException {
 		for (DmGtStatus dmGtStatus : findByStatusCode(statusCode, type)) {
-			dmGtStatusPersistence.remove(dmGtStatus);
+			remove(dmGtStatus);
 		}
 	}
 
@@ -1369,7 +1364,7 @@ public class DmGtStatusPersistenceImpl extends BasePersistenceImpl<DmGtStatus>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtStatus dmGtStatus : findAll()) {
-			dmGtStatusPersistence.remove(dmGtStatus);
+			remove(dmGtStatus);
 		}
 	}
 

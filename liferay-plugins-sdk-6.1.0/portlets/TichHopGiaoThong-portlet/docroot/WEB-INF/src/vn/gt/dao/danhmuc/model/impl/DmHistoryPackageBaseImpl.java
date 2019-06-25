@@ -39,6 +39,11 @@ public abstract class DmHistoryPackageBaseImpl extends DmHistoryPackageModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history package model instance should use the {@link DmHistoryPackage} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPackageLocalServiceUtil.updateDmHistoryPackage(this);
+		if (this.isNew()) {
+			DmHistoryPackageLocalServiceUtil.addDmHistoryPackage(this);
+		}
+		else {
+			DmHistoryPackageLocalServiceUtil.updateDmHistoryPackage(this);
+		}
 	}
 }

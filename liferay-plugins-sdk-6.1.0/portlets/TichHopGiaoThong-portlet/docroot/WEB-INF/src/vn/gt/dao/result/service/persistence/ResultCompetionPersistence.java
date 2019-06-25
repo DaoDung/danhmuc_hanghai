@@ -14,7 +14,6 @@
 
 package vn.gt.dao.result.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.result.model.ResultCompetion;
@@ -349,7 +348,4 @@ public interface ResultCompetionPersistence extends BasePersistence<ResultCompet
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public ResultCompetion remove(ResultCompetion resultCompetion)
-		throws SystemException;
 }

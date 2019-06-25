@@ -164,7 +164,12 @@ public class ResultMinistryClp extends BaseModelImpl<ResultMinistry>
 	}
 
 	public void persist() throws SystemException {
-		ResultMinistryLocalServiceUtil.updateResultMinistry(this);
+		if (this.isNew()) {
+			ResultMinistryLocalServiceUtil.addResultMinistry(this);
+		}
+		else {
+			ResultMinistryLocalServiceUtil.updateResultMinistry(this);
+		}
 	}
 
 	@Override
