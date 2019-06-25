@@ -1,0 +1,16 @@
+*-ext.properties
+.sass-cache/
+.sass_cache_*.css
+_sass_cache_*.css
+
+/*/*/bin
+/*/*/classes
+/*/*/tmp
+
+/*/*/docroot/WEB-INF/classes
+
+/build.*.properties
+/dist
+
+.DS_Store
+
