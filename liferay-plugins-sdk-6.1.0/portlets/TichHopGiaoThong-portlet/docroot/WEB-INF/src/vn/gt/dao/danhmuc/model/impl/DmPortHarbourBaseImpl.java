@@ -39,6 +39,11 @@ public abstract class DmPortHarbourBaseImpl extends DmPortHarbourModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm port harbour model instance should use the {@link DmPortHarbour} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPortHarbourLocalServiceUtil.updateDmPortHarbour(this);
+		if (this.isNew()) {
+			DmPortHarbourLocalServiceUtil.addDmPortHarbour(this);
+		}
+		else {
+			DmPortHarbourLocalServiceUtil.updateDmPortHarbour(this);
+		}
 	}
 }

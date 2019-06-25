@@ -95,14 +95,6 @@ public class DmGTFunctionTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGTFunctionType remove(DmGTFunctionType dmGTFunctionType)
-		throws SystemException {
-		return getPersistence().remove(dmGTFunctionType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGTFunctionType update(DmGTFunctionType dmGTFunctionType,

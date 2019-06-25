@@ -124,7 +124,12 @@ public class HistorySyncVersionClp extends BaseModelImpl<HistorySyncVersion>
 	}
 
 	public void persist() throws SystemException {
-		HistorySyncVersionLocalServiceUtil.updateHistorySyncVersion(this);
+		if (this.isNew()) {
+			HistorySyncVersionLocalServiceUtil.addHistorySyncVersion(this);
+		}
+		else {
+			HistorySyncVersionLocalServiceUtil.updateHistorySyncVersion(this);
+		}
 	}
 
 	@Override

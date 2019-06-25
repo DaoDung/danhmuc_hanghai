@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmucgt.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmucgt.model.DmGTShipPosition;
@@ -284,7 +283,4 @@ public interface DmGTShipPositionPersistence extends BasePersistence<DmGTShipPos
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmGTShipPosition remove(DmGTShipPosition dmGTShipPosition)
-		throws SystemException;
 }

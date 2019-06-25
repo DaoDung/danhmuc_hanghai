@@ -39,6 +39,11 @@ public abstract class DmHistoryStateBaseImpl extends DmHistoryStateModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history state model instance should use the {@link DmHistoryState} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryStateLocalServiceUtil.updateDmHistoryState(this);
+		if (this.isNew()) {
+			DmHistoryStateLocalServiceUtil.addDmHistoryState(this);
+		}
+		else {
+			DmHistoryStateLocalServiceUtil.updateDmHistoryState(this);
+		}
 	}
 }

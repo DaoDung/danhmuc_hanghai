@@ -95,14 +95,6 @@ public class DmHistoryPackageUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryPackage remove(DmHistoryPackage dmHistoryPackage)
-		throws SystemException {
-		return getPersistence().remove(dmHistoryPackage);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryPackage update(DmHistoryPackage dmHistoryPackage,

@@ -115,6 +115,8 @@ public class DmArrivalPurposeModelImpl extends BaseModelImpl<DmArrivalPurpose>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

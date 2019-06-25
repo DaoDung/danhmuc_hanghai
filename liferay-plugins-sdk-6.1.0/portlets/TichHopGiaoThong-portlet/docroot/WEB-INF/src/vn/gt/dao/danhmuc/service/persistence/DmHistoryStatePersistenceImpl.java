@@ -218,6 +218,23 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryState);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryState> dmHistoryStates) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryState dmHistoryState : dmHistoryStates) {
+			EntityCacheUtil.removeResult(DmHistoryStateModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryStateImpl.class, dmHistoryState.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryState);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryState dmHistoryState) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_STATECODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryState.getStateCode(),
@@ -244,20 +261,6 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 	/**
 	 * Removes the dm history state with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history state
-	 * @return the dm history state that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history state with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryState remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history state with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history state
 	 * @return the dm history state that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryStateException if a dm history state with the primary key could not be found
@@ -265,24 +268,38 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 	 */
 	public DmHistoryState remove(int id)
 		throws NoSuchDmHistoryStateException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history state with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history state
+	 * @return the dm history state that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryStateException if a dm history state with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryState remove(Serializable primaryKey)
+		throws NoSuchDmHistoryStateException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryState dmHistoryState = (DmHistoryState)session.get(DmHistoryStateImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryState == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryStateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryStatePersistence.remove(dmHistoryState);
+			return remove(dmHistoryState);
 		}
 		catch (NoSuchDmHistoryStateException nsee) {
 			throw nsee;
@@ -293,19 +310,6 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history state from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryState the dm history state
-	 * @return the dm history state that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryState remove(DmHistoryState dmHistoryState)
-		throws SystemException {
-		return super.remove(dmHistoryState);
 	}
 
 	@Override
@@ -327,20 +331,7 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryStateModelImpl dmHistoryStateModelImpl = (DmHistoryStateModelImpl)dmHistoryState;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_STATECODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryStateModelImpl.getStateCode(),
-				
-			dmHistoryStateModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryStateModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryStateImpl.class, dmHistoryState.getPrimaryKey());
+		clearCache(dmHistoryState);
 
 		return dmHistoryState;
 	}
@@ -1613,7 +1604,7 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 	public void removeBySyncVersion(String syncVersion)
 		throws SystemException {
 		for (DmHistoryState dmHistoryState : findBySyncVersion(syncVersion)) {
-			dmHistoryStatePersistence.remove(dmHistoryState);
+			remove(dmHistoryState);
 		}
 	}
 
@@ -1625,7 +1616,7 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 	 */
 	public void removeByStateCode(String stateCode) throws SystemException {
 		for (DmHistoryState dmHistoryState : findByStateCode(stateCode)) {
-			dmHistoryStatePersistence.remove(dmHistoryState);
+			remove(dmHistoryState);
 		}
 	}
 
@@ -1642,7 +1633,7 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 		DmHistoryState dmHistoryState = findByStateCodeAndSyncVersion(stateCode,
 				syncVersion);
 
-		dmHistoryStatePersistence.remove(dmHistoryState);
+		remove(dmHistoryState);
 	}
 
 	/**
@@ -1652,7 +1643,7 @@ public class DmHistoryStatePersistenceImpl extends BasePersistenceImpl<DmHistory
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryState dmHistoryState : findAll()) {
-			dmHistoryStatePersistence.remove(dmHistoryState);
+			remove(dmHistoryState);
 		}
 	}
 

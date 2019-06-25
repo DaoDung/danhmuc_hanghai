@@ -39,6 +39,11 @@ public abstract class ResponseBoBaseImpl extends ResponseBoModelImpl
 	 * Never modify or reference this class directly. All methods that expect a response bo model instance should use the {@link ResponseBo} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResponseBoLocalServiceUtil.updateResponseBo(this);
+		if (this.isNew()) {
+			ResponseBoLocalServiceUtil.addResponseBo(this);
+		}
+		else {
+			ResponseBoLocalServiceUtil.updateResponseBo(this);
+		}
 	}
 }

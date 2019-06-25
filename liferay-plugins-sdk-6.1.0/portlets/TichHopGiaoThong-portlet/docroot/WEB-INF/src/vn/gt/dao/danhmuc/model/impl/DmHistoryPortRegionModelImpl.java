@@ -118,6 +118,8 @@ public class DmHistoryPortRegionModelImpl extends BaseModelImpl<DmHistoryPortReg
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

@@ -151,6 +151,17 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<Document> documents) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Document document : documents) {
+			EntityCacheUtil.removeResult(DocumentModelImpl.ENTITY_CACHE_ENABLED,
+				DocumentImpl.class, document.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new document with the primary key. Does not add the document to the database.
 	 *
@@ -169,20 +180,6 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 	/**
 	 * Removes the document with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the document
-	 * @return the document that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a document with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Document remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the document with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the document
 	 * @return the document that was removed
 	 * @throws vn.gt.dao.nhapcanh.NoSuchDocumentException if a document with the primary key could not be found
@@ -190,24 +187,38 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 	 */
 	public Document remove(long id)
 		throws NoSuchDocumentException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the document with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the document
+	 * @return the document that was removed
+	 * @throws vn.gt.dao.nhapcanh.NoSuchDocumentException if a document with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Document remove(Serializable primaryKey)
+		throws NoSuchDocumentException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			Document document = (Document)session.get(DocumentImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (document == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDocumentException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return documentPersistence.remove(document);
+			return remove(document);
 		}
 		catch (NoSuchDocumentException nsee) {
 			throw nsee;
@@ -218,18 +229,6 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the document from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param document the document
-	 * @return the document that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Document remove(Document document) throws SystemException {
-		return super.remove(document);
 	}
 
 	@Override
@@ -250,11 +249,7 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DocumentModelImpl.ENTITY_CACHE_ENABLED,
-			DocumentImpl.class, document.getPrimaryKey());
+		clearCache(document);
 
 		return document;
 	}
@@ -529,7 +524,7 @@ public class DocumentPersistenceImpl extends BasePersistenceImpl<Document>
 	 */
 	public void removeAll() throws SystemException {
 		for (Document document : findAll()) {
-			documentPersistence.remove(document);
+			remove(document);
 		}
 	}
 

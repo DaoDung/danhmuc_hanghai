@@ -14,7 +14,6 @@
 
 package vn.gt.dao.nhapcanh.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.nhapcanh.model.Document;
@@ -158,6 +157,4 @@ public interface DocumentPersistence extends BasePersistence<Document> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public Document remove(Document document) throws SystemException;
 }

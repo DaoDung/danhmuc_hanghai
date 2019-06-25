@@ -154,6 +154,17 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<PassengerList> passengerLists) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (PassengerList passengerList : passengerLists) {
+			EntityCacheUtil.removeResult(PassengerListModelImpl.ENTITY_CACHE_ENABLED,
+				PassengerListImpl.class, passengerList.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new passenger list with the primary key. Does not add the passenger list to the database.
 	 *
@@ -172,20 +183,6 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 	/**
 	 * Removes the passenger list with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the passenger list
-	 * @return the passenger list that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a passenger list with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public PassengerList remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the passenger list with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the passenger list
 	 * @return the passenger list that was removed
 	 * @throws vn.gt.dao.nhapcanh.NoSuchPassengerListException if a passenger list with the primary key could not be found
@@ -193,24 +190,38 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 	 */
 	public PassengerList remove(long id)
 		throws NoSuchPassengerListException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the passenger list with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the passenger list
+	 * @return the passenger list that was removed
+	 * @throws vn.gt.dao.nhapcanh.NoSuchPassengerListException if a passenger list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public PassengerList remove(Serializable primaryKey)
+		throws NoSuchPassengerListException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			PassengerList passengerList = (PassengerList)session.get(PassengerListImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (passengerList == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchPassengerListException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return passengerListPersistence.remove(passengerList);
+			return remove(passengerList);
 		}
 		catch (NoSuchPassengerListException nsee) {
 			throw nsee;
@@ -221,19 +232,6 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the passenger list from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param passengerList the passenger list
-	 * @return the passenger list that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public PassengerList remove(PassengerList passengerList)
-		throws SystemException {
-		return super.remove(passengerList);
 	}
 
 	@Override
@@ -255,11 +253,7 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(PassengerListModelImpl.ENTITY_CACHE_ENABLED,
-			PassengerListImpl.class, passengerList.getPrimaryKey());
+		clearCache(passengerList);
 
 		return passengerList;
 	}
@@ -543,7 +537,7 @@ public class PassengerListPersistenceImpl extends BasePersistenceImpl<PassengerL
 	 */
 	public void removeAll() throws SystemException {
 		for (PassengerList passengerList : findAll()) {
-			passengerListPersistence.remove(passengerList);
+			remove(passengerList);
 		}
 	}
 

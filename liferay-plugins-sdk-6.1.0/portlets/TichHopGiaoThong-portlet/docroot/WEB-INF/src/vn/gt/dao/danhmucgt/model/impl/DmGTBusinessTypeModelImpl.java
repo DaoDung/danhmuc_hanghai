@@ -169,6 +169,8 @@ public class DmGTBusinessTypeModelImpl extends BaseModelImpl<DmGTBusinessType>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

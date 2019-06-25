@@ -148,7 +148,12 @@ public class UserSignClp extends BaseModelImpl<UserSign> implements UserSign {
 	}
 
 	public void persist() throws SystemException {
-		UserSignLocalServiceUtil.updateUserSign(this);
+		if (this.isNew()) {
+			UserSignLocalServiceUtil.addUserSign(this);
+		}
+		else {
+			UserSignLocalServiceUtil.updateUserSign(this);
+		}
 	}
 
 	@Override

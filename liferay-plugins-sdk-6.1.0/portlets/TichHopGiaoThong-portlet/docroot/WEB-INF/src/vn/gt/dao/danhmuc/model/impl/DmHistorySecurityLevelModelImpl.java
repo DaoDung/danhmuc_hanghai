@@ -116,6 +116,8 @@ public class DmHistorySecurityLevelModelImpl extends BaseModelImpl<DmHistorySecu
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

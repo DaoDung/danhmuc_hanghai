@@ -213,6 +213,17 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmPortRegion> dmPortRegions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmPortRegion dmPortRegion : dmPortRegions) {
+			EntityCacheUtil.removeResult(DmPortRegionModelImpl.ENTITY_CACHE_ENABLED,
+				DmPortRegionImpl.class, dmPortRegion.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm port region with the primary key. Does not add the dm port region to the database.
 	 *
@@ -231,20 +242,6 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	/**
 	 * Removes the dm port region with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm port region
-	 * @return the dm port region that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm port region with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPortRegion remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm port region with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm port region
 	 * @return the dm port region that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortRegionException if a dm port region with the primary key could not be found
@@ -252,24 +249,38 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	 */
 	public DmPortRegion remove(int id)
 		throws NoSuchDmPortRegionException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm port region with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm port region
+	 * @return the dm port region that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortRegionException if a dm port region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmPortRegion remove(Serializable primaryKey)
+		throws NoSuchDmPortRegionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmPortRegion dmPortRegion = (DmPortRegion)session.get(DmPortRegionImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmPortRegion == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmPortRegionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmPortRegionPersistence.remove(dmPortRegion);
+			return remove(dmPortRegion);
 		}
 		catch (NoSuchDmPortRegionException nsee) {
 			throw nsee;
@@ -280,19 +291,6 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm port region from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmPortRegion the dm port region
-	 * @return the dm port region that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPortRegion remove(DmPortRegion dmPortRegion)
-		throws SystemException {
-		return super.remove(dmPortRegion);
 	}
 
 	@Override
@@ -314,11 +312,7 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmPortRegionModelImpl.ENTITY_CACHE_ENABLED,
-			DmPortRegionImpl.class, dmPortRegion.getPrimaryKey());
+		clearCache(dmPortRegion);
 
 		return dmPortRegion;
 	}
@@ -1790,7 +1784,7 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	public void removeByPortRegionCode(String portRegionCode)
 		throws SystemException {
 		for (DmPortRegion dmPortRegion : findByPortRegionCode(portRegionCode)) {
-			dmPortRegionPersistence.remove(dmPortRegion);
+			remove(dmPortRegion);
 		}
 	}
 
@@ -1803,7 +1797,7 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	public void removeByPortRegionRef(String portRegionRef)
 		throws SystemException {
 		for (DmPortRegion dmPortRegion : findByPortRegionRef(portRegionRef)) {
-			dmPortRegionPersistence.remove(dmPortRegion);
+			remove(dmPortRegion);
 		}
 	}
 
@@ -1815,7 +1809,7 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	 */
 	public void removeByPortCodeName(String portCode) throws SystemException {
 		for (DmPortRegion dmPortRegion : findByPortCodeName(portCode)) {
-			dmPortRegionPersistence.remove(dmPortRegion);
+			remove(dmPortRegion);
 		}
 	}
 
@@ -1826,7 +1820,7 @@ public class DmPortRegionPersistenceImpl extends BasePersistenceImpl<DmPortRegio
 	 */
 	public void removeAll() throws SystemException {
 		for (DmPortRegion dmPortRegion : findAll()) {
-			dmPortRegionPersistence.remove(dmPortRegion);
+			remove(dmPortRegion);
 		}
 	}
 

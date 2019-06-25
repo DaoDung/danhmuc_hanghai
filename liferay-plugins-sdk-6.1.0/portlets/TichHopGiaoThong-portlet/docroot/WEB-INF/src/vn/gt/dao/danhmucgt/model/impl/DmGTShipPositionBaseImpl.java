@@ -39,6 +39,11 @@ public abstract class DmGTShipPositionBaseImpl extends DmGTShipPositionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm g t ship position model instance should use the {@link DmGTShipPosition} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGTShipPositionLocalServiceUtil.updateDmGTShipPosition(this);
+		if (this.isNew()) {
+			DmGTShipPositionLocalServiceUtil.addDmGTShipPosition(this);
+		}
+		else {
+			DmGTShipPositionLocalServiceUtil.updateDmGTShipPosition(this);
+		}
 	}
 }

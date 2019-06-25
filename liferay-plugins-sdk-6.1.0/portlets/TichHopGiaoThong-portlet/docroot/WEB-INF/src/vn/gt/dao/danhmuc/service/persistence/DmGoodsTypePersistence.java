@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmGoodsType;
@@ -282,7 +281,4 @@ public interface DmGoodsTypePersistence extends BasePersistence<DmGoodsType> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmGoodsType remove(DmGoodsType dmGoodsType)
-		throws SystemException;
 }

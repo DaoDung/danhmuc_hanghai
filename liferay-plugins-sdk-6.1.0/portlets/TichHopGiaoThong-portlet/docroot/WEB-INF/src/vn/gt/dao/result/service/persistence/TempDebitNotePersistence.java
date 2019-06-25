@@ -14,7 +14,6 @@
 
 package vn.gt.dao.result.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.result.model.TempDebitNote;
@@ -1584,7 +1583,4 @@ public interface TempDebitNotePersistence extends BasePersistence<TempDebitNote>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public TempDebitNote remove(TempDebitNote tempDebitNote)
-		throws SystemException;
 }

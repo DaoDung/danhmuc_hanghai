@@ -132,7 +132,12 @@ public class DmGtReportCategoryClp extends BaseModelImpl<DmGtReportCategory>
 	}
 
 	public void persist() throws SystemException {
-		DmGtReportCategoryLocalServiceUtil.updateDmGtReportCategory(this);
+		if (this.isNew()) {
+			DmGtReportCategoryLocalServiceUtil.addDmGtReportCategory(this);
+		}
+		else {
+			DmGtReportCategoryLocalServiceUtil.updateDmGtReportCategory(this);
+		}
 	}
 
 	@Override

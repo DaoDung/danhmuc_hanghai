@@ -95,13 +95,6 @@ public class DmStateUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmState remove(DmState dmState) throws SystemException {
-		return getPersistence().remove(dmState);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmState update(DmState dmState, boolean merge)

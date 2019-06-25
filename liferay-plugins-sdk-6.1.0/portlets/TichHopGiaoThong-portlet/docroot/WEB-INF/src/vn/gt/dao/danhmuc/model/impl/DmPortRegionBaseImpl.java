@@ -39,6 +39,11 @@ public abstract class DmPortRegionBaseImpl extends DmPortRegionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm port region model instance should use the {@link DmPortRegion} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPortRegionLocalServiceUtil.updateDmPortRegion(this);
+		if (this.isNew()) {
+			DmPortRegionLocalServiceUtil.addDmPortRegion(this);
+		}
+		else {
+			DmPortRegionLocalServiceUtil.updateDmPortRegion(this);
+		}
 	}
 }

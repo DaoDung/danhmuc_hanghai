@@ -116,6 +116,8 @@ public class DmRankRatingModelImpl extends BaseModelImpl<DmRankRating>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

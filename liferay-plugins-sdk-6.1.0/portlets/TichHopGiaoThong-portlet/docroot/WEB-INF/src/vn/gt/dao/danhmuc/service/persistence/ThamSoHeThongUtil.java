@@ -95,14 +95,6 @@ public class ThamSoHeThongUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ThamSoHeThong remove(ThamSoHeThong thamSoHeThong)
-		throws SystemException {
-		return getPersistence().remove(thamSoHeThong);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ThamSoHeThong update(ThamSoHeThong thamSoHeThong,

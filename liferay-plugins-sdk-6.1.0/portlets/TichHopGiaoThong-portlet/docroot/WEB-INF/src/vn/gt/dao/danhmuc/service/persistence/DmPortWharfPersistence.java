@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmPortWharf;
@@ -542,7 +541,4 @@ public interface DmPortWharfPersistence extends BasePersistence<DmPortWharf> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmPortWharf remove(DmPortWharf dmPortWharf)
-		throws SystemException;
 }

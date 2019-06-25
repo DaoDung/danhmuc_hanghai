@@ -201,6 +201,25 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistorySecurityLevel);
+	}
+
+	@Override
+	public void clearCache(List<DmHistorySecurityLevel> dmHistorySecurityLevels) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistorySecurityLevel dmHistorySecurityLevel : dmHistorySecurityLevels) {
+			EntityCacheUtil.removeResult(DmHistorySecurityLevelModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistorySecurityLevelImpl.class,
+				dmHistorySecurityLevel.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistorySecurityLevel);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistorySecurityLevel dmHistorySecurityLevel) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SECURITYLEVELCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistorySecurityLevel.getSecurityLevelCode(),
@@ -227,20 +246,6 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 	/**
 	 * Removes the dm history security level with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history security level
-	 * @return the dm history security level that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history security level with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistorySecurityLevel remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history security level with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history security level
 	 * @return the dm history security level that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistorySecurityLevelException if a dm history security level with the primary key could not be found
@@ -248,24 +253,38 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 	 */
 	public DmHistorySecurityLevel remove(int id)
 		throws NoSuchDmHistorySecurityLevelException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history security level with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history security level
+	 * @return the dm history security level that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistorySecurityLevelException if a dm history security level with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistorySecurityLevel remove(Serializable primaryKey)
+		throws NoSuchDmHistorySecurityLevelException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistorySecurityLevel dmHistorySecurityLevel = (DmHistorySecurityLevel)session.get(DmHistorySecurityLevelImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistorySecurityLevel == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistorySecurityLevelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistorySecurityLevelPersistence.remove(dmHistorySecurityLevel);
+			return remove(dmHistorySecurityLevel);
 		}
 		catch (NoSuchDmHistorySecurityLevelException nsee) {
 			throw nsee;
@@ -276,20 +295,6 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history security level from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistorySecurityLevel the dm history security level
-	 * @return the dm history security level that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistorySecurityLevel remove(
-		DmHistorySecurityLevel dmHistorySecurityLevel)
-		throws SystemException {
-		return super.remove(dmHistorySecurityLevel);
 	}
 
 	@Override
@@ -312,21 +317,7 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistorySecurityLevelModelImpl dmHistorySecurityLevelModelImpl = (DmHistorySecurityLevelModelImpl)dmHistorySecurityLevel;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SECURITYLEVELCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistorySecurityLevelModelImpl.getSecurityLevelCode(),
-				
-			dmHistorySecurityLevelModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistorySecurityLevelModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistorySecurityLevelImpl.class,
-			dmHistorySecurityLevel.getPrimaryKey());
+		clearCache(dmHistorySecurityLevel);
 
 		return dmHistorySecurityLevel;
 	}
@@ -1225,7 +1216,7 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 		throws SystemException {
 		for (DmHistorySecurityLevel dmHistorySecurityLevel : findBySecurityLevelCode(
 				securityLevelCode)) {
-			dmHistorySecurityLevelPersistence.remove(dmHistorySecurityLevel);
+			remove(dmHistorySecurityLevel);
 		}
 	}
 
@@ -1242,7 +1233,7 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 		DmHistorySecurityLevel dmHistorySecurityLevel = findBySecurityLevelCodeAndSyncVersion(securityLevelCode,
 				syncVersion);
 
-		dmHistorySecurityLevelPersistence.remove(dmHistorySecurityLevel);
+		remove(dmHistorySecurityLevel);
 	}
 
 	/**
@@ -1252,7 +1243,7 @@ public class DmHistorySecurityLevelPersistenceImpl extends BasePersistenceImpl<D
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistorySecurityLevel dmHistorySecurityLevel : findAll()) {
-			dmHistorySecurityLevelPersistence.remove(dmHistorySecurityLevel);
+			remove(dmHistorySecurityLevel);
 		}
 	}
 

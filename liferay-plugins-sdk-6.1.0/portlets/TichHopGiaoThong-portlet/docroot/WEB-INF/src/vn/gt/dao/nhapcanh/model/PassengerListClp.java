@@ -177,7 +177,12 @@ public class PassengerListClp extends BaseModelImpl<PassengerList>
 	}
 
 	public void persist() throws SystemException {
-		PassengerListLocalServiceUtil.updatePassengerList(this);
+		if (this.isNew()) {
+			PassengerListLocalServiceUtil.addPassengerList(this);
+		}
+		else {
+			PassengerListLocalServiceUtil.updatePassengerList(this);
+		}
 	}
 
 	@Override

@@ -228,7 +228,12 @@ public class DmGtVersionClp extends BaseModelImpl<DmGtVersion>
 	}
 
 	public void persist() throws SystemException {
-		DmGtVersionLocalServiceUtil.updateDmGtVersion(this);
+		if (this.isNew()) {
+			DmGtVersionLocalServiceUtil.addDmGtVersion(this);
+		}
+		else {
+			DmGtVersionLocalServiceUtil.updateDmGtVersion(this);
+		}
 	}
 
 	@Override

@@ -39,6 +39,11 @@ public abstract class DmHistoryArrivalPurposeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history arrival purpose model instance should use the {@link DmHistoryArrivalPurpose} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryArrivalPurposeLocalServiceUtil.updateDmHistoryArrivalPurpose(this);
+		if (this.isNew()) {
+			DmHistoryArrivalPurposeLocalServiceUtil.addDmHistoryArrivalPurpose(this);
+		}
+		else {
+			DmHistoryArrivalPurposeLocalServiceUtil.updateDmHistoryArrivalPurpose(this);
+		}
 	}
 }

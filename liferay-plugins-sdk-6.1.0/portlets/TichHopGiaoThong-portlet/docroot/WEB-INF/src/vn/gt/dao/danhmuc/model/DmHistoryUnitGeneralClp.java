@@ -124,7 +124,12 @@ public class DmHistoryUnitGeneralClp extends BaseModelImpl<DmHistoryUnitGeneral>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryUnitGeneralLocalServiceUtil.updateDmHistoryUnitGeneral(this);
+		if (this.isNew()) {
+			DmHistoryUnitGeneralLocalServiceUtil.addDmHistoryUnitGeneral(this);
+		}
+		else {
+			DmHistoryUnitGeneralLocalServiceUtil.updateDmHistoryUnitGeneral(this);
+		}
 	}
 
 	@Override

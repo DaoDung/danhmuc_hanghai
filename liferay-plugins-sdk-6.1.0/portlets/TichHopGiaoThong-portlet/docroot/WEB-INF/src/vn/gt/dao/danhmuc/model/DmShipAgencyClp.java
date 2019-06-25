@@ -228,7 +228,12 @@ public class DmShipAgencyClp extends BaseModelImpl<DmShipAgency>
 	}
 
 	public void persist() throws SystemException {
-		DmShipAgencyLocalServiceUtil.updateDmShipAgency(this);
+		if (this.isNew()) {
+			DmShipAgencyLocalServiceUtil.addDmShipAgency(this);
+		}
+		else {
+			DmShipAgencyLocalServiceUtil.updateDmShipAgency(this);
+		}
 	}
 
 	@Override

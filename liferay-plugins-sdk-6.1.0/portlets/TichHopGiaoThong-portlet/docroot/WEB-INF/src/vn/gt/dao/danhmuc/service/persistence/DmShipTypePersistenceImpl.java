@@ -173,6 +173,17 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmShipType> dmShipTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmShipType dmShipType : dmShipTypes) {
+			EntityCacheUtil.removeResult(DmShipTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmShipTypeImpl.class, dmShipType.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm ship type with the primary key. Does not add the dm ship type to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 	/**
 	 * Removes the dm ship type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm ship type
-	 * @return the dm ship type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm ship type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmShipType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm ship type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm ship type
 	 * @return the dm ship type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmShipTypeException if a dm ship type with the primary key could not be found
@@ -212,24 +209,38 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 	 */
 	public DmShipType remove(int id)
 		throws NoSuchDmShipTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm ship type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm ship type
+	 * @return the dm ship type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmShipTypeException if a dm ship type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmShipType remove(Serializable primaryKey)
+		throws NoSuchDmShipTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmShipType dmShipType = (DmShipType)session.get(DmShipTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmShipType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmShipTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmShipTypePersistence.remove(dmShipType);
+			return remove(dmShipType);
 		}
 		catch (NoSuchDmShipTypeException nsee) {
 			throw nsee;
@@ -240,18 +251,6 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm ship type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmShipType the dm ship type
-	 * @return the dm ship type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmShipType remove(DmShipType dmShipType) throws SystemException {
-		return super.remove(dmShipType);
 	}
 
 	@Override
@@ -273,11 +272,7 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmShipTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmShipTypeImpl.class, dmShipType.getPrimaryKey());
+		clearCache(dmShipType);
 
 		return dmShipType;
 	}
@@ -962,7 +957,7 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 	public void removeByShipTypeCode(String shipTypeCode)
 		throws SystemException {
 		for (DmShipType dmShipType : findByShipTypeCode(shipTypeCode)) {
-			dmShipTypePersistence.remove(dmShipType);
+			remove(dmShipType);
 		}
 	}
 
@@ -973,7 +968,7 @@ public class DmShipTypePersistenceImpl extends BasePersistenceImpl<DmShipType>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmShipType dmShipType : findAll()) {
-			dmShipTypePersistence.remove(dmShipType);
+			remove(dmShipType);
 		}
 	}
 

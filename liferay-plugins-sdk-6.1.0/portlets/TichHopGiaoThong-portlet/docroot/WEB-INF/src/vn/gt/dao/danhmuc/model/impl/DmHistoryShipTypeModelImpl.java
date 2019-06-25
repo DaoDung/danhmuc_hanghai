@@ -117,6 +117,8 @@ public class DmHistoryShipTypeModelImpl extends BaseModelImpl<DmHistoryShipType>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

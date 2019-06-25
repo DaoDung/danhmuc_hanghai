@@ -201,6 +201,26 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryArrivalPurpose);
+	}
+
+	@Override
+	public void clearCache(
+		List<DmHistoryArrivalPurpose> dmHistoryArrivalPurposes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryArrivalPurpose dmHistoryArrivalPurpose : dmHistoryArrivalPurposes) {
+			EntityCacheUtil.removeResult(DmHistoryArrivalPurposeModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryArrivalPurposeImpl.class,
+				dmHistoryArrivalPurpose.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryArrivalPurpose);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryArrivalPurpose dmHistoryArrivalPurpose) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PURPOSECODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryArrivalPurpose.getPurposeCode(),
@@ -227,20 +247,6 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 	/**
 	 * Removes the dm history arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history arrival purpose
-	 * @return the dm history arrival purpose that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history arrival purpose with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryArrivalPurpose remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history arrival purpose
 	 * @return the dm history arrival purpose that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryArrivalPurposeException if a dm history arrival purpose with the primary key could not be found
@@ -248,24 +254,38 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 	 */
 	public DmHistoryArrivalPurpose remove(int id)
 		throws NoSuchDmHistoryArrivalPurposeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history arrival purpose with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history arrival purpose
+	 * @return the dm history arrival purpose that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryArrivalPurposeException if a dm history arrival purpose with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryArrivalPurpose remove(Serializable primaryKey)
+		throws NoSuchDmHistoryArrivalPurposeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryArrivalPurpose dmHistoryArrivalPurpose = (DmHistoryArrivalPurpose)session.get(DmHistoryArrivalPurposeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryArrivalPurpose == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryArrivalPurposeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryArrivalPurposePersistence.remove(dmHistoryArrivalPurpose);
+			return remove(dmHistoryArrivalPurpose);
 		}
 		catch (NoSuchDmHistoryArrivalPurposeException nsee) {
 			throw nsee;
@@ -276,20 +296,6 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history arrival purpose from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryArrivalPurpose the dm history arrival purpose
-	 * @return the dm history arrival purpose that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryArrivalPurpose remove(
-		DmHistoryArrivalPurpose dmHistoryArrivalPurpose)
-		throws SystemException {
-		return super.remove(dmHistoryArrivalPurpose);
 	}
 
 	@Override
@@ -312,21 +318,7 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryArrivalPurposeModelImpl dmHistoryArrivalPurposeModelImpl = (DmHistoryArrivalPurposeModelImpl)dmHistoryArrivalPurpose;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PURPOSECODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryArrivalPurposeModelImpl.getPurposeCode(),
-				
-			dmHistoryArrivalPurposeModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryArrivalPurposeModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryArrivalPurposeImpl.class,
-			dmHistoryArrivalPurpose.getPrimaryKey());
+		clearCache(dmHistoryArrivalPurpose);
 
 		return dmHistoryArrivalPurpose;
 	}
@@ -1220,7 +1212,7 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 		throws SystemException {
 		for (DmHistoryArrivalPurpose dmHistoryArrivalPurpose : findByPurposeCode(
 				purposeCode)) {
-			dmHistoryArrivalPurposePersistence.remove(dmHistoryArrivalPurpose);
+			remove(dmHistoryArrivalPurpose);
 		}
 	}
 
@@ -1237,7 +1229,7 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 		DmHistoryArrivalPurpose dmHistoryArrivalPurpose = findByPurposeCodeAndSyncVersion(purposeCode,
 				syncVersion);
 
-		dmHistoryArrivalPurposePersistence.remove(dmHistoryArrivalPurpose);
+		remove(dmHistoryArrivalPurpose);
 	}
 
 	/**
@@ -1247,7 +1239,7 @@ public class DmHistoryArrivalPurposePersistenceImpl extends BasePersistenceImpl<
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryArrivalPurpose dmHistoryArrivalPurpose : findAll()) {
-			dmHistoryArrivalPurposePersistence.remove(dmHistoryArrivalPurpose);
+			remove(dmHistoryArrivalPurpose);
 		}
 	}
 

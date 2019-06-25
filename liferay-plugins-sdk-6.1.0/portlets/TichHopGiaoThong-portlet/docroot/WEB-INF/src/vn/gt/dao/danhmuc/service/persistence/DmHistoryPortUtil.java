@@ -95,14 +95,6 @@ public class DmHistoryPortUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryPort remove(DmHistoryPort dmHistoryPort)
-		throws SystemException {
-		return getPersistence().remove(dmHistoryPort);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryPort update(DmHistoryPort dmHistoryPort,

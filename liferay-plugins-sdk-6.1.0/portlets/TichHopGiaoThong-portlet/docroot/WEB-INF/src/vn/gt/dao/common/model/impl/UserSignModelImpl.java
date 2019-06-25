@@ -123,6 +123,8 @@ public class UserSignModelImpl extends BaseModelImpl<UserSign>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

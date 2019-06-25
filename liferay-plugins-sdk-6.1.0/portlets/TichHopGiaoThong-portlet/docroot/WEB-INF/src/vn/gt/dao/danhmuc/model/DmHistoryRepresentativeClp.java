@@ -156,7 +156,12 @@ public class DmHistoryRepresentativeClp extends BaseModelImpl<DmHistoryRepresent
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryRepresentativeLocalServiceUtil.updateDmHistoryRepresentative(this);
+		if (this.isNew()) {
+			DmHistoryRepresentativeLocalServiceUtil.addDmHistoryRepresentative(this);
+		}
+		else {
+			DmHistoryRepresentativeLocalServiceUtil.updateDmHistoryRepresentative(this);
+		}
 	}
 
 	@Override

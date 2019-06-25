@@ -39,6 +39,11 @@ public abstract class DmHistoryRepresentativeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history representative model instance should use the {@link DmHistoryRepresentative} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryRepresentativeLocalServiceUtil.updateDmHistoryRepresentative(this);
+		if (this.isNew()) {
+			DmHistoryRepresentativeLocalServiceUtil.addDmHistoryRepresentative(this);
+		}
+		else {
+			DmHistoryRepresentativeLocalServiceUtil.updateDmHistoryRepresentative(this);
+		}
 	}
 }

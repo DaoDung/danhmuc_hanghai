@@ -39,6 +39,11 @@ public abstract class ThamSoHeThongBaseImpl extends ThamSoHeThongModelImpl
 	 * Never modify or reference this class directly. All methods that expect a tham so he thong model instance should use the {@link ThamSoHeThong} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ThamSoHeThongLocalServiceUtil.updateThamSoHeThong(this);
+		if (this.isNew()) {
+			ThamSoHeThongLocalServiceUtil.addThamSoHeThong(this);
+		}
+		else {
+			ThamSoHeThongLocalServiceUtil.updateThamSoHeThong(this);
+		}
 	}
 }

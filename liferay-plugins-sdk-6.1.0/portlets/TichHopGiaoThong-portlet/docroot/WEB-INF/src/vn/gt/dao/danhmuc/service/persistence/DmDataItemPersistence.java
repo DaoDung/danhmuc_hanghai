@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmDataItem;
@@ -1022,6 +1021,4 @@ public interface DmDataItemPersistence extends BasePersistence<DmDataItem> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmDataItem remove(DmDataItem dmDataItem) throws SystemException;
 }

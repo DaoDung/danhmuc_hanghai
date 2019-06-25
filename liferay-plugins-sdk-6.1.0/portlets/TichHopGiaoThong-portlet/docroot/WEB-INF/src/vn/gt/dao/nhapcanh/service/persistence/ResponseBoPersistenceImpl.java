@@ -151,6 +151,17 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<ResponseBo> responseBos) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResponseBo responseBo : responseBos) {
+			EntityCacheUtil.removeResult(ResponseBoModelImpl.ENTITY_CACHE_ENABLED,
+				ResponseBoImpl.class, responseBo.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new response bo with the primary key. Does not add the response bo to the database.
 	 *
@@ -169,20 +180,6 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 	/**
 	 * Removes the response bo with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the response bo
-	 * @return the response bo that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a response bo with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResponseBo remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the response bo with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the response bo
 	 * @return the response bo that was removed
 	 * @throws vn.gt.dao.nhapcanh.NoSuchResponseBoException if a response bo with the primary key could not be found
@@ -190,24 +187,38 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 	 */
 	public ResponseBo remove(long id)
 		throws NoSuchResponseBoException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the response bo with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the response bo
+	 * @return the response bo that was removed
+	 * @throws vn.gt.dao.nhapcanh.NoSuchResponseBoException if a response bo with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResponseBo remove(Serializable primaryKey)
+		throws NoSuchResponseBoException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResponseBo responseBo = (ResponseBo)session.get(ResponseBoImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (responseBo == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResponseBoException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return responseBoPersistence.remove(responseBo);
+			return remove(responseBo);
 		}
 		catch (NoSuchResponseBoException nsee) {
 			throw nsee;
@@ -218,18 +229,6 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the response bo from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param responseBo the response bo
-	 * @return the response bo that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResponseBo remove(ResponseBo responseBo) throws SystemException {
-		return super.remove(responseBo);
 	}
 
 	@Override
@@ -251,11 +250,7 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(ResponseBoModelImpl.ENTITY_CACHE_ENABLED,
-			ResponseBoImpl.class, responseBo.getPrimaryKey());
+		clearCache(responseBo);
 
 		return responseBo;
 	}
@@ -527,7 +522,7 @@ public class ResponseBoPersistenceImpl extends BasePersistenceImpl<ResponseBo>
 	 */
 	public void removeAll() throws SystemException {
 		for (ResponseBo responseBo : findAll()) {
-			responseBoPersistence.remove(responseBo);
+			remove(responseBo);
 		}
 	}
 

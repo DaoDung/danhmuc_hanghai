@@ -199,6 +199,23 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryMaritime);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryMaritime> dmHistoryMaritimes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryMaritime dmHistoryMaritime : dmHistoryMaritimes) {
+			EntityCacheUtil.removeResult(DmHistoryMaritimeModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryMaritimeImpl.class, dmHistoryMaritime.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryMaritime);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryMaritime dmHistoryMaritime) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MARITIMECODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryMaritime.getMaritimeCode(),
@@ -225,20 +242,6 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 	/**
 	 * Removes the dm history maritime with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history maritime
-	 * @return the dm history maritime that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history maritime with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryMaritime remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history maritime with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history maritime
 	 * @return the dm history maritime that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryMaritimeException if a dm history maritime with the primary key could not be found
@@ -246,24 +249,38 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 	 */
 	public DmHistoryMaritime remove(int id)
 		throws NoSuchDmHistoryMaritimeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history maritime with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history maritime
+	 * @return the dm history maritime that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryMaritimeException if a dm history maritime with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryMaritime remove(Serializable primaryKey)
+		throws NoSuchDmHistoryMaritimeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryMaritime dmHistoryMaritime = (DmHistoryMaritime)session.get(DmHistoryMaritimeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryMaritime == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryMaritimeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryMaritimePersistence.remove(dmHistoryMaritime);
+			return remove(dmHistoryMaritime);
 		}
 		catch (NoSuchDmHistoryMaritimeException nsee) {
 			throw nsee;
@@ -274,19 +291,6 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history maritime from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryMaritime the dm history maritime
-	 * @return the dm history maritime that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryMaritime remove(DmHistoryMaritime dmHistoryMaritime)
-		throws SystemException {
-		return super.remove(dmHistoryMaritime);
 	}
 
 	@Override
@@ -308,20 +312,7 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryMaritimeModelImpl dmHistoryMaritimeModelImpl = (DmHistoryMaritimeModelImpl)dmHistoryMaritime;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MARITIMECODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryMaritimeModelImpl.getMaritimeCode(),
-				
-			dmHistoryMaritimeModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryMaritimeModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryMaritimeImpl.class, dmHistoryMaritime.getPrimaryKey());
+		clearCache(dmHistoryMaritime);
 
 		return dmHistoryMaritime;
 	}
@@ -1219,7 +1210,7 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 		throws SystemException {
 		for (DmHistoryMaritime dmHistoryMaritime : findByMaritimeCode(
 				maritimeCode)) {
-			dmHistoryMaritimePersistence.remove(dmHistoryMaritime);
+			remove(dmHistoryMaritime);
 		}
 	}
 
@@ -1236,7 +1227,7 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 		DmHistoryMaritime dmHistoryMaritime = findByMaritimeCodeAndSyncVersion(maritimeCode,
 				syncVersion);
 
-		dmHistoryMaritimePersistence.remove(dmHistoryMaritime);
+		remove(dmHistoryMaritime);
 	}
 
 	/**
@@ -1246,7 +1237,7 @@ public class DmHistoryMaritimePersistenceImpl extends BasePersistenceImpl<DmHist
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryMaritime dmHistoryMaritime : findAll()) {
-			dmHistoryMaritimePersistence.remove(dmHistoryMaritime);
+			remove(dmHistoryMaritime);
 		}
 	}
 

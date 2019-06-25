@@ -115,6 +115,8 @@ public class DmStateModelImpl extends BaseModelImpl<DmState>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

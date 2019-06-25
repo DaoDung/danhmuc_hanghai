@@ -148,7 +148,12 @@ public class DmGTBusinessTypeClp extends BaseModelImpl<DmGTBusinessType>
 	}
 
 	public void persist() throws SystemException {
-		DmGTBusinessTypeLocalServiceUtil.updateDmGTBusinessType(this);
+		if (this.isNew()) {
+			DmGTBusinessTypeLocalServiceUtil.addDmGTBusinessType(this);
+		}
+		else {
+			DmGTBusinessTypeLocalServiceUtil.updateDmGTBusinessType(this);
+		}
 	}
 
 	@Override

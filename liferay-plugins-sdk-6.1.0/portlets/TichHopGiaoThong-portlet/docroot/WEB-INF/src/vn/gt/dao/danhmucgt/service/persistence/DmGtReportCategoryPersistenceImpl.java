@@ -155,6 +155,17 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmGtReportCategory> dmGtReportCategories) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtReportCategory dmGtReportCategory : dmGtReportCategories) {
+			EntityCacheUtil.removeResult(DmGtReportCategoryModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtReportCategoryImpl.class, dmGtReportCategory.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm gt report category with the primary key. Does not add the dm gt report category to the database.
 	 *
@@ -173,20 +184,6 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 	/**
 	 * Removes the dm gt report category with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt report category
-	 * @return the dm gt report category that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt report category with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtReportCategory remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm gt report category with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt report category
 	 * @return the dm gt report category that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtReportCategoryException if a dm gt report category with the primary key could not be found
@@ -194,24 +191,38 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 	 */
 	public DmGtReportCategory remove(long id)
 		throws NoSuchDmGtReportCategoryException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt report category with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt report category
+	 * @return the dm gt report category that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtReportCategoryException if a dm gt report category with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtReportCategory remove(Serializable primaryKey)
+		throws NoSuchDmGtReportCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtReportCategory dmGtReportCategory = (DmGtReportCategory)session.get(DmGtReportCategoryImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGtReportCategory == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtReportCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtReportCategoryPersistence.remove(dmGtReportCategory);
+			return remove(dmGtReportCategory);
 		}
 		catch (NoSuchDmGtReportCategoryException nsee) {
 			throw nsee;
@@ -222,19 +233,6 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt report category from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtReportCategory the dm gt report category
-	 * @return the dm gt report category that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtReportCategory remove(DmGtReportCategory dmGtReportCategory)
-		throws SystemException {
-		return super.remove(dmGtReportCategory);
 	}
 
 	@Override
@@ -256,11 +254,7 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmGtReportCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtReportCategoryImpl.class, dmGtReportCategory.getPrimaryKey());
+		clearCache(dmGtReportCategory);
 
 		return dmGtReportCategory;
 	}
@@ -542,7 +536,7 @@ public class DmGtReportCategoryPersistenceImpl extends BasePersistenceImpl<DmGtR
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtReportCategory dmGtReportCategory : findAll()) {
-			dmGtReportCategoryPersistence.remove(dmGtReportCategory);
+			remove(dmGtReportCategory);
 		}
 	}
 

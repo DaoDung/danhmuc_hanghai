@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmSyncCategory;
@@ -159,7 +158,4 @@ public interface DmSyncCategoryPersistence extends BasePersistence<DmSyncCategor
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmSyncCategory remove(DmSyncCategory dmSyncCategory)
-		throws SystemException;
 }

@@ -199,6 +199,24 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPortWharf);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPortWharf> dmHistoryPortWharfs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPortWharf dmHistoryPortWharf : dmHistoryPortWharfs) {
+			EntityCacheUtil.removeResult(DmHistoryPortWharfModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPortWharfImpl.class, dmHistoryPortWharf.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPortWharf);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryPortWharf dmHistoryPortWharf) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTWHARFCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPortWharf.getPortWharfCode(),
@@ -225,20 +243,6 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 	/**
 	 * Removes the dm history port wharf with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history port wharf
-	 * @return the dm history port wharf that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history port wharf with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortWharf remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history port wharf with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history port wharf
 	 * @return the dm history port wharf that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortWharfException if a dm history port wharf with the primary key could not be found
@@ -246,24 +250,38 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 	 */
 	public DmHistoryPortWharf remove(int id)
 		throws NoSuchDmHistoryPortWharfException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history port wharf with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history port wharf
+	 * @return the dm history port wharf that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortWharfException if a dm history port wharf with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPortWharf remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPortWharfException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPortWharf dmHistoryPortWharf = (DmHistoryPortWharf)session.get(DmHistoryPortWharfImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPortWharf == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPortWharfException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPortWharfPersistence.remove(dmHistoryPortWharf);
+			return remove(dmHistoryPortWharf);
 		}
 		catch (NoSuchDmHistoryPortWharfException nsee) {
 			throw nsee;
@@ -274,19 +292,6 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history port wharf from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPortWharf the dm history port wharf
-	 * @return the dm history port wharf that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortWharf remove(DmHistoryPortWharf dmHistoryPortWharf)
-		throws SystemException {
-		return super.remove(dmHistoryPortWharf);
 	}
 
 	@Override
@@ -308,20 +313,7 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPortWharfModelImpl dmHistoryPortWharfModelImpl = (DmHistoryPortWharfModelImpl)dmHistoryPortWharf;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTWHARFCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPortWharfModelImpl.getPortWharfCode(),
-				
-			dmHistoryPortWharfModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPortWharfModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPortWharfImpl.class, dmHistoryPortWharf.getPrimaryKey());
+		clearCache(dmHistoryPortWharf);
 
 		return dmHistoryPortWharf;
 	}
@@ -1223,7 +1215,7 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 		throws SystemException {
 		for (DmHistoryPortWharf dmHistoryPortWharf : findByPortWharfCode(
 				portWharfCode)) {
-			dmHistoryPortWharfPersistence.remove(dmHistoryPortWharf);
+			remove(dmHistoryPortWharf);
 		}
 	}
 
@@ -1240,7 +1232,7 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 		DmHistoryPortWharf dmHistoryPortWharf = findByPortWharfCodeAndSyncVersion(portWharfCode,
 				syncVersion);
 
-		dmHistoryPortWharfPersistence.remove(dmHistoryPortWharf);
+		remove(dmHistoryPortWharf);
 	}
 
 	/**
@@ -1250,7 +1242,7 @@ public class DmHistoryPortWharfPersistenceImpl extends BasePersistenceImpl<DmHis
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPortWharf dmHistoryPortWharf : findAll()) {
-			dmHistoryPortWharfPersistence.remove(dmHistoryPortWharf);
+			remove(dmHistoryPortWharf);
 		}
 	}
 

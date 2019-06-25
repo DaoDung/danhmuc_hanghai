@@ -188,7 +188,12 @@ public class ResultNotificationClp extends BaseModelImpl<ResultNotification>
 	}
 
 	public void persist() throws SystemException {
-		ResultNotificationLocalServiceUtil.updateResultNotification(this);
+		if (this.isNew()) {
+			ResultNotificationLocalServiceUtil.addResultNotification(this);
+		}
+		else {
+			ResultNotificationLocalServiceUtil.updateResultNotification(this);
+		}
 	}
 
 	@Override

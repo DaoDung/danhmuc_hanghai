@@ -173,6 +173,17 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmPackage> dmPackages) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmPackage dmPackage : dmPackages) {
+			EntityCacheUtil.removeResult(DmPackageModelImpl.ENTITY_CACHE_ENABLED,
+				DmPackageImpl.class, dmPackage.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm package with the primary key. Does not add the dm package to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 	/**
 	 * Removes the dm package with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm package
-	 * @return the dm package that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm package with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPackage remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm package with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm package
 	 * @return the dm package that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmPackageException if a dm package with the primary key could not be found
@@ -212,24 +209,38 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 	 */
 	public DmPackage remove(int id)
 		throws NoSuchDmPackageException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm package with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm package
+	 * @return the dm package that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmPackageException if a dm package with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmPackage remove(Serializable primaryKey)
+		throws NoSuchDmPackageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmPackage dmPackage = (DmPackage)session.get(DmPackageImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmPackage == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmPackageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmPackagePersistence.remove(dmPackage);
+			return remove(dmPackage);
 		}
 		catch (NoSuchDmPackageException nsee) {
 			throw nsee;
@@ -240,18 +251,6 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm package from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmPackage the dm package
-	 * @return the dm package that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPackage remove(DmPackage dmPackage) throws SystemException {
-		return super.remove(dmPackage);
 	}
 
 	@Override
@@ -273,11 +272,7 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmPackageModelImpl.ENTITY_CACHE_ENABLED,
-			DmPackageImpl.class, dmPackage.getPrimaryKey());
+		clearCache(dmPackage);
 
 		return dmPackage;
 	}
@@ -957,7 +952,7 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 	public void removeByPackageCode(String packageCode)
 		throws SystemException {
 		for (DmPackage dmPackage : findByPackageCode(packageCode)) {
-			dmPackagePersistence.remove(dmPackage);
+			remove(dmPackage);
 		}
 	}
 
@@ -968,7 +963,7 @@ public class DmPackagePersistenceImpl extends BasePersistenceImpl<DmPackage>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmPackage dmPackage : findAll()) {
-			dmPackagePersistence.remove(dmPackage);
+			remove(dmPackage);
 		}
 	}
 

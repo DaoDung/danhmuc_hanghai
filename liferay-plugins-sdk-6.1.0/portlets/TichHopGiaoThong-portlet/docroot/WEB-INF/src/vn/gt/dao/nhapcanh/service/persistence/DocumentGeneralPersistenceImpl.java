@@ -155,6 +155,17 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DocumentGeneral> documentGenerals) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DocumentGeneral documentGeneral : documentGenerals) {
+			EntityCacheUtil.removeResult(DocumentGeneralModelImpl.ENTITY_CACHE_ENABLED,
+				DocumentGeneralImpl.class, documentGeneral.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new document general with the primary key. Does not add the document general to the database.
 	 *
@@ -173,20 +184,6 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 	/**
 	 * Removes the document general with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the document general
-	 * @return the document general that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a document general with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DocumentGeneral remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the document general with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the document general
 	 * @return the document general that was removed
 	 * @throws vn.gt.dao.nhapcanh.NoSuchDocumentGeneralException if a document general with the primary key could not be found
@@ -194,24 +191,38 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 	 */
 	public DocumentGeneral remove(long id)
 		throws NoSuchDocumentGeneralException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the document general with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the document general
+	 * @return the document general that was removed
+	 * @throws vn.gt.dao.nhapcanh.NoSuchDocumentGeneralException if a document general with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DocumentGeneral remove(Serializable primaryKey)
+		throws NoSuchDocumentGeneralException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DocumentGeneral documentGeneral = (DocumentGeneral)session.get(DocumentGeneralImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (documentGeneral == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDocumentGeneralException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return documentGeneralPersistence.remove(documentGeneral);
+			return remove(documentGeneral);
 		}
 		catch (NoSuchDocumentGeneralException nsee) {
 			throw nsee;
@@ -222,19 +233,6 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the document general from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param documentGeneral the document general
-	 * @return the document general that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DocumentGeneral remove(DocumentGeneral documentGeneral)
-		throws SystemException {
-		return super.remove(documentGeneral);
 	}
 
 	@Override
@@ -256,11 +254,7 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DocumentGeneralModelImpl.ENTITY_CACHE_ENABLED,
-			DocumentGeneralImpl.class, documentGeneral.getPrimaryKey());
+		clearCache(documentGeneral);
 
 		return documentGeneral;
 	}
@@ -562,7 +556,7 @@ public class DocumentGeneralPersistenceImpl extends BasePersistenceImpl<Document
 	 */
 	public void removeAll() throws SystemException {
 		for (DocumentGeneral documentGeneral : findAll()) {
-			documentGeneralPersistence.remove(documentGeneral);
+			remove(documentGeneral);
 		}
 	}
 

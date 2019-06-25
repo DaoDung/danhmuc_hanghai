@@ -95,14 +95,6 @@ public class TempDebitNoteUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static TempDebitNote remove(TempDebitNote tempDebitNote)
-		throws SystemException {
-		return getPersistence().remove(tempDebitNote);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static TempDebitNote update(TempDebitNote tempDebitNote,

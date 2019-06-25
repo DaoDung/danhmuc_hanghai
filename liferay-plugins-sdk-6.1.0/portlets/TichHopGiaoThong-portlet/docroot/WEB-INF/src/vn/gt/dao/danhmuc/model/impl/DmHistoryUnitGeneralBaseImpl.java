@@ -39,6 +39,11 @@ public abstract class DmHistoryUnitGeneralBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history unit general model instance should use the {@link DmHistoryUnitGeneral} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryUnitGeneralLocalServiceUtil.updateDmHistoryUnitGeneral(this);
+		if (this.isNew()) {
+			DmHistoryUnitGeneralLocalServiceUtil.addDmHistoryUnitGeneral(this);
+		}
+		else {
+			DmHistoryUnitGeneralLocalServiceUtil.updateDmHistoryUnitGeneral(this);
+		}
 	}
 }

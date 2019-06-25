@@ -212,6 +212,8 @@ public class HistoryRmdcShipModelImpl extends BaseModelImpl<HistoryRmdcShip>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

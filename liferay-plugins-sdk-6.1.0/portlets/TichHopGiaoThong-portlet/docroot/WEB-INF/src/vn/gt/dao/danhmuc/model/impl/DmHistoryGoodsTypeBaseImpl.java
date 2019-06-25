@@ -39,6 +39,11 @@ public abstract class DmHistoryGoodsTypeBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history goods type model instance should use the {@link DmHistoryGoodsType} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryGoodsTypeLocalServiceUtil.updateDmHistoryGoodsType(this);
+		if (this.isNew()) {
+			DmHistoryGoodsTypeLocalServiceUtil.addDmHistoryGoodsType(this);
+		}
+		else {
+			DmHistoryGoodsTypeLocalServiceUtil.updateDmHistoryGoodsType(this);
+		}
 	}
 }

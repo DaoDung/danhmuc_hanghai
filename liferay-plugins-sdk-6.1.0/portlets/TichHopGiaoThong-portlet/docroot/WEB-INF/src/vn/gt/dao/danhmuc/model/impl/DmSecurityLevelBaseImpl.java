@@ -39,6 +39,11 @@ public abstract class DmSecurityLevelBaseImpl extends DmSecurityLevelModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm security level model instance should use the {@link DmSecurityLevel} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmSecurityLevelLocalServiceUtil.updateDmSecurityLevel(this);
+		if (this.isNew()) {
+			DmSecurityLevelLocalServiceUtil.addDmSecurityLevel(this);
+		}
+		else {
+			DmSecurityLevelLocalServiceUtil.updateDmSecurityLevel(this);
+		}
 	}
 }

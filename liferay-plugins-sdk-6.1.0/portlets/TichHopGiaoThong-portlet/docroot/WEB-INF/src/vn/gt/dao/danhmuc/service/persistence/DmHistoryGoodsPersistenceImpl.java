@@ -198,6 +198,23 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryGoods);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryGoods> dmHistoryGoodses) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryGoods dmHistoryGoods : dmHistoryGoodses) {
+			EntityCacheUtil.removeResult(DmHistoryGoodsModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryGoodsImpl.class, dmHistoryGoods.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryGoods);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryGoods dmHistoryGoods) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GOODSITEMCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryGoods.getGoodsItemCode(),
@@ -224,20 +241,6 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 	/**
 	 * Removes the dm history goods with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history goods
-	 * @return the dm history goods that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history goods with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryGoods remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history goods with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history goods
 	 * @return the dm history goods that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryGoodsException if a dm history goods with the primary key could not be found
@@ -245,24 +248,38 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 	 */
 	public DmHistoryGoods remove(int id)
 		throws NoSuchDmHistoryGoodsException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history goods with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history goods
+	 * @return the dm history goods that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryGoodsException if a dm history goods with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryGoods remove(Serializable primaryKey)
+		throws NoSuchDmHistoryGoodsException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryGoods dmHistoryGoods = (DmHistoryGoods)session.get(DmHistoryGoodsImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryGoods == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryGoodsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryGoodsPersistence.remove(dmHistoryGoods);
+			return remove(dmHistoryGoods);
 		}
 		catch (NoSuchDmHistoryGoodsException nsee) {
 			throw nsee;
@@ -273,19 +290,6 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history goods from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryGoods the dm history goods
-	 * @return the dm history goods that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryGoods remove(DmHistoryGoods dmHistoryGoods)
-		throws SystemException {
-		return super.remove(dmHistoryGoods);
 	}
 
 	@Override
@@ -307,20 +311,7 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryGoodsModelImpl dmHistoryGoodsModelImpl = (DmHistoryGoodsModelImpl)dmHistoryGoods;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GOODSITEMCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryGoodsModelImpl.getGoodsItemCode(),
-				
-			dmHistoryGoodsModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryGoodsModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryGoodsImpl.class, dmHistoryGoods.getPrimaryKey());
+		clearCache(dmHistoryGoods);
 
 		return dmHistoryGoods;
 	}
@@ -1210,7 +1201,7 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 	public void removeByGoodsItemCode(String goodsItemCode)
 		throws SystemException {
 		for (DmHistoryGoods dmHistoryGoods : findByGoodsItemCode(goodsItemCode)) {
-			dmHistoryGoodsPersistence.remove(dmHistoryGoods);
+			remove(dmHistoryGoods);
 		}
 	}
 
@@ -1227,7 +1218,7 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 		DmHistoryGoods dmHistoryGoods = findByGoodsItemCodeAndSyncVersion(goodsItemCode,
 				syncVersion);
 
-		dmHistoryGoodsPersistence.remove(dmHistoryGoods);
+		remove(dmHistoryGoods);
 	}
 
 	/**
@@ -1237,7 +1228,7 @@ public class DmHistoryGoodsPersistenceImpl extends BasePersistenceImpl<DmHistory
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryGoods dmHistoryGoods : findAll()) {
-			dmHistoryGoodsPersistence.remove(dmHistoryGoods);
+			remove(dmHistoryGoods);
 		}
 	}
 

@@ -194,6 +194,23 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmUnitGeneral);
+	}
+
+	@Override
+	public void clearCache(List<DmUnitGeneral> dmUnitGenerals) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmUnitGeneral dmUnitGeneral : dmUnitGenerals) {
+			EntityCacheUtil.removeResult(DmUnitGeneralModelImpl.ENTITY_CACHE_ENABLED,
+				DmUnitGeneralImpl.class, dmUnitGeneral.getPrimaryKey());
+
+			clearUniqueFindersCache(dmUnitGeneral);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmUnitGeneral dmUnitGeneral) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UNITCODEANDSYNCVERSION,
 			new Object[] {
 				dmUnitGeneral.getUnitCode(),
@@ -220,20 +237,6 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 	/**
 	 * Removes the dm unit general with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm unit general
-	 * @return the dm unit general that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm unit general with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmUnitGeneral remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm unit general with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm unit general
 	 * @return the dm unit general that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmUnitGeneralException if a dm unit general with the primary key could not be found
@@ -241,24 +244,38 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 	 */
 	public DmUnitGeneral remove(int id)
 		throws NoSuchDmUnitGeneralException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm unit general with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm unit general
+	 * @return the dm unit general that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmUnitGeneralException if a dm unit general with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmUnitGeneral remove(Serializable primaryKey)
+		throws NoSuchDmUnitGeneralException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmUnitGeneral dmUnitGeneral = (DmUnitGeneral)session.get(DmUnitGeneralImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmUnitGeneral == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmUnitGeneralException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmUnitGeneralPersistence.remove(dmUnitGeneral);
+			return remove(dmUnitGeneral);
 		}
 		catch (NoSuchDmUnitGeneralException nsee) {
 			throw nsee;
@@ -269,19 +286,6 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm unit general from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmUnitGeneral the dm unit general
-	 * @return the dm unit general that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmUnitGeneral remove(DmUnitGeneral dmUnitGeneral)
-		throws SystemException {
-		return super.remove(dmUnitGeneral);
 	}
 
 	@Override
@@ -303,20 +307,7 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmUnitGeneralModelImpl dmUnitGeneralModelImpl = (DmUnitGeneralModelImpl)dmUnitGeneral;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UNITCODEANDSYNCVERSION,
-			new Object[] {
-				dmUnitGeneralModelImpl.getUnitCode(),
-				
-			dmUnitGeneralModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmUnitGeneralModelImpl.ENTITY_CACHE_ENABLED,
-			DmUnitGeneralImpl.class, dmUnitGeneral.getPrimaryKey());
+		clearCache(dmUnitGeneral);
 
 		return dmUnitGeneral;
 	}
@@ -1194,7 +1185,7 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 	 */
 	public void removeByUnitCode(String unitCode) throws SystemException {
 		for (DmUnitGeneral dmUnitGeneral : findByUnitCode(unitCode)) {
-			dmUnitGeneralPersistence.remove(dmUnitGeneral);
+			remove(dmUnitGeneral);
 		}
 	}
 
@@ -1211,7 +1202,7 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 		DmUnitGeneral dmUnitGeneral = findByUnitCodeAndSyncVersion(unitCode,
 				syncVersion);
 
-		dmUnitGeneralPersistence.remove(dmUnitGeneral);
+		remove(dmUnitGeneral);
 	}
 
 	/**
@@ -1221,7 +1212,7 @@ public class DmUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmUnitGene
 	 */
 	public void removeAll() throws SystemException {
 		for (DmUnitGeneral dmUnitGeneral : findAll()) {
-			dmUnitGeneralPersistence.remove(dmUnitGeneral);
+			remove(dmUnitGeneral);
 		}
 	}
 

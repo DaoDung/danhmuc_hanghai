@@ -173,6 +173,17 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmState> dmStates) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmState dmState : dmStates) {
+			EntityCacheUtil.removeResult(DmStateModelImpl.ENTITY_CACHE_ENABLED,
+				DmStateImpl.class, dmState.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm state with the primary key. Does not add the dm state to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 	/**
 	 * Removes the dm state with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm state
-	 * @return the dm state that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm state with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmState remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm state with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm state
 	 * @return the dm state that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmStateException if a dm state with the primary key could not be found
@@ -212,24 +209,37 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 	 */
 	public DmState remove(int id)
 		throws NoSuchDmStateException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm state with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm state
+	 * @return the dm state that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmStateException if a dm state with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmState remove(Serializable primaryKey)
+		throws NoSuchDmStateException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DmState dmState = (DmState)session.get(DmStateImpl.class,
-					Integer.valueOf(id));
+			DmState dmState = (DmState)session.get(DmStateImpl.class, primaryKey);
 
 			if (dmState == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmStateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmStatePersistence.remove(dmState);
+			return remove(dmState);
 		}
 		catch (NoSuchDmStateException nsee) {
 			throw nsee;
@@ -240,18 +250,6 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm state from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmState the dm state
-	 * @return the dm state that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmState remove(DmState dmState) throws SystemException {
-		return super.remove(dmState);
 	}
 
 	@Override
@@ -272,11 +270,7 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmStateModelImpl.ENTITY_CACHE_ENABLED,
-			DmStateImpl.class, dmState.getPrimaryKey());
+		clearCache(dmState);
 
 		return dmState;
 	}
@@ -951,7 +945,7 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 	 */
 	public void removeByStateCode(String stateCode) throws SystemException {
 		for (DmState dmState : findByStateCode(stateCode)) {
-			dmStatePersistence.remove(dmState);
+			remove(dmState);
 		}
 	}
 
@@ -962,7 +956,7 @@ public class DmStatePersistenceImpl extends BasePersistenceImpl<DmState>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmState dmState : findAll()) {
-			dmStatePersistence.remove(dmState);
+			remove(dmState);
 		}
 	}
 

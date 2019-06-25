@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmShipType;
@@ -282,6 +281,4 @@ public interface DmShipTypePersistence extends BasePersistence<DmShipType> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmShipType remove(DmShipType dmShipType) throws SystemException;
 }

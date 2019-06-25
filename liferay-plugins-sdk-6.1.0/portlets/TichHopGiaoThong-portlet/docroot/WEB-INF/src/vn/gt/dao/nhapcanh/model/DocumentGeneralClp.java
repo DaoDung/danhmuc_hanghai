@@ -317,7 +317,12 @@ public class DocumentGeneralClp extends BaseModelImpl<DocumentGeneral>
 	}
 
 	public void persist() throws SystemException {
-		DocumentGeneralLocalServiceUtil.updateDocumentGeneral(this);
+		if (this.isNew()) {
+			DocumentGeneralLocalServiceUtil.addDocumentGeneral(this);
+		}
+		else {
+			DocumentGeneralLocalServiceUtil.updateDocumentGeneral(this);
+		}
 	}
 
 	@Override

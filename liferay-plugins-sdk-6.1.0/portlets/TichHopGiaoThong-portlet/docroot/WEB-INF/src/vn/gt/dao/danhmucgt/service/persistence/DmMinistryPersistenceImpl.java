@@ -164,6 +164,23 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmMinistry);
+	}
+
+	@Override
+	public void clearCache(List<DmMinistry> dmMinistries) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmMinistry dmMinistry : dmMinistries) {
+			EntityCacheUtil.removeResult(DmMinistryModelImpl.ENTITY_CACHE_ENABLED,
+				DmMinistryImpl.class, dmMinistry.getPrimaryKey());
+
+			clearUniqueFindersCache(dmMinistry);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmMinistry dmMinistry) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MINISTRYCODE,
 			new Object[] { dmMinistry.getMinistryCode() });
 	}
@@ -186,20 +203,6 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 	/**
 	 * Removes the dm ministry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm ministry
-	 * @return the dm ministry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm ministry with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmMinistry remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm ministry with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm ministry
 	 * @return the dm ministry that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmMinistryException if a dm ministry with the primary key could not be found
@@ -207,24 +210,38 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 	 */
 	public DmMinistry remove(long id)
 		throws NoSuchDmMinistryException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm ministry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm ministry
+	 * @return the dm ministry that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmMinistryException if a dm ministry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmMinistry remove(Serializable primaryKey)
+		throws NoSuchDmMinistryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmMinistry dmMinistry = (DmMinistry)session.get(DmMinistryImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmMinistry == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmMinistryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmMinistryPersistence.remove(dmMinistry);
+			return remove(dmMinistry);
 		}
 		catch (NoSuchDmMinistryException nsee) {
 			throw nsee;
@@ -235,18 +252,6 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm ministry from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmMinistry the dm ministry
-	 * @return the dm ministry that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmMinistry remove(DmMinistry dmMinistry) throws SystemException {
-		return super.remove(dmMinistry);
 	}
 
 	@Override
@@ -268,16 +273,7 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmMinistryModelImpl dmMinistryModelImpl = (DmMinistryModelImpl)dmMinistry;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MINISTRYCODE,
-			new Object[] { dmMinistryModelImpl.getMinistryCode() });
-
-		EntityCacheUtil.removeResult(DmMinistryModelImpl.ENTITY_CACHE_ENABLED,
-			DmMinistryImpl.class, dmMinistry.getPrimaryKey());
+		clearCache(dmMinistry);
 
 		return dmMinistry;
 	}
@@ -731,7 +727,7 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 		throws NoSuchDmMinistryException, SystemException {
 		DmMinistry dmMinistry = findByMinistryCode(ministryCode);
 
-		dmMinistryPersistence.remove(dmMinistry);
+		remove(dmMinistry);
 	}
 
 	/**
@@ -741,7 +737,7 @@ public class DmMinistryPersistenceImpl extends BasePersistenceImpl<DmMinistry>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmMinistry dmMinistry : findAll()) {
-			dmMinistryPersistence.remove(dmMinistry);
+			remove(dmMinistry);
 		}
 	}
 

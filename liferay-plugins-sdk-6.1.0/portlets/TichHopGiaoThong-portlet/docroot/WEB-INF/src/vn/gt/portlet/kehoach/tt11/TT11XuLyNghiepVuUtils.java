@@ -4,7 +4,27 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 
-import org.apache.jasper.tagplugins.jstl.core.Param;
+import vn.gt.dao.noticeandmessage.model.InterfaceRequest;
+import vn.gt.dao.noticeandmessage.model.TempDocument;
+import vn.gt.dao.noticeandmessage.model.TempNoTiceShipMessage;
+import vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalServiceUtil;
+import vn.gt.dao.noticeandmessage.service.TempDocumentLocalServiceUtil;
+import vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalServiceUtil;
+import vn.gt.dao.result.model.ResultDeclaration;
+import vn.gt.dao.result.service.ResultDeclarationLocalServiceUtil;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiCacGiayToPhaiXuatTrinhUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiChungUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDanhSachHanhKhachUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDanhSachThuyenVienUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiGiayPhepRoiCangBoGTVTUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiKetQuaPheDuyetHoSoUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiLenhDieuDongUtils;
+import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiThongBaoUtils;
+import vn.gt.portlet.kehoach.utils.ChuyenDichTrangThaiUtils;
+import vn.gt.tichhop.message.BusinessUtils;
+import vn.gt.tichhop.message.MessageType;
+import vn.gt.tichhop.message.TrangThaiBanKhai;
+import vn.gt.tichhop.message.TrangThaiBanKhaiNhapCanh;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -13,36 +33,6 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-
-import vn.gt.dao.noticeandmessage.model.InterfaceRequest;
-import vn.gt.dao.noticeandmessage.model.TempDocument;
-import vn.gt.dao.noticeandmessage.model.TempNoTiceShipMessage;
-import vn.gt.dao.noticeandmessage.model.TempShipSecurityMessage;
-import vn.gt.dao.noticeandmessage.service.InterfaceRequestLocalServiceUtil;
-import vn.gt.dao.noticeandmessage.service.TempDocumentLocalServiceUtil;
-import vn.gt.dao.noticeandmessage.service.TempNoTiceShipMessageLocalServiceUtil;
-import vn.gt.dao.noticeandmessage.service.TempShipSecurityMessageLocalServiceUtil;
-import vn.gt.dao.result.model.ResultDeclaration;
-import vn.gt.dao.result.service.ResultDeclarationLocalServiceUtil;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiBaoYTeHangHaiUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiCacGiayToPhaiXuatTrinhUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiChungUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDanhSachHangHoaNguyHiemUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDanhSachHanhKhachUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDanhSachThuyenVienUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiDuTruCuaTauUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiGiayPhepRoiCangBoGTVTUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiHanhLyThuyenVienUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiKetQuaPheDuyetHoSoUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiKiemDichDongVatUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiKiemDichThucVatUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiLenhDieuDongUtils;
-import vn.gt.portlet.kehoach.nghiepvu.bankhai.BanKhaiThongBaoUtils;
-import vn.gt.portlet.kehoach.utils.ChuyenDichTrangThaiUtils;
-import vn.gt.tichhop.message.BusinessUtils;
-import vn.gt.tichhop.message.MessageType;
-import vn.gt.tichhop.message.TrangThaiBanKhai;
-import vn.gt.tichhop.message.TrangThaiBanKhaiNhapCanh;
 
 public class TT11XuLyNghiepVuUtils {
 

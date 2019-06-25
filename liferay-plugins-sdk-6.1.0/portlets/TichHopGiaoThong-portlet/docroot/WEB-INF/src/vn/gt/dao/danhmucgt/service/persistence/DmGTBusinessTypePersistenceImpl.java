@@ -170,6 +170,23 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmGTBusinessType);
+	}
+
+	@Override
+	public void clearCache(List<DmGTBusinessType> dmGTBusinessTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGTBusinessType dmGTBusinessType : dmGTBusinessTypes) {
+			EntityCacheUtil.removeResult(DmGTBusinessTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmGTBusinessTypeImpl.class, dmGTBusinessType.getPrimaryKey());
+
+			clearUniqueFindersCache(dmGTBusinessType);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmGTBusinessType dmGTBusinessType) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BUSINESSTYPECODE,
 			new Object[] { Integer.valueOf(
 					dmGTBusinessType.getBusinessTypeCode()) });
@@ -193,20 +210,6 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 	/**
 	 * Removes the dm g t business type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm g t business type
-	 * @return the dm g t business type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm g t business type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTBusinessType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm g t business type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm g t business type
 	 * @return the dm g t business type that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTBusinessTypeException if a dm g t business type with the primary key could not be found
@@ -214,24 +217,38 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 	 */
 	public DmGTBusinessType remove(long id)
 		throws NoSuchDmGTBusinessTypeException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm g t business type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm g t business type
+	 * @return the dm g t business type that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTBusinessTypeException if a dm g t business type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGTBusinessType remove(Serializable primaryKey)
+		throws NoSuchDmGTBusinessTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGTBusinessType dmGTBusinessType = (DmGTBusinessType)session.get(DmGTBusinessTypeImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGTBusinessType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGTBusinessTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGTBusinessTypePersistence.remove(dmGTBusinessType);
+			return remove(dmGTBusinessType);
 		}
 		catch (NoSuchDmGTBusinessTypeException nsee) {
 			throw nsee;
@@ -242,19 +259,6 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm g t business type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGTBusinessType the dm g t business type
-	 * @return the dm g t business type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTBusinessType remove(DmGTBusinessType dmGTBusinessType)
-		throws SystemException {
-		return super.remove(dmGTBusinessType);
 	}
 
 	@Override
@@ -276,18 +280,7 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmGTBusinessTypeModelImpl dmGTBusinessTypeModelImpl = (DmGTBusinessTypeModelImpl)dmGTBusinessType;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BUSINESSTYPECODE,
-			new Object[] {
-				Integer.valueOf(dmGTBusinessTypeModelImpl.getBusinessTypeCode())
-			});
-
-		EntityCacheUtil.removeResult(DmGTBusinessTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmGTBusinessTypeImpl.class, dmGTBusinessType.getPrimaryKey());
+		clearCache(dmGTBusinessType);
 
 		return dmGTBusinessType;
 	}
@@ -736,7 +729,7 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 		throws NoSuchDmGTBusinessTypeException, SystemException {
 		DmGTBusinessType dmGTBusinessType = findByBusinessTypeCode(businessTypeCode);
 
-		dmGTBusinessTypePersistence.remove(dmGTBusinessType);
+		remove(dmGTBusinessType);
 	}
 
 	/**
@@ -746,7 +739,7 @@ public class DmGTBusinessTypePersistenceImpl extends BasePersistenceImpl<DmGTBus
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGTBusinessType dmGTBusinessType : findAll()) {
-			dmGTBusinessTypePersistence.remove(dmGTBusinessType);
+			remove(dmGTBusinessType);
 		}
 	}
 

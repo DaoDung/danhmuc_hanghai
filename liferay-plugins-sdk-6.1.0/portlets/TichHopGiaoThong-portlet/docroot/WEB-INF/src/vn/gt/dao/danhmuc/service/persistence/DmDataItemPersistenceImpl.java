@@ -319,6 +319,23 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmDataItem);
+	}
+
+	@Override
+	public void clearCache(List<DmDataItem> dmDataItems) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmDataItem dmDataItem : dmDataItems) {
+			EntityCacheUtil.removeResult(DmDataItemModelImpl.ENTITY_CACHE_ENABLED,
+				DmDataItemImpl.class, dmDataItem.getPrimaryKey());
+
+			clearUniqueFindersCache(dmDataItem);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmDataItem dmDataItem) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DATAGROUPIDANDCODE0,
 			new Object[] {
 				Long.valueOf(dmDataItem.getDataGroupId()),
@@ -345,20 +362,6 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 	/**
 	 * Removes the dm data item with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm data item
-	 * @return the dm data item that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm data item with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmDataItem remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm data item with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param Id the primary key of the dm data item
 	 * @return the dm data item that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmDataItemException if a dm data item with the primary key could not be found
@@ -366,24 +369,38 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 	 */
 	public DmDataItem remove(long Id)
 		throws NoSuchDmDataItemException, SystemException {
+		return remove(Long.valueOf(Id));
+	}
+
+	/**
+	 * Removes the dm data item with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm data item
+	 * @return the dm data item that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmDataItemException if a dm data item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmDataItem remove(Serializable primaryKey)
+		throws NoSuchDmDataItemException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmDataItem dmDataItem = (DmDataItem)session.get(DmDataItemImpl.class,
-					Long.valueOf(Id));
+					primaryKey);
 
 			if (dmDataItem == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + Id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmDataItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					Id);
+					primaryKey);
 			}
 
-			return dmDataItemPersistence.remove(dmDataItem);
+			return remove(dmDataItem);
 		}
 		catch (NoSuchDmDataItemException nsee) {
 			throw nsee;
@@ -394,18 +411,6 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm data item from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmDataItem the dm data item
-	 * @return the dm data item that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmDataItem remove(DmDataItem dmDataItem) throws SystemException {
-		return super.remove(dmDataItem);
 	}
 
 	@Override
@@ -427,20 +432,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmDataItemModelImpl dmDataItemModelImpl = (DmDataItemModelImpl)dmDataItem;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DATAGROUPIDANDCODE0,
-			new Object[] {
-				Long.valueOf(dmDataItemModelImpl.getDataGroupId()),
-				
-			dmDataItemModelImpl.getCode0()
-			});
-
-		EntityCacheUtil.removeResult(DmDataItemModelImpl.ENTITY_CACHE_ENABLED,
-			DmDataItemImpl.class, dmDataItem.getPrimaryKey());
+		clearCache(dmDataItem);
 
 		return dmDataItem;
 	}
@@ -3402,7 +3394,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		throws NoSuchDmDataItemException, SystemException {
 		DmDataItem dmDataItem = findByDataGroupIdAndCode0(DataGroupId, Code0);
 
-		dmDataItemPersistence.remove(dmDataItem);
+		remove(dmDataItem);
 	}
 
 	/**
@@ -3416,7 +3408,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupIdAndNode1(DataGroupId,
 				Node1)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3431,7 +3423,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupIdAndNode2(DataGroupId,
 				Node2)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3447,7 +3439,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		int Level, String ShortName) throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupIdAndLevelandShortName(
 				DataGroupId, Level, ShortName)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3462,7 +3454,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupIdAndLevel(DataGroupId,
 				Level)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3474,7 +3466,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 	 */
 	public void removeByDataGroupId(long DataGroupId) throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupId(DataGroupId)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3489,7 +3481,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 		String ShortName) throws SystemException {
 		for (DmDataItem dmDataItem : findByDataGroupIdAndShortName(
 				DataGroupId, ShortName)) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 
@@ -3500,7 +3492,7 @@ public class DmDataItemPersistenceImpl extends BasePersistenceImpl<DmDataItem>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmDataItem dmDataItem : findAll()) {
-			dmDataItemPersistence.remove(dmDataItem);
+			remove(dmDataItem);
 		}
 	}
 

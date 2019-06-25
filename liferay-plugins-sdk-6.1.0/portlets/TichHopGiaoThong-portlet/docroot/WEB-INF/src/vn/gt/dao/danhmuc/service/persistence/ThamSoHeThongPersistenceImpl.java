@@ -186,6 +186,23 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(thamSoHeThong);
+	}
+
+	@Override
+	public void clearCache(List<ThamSoHeThong> thamSoHeThongs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ThamSoHeThong thamSoHeThong : thamSoHeThongs) {
+			EntityCacheUtil.removeResult(ThamSoHeThongModelImpl.ENTITY_CACHE_ENABLED,
+				ThamSoHeThongImpl.class, thamSoHeThong.getPrimaryKey());
+
+			clearUniqueFindersCache(thamSoHeThong);
+		}
+	}
+
+	protected void clearUniqueFindersCache(ThamSoHeThong thamSoHeThong) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYDATA,
 			new Object[] { thamSoHeThong.getKeyData() });
 
@@ -215,20 +232,6 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 	/**
 	 * Removes the tham so he thong with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the tham so he thong
-	 * @return the tham so he thong that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a tham so he thong with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ThamSoHeThong remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the tham so he thong with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the tham so he thong
 	 * @return the tham so he thong that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchThamSoHeThongException if a tham so he thong with the primary key could not be found
@@ -236,24 +239,38 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 	 */
 	public ThamSoHeThong remove(long id)
 		throws NoSuchThamSoHeThongException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the tham so he thong with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the tham so he thong
+	 * @return the tham so he thong that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchThamSoHeThongException if a tham so he thong with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ThamSoHeThong remove(Serializable primaryKey)
+		throws NoSuchThamSoHeThongException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ThamSoHeThong thamSoHeThong = (ThamSoHeThong)session.get(ThamSoHeThongImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (thamSoHeThong == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchThamSoHeThongException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return thamSoHeThongPersistence.remove(thamSoHeThong);
+			return remove(thamSoHeThong);
 		}
 		catch (NoSuchThamSoHeThongException nsee) {
 			throw nsee;
@@ -264,19 +281,6 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the tham so he thong from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param thamSoHeThong the tham so he thong
-	 * @return the tham so he thong that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ThamSoHeThong remove(ThamSoHeThong thamSoHeThong)
-		throws SystemException {
-		return super.remove(thamSoHeThong);
 	}
 
 	@Override
@@ -298,23 +302,7 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		ThamSoHeThongModelImpl thamSoHeThongModelImpl = (ThamSoHeThongModelImpl)thamSoHeThong;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYDATA,
-			new Object[] { thamSoHeThongModelImpl.getKeyData() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYDATAANDDESCRIPTION,
-			new Object[] {
-				thamSoHeThongModelImpl.getKeyData(),
-				
-			thamSoHeThongModelImpl.getDescription()
-			});
-
-		EntityCacheUtil.removeResult(ThamSoHeThongModelImpl.ENTITY_CACHE_ENABLED,
-			ThamSoHeThongImpl.class, thamSoHeThong.getPrimaryKey());
+		clearCache(thamSoHeThong);
 
 		return thamSoHeThong;
 	}
@@ -959,7 +947,7 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 		throws NoSuchThamSoHeThongException, SystemException {
 		ThamSoHeThong thamSoHeThong = findByKeyData(keyData);
 
-		thamSoHeThongPersistence.remove(thamSoHeThong);
+		remove(thamSoHeThong);
 	}
 
 	/**
@@ -974,7 +962,7 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 		ThamSoHeThong thamSoHeThong = findByKeyDataAndDescription(keyData,
 				description);
 
-		thamSoHeThongPersistence.remove(thamSoHeThong);
+		remove(thamSoHeThong);
 	}
 
 	/**
@@ -984,7 +972,7 @@ public class ThamSoHeThongPersistenceImpl extends BasePersistenceImpl<ThamSoHeTh
 	 */
 	public void removeAll() throws SystemException {
 		for (ThamSoHeThong thamSoHeThong : findAll()) {
-			thamSoHeThongPersistence.remove(thamSoHeThong);
+			remove(thamSoHeThong);
 		}
 	}
 

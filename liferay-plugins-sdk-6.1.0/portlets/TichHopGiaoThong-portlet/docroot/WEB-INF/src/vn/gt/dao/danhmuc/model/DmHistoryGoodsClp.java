@@ -140,7 +140,12 @@ public class DmHistoryGoodsClp extends BaseModelImpl<DmHistoryGoods>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryGoodsLocalServiceUtil.updateDmHistoryGoods(this);
+		if (this.isNew()) {
+			DmHistoryGoodsLocalServiceUtil.addDmHistoryGoods(this);
+		}
+		else {
+			DmHistoryGoodsLocalServiceUtil.updateDmHistoryGoods(this);
+		}
 	}
 
 	@Override

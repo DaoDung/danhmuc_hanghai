@@ -39,6 +39,11 @@ public abstract class DmTestN01RequestBaseImpl extends DmTestN01RequestModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm test n01 request model instance should use the {@link DmTestN01Request} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmTestN01RequestLocalServiceUtil.updateDmTestN01Request(this);
+		if (this.isNew()) {
+			DmTestN01RequestLocalServiceUtil.addDmTestN01Request(this);
+		}
+		else {
+			DmTestN01RequestLocalServiceUtil.updateDmTestN01Request(this);
+		}
 	}
 }

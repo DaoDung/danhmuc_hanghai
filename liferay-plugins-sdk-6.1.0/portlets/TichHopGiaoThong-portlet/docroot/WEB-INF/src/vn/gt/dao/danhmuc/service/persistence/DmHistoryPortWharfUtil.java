@@ -95,14 +95,6 @@ public class DmHistoryPortWharfUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryPortWharf remove(
-		DmHistoryPortWharf dmHistoryPortWharf) throws SystemException {
-		return getPersistence().remove(dmHistoryPortWharf);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryPortWharf update(

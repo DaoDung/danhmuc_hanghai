@@ -39,6 +39,11 @@ public abstract class DmHistoryMinistryBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history ministry model instance should use the {@link DmHistoryMinistry} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryMinistryLocalServiceUtil.updateDmHistoryMinistry(this);
+		if (this.isNew()) {
+			DmHistoryMinistryLocalServiceUtil.addDmHistoryMinistry(this);
+		}
+		else {
+			DmHistoryMinistryLocalServiceUtil.updateDmHistoryMinistry(this);
+		}
 	}
 }

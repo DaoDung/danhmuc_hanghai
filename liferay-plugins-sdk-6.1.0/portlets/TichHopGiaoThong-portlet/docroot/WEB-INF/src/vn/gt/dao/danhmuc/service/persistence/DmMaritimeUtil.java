@@ -95,14 +95,6 @@ public class DmMaritimeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmMaritime remove(DmMaritime dmMaritime)
-		throws SystemException {
-		return getPersistence().remove(dmMaritime);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmMaritime update(DmMaritime dmMaritime, boolean merge)

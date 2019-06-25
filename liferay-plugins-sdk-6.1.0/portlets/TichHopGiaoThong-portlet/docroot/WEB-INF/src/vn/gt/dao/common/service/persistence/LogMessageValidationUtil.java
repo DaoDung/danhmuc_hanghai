@@ -95,14 +95,6 @@ public class LogMessageValidationUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static LogMessageValidation remove(
-		LogMessageValidation logMessageValidation) throws SystemException {
-		return getPersistence().remove(logMessageValidation);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static LogMessageValidation update(

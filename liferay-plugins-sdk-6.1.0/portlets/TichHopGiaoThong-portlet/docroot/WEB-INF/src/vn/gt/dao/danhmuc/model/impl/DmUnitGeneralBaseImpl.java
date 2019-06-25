@@ -39,6 +39,11 @@ public abstract class DmUnitGeneralBaseImpl extends DmUnitGeneralModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm unit general model instance should use the {@link DmUnitGeneral} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmUnitGeneralLocalServiceUtil.updateDmUnitGeneral(this);
+		if (this.isNew()) {
+			DmUnitGeneralLocalServiceUtil.addDmUnitGeneral(this);
+		}
+		else {
+			DmUnitGeneralLocalServiceUtil.updateDmUnitGeneral(this);
+		}
 	}
 }

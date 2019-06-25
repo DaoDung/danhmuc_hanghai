@@ -191,6 +191,24 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmGtReportTemplate);
+	}
+
+	@Override
+	public void clearCache(List<DmGtReportTemplate> dmGtReportTemplates) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtReportTemplate dmGtReportTemplate : dmGtReportTemplates) {
+			EntityCacheUtil.removeResult(DmGtReportTemplateModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtReportTemplateImpl.class, dmGtReportTemplate.getPrimaryKey());
+
+			clearUniqueFindersCache(dmGtReportTemplate);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmGtReportTemplate dmGtReportTemplate) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPORTCODE,
 			new Object[] { Integer.valueOf(dmGtReportTemplate.getReportCode()) });
 	}
@@ -213,20 +231,6 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 	/**
 	 * Removes the dm gt report template with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt report template
-	 * @return the dm gt report template that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt report template with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtReportTemplate remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm gt report template with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt report template
 	 * @return the dm gt report template that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtReportTemplateException if a dm gt report template with the primary key could not be found
@@ -234,24 +238,38 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 	 */
 	public DmGtReportTemplate remove(long id)
 		throws NoSuchDmGtReportTemplateException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt report template with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt report template
+	 * @return the dm gt report template that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtReportTemplateException if a dm gt report template with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtReportTemplate remove(Serializable primaryKey)
+		throws NoSuchDmGtReportTemplateException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtReportTemplate dmGtReportTemplate = (DmGtReportTemplate)session.get(DmGtReportTemplateImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGtReportTemplate == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtReportTemplateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtReportTemplatePersistence.remove(dmGtReportTemplate);
+			return remove(dmGtReportTemplate);
 		}
 		catch (NoSuchDmGtReportTemplateException nsee) {
 			throw nsee;
@@ -262,19 +280,6 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt report template from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtReportTemplate the dm gt report template
-	 * @return the dm gt report template that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtReportTemplate remove(DmGtReportTemplate dmGtReportTemplate)
-		throws SystemException {
-		return super.remove(dmGtReportTemplate);
 	}
 
 	@Override
@@ -296,18 +301,7 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmGtReportTemplateModelImpl dmGtReportTemplateModelImpl = (DmGtReportTemplateModelImpl)dmGtReportTemplate;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPORTCODE,
-			new Object[] {
-				Integer.valueOf(dmGtReportTemplateModelImpl.getReportCode())
-			});
-
-		EntityCacheUtil.removeResult(DmGtReportTemplateModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtReportTemplateImpl.class, dmGtReportTemplate.getPrimaryKey());
+		clearCache(dmGtReportTemplate);
 
 		return dmGtReportTemplate;
 	}
@@ -1127,7 +1121,7 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 		throws NoSuchDmGtReportTemplateException, SystemException {
 		DmGtReportTemplate dmGtReportTemplate = findByReportCode(reportCode);
 
-		dmGtReportTemplatePersistence.remove(dmGtReportTemplate);
+		remove(dmGtReportTemplate);
 	}
 
 	/**
@@ -1139,7 +1133,7 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 	public void removeByreportType(int reportType) throws SystemException {
 		for (DmGtReportTemplate dmGtReportTemplate : findByreportType(
 				reportType)) {
-			dmGtReportTemplatePersistence.remove(dmGtReportTemplate);
+			remove(dmGtReportTemplate);
 		}
 	}
 
@@ -1150,7 +1144,7 @@ public class DmGtReportTemplatePersistenceImpl extends BasePersistenceImpl<DmGtR
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtReportTemplate dmGtReportTemplate : findAll()) {
-			dmGtReportTemplatePersistence.remove(dmGtReportTemplate);
+			remove(dmGtReportTemplate);
 		}
 	}
 

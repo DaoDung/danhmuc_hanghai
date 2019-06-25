@@ -39,6 +39,11 @@ public abstract class DmHistoryPortBaseImpl extends DmHistoryPortModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history port model instance should use the {@link DmHistoryPort} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPortLocalServiceUtil.updateDmHistoryPort(this);
+		if (this.isNew()) {
+			DmHistoryPortLocalServiceUtil.addDmHistoryPort(this);
+		}
+		else {
+			DmHistoryPortLocalServiceUtil.updateDmHistoryPort(this);
+		}
 	}
 }

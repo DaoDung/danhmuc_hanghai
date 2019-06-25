@@ -123,7 +123,12 @@ public class DocumentClp extends BaseModelImpl<Document> implements Document {
 	}
 
 	public void persist() throws SystemException {
-		DocumentLocalServiceUtil.updateDocument(this);
+		if (this.isNew()) {
+			DocumentLocalServiceUtil.addDocument(this);
+		}
+		else {
+			DocumentLocalServiceUtil.updateDocument(this);
+		}
 	}
 
 	@Override

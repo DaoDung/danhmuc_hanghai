@@ -180,7 +180,12 @@ public class ResultCertificateClp extends BaseModelImpl<ResultCertificate>
 	}
 
 	public void persist() throws SystemException {
-		ResultCertificateLocalServiceUtil.updateResultCertificate(this);
+		if (this.isNew()) {
+			ResultCertificateLocalServiceUtil.addResultCertificate(this);
+		}
+		else {
+			ResultCertificateLocalServiceUtil.updateResultCertificate(this);
+		}
 	}
 
 	@Override

@@ -140,7 +140,12 @@ public class DmHistoryPackageClp extends BaseModelImpl<DmHistoryPackage>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryPackageLocalServiceUtil.updateDmHistoryPackage(this);
+		if (this.isNew()) {
+			DmHistoryPackageLocalServiceUtil.addDmHistoryPackage(this);
+		}
+		else {
+			DmHistoryPackageLocalServiceUtil.updateDmHistoryPackage(this);
+		}
 	}
 
 	@Override

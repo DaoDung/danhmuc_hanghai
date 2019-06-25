@@ -151,6 +151,17 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmGtVersion> dmGtVersions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGtVersion dmGtVersion : dmGtVersions) {
+			EntityCacheUtil.removeResult(DmGtVersionModelImpl.ENTITY_CACHE_ENABLED,
+				DmGtVersionImpl.class, dmGtVersion.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm gt version with the primary key. Does not add the dm gt version to the database.
 	 *
@@ -169,20 +180,6 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 	/**
 	 * Removes the dm gt version with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm gt version
-	 * @return the dm gt version that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm gt version with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtVersion remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm gt version with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm gt version
 	 * @return the dm gt version that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtVersionException if a dm gt version with the primary key could not be found
@@ -190,24 +187,38 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 	 */
 	public DmGtVersion remove(int id)
 		throws NoSuchDmGtVersionException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm gt version with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm gt version
+	 * @return the dm gt version that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGtVersionException if a dm gt version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGtVersion remove(Serializable primaryKey)
+		throws NoSuchDmGtVersionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGtVersion dmGtVersion = (DmGtVersion)session.get(DmGtVersionImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmGtVersion == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGtVersionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGtVersionPersistence.remove(dmGtVersion);
+			return remove(dmGtVersion);
 		}
 		catch (NoSuchDmGtVersionException nsee) {
 			throw nsee;
@@ -218,19 +229,6 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm gt version from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGtVersion the dm gt version
-	 * @return the dm gt version that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGtVersion remove(DmGtVersion dmGtVersion)
-		throws SystemException {
-		return super.remove(dmGtVersion);
 	}
 
 	@Override
@@ -252,11 +250,7 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmGtVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DmGtVersionImpl.class, dmGtVersion.getPrimaryKey());
+		clearCache(dmGtVersion);
 
 		return dmGtVersion;
 	}
@@ -546,7 +540,7 @@ public class DmGtVersionPersistenceImpl extends BasePersistenceImpl<DmGtVersion>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGtVersion dmGtVersion : findAll()) {
-			dmGtVersionPersistence.remove(dmGtVersion);
+			remove(dmGtVersion);
 		}
 	}
 

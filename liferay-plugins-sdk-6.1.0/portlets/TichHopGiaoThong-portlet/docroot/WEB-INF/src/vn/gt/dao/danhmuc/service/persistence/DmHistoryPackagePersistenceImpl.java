@@ -199,6 +199,23 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPackage);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPackage> dmHistoryPackages) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPackage dmHistoryPackage : dmHistoryPackages) {
+			EntityCacheUtil.removeResult(DmHistoryPackageModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPackageImpl.class, dmHistoryPackage.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPackage);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmHistoryPackage dmHistoryPackage) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PACKAGECODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPackage.getPackageCode(),
@@ -225,20 +242,6 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 	/**
 	 * Removes the dm history package with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history package
-	 * @return the dm history package that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history package with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPackage remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history package with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history package
 	 * @return the dm history package that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPackageException if a dm history package with the primary key could not be found
@@ -246,24 +249,38 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 	 */
 	public DmHistoryPackage remove(int id)
 		throws NoSuchDmHistoryPackageException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history package with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history package
+	 * @return the dm history package that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPackageException if a dm history package with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPackage remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPackageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPackage dmHistoryPackage = (DmHistoryPackage)session.get(DmHistoryPackageImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPackage == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPackageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPackagePersistence.remove(dmHistoryPackage);
+			return remove(dmHistoryPackage);
 		}
 		catch (NoSuchDmHistoryPackageException nsee) {
 			throw nsee;
@@ -274,19 +291,6 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history package from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPackage the dm history package
-	 * @return the dm history package that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPackage remove(DmHistoryPackage dmHistoryPackage)
-		throws SystemException {
-		return super.remove(dmHistoryPackage);
 	}
 
 	@Override
@@ -308,20 +312,7 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPackageModelImpl dmHistoryPackageModelImpl = (DmHistoryPackageModelImpl)dmHistoryPackage;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PACKAGECODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPackageModelImpl.getPackageCode(),
-				
-			dmHistoryPackageModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPackageModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPackageImpl.class, dmHistoryPackage.getPrimaryKey());
+		clearCache(dmHistoryPackage);
 
 		return dmHistoryPackage;
 	}
@@ -1208,7 +1199,7 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 	public void removeByPackageCode(String packageCode)
 		throws SystemException {
 		for (DmHistoryPackage dmHistoryPackage : findByPackageCode(packageCode)) {
-			dmHistoryPackagePersistence.remove(dmHistoryPackage);
+			remove(dmHistoryPackage);
 		}
 	}
 
@@ -1225,7 +1216,7 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 		DmHistoryPackage dmHistoryPackage = findByPackageCodeAndSyncVersion(packageCode,
 				syncVersion);
 
-		dmHistoryPackagePersistence.remove(dmHistoryPackage);
+		remove(dmHistoryPackage);
 	}
 
 	/**
@@ -1235,7 +1226,7 @@ public class DmHistoryPackagePersistenceImpl extends BasePersistenceImpl<DmHisto
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPackage dmHistoryPackage : findAll()) {
-			dmHistoryPackagePersistence.remove(dmHistoryPackage);
+			remove(dmHistoryPackage);
 		}
 	}
 

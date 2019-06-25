@@ -315,7 +315,12 @@ public class RmdcShipClp extends BaseModelImpl<RmdcShip> implements RmdcShip {
 	}
 
 	public void persist() throws SystemException {
-		RmdcShipLocalServiceUtil.updateRmdcShip(this);
+		if (this.isNew()) {
+			RmdcShipLocalServiceUtil.addRmdcShip(this);
+		}
+		else {
+			RmdcShipLocalServiceUtil.updateRmdcShip(this);
+		}
 	}
 
 	@Override

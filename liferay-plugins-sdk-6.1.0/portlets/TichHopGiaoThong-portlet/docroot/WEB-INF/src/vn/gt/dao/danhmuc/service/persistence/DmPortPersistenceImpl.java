@@ -227,6 +227,23 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmPort);
+	}
+
+	@Override
+	public void clearCache(List<DmPort> dmPorts) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmPort dmPort : dmPorts) {
+			EntityCacheUtil.removeResult(DmPortModelImpl.ENTITY_CACHE_ENABLED,
+				DmPortImpl.class, dmPort.getPrimaryKey());
+
+			clearUniqueFindersCache(dmPort);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmPort dmPort) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTCODELOCODE,
 			new Object[] { dmPort.getPortCode(), dmPort.getLoCode() });
 	}
@@ -249,44 +266,43 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 	/**
 	 * Removes the dm port with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm port
-	 * @return the dm port that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm port with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPort remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm port with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm port
 	 * @return the dm port that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortException if a dm port with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DmPort remove(int id) throws NoSuchDmPortException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm port with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm port
+	 * @return the dm port that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortException if a dm port with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmPort remove(Serializable primaryKey)
+		throws NoSuchDmPortException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DmPort dmPort = (DmPort)session.get(DmPortImpl.class,
-					Integer.valueOf(id));
+			DmPort dmPort = (DmPort)session.get(DmPortImpl.class, primaryKey);
 
 			if (dmPort == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmPortException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmPortPersistence.remove(dmPort);
+			return remove(dmPort);
 		}
 		catch (NoSuchDmPortException nsee) {
 			throw nsee;
@@ -297,18 +313,6 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm port from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmPort the dm port
-	 * @return the dm port that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPort remove(DmPort dmPort) throws SystemException {
-		return super.remove(dmPort);
 	}
 
 	@Override
@@ -329,20 +333,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmPortModelImpl dmPortModelImpl = (DmPortModelImpl)dmPort;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTCODELOCODE,
-			new Object[] {
-				dmPortModelImpl.getPortCode(),
-				
-			dmPortModelImpl.getLoCode()
-			});
-
-		EntityCacheUtil.removeResult(DmPortModelImpl.ENTITY_CACHE_ENABLED,
-			DmPortImpl.class, dmPort.getPrimaryKey());
+		clearCache(dmPort);
 
 		return dmPort;
 	}
@@ -2039,7 +2030,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 	 */
 	public void removeByPortCode(String portCode) throws SystemException {
 		for (DmPort dmPort : findByPortCode(portCode)) {
-			dmPortPersistence.remove(dmPort);
+			remove(dmPort);
 		}
 	}
 
@@ -2051,7 +2042,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 	 */
 	public void removeByLoCode(String loCode) throws SystemException {
 		for (DmPort dmPort : findByLoCode(loCode)) {
-			dmPortPersistence.remove(dmPort);
+			remove(dmPort);
 		}
 	}
 
@@ -2065,7 +2056,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 	public void removeByStateCodeAndCityCode(String stateCode, String citycode)
 		throws SystemException {
 		for (DmPort dmPort : findByStateCodeAndCityCode(stateCode, citycode)) {
-			dmPortPersistence.remove(dmPort);
+			remove(dmPort);
 		}
 	}
 
@@ -2080,7 +2071,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 		throws NoSuchDmPortException, SystemException {
 		DmPort dmPort = findByPortCodeLoCode(portCode, loCode);
 
-		dmPortPersistence.remove(dmPort);
+		remove(dmPort);
 	}
 
 	/**
@@ -2090,7 +2081,7 @@ public class DmPortPersistenceImpl extends BasePersistenceImpl<DmPort>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmPort dmPort : findAll()) {
-			dmPortPersistence.remove(dmPort);
+			remove(dmPort);
 		}
 	}
 

@@ -181,6 +181,8 @@ public class ResultNotificationModelImpl extends BaseModelImpl<ResultNotificatio
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

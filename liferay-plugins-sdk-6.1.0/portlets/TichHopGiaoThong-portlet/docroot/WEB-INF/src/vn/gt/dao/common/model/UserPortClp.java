@@ -108,7 +108,12 @@ public class UserPortClp extends BaseModelImpl<UserPort> implements UserPort {
 	}
 
 	public void persist() throws SystemException {
-		UserPortLocalServiceUtil.updateUserPort(this);
+		if (this.isNew()) {
+			UserPortLocalServiceUtil.addUserPort(this);
+		}
+		else {
+			UserPortLocalServiceUtil.updateUserPort(this);
+		}
 	}
 
 	@Override

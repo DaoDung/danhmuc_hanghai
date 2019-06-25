@@ -39,6 +39,11 @@ public abstract class DmMaritimeBaseImpl extends DmMaritimeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm maritime model instance should use the {@link DmMaritime} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmMaritimeLocalServiceUtil.updateDmMaritime(this);
+		if (this.isNew()) {
+			DmMaritimeLocalServiceUtil.addDmMaritime(this);
+		}
+		else {
+			DmMaritimeLocalServiceUtil.updateDmMaritime(this);
+		}
 	}
 }

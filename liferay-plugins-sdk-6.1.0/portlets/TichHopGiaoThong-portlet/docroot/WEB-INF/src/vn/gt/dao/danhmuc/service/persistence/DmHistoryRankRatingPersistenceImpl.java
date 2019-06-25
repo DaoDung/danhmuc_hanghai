@@ -196,6 +196,25 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryRankRating);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryRankRating> dmHistoryRankRatings) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryRankRating dmHistoryRankRating : dmHistoryRankRatings) {
+			EntityCacheUtil.removeResult(DmHistoryRankRatingModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryRankRatingImpl.class,
+				dmHistoryRankRating.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryRankRating);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryRankRating dmHistoryRankRating) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RANKCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryRankRating.getRankCode(),
@@ -222,20 +241,6 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 	/**
 	 * Removes the dm history rank rating with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history rank rating
-	 * @return the dm history rank rating that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history rank rating with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryRankRating remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history rank rating with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history rank rating
 	 * @return the dm history rank rating that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryRankRatingException if a dm history rank rating with the primary key could not be found
@@ -243,24 +248,38 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public DmHistoryRankRating remove(int id)
 		throws NoSuchDmHistoryRankRatingException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history rank rating with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history rank rating
+	 * @return the dm history rank rating that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryRankRatingException if a dm history rank rating with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryRankRating remove(Serializable primaryKey)
+		throws NoSuchDmHistoryRankRatingException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryRankRating dmHistoryRankRating = (DmHistoryRankRating)session.get(DmHistoryRankRatingImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryRankRating == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryRankRatingException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryRankRatingPersistence.remove(dmHistoryRankRating);
+			return remove(dmHistoryRankRating);
 		}
 		catch (NoSuchDmHistoryRankRatingException nsee) {
 			throw nsee;
@@ -271,19 +290,6 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history rank rating from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryRankRating the dm history rank rating
-	 * @return the dm history rank rating that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryRankRating remove(DmHistoryRankRating dmHistoryRankRating)
-		throws SystemException {
-		return super.remove(dmHistoryRankRating);
 	}
 
 	@Override
@@ -305,20 +311,7 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryRankRatingModelImpl dmHistoryRankRatingModelImpl = (DmHistoryRankRatingModelImpl)dmHistoryRankRating;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RANKCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryRankRatingModelImpl.getRankCode(),
-				
-			dmHistoryRankRatingModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryRankRatingModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryRankRatingImpl.class, dmHistoryRankRating.getPrimaryKey());
+		clearCache(dmHistoryRankRating);
 
 		return dmHistoryRankRating;
 	}
@@ -1202,7 +1195,7 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public void removeByRankCode(String rankCode) throws SystemException {
 		for (DmHistoryRankRating dmHistoryRankRating : findByRankCode(rankCode)) {
-			dmHistoryRankRatingPersistence.remove(dmHistoryRankRating);
+			remove(dmHistoryRankRating);
 		}
 	}
 
@@ -1219,7 +1212,7 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 		DmHistoryRankRating dmHistoryRankRating = findByRankCodeAndSyncVersion(rankCode,
 				syncVersion);
 
-		dmHistoryRankRatingPersistence.remove(dmHistoryRankRating);
+		remove(dmHistoryRankRating);
 	}
 
 	/**
@@ -1229,7 +1222,7 @@ public class DmHistoryRankRatingPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryRankRating dmHistoryRankRating : findAll()) {
-			dmHistoryRankRatingPersistence.remove(dmHistoryRankRating);
+			remove(dmHistoryRankRating);
 		}
 	}
 

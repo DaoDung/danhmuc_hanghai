@@ -39,6 +39,11 @@ public abstract class DmGtReportTemplateBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt report template model instance should use the {@link DmGtReportTemplate} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtReportTemplateLocalServiceUtil.updateDmGtReportTemplate(this);
+		if (this.isNew()) {
+			DmGtReportTemplateLocalServiceUtil.addDmGtReportTemplate(this);
+		}
+		else {
+			DmGtReportTemplateLocalServiceUtil.updateDmGtReportTemplate(this);
+		}
 	}
 }

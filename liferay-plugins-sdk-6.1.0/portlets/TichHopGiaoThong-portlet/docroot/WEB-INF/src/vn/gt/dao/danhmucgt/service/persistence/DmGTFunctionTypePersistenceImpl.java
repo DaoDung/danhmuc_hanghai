@@ -169,6 +169,23 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmGTFunctionType);
+	}
+
+	@Override
+	public void clearCache(List<DmGTFunctionType> dmGTFunctionTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmGTFunctionType dmGTFunctionType : dmGTFunctionTypes) {
+			EntityCacheUtil.removeResult(DmGTFunctionTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmGTFunctionTypeImpl.class, dmGTFunctionType.getPrimaryKey());
+
+			clearUniqueFindersCache(dmGTFunctionType);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmGTFunctionType dmGTFunctionType) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FUNCTIONTYPECODE,
 			new Object[] { dmGTFunctionType.getFunctionTypeCode() });
 	}
@@ -191,20 +208,6 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 	/**
 	 * Removes the dm g t function type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm g t function type
-	 * @return the dm g t function type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm g t function type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTFunctionType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm g t function type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm g t function type
 	 * @return the dm g t function type that was removed
 	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTFunctionTypeException if a dm g t function type with the primary key could not be found
@@ -212,24 +215,38 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 	 */
 	public DmGTFunctionType remove(long id)
 		throws NoSuchDmGTFunctionTypeException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm g t function type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm g t function type
+	 * @return the dm g t function type that was removed
+	 * @throws vn.gt.dao.danhmucgt.NoSuchDmGTFunctionTypeException if a dm g t function type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmGTFunctionType remove(Serializable primaryKey)
+		throws NoSuchDmGTFunctionTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmGTFunctionType dmGTFunctionType = (DmGTFunctionType)session.get(DmGTFunctionTypeImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmGTFunctionType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmGTFunctionTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmGTFunctionTypePersistence.remove(dmGTFunctionType);
+			return remove(dmGTFunctionType);
 		}
 		catch (NoSuchDmGTFunctionTypeException nsee) {
 			throw nsee;
@@ -240,19 +257,6 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm g t function type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmGTFunctionType the dm g t function type
-	 * @return the dm g t function type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmGTFunctionType remove(DmGTFunctionType dmGTFunctionType)
-		throws SystemException {
-		return super.remove(dmGTFunctionType);
 	}
 
 	@Override
@@ -274,16 +278,7 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmGTFunctionTypeModelImpl dmGTFunctionTypeModelImpl = (DmGTFunctionTypeModelImpl)dmGTFunctionType;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FUNCTIONTYPECODE,
-			new Object[] { dmGTFunctionTypeModelImpl.getFunctionTypeCode() });
-
-		EntityCacheUtil.removeResult(DmGTFunctionTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmGTFunctionTypeImpl.class, dmGTFunctionType.getPrimaryKey());
+		clearCache(dmGTFunctionType);
 
 		return dmGTFunctionType;
 	}
@@ -743,7 +738,7 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 		throws NoSuchDmGTFunctionTypeException, SystemException {
 		DmGTFunctionType dmGTFunctionType = findByFunctionTypeCode(functionTypeCode);
 
-		dmGTFunctionTypePersistence.remove(dmGTFunctionType);
+		remove(dmGTFunctionType);
 	}
 
 	/**
@@ -753,7 +748,7 @@ public class DmGTFunctionTypePersistenceImpl extends BasePersistenceImpl<DmGTFun
 	 */
 	public void removeAll() throws SystemException {
 		for (DmGTFunctionType dmGTFunctionType : findAll()) {
-			dmGTFunctionTypePersistence.remove(dmGTFunctionType);
+			remove(dmGTFunctionType);
 		}
 	}
 

@@ -39,6 +39,11 @@ public abstract class DmGtVersionBaseImpl extends DmGtVersionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt version model instance should use the {@link DmGtVersion} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtVersionLocalServiceUtil.updateDmGtVersion(this);
+		if (this.isNew()) {
+			DmGtVersionLocalServiceUtil.addDmGtVersion(this);
+		}
+		else {
+			DmGtVersionLocalServiceUtil.updateDmGtVersion(this);
+		}
 	}
 }

@@ -190,6 +190,26 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryRepresentative);
+	}
+
+	@Override
+	public void clearCache(
+		List<DmHistoryRepresentative> dmHistoryRepresentatives) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryRepresentative dmHistoryRepresentative : dmHistoryRepresentatives) {
+			EntityCacheUtil.removeResult(DmHistoryRepresentativeModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryRepresentativeImpl.class,
+				dmHistoryRepresentative.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryRepresentative);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryRepresentative dmHistoryRepresentative) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPCODE,
 			new Object[] { dmHistoryRepresentative.getRepCode() });
 
@@ -219,20 +239,6 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 	/**
 	 * Removes the dm history representative with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history representative
-	 * @return the dm history representative that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history representative with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryRepresentative remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history representative with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history representative
 	 * @return the dm history representative that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryRepresentativeException if a dm history representative with the primary key could not be found
@@ -240,24 +246,38 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 	 */
 	public DmHistoryRepresentative remove(int id)
 		throws NoSuchDmHistoryRepresentativeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history representative with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history representative
+	 * @return the dm history representative that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryRepresentativeException if a dm history representative with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryRepresentative remove(Serializable primaryKey)
+		throws NoSuchDmHistoryRepresentativeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryRepresentative dmHistoryRepresentative = (DmHistoryRepresentative)session.get(DmHistoryRepresentativeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryRepresentative == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryRepresentativeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryRepresentativePersistence.remove(dmHistoryRepresentative);
+			return remove(dmHistoryRepresentative);
 		}
 		catch (NoSuchDmHistoryRepresentativeException nsee) {
 			throw nsee;
@@ -268,20 +288,6 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history representative from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryRepresentative the dm history representative
-	 * @return the dm history representative that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryRepresentative remove(
-		DmHistoryRepresentative dmHistoryRepresentative)
-		throws SystemException {
-		return super.remove(dmHistoryRepresentative);
 	}
 
 	@Override
@@ -304,24 +310,7 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryRepresentativeModelImpl dmHistoryRepresentativeModelImpl = (DmHistoryRepresentativeModelImpl)dmHistoryRepresentative;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPCODE,
-			new Object[] { dmHistoryRepresentativeModelImpl.getRepCode() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryRepresentativeModelImpl.getRepCode(),
-				
-			dmHistoryRepresentativeModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryRepresentativeModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryRepresentativeImpl.class,
-			dmHistoryRepresentative.getPrimaryKey());
+		clearCache(dmHistoryRepresentative);
 
 		return dmHistoryRepresentative;
 	}
@@ -980,7 +969,7 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 		throws NoSuchDmHistoryRepresentativeException, SystemException {
 		DmHistoryRepresentative dmHistoryRepresentative = findByRepCode(repCode);
 
-		dmHistoryRepresentativePersistence.remove(dmHistoryRepresentative);
+		remove(dmHistoryRepresentative);
 	}
 
 	/**
@@ -995,7 +984,7 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 		DmHistoryRepresentative dmHistoryRepresentative = findByRepCodeAndSyncVersion(repCode,
 				syncVersion);
 
-		dmHistoryRepresentativePersistence.remove(dmHistoryRepresentative);
+		remove(dmHistoryRepresentative);
 	}
 
 	/**
@@ -1005,7 +994,7 @@ public class DmHistoryRepresentativePersistenceImpl extends BasePersistenceImpl<
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryRepresentative dmHistoryRepresentative : findAll()) {
-			dmHistoryRepresentativePersistence.remove(dmHistoryRepresentative);
+			remove(dmHistoryRepresentative);
 		}
 	}
 

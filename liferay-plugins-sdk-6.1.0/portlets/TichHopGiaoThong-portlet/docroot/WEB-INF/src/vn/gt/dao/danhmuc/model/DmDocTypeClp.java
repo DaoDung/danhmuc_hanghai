@@ -131,7 +131,12 @@ public class DmDocTypeClp extends BaseModelImpl<DmDocType> implements DmDocType 
 	}
 
 	public void persist() throws SystemException {
-		DmDocTypeLocalServiceUtil.updateDmDocType(this);
+		if (this.isNew()) {
+			DmDocTypeLocalServiceUtil.addDmDocType(this);
+		}
+		else {
+			DmDocTypeLocalServiceUtil.updateDmDocType(this);
+		}
 	}
 
 	@Override

@@ -95,14 +95,6 @@ public class ResultHistoryMinistryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultHistoryMinistry remove(
-		ResultHistoryMinistry resultHistoryMinistry) throws SystemException {
-		return getPersistence().remove(resultHistoryMinistry);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultHistoryMinistry update(

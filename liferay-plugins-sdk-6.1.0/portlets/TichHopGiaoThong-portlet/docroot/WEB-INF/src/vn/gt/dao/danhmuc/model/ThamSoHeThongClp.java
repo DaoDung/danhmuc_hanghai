@@ -90,7 +90,12 @@ public class ThamSoHeThongClp extends BaseModelImpl<ThamSoHeThong>
 	}
 
 	public void persist() throws SystemException {
-		ThamSoHeThongLocalServiceUtil.updateThamSoHeThong(this);
+		if (this.isNew()) {
+			ThamSoHeThongLocalServiceUtil.addThamSoHeThong(this);
+		}
+		else {
+			ThamSoHeThongLocalServiceUtil.updateThamSoHeThong(this);
+		}
 	}
 
 	@Override

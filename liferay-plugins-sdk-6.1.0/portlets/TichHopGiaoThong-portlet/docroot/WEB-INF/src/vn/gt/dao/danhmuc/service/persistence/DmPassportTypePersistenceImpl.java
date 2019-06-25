@@ -178,6 +178,17 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmPassportType> dmPassportTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmPassportType dmPassportType : dmPassportTypes) {
+			EntityCacheUtil.removeResult(DmPassportTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DmPassportTypeImpl.class, dmPassportType.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm passport type with the primary key. Does not add the dm passport type to the database.
 	 *
@@ -196,20 +207,6 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 	/**
 	 * Removes the dm passport type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm passport type
-	 * @return the dm passport type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm passport type with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPassportType remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm passport type with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm passport type
 	 * @return the dm passport type that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmPassportTypeException if a dm passport type with the primary key could not be found
@@ -217,24 +214,38 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 	 */
 	public DmPassportType remove(int id)
 		throws NoSuchDmPassportTypeException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm passport type with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm passport type
+	 * @return the dm passport type that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmPassportTypeException if a dm passport type with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmPassportType remove(Serializable primaryKey)
+		throws NoSuchDmPassportTypeException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmPassportType dmPassportType = (DmPassportType)session.get(DmPassportTypeImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmPassportType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmPassportTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmPassportTypePersistence.remove(dmPassportType);
+			return remove(dmPassportType);
 		}
 		catch (NoSuchDmPassportTypeException nsee) {
 			throw nsee;
@@ -245,19 +256,6 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm passport type from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmPassportType the dm passport type
-	 * @return the dm passport type that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPassportType remove(DmPassportType dmPassportType)
-		throws SystemException {
-		return super.remove(dmPassportType);
 	}
 
 	@Override
@@ -279,11 +277,7 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmPassportTypeModelImpl.ENTITY_CACHE_ENABLED,
-			DmPassportTypeImpl.class, dmPassportType.getPrimaryKey());
+		clearCache(dmPassportType);
 
 		return dmPassportType;
 	}
@@ -974,7 +968,7 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 		throws SystemException {
 		for (DmPassportType dmPassportType : findByPassportTypeCode(
 				passportTypeCode)) {
-			dmPassportTypePersistence.remove(dmPassportType);
+			remove(dmPassportType);
 		}
 	}
 
@@ -985,7 +979,7 @@ public class DmPassportTypePersistenceImpl extends BasePersistenceImpl<DmPasspor
 	 */
 	public void removeAll() throws SystemException {
 		for (DmPassportType dmPassportType : findAll()) {
-			dmPassportTypePersistence.remove(dmPassportType);
+			remove(dmPassportType);
 		}
 	}
 

@@ -39,6 +39,11 @@ public abstract class RmdcShipBaseImpl extends RmdcShipModelImpl
 	 * Never modify or reference this class directly. All methods that expect a rmdc ship model instance should use the {@link RmdcShip} interface instead.
 	 */
 	public void persist() throws SystemException {
-		RmdcShipLocalServiceUtil.updateRmdcShip(this);
+		if (this.isNew()) {
+			RmdcShipLocalServiceUtil.addRmdcShip(this);
+		}
+		else {
+			RmdcShipLocalServiceUtil.updateRmdcShip(this);
+		}
 	}
 }

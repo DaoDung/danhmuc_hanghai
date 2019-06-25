@@ -180,7 +180,12 @@ public class DmHistoryMaritimeClp extends BaseModelImpl<DmHistoryMaritime>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryMaritimeLocalServiceUtil.updateDmHistoryMaritime(this);
+		if (this.isNew()) {
+			DmHistoryMaritimeLocalServiceUtil.addDmHistoryMaritime(this);
+		}
+		else {
+			DmHistoryMaritimeLocalServiceUtil.updateDmHistoryMaritime(this);
+		}
 	}
 
 	@Override

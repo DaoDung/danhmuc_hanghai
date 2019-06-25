@@ -156,7 +156,12 @@ public class ResultDeclarationClp extends BaseModelImpl<ResultDeclaration>
 	}
 
 	public void persist() throws SystemException {
-		ResultDeclarationLocalServiceUtil.updateResultDeclaration(this);
+		if (this.isNew()) {
+			ResultDeclarationLocalServiceUtil.addResultDeclaration(this);
+		}
+		else {
+			ResultDeclarationLocalServiceUtil.updateResultDeclaration(this);
+		}
 	}
 
 	@Override

@@ -314,6 +314,23 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(resultCertificate);
+	}
+
+	@Override
+	public void clearCache(List<ResultCertificate> resultCertificates) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResultCertificate resultCertificate : resultCertificates) {
+			EntityCacheUtil.removeResult(ResultCertificateModelImpl.ENTITY_CACHE_ENABLED,
+				ResultCertificateImpl.class, resultCertificate.getPrimaryKey());
+
+			clearUniqueFindersCache(resultCertificate);
+		}
+	}
+
+	protected void clearUniqueFindersCache(ResultCertificate resultCertificate) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_BY4,
 			new Object[] {
 				Long.valueOf(resultCertificate.getDocumentName()),
@@ -353,20 +370,6 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 	/**
 	 * Removes the result certificate with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the result certificate
-	 * @return the result certificate that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a result certificate with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultCertificate remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the result certificate with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the result certificate
 	 * @return the result certificate that was removed
 	 * @throws vn.gt.dao.result.NoSuchResultCertificateException if a result certificate with the primary key could not be found
@@ -374,24 +377,38 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 	 */
 	public ResultCertificate remove(long id)
 		throws NoSuchResultCertificateException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the result certificate with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the result certificate
+	 * @return the result certificate that was removed
+	 * @throws vn.gt.dao.result.NoSuchResultCertificateException if a result certificate with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResultCertificate remove(Serializable primaryKey)
+		throws NoSuchResultCertificateException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResultCertificate resultCertificate = (ResultCertificate)session.get(ResultCertificateImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (resultCertificate == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResultCertificateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return resultCertificatePersistence.remove(resultCertificate);
+			return remove(resultCertificate);
 		}
 		catch (NoSuchResultCertificateException nsee) {
 			throw nsee;
@@ -402,19 +419,6 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the result certificate from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param resultCertificate the result certificate
-	 * @return the result certificate that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultCertificate remove(ResultCertificate resultCertificate)
-		throws SystemException {
-		return super.remove(resultCertificate);
 	}
 
 	@Override
@@ -436,33 +440,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		ResultCertificateModelImpl resultCertificateModelImpl = (ResultCertificateModelImpl)resultCertificate;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_BY4,
-			new Object[] {
-				Long.valueOf(resultCertificateModelImpl.getDocumentName()),
-				Integer.valueOf(resultCertificateModelImpl.getDocumentYear()),
-				
-			resultCertificateModelImpl.getCertificateCode(),
-				
-			resultCertificateModelImpl.getCertificateNo()
-			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CREWNAMEANDCERTIFICATECODE,
-			new Object[] {
-				Long.valueOf(resultCertificateModelImpl.getDocumentName()),
-				Integer.valueOf(resultCertificateModelImpl.getDocumentYear()),
-				
-			resultCertificateModelImpl.getCertificateCode(),
-				
-			resultCertificateModelImpl.getComment()
-			});
-
-		EntityCacheUtil.removeResult(ResultCertificateModelImpl.ENTITY_CACHE_ENABLED,
-			ResultCertificateImpl.class, resultCertificate.getPrimaryKey());
+		clearCache(resultCertificate);
 
 		return resultCertificate;
 	}
@@ -2546,7 +2524,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		int documentYear) throws SystemException {
 		for (ResultCertificate resultCertificate : findByDocumentNameAnddocumentYear(
 				documentName, documentYear)) {
-			resultCertificatePersistence.remove(resultCertificate);
+			remove(resultCertificate);
 		}
 	}
 
@@ -2563,7 +2541,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		throws SystemException {
 		for (ResultCertificate resultCertificate : findByDocumentNameAnddocumentYearAndMaritimeCode(
 				documentName, documentYear, maritimeCode)) {
-			resultCertificatePersistence.remove(resultCertificate);
+			remove(resultCertificate);
 		}
 	}
 
@@ -2580,7 +2558,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		throws SystemException {
 		for (ResultCertificate resultCertificate : findByDocumentNameAnddocumentYearAndCertificateCode(
 				documentName, documentYear, certificateCode)) {
-			resultCertificatePersistence.remove(resultCertificate);
+			remove(resultCertificate);
 		}
 	}
 
@@ -2599,7 +2577,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		ResultCertificate resultCertificate = findByF_BY4(documentName,
 				documentYear, certificateCode, certificateNo);
 
-		resultCertificatePersistence.remove(resultCertificate);
+		remove(resultCertificate);
 	}
 
 	/**
@@ -2617,7 +2595,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 		ResultCertificate resultCertificate = findByCrewNameAndCertificateCode(documentName,
 				documentYear, certificateCode, comment);
 
-		resultCertificatePersistence.remove(resultCertificate);
+		remove(resultCertificate);
 	}
 
 	/**
@@ -2627,7 +2605,7 @@ public class ResultCertificatePersistenceImpl extends BasePersistenceImpl<Result
 	 */
 	public void removeAll() throws SystemException {
 		for (ResultCertificate resultCertificate : findAll()) {
-			resultCertificatePersistence.remove(resultCertificate);
+			remove(resultCertificate);
 		}
 	}
 

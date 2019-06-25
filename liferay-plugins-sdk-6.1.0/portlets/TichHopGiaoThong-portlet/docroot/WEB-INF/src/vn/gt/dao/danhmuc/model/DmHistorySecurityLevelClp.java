@@ -132,7 +132,12 @@ public class DmHistorySecurityLevelClp extends BaseModelImpl<DmHistorySecurityLe
 	}
 
 	public void persist() throws SystemException {
-		DmHistorySecurityLevelLocalServiceUtil.updateDmHistorySecurityLevel(this);
+		if (this.isNew()) {
+			DmHistorySecurityLevelLocalServiceUtil.addDmHistorySecurityLevel(this);
+		}
+		else {
+			DmHistorySecurityLevelLocalServiceUtil.updateDmHistorySecurityLevel(this);
+		}
 	}
 
 	@Override

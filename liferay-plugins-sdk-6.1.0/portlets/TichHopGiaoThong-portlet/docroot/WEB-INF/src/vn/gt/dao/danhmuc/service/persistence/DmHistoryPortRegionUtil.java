@@ -95,14 +95,6 @@ public class DmHistoryPortRegionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmHistoryPortRegion remove(
-		DmHistoryPortRegion dmHistoryPortRegion) throws SystemException {
-		return getPersistence().remove(dmHistoryPortRegion);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmHistoryPortRegion update(

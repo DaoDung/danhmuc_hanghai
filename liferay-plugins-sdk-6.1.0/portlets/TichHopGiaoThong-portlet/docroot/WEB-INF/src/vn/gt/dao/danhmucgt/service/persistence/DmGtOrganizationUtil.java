@@ -95,14 +95,6 @@ public class DmGtOrganizationUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGtOrganization remove(DmGtOrganization dmGtOrganization)
-		throws SystemException {
-		return getPersistence().remove(dmGtOrganization);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGtOrganization update(DmGtOrganization dmGtOrganization,

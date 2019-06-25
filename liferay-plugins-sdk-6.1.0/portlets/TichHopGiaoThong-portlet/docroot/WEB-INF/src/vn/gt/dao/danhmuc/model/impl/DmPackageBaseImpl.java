@@ -39,6 +39,11 @@ public abstract class DmPackageBaseImpl extends DmPackageModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm package model instance should use the {@link DmPackage} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPackageLocalServiceUtil.updateDmPackage(this);
+		if (this.isNew()) {
+			DmPackageLocalServiceUtil.addDmPackage(this);
+		}
+		else {
+			DmPackageLocalServiceUtil.updateDmPackage(this);
+		}
 	}
 }

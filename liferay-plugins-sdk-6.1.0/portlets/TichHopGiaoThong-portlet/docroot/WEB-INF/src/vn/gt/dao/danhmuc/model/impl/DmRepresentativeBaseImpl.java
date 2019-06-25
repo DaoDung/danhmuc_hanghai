@@ -39,6 +39,11 @@ public abstract class DmRepresentativeBaseImpl extends DmRepresentativeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm representative model instance should use the {@link DmRepresentative} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmRepresentativeLocalServiceUtil.updateDmRepresentative(this);
+		if (this.isNew()) {
+			DmRepresentativeLocalServiceUtil.addDmRepresentative(this);
+		}
+		else {
+			DmRepresentativeLocalServiceUtil.updateDmRepresentative(this);
+		}
 	}
 }

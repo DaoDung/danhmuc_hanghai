@@ -39,6 +39,11 @@ public abstract class DmArrivalPurposeBaseImpl extends DmArrivalPurposeModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm arrival purpose model instance should use the {@link DmArrivalPurpose} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmArrivalPurposeLocalServiceUtil.updateDmArrivalPurpose(this);
+		if (this.isNew()) {
+			DmArrivalPurposeLocalServiceUtil.addDmArrivalPurpose(this);
+		}
+		else {
+			DmArrivalPurposeLocalServiceUtil.updateDmArrivalPurpose(this);
+		}
 	}
 }

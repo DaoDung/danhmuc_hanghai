@@ -402,6 +402,8 @@ public class TempDebitNoteModelImpl extends BaseModelImpl<TempDebitNote>
 	}
 
 	public void setReportdate(Date reportdate) {
+		_columnBitmask = -1L;
+
 		_reportdate = reportdate;
 	}
 

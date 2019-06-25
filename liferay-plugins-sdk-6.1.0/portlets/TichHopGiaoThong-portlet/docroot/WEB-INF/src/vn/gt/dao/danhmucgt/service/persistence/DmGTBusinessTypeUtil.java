@@ -95,14 +95,6 @@ public class DmGTBusinessTypeUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGTBusinessType remove(DmGTBusinessType dmGTBusinessType)
-		throws SystemException {
-		return getPersistence().remove(dmGTBusinessType);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGTBusinessType update(DmGTBusinessType dmGTBusinessType,

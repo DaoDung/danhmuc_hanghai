@@ -95,14 +95,6 @@ public class ResultCertificateUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResultCertificate remove(ResultCertificate resultCertificate)
-		throws SystemException {
-		return getPersistence().remove(resultCertificate);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResultCertificate update(

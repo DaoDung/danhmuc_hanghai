@@ -38,6 +38,11 @@ public abstract class DmPortBaseImpl extends DmPortModelImpl implements DmPort {
 	 * Never modify or reference this class directly. All methods that expect a dm port model instance should use the {@link DmPort} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmPortLocalServiceUtil.updateDmPort(this);
+		if (this.isNew()) {
+			DmPortLocalServiceUtil.addDmPort(this);
+		}
+		else {
+			DmPortLocalServiceUtil.updateDmPort(this);
+		}
 	}
 }

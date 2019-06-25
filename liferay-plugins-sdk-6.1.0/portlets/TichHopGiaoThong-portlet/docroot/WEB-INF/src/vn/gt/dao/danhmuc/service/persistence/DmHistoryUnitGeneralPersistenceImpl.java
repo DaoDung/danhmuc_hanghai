@@ -196,6 +196,25 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryUnitGeneral);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryUnitGeneral> dmHistoryUnitGenerals) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryUnitGeneral dmHistoryUnitGeneral : dmHistoryUnitGenerals) {
+			EntityCacheUtil.removeResult(DmHistoryUnitGeneralModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryUnitGeneralImpl.class,
+				dmHistoryUnitGeneral.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryUnitGeneral);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryUnitGeneral dmHistoryUnitGeneral) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UNITCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryUnitGeneral.getUnitCode(),
@@ -222,20 +241,6 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 	/**
 	 * Removes the dm history unit general with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history unit general
-	 * @return the dm history unit general that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history unit general with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryUnitGeneral remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history unit general with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history unit general
 	 * @return the dm history unit general that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryUnitGeneralException if a dm history unit general with the primary key could not be found
@@ -243,24 +248,38 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 	 */
 	public DmHistoryUnitGeneral remove(int id)
 		throws NoSuchDmHistoryUnitGeneralException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history unit general with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history unit general
+	 * @return the dm history unit general that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryUnitGeneralException if a dm history unit general with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryUnitGeneral remove(Serializable primaryKey)
+		throws NoSuchDmHistoryUnitGeneralException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryUnitGeneral dmHistoryUnitGeneral = (DmHistoryUnitGeneral)session.get(DmHistoryUnitGeneralImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryUnitGeneral == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryUnitGeneralException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryUnitGeneralPersistence.remove(dmHistoryUnitGeneral);
+			return remove(dmHistoryUnitGeneral);
 		}
 		catch (NoSuchDmHistoryUnitGeneralException nsee) {
 			throw nsee;
@@ -271,19 +290,6 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history unit general from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryUnitGeneral the dm history unit general
-	 * @return the dm history unit general that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryUnitGeneral remove(
-		DmHistoryUnitGeneral dmHistoryUnitGeneral) throws SystemException {
-		return super.remove(dmHistoryUnitGeneral);
 	}
 
 	@Override
@@ -305,20 +311,7 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryUnitGeneralModelImpl dmHistoryUnitGeneralModelImpl = (DmHistoryUnitGeneralModelImpl)dmHistoryUnitGeneral;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UNITCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryUnitGeneralModelImpl.getUnitCode(),
-				
-			dmHistoryUnitGeneralModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryUnitGeneralModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryUnitGeneralImpl.class, dmHistoryUnitGeneral.getPrimaryKey());
+		clearCache(dmHistoryUnitGeneral);
 
 		return dmHistoryUnitGeneral;
 	}
@@ -1202,7 +1195,7 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 	public void removeByUnitCode(String unitCode) throws SystemException {
 		for (DmHistoryUnitGeneral dmHistoryUnitGeneral : findByUnitCode(
 				unitCode)) {
-			dmHistoryUnitGeneralPersistence.remove(dmHistoryUnitGeneral);
+			remove(dmHistoryUnitGeneral);
 		}
 	}
 
@@ -1219,7 +1212,7 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 		DmHistoryUnitGeneral dmHistoryUnitGeneral = findByUnitCodeAndSyncVersion(unitCode,
 				syncVersion);
 
-		dmHistoryUnitGeneralPersistence.remove(dmHistoryUnitGeneral);
+		remove(dmHistoryUnitGeneral);
 	}
 
 	/**
@@ -1229,7 +1222,7 @@ public class DmHistoryUnitGeneralPersistenceImpl extends BasePersistenceImpl<DmH
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryUnitGeneral dmHistoryUnitGeneral : findAll()) {
-			dmHistoryUnitGeneralPersistence.remove(dmHistoryUnitGeneral);
+			remove(dmHistoryUnitGeneral);
 		}
 	}
 

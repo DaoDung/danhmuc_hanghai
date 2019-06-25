@@ -199,6 +199,23 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmSecurityLevel);
+	}
+
+	@Override
+	public void clearCache(List<DmSecurityLevel> dmSecurityLevels) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmSecurityLevel dmSecurityLevel : dmSecurityLevels) {
+			EntityCacheUtil.removeResult(DmSecurityLevelModelImpl.ENTITY_CACHE_ENABLED,
+				DmSecurityLevelImpl.class, dmSecurityLevel.getPrimaryKey());
+
+			clearUniqueFindersCache(dmSecurityLevel);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DmSecurityLevel dmSecurityLevel) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SECURITYLEVELCODEANDSYNCVERSION,
 			new Object[] {
 				dmSecurityLevel.getSecurityLevelCode(),
@@ -225,20 +242,6 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 	/**
 	 * Removes the dm security level with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm security level
-	 * @return the dm security level that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm security level with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmSecurityLevel remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm security level with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm security level
 	 * @return the dm security level that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmSecurityLevelException if a dm security level with the primary key could not be found
@@ -246,24 +249,38 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 	 */
 	public DmSecurityLevel remove(int id)
 		throws NoSuchDmSecurityLevelException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm security level with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm security level
+	 * @return the dm security level that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmSecurityLevelException if a dm security level with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmSecurityLevel remove(Serializable primaryKey)
+		throws NoSuchDmSecurityLevelException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmSecurityLevel dmSecurityLevel = (DmSecurityLevel)session.get(DmSecurityLevelImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmSecurityLevel == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmSecurityLevelException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmSecurityLevelPersistence.remove(dmSecurityLevel);
+			return remove(dmSecurityLevel);
 		}
 		catch (NoSuchDmSecurityLevelException nsee) {
 			throw nsee;
@@ -274,19 +291,6 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm security level from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmSecurityLevel the dm security level
-	 * @return the dm security level that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmSecurityLevel remove(DmSecurityLevel dmSecurityLevel)
-		throws SystemException {
-		return super.remove(dmSecurityLevel);
 	}
 
 	@Override
@@ -308,20 +312,7 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmSecurityLevelModelImpl dmSecurityLevelModelImpl = (DmSecurityLevelModelImpl)dmSecurityLevel;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SECURITYLEVELCODEANDSYNCVERSION,
-			new Object[] {
-				dmSecurityLevelModelImpl.getSecurityLevelCode(),
-				
-			dmSecurityLevelModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmSecurityLevelModelImpl.ENTITY_CACHE_ENABLED,
-			DmSecurityLevelImpl.class, dmSecurityLevel.getPrimaryKey());
+		clearCache(dmSecurityLevel);
 
 		return dmSecurityLevel;
 	}
@@ -1214,7 +1205,7 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 		throws SystemException {
 		for (DmSecurityLevel dmSecurityLevel : findBySecurityLevelCode(
 				securityLevelCode)) {
-			dmSecurityLevelPersistence.remove(dmSecurityLevel);
+			remove(dmSecurityLevel);
 		}
 	}
 
@@ -1231,7 +1222,7 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 		DmSecurityLevel dmSecurityLevel = findBySecurityLevelCodeAndSyncVersion(securityLevelCode,
 				syncVersion);
 
-		dmSecurityLevelPersistence.remove(dmSecurityLevel);
+		remove(dmSecurityLevel);
 	}
 
 	/**
@@ -1241,7 +1232,7 @@ public class DmSecurityLevelPersistenceImpl extends BasePersistenceImpl<DmSecuri
 	 */
 	public void removeAll() throws SystemException {
 		for (DmSecurityLevel dmSecurityLevel : findAll()) {
-			dmSecurityLevelPersistence.remove(dmSecurityLevel);
+			remove(dmSecurityLevel);
 		}
 	}
 

@@ -115,6 +115,8 @@ public class DmDocTypeModelImpl extends BaseModelImpl<DmDocType>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

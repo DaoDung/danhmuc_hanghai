@@ -180,7 +180,12 @@ public class DmMaritimeClp extends BaseModelImpl<DmMaritime>
 	}
 
 	public void persist() throws SystemException {
-		DmMaritimeLocalServiceUtil.updateDmMaritime(this);
+		if (this.isNew()) {
+			DmMaritimeLocalServiceUtil.addDmMaritime(this);
+		}
+		else {
+			DmMaritimeLocalServiceUtil.updateDmMaritime(this);
+		}
 	}
 
 	@Override

@@ -39,6 +39,11 @@ public abstract class ResultHistoryMinistryBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a result history ministry model instance should use the {@link ResultHistoryMinistry} interface instead.
 	 */
 	public void persist() throws SystemException {
-		ResultHistoryMinistryLocalServiceUtil.updateResultHistoryMinistry(this);
+		if (this.isNew()) {
+			ResultHistoryMinistryLocalServiceUtil.addResultHistoryMinistry(this);
+		}
+		else {
+			ResultHistoryMinistryLocalServiceUtil.updateResultHistoryMinistry(this);
+		}
 	}
 }

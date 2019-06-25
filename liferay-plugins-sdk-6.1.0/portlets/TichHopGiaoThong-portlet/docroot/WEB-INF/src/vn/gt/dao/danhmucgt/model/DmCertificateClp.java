@@ -140,7 +140,12 @@ public class DmCertificateClp extends BaseModelImpl<DmCertificate>
 	}
 
 	public void persist() throws SystemException {
-		DmCertificateLocalServiceUtil.updateDmCertificate(this);
+		if (this.isNew()) {
+			DmCertificateLocalServiceUtil.addDmCertificate(this);
+		}
+		else {
+			DmCertificateLocalServiceUtil.updateDmCertificate(this);
+		}
 	}
 
 	@Override

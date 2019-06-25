@@ -173,6 +173,8 @@ public class DmGtRouteConfigModelImpl extends BaseModelImpl<DmGtRouteConfig>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

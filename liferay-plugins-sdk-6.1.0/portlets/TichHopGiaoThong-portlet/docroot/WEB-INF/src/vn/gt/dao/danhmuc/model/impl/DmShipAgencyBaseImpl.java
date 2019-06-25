@@ -39,6 +39,11 @@ public abstract class DmShipAgencyBaseImpl extends DmShipAgencyModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm ship agency model instance should use the {@link DmShipAgency} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmShipAgencyLocalServiceUtil.updateDmShipAgency(this);
+		if (this.isNew()) {
+			DmShipAgencyLocalServiceUtil.addDmShipAgency(this);
+		}
+		else {
+			DmShipAgencyLocalServiceUtil.updateDmShipAgency(this);
+		}
 	}
 }

@@ -39,6 +39,11 @@ public abstract class DmEnterriseBaseImpl extends DmEnterriseModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm enterrise model instance should use the {@link DmEnterrise} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmEnterriseLocalServiceUtil.updateDmEnterrise(this);
+		if (this.isNew()) {
+			DmEnterriseLocalServiceUtil.addDmEnterrise(this);
+		}
+		else {
+			DmEnterriseLocalServiceUtil.updateDmEnterrise(this);
+		}
 	}
 }

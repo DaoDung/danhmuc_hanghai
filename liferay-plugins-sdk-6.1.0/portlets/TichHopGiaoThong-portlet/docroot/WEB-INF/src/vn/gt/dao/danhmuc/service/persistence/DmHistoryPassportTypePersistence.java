@@ -14,7 +14,6 @@
 
 package vn.gt.dao.danhmuc.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.danhmuc.model.DmHistoryPassportType;
@@ -349,7 +348,4 @@ public interface DmHistoryPassportTypePersistence extends BasePersistence<DmHist
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public DmHistoryPassportType remove(
-		DmHistoryPassportType dmHistoryPassportType) throws SystemException;
 }

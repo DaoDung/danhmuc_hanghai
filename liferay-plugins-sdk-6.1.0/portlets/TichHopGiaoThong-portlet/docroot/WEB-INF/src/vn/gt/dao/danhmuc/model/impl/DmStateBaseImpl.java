@@ -39,6 +39,11 @@ public abstract class DmStateBaseImpl extends DmStateModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm state model instance should use the {@link DmState} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmStateLocalServiceUtil.updateDmState(this);
+		if (this.isNew()) {
+			DmStateLocalServiceUtil.addDmState(this);
+		}
+		else {
+			DmStateLocalServiceUtil.updateDmState(this);
+		}
 	}
 }

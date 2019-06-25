@@ -82,7 +82,12 @@ public class ResponseBoClp extends BaseModelImpl<ResponseBo>
 	}
 
 	public void persist() throws SystemException {
-		ResponseBoLocalServiceUtil.updateResponseBo(this);
+		if (this.isNew()) {
+			ResponseBoLocalServiceUtil.addResponseBo(this);
+		}
+		else {
+			ResponseBoLocalServiceUtil.updateResponseBo(this);
+		}
 	}
 
 	@Override

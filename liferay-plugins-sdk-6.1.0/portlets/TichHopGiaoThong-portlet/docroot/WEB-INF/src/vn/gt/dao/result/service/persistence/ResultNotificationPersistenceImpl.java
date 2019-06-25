@@ -217,6 +217,17 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<ResultNotification> resultNotifications) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResultNotification resultNotification : resultNotifications) {
+			EntityCacheUtil.removeResult(ResultNotificationModelImpl.ENTITY_CACHE_ENABLED,
+				ResultNotificationImpl.class, resultNotification.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new result notification with the primary key. Does not add the result notification to the database.
 	 *
@@ -235,20 +246,6 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 	/**
 	 * Removes the result notification with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the result notification
-	 * @return the result notification that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a result notification with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultNotification remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the result notification with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the result notification
 	 * @return the result notification that was removed
 	 * @throws vn.gt.dao.result.NoSuchResultNotificationException if a result notification with the primary key could not be found
@@ -256,24 +253,38 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 	 */
 	public ResultNotification remove(long id)
 		throws NoSuchResultNotificationException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the result notification with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the result notification
+	 * @return the result notification that was removed
+	 * @throws vn.gt.dao.result.NoSuchResultNotificationException if a result notification with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ResultNotification remove(Serializable primaryKey)
+		throws NoSuchResultNotificationException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			ResultNotification resultNotification = (ResultNotification)session.get(ResultNotificationImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (resultNotification == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchResultNotificationException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return resultNotificationPersistence.remove(resultNotification);
+			return remove(resultNotification);
 		}
 		catch (NoSuchResultNotificationException nsee) {
 			throw nsee;
@@ -284,19 +295,6 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the result notification from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param resultNotification the result notification
-	 * @return the result notification that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ResultNotification remove(ResultNotification resultNotification)
-		throws SystemException {
-		return super.remove(resultNotification);
 	}
 
 	@Override
@@ -318,11 +316,7 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(ResultNotificationModelImpl.ENTITY_CACHE_ENABLED,
-			ResultNotificationImpl.class, resultNotification.getPrimaryKey());
+		clearCache(resultNotification);
 
 		return resultNotification;
 	}
@@ -1457,7 +1451,7 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 		long documentName, int documentYear) throws SystemException {
 		for (ResultNotification resultNotification : findByBusinessTypeCode(
 				businessTypeCode, documentName, documentYear)) {
-			resultNotificationPersistence.remove(resultNotification);
+			remove(resultNotification);
 		}
 	}
 
@@ -1472,7 +1466,7 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 		int documentYear) throws SystemException {
 		for (ResultNotification resultNotification : findByDocumentNameAnddocumentYear(
 				documentName, documentYear)) {
-			resultNotificationPersistence.remove(resultNotification);
+			remove(resultNotification);
 		}
 	}
 
@@ -1483,7 +1477,7 @@ public class ResultNotificationPersistenceImpl extends BasePersistenceImpl<Resul
 	 */
 	public void removeAll() throws SystemException {
 		for (ResultNotification resultNotification : findAll()) {
-			resultNotificationPersistence.remove(resultNotification);
+			remove(resultNotification);
 		}
 	}
 

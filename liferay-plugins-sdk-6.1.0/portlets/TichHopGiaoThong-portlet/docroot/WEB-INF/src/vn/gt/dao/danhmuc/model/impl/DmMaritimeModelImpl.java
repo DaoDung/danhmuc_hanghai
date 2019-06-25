@@ -124,6 +124,8 @@ public class DmMaritimeModelImpl extends BaseModelImpl<DmMaritime>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

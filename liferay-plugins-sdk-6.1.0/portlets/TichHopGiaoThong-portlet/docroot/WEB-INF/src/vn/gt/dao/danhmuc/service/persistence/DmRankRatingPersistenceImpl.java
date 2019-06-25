@@ -172,6 +172,17 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmRankRating> dmRankRatings) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmRankRating dmRankRating : dmRankRatings) {
+			EntityCacheUtil.removeResult(DmRankRatingModelImpl.ENTITY_CACHE_ENABLED,
+				DmRankRatingImpl.class, dmRankRating.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm rank rating with the primary key. Does not add the dm rank rating to the database.
 	 *
@@ -190,20 +201,6 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 	/**
 	 * Removes the dm rank rating with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm rank rating
-	 * @return the dm rank rating that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm rank rating with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmRankRating remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm rank rating with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm rank rating
 	 * @return the dm rank rating that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmRankRatingException if a dm rank rating with the primary key could not be found
@@ -211,24 +208,38 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 	 */
 	public DmRankRating remove(int id)
 		throws NoSuchDmRankRatingException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm rank rating with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm rank rating
+	 * @return the dm rank rating that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmRankRatingException if a dm rank rating with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmRankRating remove(Serializable primaryKey)
+		throws NoSuchDmRankRatingException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmRankRating dmRankRating = (DmRankRating)session.get(DmRankRatingImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmRankRating == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmRankRatingException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmRankRatingPersistence.remove(dmRankRating);
+			return remove(dmRankRating);
 		}
 		catch (NoSuchDmRankRatingException nsee) {
 			throw nsee;
@@ -239,19 +250,6 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm rank rating from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmRankRating the dm rank rating
-	 * @return the dm rank rating that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmRankRating remove(DmRankRating dmRankRating)
-		throws SystemException {
-		return super.remove(dmRankRating);
 	}
 
 	@Override
@@ -273,11 +271,7 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmRankRatingModelImpl.ENTITY_CACHE_ENABLED,
-			DmRankRatingImpl.class, dmRankRating.getPrimaryKey());
+		clearCache(dmRankRating);
 
 		return dmRankRating;
 	}
@@ -955,7 +949,7 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 	 */
 	public void removeByRankCode(String rankCode) throws SystemException {
 		for (DmRankRating dmRankRating : findByRankCode(rankCode)) {
-			dmRankRatingPersistence.remove(dmRankRating);
+			remove(dmRankRating);
 		}
 	}
 
@@ -966,7 +960,7 @@ public class DmRankRatingPersistenceImpl extends BasePersistenceImpl<DmRankRatin
 	 */
 	public void removeAll() throws SystemException {
 		for (DmRankRating dmRankRating : findAll()) {
-			dmRankRatingPersistence.remove(dmRankRating);
+			remove(dmRankRating);
 		}
 	}
 

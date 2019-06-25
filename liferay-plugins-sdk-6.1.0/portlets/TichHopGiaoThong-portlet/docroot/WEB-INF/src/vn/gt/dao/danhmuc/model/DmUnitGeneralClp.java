@@ -124,7 +124,12 @@ public class DmUnitGeneralClp extends BaseModelImpl<DmUnitGeneral>
 	}
 
 	public void persist() throws SystemException {
-		DmUnitGeneralLocalServiceUtil.updateDmUnitGeneral(this);
+		if (this.isNew()) {
+			DmUnitGeneralLocalServiceUtil.addDmUnitGeneral(this);
+		}
+		else {
+			DmUnitGeneralLocalServiceUtil.updateDmUnitGeneral(this);
+		}
 	}
 
 	@Override

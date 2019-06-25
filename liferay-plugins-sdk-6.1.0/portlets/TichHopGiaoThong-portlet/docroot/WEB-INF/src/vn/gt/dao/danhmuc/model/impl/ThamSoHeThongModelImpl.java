@@ -154,6 +154,8 @@ public class ThamSoHeThongModelImpl extends BaseModelImpl<ThamSoHeThong>
 	}
 
 	public void setId(long id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

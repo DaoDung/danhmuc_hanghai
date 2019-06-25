@@ -286,7 +286,12 @@ public class TempDebitNoteClp extends BaseModelImpl<TempDebitNote>
 	}
 
 	public void persist() throws SystemException {
-		TempDebitNoteLocalServiceUtil.updateTempDebitNote(this);
+		if (this.isNew()) {
+			TempDebitNoteLocalServiceUtil.addTempDebitNote(this);
+		}
+		else {
+			TempDebitNoteLocalServiceUtil.updateTempDebitNote(this);
+		}
 	}
 
 	@Override

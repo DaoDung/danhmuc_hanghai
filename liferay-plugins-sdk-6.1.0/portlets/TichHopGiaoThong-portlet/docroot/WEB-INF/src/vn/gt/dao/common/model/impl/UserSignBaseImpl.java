@@ -39,6 +39,11 @@ public abstract class UserSignBaseImpl extends UserSignModelImpl
 	 * Never modify or reference this class directly. All methods that expect a user sign model instance should use the {@link UserSign} interface instead.
 	 */
 	public void persist() throws SystemException {
-		UserSignLocalServiceUtil.updateUserSign(this);
+		if (this.isNew()) {
+			UserSignLocalServiceUtil.addUserSign(this);
+		}
+		else {
+			UserSignLocalServiceUtil.updateUserSign(this);
+		}
 	}
 }

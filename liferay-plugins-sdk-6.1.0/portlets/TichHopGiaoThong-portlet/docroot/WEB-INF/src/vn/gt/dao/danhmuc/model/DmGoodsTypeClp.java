@@ -140,7 +140,12 @@ public class DmGoodsTypeClp extends BaseModelImpl<DmGoodsType>
 	}
 
 	public void persist() throws SystemException {
-		DmGoodsTypeLocalServiceUtil.updateDmGoodsType(this);
+		if (this.isNew()) {
+			DmGoodsTypeLocalServiceUtil.addDmGoodsType(this);
+		}
+		else {
+			DmGoodsTypeLocalServiceUtil.updateDmGoodsType(this);
+		}
 	}
 
 	@Override

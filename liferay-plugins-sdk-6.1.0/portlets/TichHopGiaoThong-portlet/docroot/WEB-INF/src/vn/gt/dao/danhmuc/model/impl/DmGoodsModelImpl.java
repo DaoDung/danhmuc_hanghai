@@ -116,6 +116,8 @@ public class DmGoodsModelImpl extends BaseModelImpl<DmGoods>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

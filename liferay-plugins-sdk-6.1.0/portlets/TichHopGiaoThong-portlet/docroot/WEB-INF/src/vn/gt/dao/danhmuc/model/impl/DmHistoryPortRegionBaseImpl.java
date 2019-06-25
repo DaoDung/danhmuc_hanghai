@@ -39,6 +39,11 @@ public abstract class DmHistoryPortRegionBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history port region model instance should use the {@link DmHistoryPortRegion} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryPortRegionLocalServiceUtil.updateDmHistoryPortRegion(this);
+		if (this.isNew()) {
+			DmHistoryPortRegionLocalServiceUtil.addDmHistoryPortRegion(this);
+		}
+		else {
+			DmHistoryPortRegionLocalServiceUtil.updateDmHistoryPortRegion(this);
+		}
 	}
 }

@@ -179,6 +179,17 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<HistorySyncVersion> historySyncVersions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (HistorySyncVersion historySyncVersion : historySyncVersions) {
+			EntityCacheUtil.removeResult(HistorySyncVersionModelImpl.ENTITY_CACHE_ENABLED,
+				HistorySyncVersionImpl.class, historySyncVersion.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new history sync version with the primary key. Does not add the history sync version to the database.
 	 *
@@ -197,20 +208,6 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 	/**
 	 * Removes the history sync version with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the history sync version
-	 * @return the history sync version that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a history sync version with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public HistorySyncVersion remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the history sync version with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the history sync version
 	 * @return the history sync version that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchHistorySyncVersionException if a history sync version with the primary key could not be found
@@ -218,24 +215,38 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 	 */
 	public HistorySyncVersion remove(long id)
 		throws NoSuchHistorySyncVersionException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the history sync version with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the history sync version
+	 * @return the history sync version that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchHistorySyncVersionException if a history sync version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public HistorySyncVersion remove(Serializable primaryKey)
+		throws NoSuchHistorySyncVersionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			HistorySyncVersion historySyncVersion = (HistorySyncVersion)session.get(HistorySyncVersionImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (historySyncVersion == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchHistorySyncVersionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return historySyncVersionPersistence.remove(historySyncVersion);
+			return remove(historySyncVersion);
 		}
 		catch (NoSuchHistorySyncVersionException nsee) {
 			throw nsee;
@@ -246,19 +257,6 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the history sync version from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param historySyncVersion the history sync version
-	 * @return the history sync version that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public HistorySyncVersion remove(HistorySyncVersion historySyncVersion)
-		throws SystemException {
-		return super.remove(historySyncVersion);
 	}
 
 	@Override
@@ -280,11 +278,7 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(HistorySyncVersionModelImpl.ENTITY_CACHE_ENABLED,
-			HistorySyncVersionImpl.class, historySyncVersion.getPrimaryKey());
+		clearCache(historySyncVersion);
 
 		return historySyncVersion;
 	}
@@ -969,7 +963,7 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 		throws SystemException {
 		for (HistorySyncVersion historySyncVersion : findBySyncVersion(
 				syncVersion)) {
-			historySyncVersionPersistence.remove(historySyncVersion);
+			remove(historySyncVersion);
 		}
 	}
 
@@ -980,7 +974,7 @@ public class HistorySyncVersionPersistenceImpl extends BasePersistenceImpl<Histo
 	 */
 	public void removeAll() throws SystemException {
 		for (HistorySyncVersion historySyncVersion : findAll()) {
-			historySyncVersionPersistence.remove(historySyncVersion);
+			remove(historySyncVersion);
 		}
 	}
 

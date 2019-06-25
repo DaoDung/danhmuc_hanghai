@@ -95,14 +95,6 @@ public class DmGtReportTemplateUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGtReportTemplate remove(
-		DmGtReportTemplate dmGtReportTemplate) throws SystemException {
-		return getPersistence().remove(dmGtReportTemplate);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGtReportTemplate update(

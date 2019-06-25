@@ -39,6 +39,11 @@ public abstract class DmDataItemBaseImpl extends DmDataItemModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm data item model instance should use the {@link DmDataItem} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmDataItemLocalServiceUtil.updateDmDataItem(this);
+		if (this.isNew()) {
+			DmDataItemLocalServiceUtil.addDmDataItem(this);
+		}
+		else {
+			DmDataItemLocalServiceUtil.updateDmDataItem(this);
+		}
 	}
 }

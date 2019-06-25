@@ -130,6 +130,8 @@ public class DmHistoryEnterriseModelImpl extends BaseModelImpl<DmHistoryEnterris
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

@@ -201,6 +201,17 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<HistoryRmdcShip> historyRmdcShips) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (HistoryRmdcShip historyRmdcShip : historyRmdcShips) {
+			EntityCacheUtil.removeResult(HistoryRmdcShipModelImpl.ENTITY_CACHE_ENABLED,
+				HistoryRmdcShipImpl.class, historyRmdcShip.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new history rmdc ship with the primary key. Does not add the history rmdc ship to the database.
 	 *
@@ -219,20 +230,6 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 	/**
 	 * Removes the history rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the history rmdc ship
-	 * @return the history rmdc ship that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a history rmdc ship with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public HistoryRmdcShip remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the history rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the history rmdc ship
 	 * @return the history rmdc ship that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchHistoryRmdcShipException if a history rmdc ship with the primary key could not be found
@@ -240,24 +237,38 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 	 */
 	public HistoryRmdcShip remove(long id)
 		throws NoSuchHistoryRmdcShipException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the history rmdc ship with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the history rmdc ship
+	 * @return the history rmdc ship that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchHistoryRmdcShipException if a history rmdc ship with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public HistoryRmdcShip remove(Serializable primaryKey)
+		throws NoSuchHistoryRmdcShipException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			HistoryRmdcShip historyRmdcShip = (HistoryRmdcShip)session.get(HistoryRmdcShipImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (historyRmdcShip == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchHistoryRmdcShipException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return historyRmdcShipPersistence.remove(historyRmdcShip);
+			return remove(historyRmdcShip);
 		}
 		catch (NoSuchHistoryRmdcShipException nsee) {
 			throw nsee;
@@ -268,19 +279,6 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the history rmdc ship from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param historyRmdcShip the history rmdc ship
-	 * @return the history rmdc ship that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public HistoryRmdcShip remove(HistoryRmdcShip historyRmdcShip)
-		throws SystemException {
-		return super.remove(historyRmdcShip);
 	}
 
 	@Override
@@ -302,11 +300,7 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(HistoryRmdcShipModelImpl.ENTITY_CACHE_ENABLED,
-			HistoryRmdcShipImpl.class, historyRmdcShip.getPrimaryKey());
+		clearCache(historyRmdcShip);
 
 		return historyRmdcShip;
 	}
@@ -1406,7 +1400,7 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 	public void removeBySyncVersion(String syncVersion)
 		throws SystemException {
 		for (HistoryRmdcShip historyRmdcShip : findBySyncVersion(syncVersion)) {
-			historyRmdcShipPersistence.remove(historyRmdcShip);
+			remove(historyRmdcShip);
 		}
 	}
 
@@ -1419,7 +1413,7 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 	public void removeByShipTypeCode(String shipTypeCode)
 		throws SystemException {
 		for (HistoryRmdcShip historyRmdcShip : findByShipTypeCode(shipTypeCode)) {
-			historyRmdcShipPersistence.remove(historyRmdcShip);
+			remove(historyRmdcShip);
 		}
 	}
 
@@ -1430,7 +1424,7 @@ public class HistoryRmdcShipPersistenceImpl extends BasePersistenceImpl<HistoryR
 	 */
 	public void removeAll() throws SystemException {
 		for (HistoryRmdcShip historyRmdcShip : findAll()) {
-			historyRmdcShipPersistence.remove(historyRmdcShip);
+			remove(historyRmdcShip);
 		}
 	}
 

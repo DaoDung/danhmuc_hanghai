@@ -39,6 +39,11 @@ public abstract class DmGtRouteConfigBaseImpl extends DmGtRouteConfigModelImpl
 	 * Never modify or reference this class directly. All methods that expect a dm gt route config model instance should use the {@link DmGtRouteConfig} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmGtRouteConfigLocalServiceUtil.updateDmGtRouteConfig(this);
+		if (this.isNew()) {
+			DmGtRouteConfigLocalServiceUtil.addDmGtRouteConfig(this);
+		}
+		else {
+			DmGtRouteConfigLocalServiceUtil.updateDmGtRouteConfig(this);
+		}
 	}
 }

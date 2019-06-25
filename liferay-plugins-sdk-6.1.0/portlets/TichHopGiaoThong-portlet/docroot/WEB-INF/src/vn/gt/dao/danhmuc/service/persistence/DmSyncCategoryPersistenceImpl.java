@@ -154,6 +154,17 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmSyncCategory> dmSyncCategories) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmSyncCategory dmSyncCategory : dmSyncCategories) {
+			EntityCacheUtil.removeResult(DmSyncCategoryModelImpl.ENTITY_CACHE_ENABLED,
+				DmSyncCategoryImpl.class, dmSyncCategory.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm sync category with the primary key. Does not add the dm sync category to the database.
 	 *
@@ -172,20 +183,6 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 	/**
 	 * Removes the dm sync category with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm sync category
-	 * @return the dm sync category that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm sync category with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmSyncCategory remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Long)primaryKey).longValue());
-	}
-
-	/**
-	 * Removes the dm sync category with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm sync category
 	 * @return the dm sync category that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmSyncCategoryException if a dm sync category with the primary key could not be found
@@ -193,24 +190,38 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 	 */
 	public DmSyncCategory remove(long id)
 		throws NoSuchDmSyncCategoryException, SystemException {
+		return remove(Long.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm sync category with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm sync category
+	 * @return the dm sync category that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmSyncCategoryException if a dm sync category with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmSyncCategory remove(Serializable primaryKey)
+		throws NoSuchDmSyncCategoryException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmSyncCategory dmSyncCategory = (DmSyncCategory)session.get(DmSyncCategoryImpl.class,
-					Long.valueOf(id));
+					primaryKey);
 
 			if (dmSyncCategory == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmSyncCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmSyncCategoryPersistence.remove(dmSyncCategory);
+			return remove(dmSyncCategory);
 		}
 		catch (NoSuchDmSyncCategoryException nsee) {
 			throw nsee;
@@ -221,19 +232,6 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm sync category from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmSyncCategory the dm sync category
-	 * @return the dm sync category that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmSyncCategory remove(DmSyncCategory dmSyncCategory)
-		throws SystemException {
-		return super.remove(dmSyncCategory);
 	}
 
 	@Override
@@ -255,11 +253,7 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmSyncCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			DmSyncCategoryImpl.class, dmSyncCategory.getPrimaryKey());
+		clearCache(dmSyncCategory);
 
 		return dmSyncCategory;
 	}
@@ -534,7 +528,7 @@ public class DmSyncCategoryPersistenceImpl extends BasePersistenceImpl<DmSyncCat
 	 */
 	public void removeAll() throws SystemException {
 		for (DmSyncCategory dmSyncCategory : findAll()) {
-			dmSyncCategoryPersistence.remove(dmSyncCategory);
+			remove(dmSyncCategory);
 		}
 	}
 

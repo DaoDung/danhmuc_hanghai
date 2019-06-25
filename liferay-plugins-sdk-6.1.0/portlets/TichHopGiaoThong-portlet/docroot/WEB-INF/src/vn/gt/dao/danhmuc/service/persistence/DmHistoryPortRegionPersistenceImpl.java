@@ -199,6 +199,25 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
+		clearUniqueFindersCache(dmHistoryPortRegion);
+	}
+
+	@Override
+	public void clearCache(List<DmHistoryPortRegion> dmHistoryPortRegions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryPortRegion dmHistoryPortRegion : dmHistoryPortRegions) {
+			EntityCacheUtil.removeResult(DmHistoryPortRegionModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryPortRegionImpl.class,
+				dmHistoryPortRegion.getPrimaryKey());
+
+			clearUniqueFindersCache(dmHistoryPortRegion);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DmHistoryPortRegion dmHistoryPortRegion) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTREGIONCODEANDSYNCVERSION,
 			new Object[] {
 				dmHistoryPortRegion.getPortRegionCode(),
@@ -225,20 +244,6 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 	/**
 	 * Removes the dm history port region with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history port region
-	 * @return the dm history port region that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history port region with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortRegion remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history port region with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history port region
 	 * @return the dm history port region that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortRegionException if a dm history port region with the primary key could not be found
@@ -246,24 +251,38 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public DmHistoryPortRegion remove(int id)
 		throws NoSuchDmHistoryPortRegionException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history port region with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history port region
+	 * @return the dm history port region that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryPortRegionException if a dm history port region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryPortRegion remove(Serializable primaryKey)
+		throws NoSuchDmHistoryPortRegionException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryPortRegion dmHistoryPortRegion = (DmHistoryPortRegion)session.get(DmHistoryPortRegionImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryPortRegion == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryPortRegionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryPortRegionPersistence.remove(dmHistoryPortRegion);
+			return remove(dmHistoryPortRegion);
 		}
 		catch (NoSuchDmHistoryPortRegionException nsee) {
 			throw nsee;
@@ -274,19 +293,6 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history port region from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryPortRegion the dm history port region
-	 * @return the dm history port region that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryPortRegion remove(DmHistoryPortRegion dmHistoryPortRegion)
-		throws SystemException {
-		return super.remove(dmHistoryPortRegion);
 	}
 
 	@Override
@@ -308,20 +314,7 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		DmHistoryPortRegionModelImpl dmHistoryPortRegionModelImpl = (DmHistoryPortRegionModelImpl)dmHistoryPortRegion;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTREGIONCODEANDSYNCVERSION,
-			new Object[] {
-				dmHistoryPortRegionModelImpl.getPortRegionCode(),
-				
-			dmHistoryPortRegionModelImpl.getSyncVersion()
-			});
-
-		EntityCacheUtil.removeResult(DmHistoryPortRegionModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryPortRegionImpl.class, dmHistoryPortRegion.getPrimaryKey());
+		clearCache(dmHistoryPortRegion);
 
 		return dmHistoryPortRegion;
 	}
@@ -1221,7 +1214,7 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 		throws SystemException {
 		for (DmHistoryPortRegion dmHistoryPortRegion : findByPortRegionCode(
 				portRegionCode)) {
-			dmHistoryPortRegionPersistence.remove(dmHistoryPortRegion);
+			remove(dmHistoryPortRegion);
 		}
 	}
 
@@ -1238,7 +1231,7 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 		DmHistoryPortRegion dmHistoryPortRegion = findByPortRegionCodeAndSyncVersion(portRegionCode,
 				syncVersion);
 
-		dmHistoryPortRegionPersistence.remove(dmHistoryPortRegion);
+		remove(dmHistoryPortRegion);
 	}
 
 	/**
@@ -1248,7 +1241,7 @@ public class DmHistoryPortRegionPersistenceImpl extends BasePersistenceImpl<DmHi
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryPortRegion dmHistoryPortRegion : findAll()) {
-			dmHistoryPortRegionPersistence.remove(dmHistoryPortRegion);
+			remove(dmHistoryPortRegion);
 		}
 	}
 

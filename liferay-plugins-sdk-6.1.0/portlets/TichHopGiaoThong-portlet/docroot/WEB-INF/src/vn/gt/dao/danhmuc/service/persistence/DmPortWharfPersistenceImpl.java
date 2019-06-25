@@ -218,6 +218,17 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmPortWharf> dmPortWharfs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmPortWharf dmPortWharf : dmPortWharfs) {
+			EntityCacheUtil.removeResult(DmPortWharfModelImpl.ENTITY_CACHE_ENABLED,
+				DmPortWharfImpl.class, dmPortWharf.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm port wharf with the primary key. Does not add the dm port wharf to the database.
 	 *
@@ -236,20 +247,6 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 	/**
 	 * Removes the dm port wharf with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm port wharf
-	 * @return the dm port wharf that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm port wharf with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPortWharf remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm port wharf with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm port wharf
 	 * @return the dm port wharf that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortWharfException if a dm port wharf with the primary key could not be found
@@ -257,24 +254,38 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 	 */
 	public DmPortWharf remove(int id)
 		throws NoSuchDmPortWharfException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm port wharf with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm port wharf
+	 * @return the dm port wharf that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmPortWharfException if a dm port wharf with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmPortWharf remove(Serializable primaryKey)
+		throws NoSuchDmPortWharfException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmPortWharf dmPortWharf = (DmPortWharf)session.get(DmPortWharfImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmPortWharf == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmPortWharfException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmPortWharfPersistence.remove(dmPortWharf);
+			return remove(dmPortWharf);
 		}
 		catch (NoSuchDmPortWharfException nsee) {
 			throw nsee;
@@ -285,19 +296,6 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm port wharf from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmPortWharf the dm port wharf
-	 * @return the dm port wharf that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmPortWharf remove(DmPortWharf dmPortWharf)
-		throws SystemException {
-		return super.remove(dmPortWharf);
 	}
 
 	@Override
@@ -319,11 +317,7 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmPortWharfModelImpl.ENTITY_CACHE_ENABLED,
-			DmPortWharfImpl.class, dmPortWharf.getPrimaryKey());
+		clearCache(dmPortWharf);
 
 		return dmPortWharf;
 	}
@@ -1862,7 +1856,7 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 	public void removeByPortWharfCode(String portWharfCode)
 		throws SystemException {
 		for (DmPortWharf dmPortWharf : findByPortWharfCode(portWharfCode)) {
-			dmPortWharfPersistence.remove(dmPortWharf);
+			remove(dmPortWharf);
 		}
 	}
 
@@ -1877,7 +1871,7 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 		String syncVersion) throws SystemException {
 		for (DmPortWharf dmPortWharf : findByPortWharfCodeAndSyncVersion(
 				portWharfCode, syncVersion)) {
-			dmPortWharfPersistence.remove(dmPortWharf);
+			remove(dmPortWharf);
 		}
 	}
 
@@ -1890,7 +1884,7 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 	public void removeByPortRegionCode(String portRegionCode)
 		throws SystemException {
 		for (DmPortWharf dmPortWharf : findByPortRegionCode(portRegionCode)) {
-			dmPortWharfPersistence.remove(dmPortWharf);
+			remove(dmPortWharf);
 		}
 	}
 
@@ -1901,7 +1895,7 @@ public class DmPortWharfPersistenceImpl extends BasePersistenceImpl<DmPortWharf>
 	 */
 	public void removeAll() throws SystemException {
 		for (DmPortWharf dmPortWharf : findAll()) {
-			dmPortWharfPersistence.remove(dmPortWharf);
+			remove(dmPortWharf);
 		}
 	}
 

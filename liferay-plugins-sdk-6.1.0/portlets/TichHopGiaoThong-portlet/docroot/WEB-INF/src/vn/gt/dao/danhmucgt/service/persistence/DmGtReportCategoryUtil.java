@@ -95,14 +95,6 @@ public class DmGtReportCategoryUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGtReportCategory remove(
-		DmGtReportCategory dmGtReportCategory) throws SystemException {
-		return getPersistence().remove(dmGtReportCategory);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGtReportCategory update(

@@ -316,7 +316,12 @@ public class HistoryRmdcShipClp extends BaseModelImpl<HistoryRmdcShip>
 	}
 
 	public void persist() throws SystemException {
-		HistoryRmdcShipLocalServiceUtil.updateHistoryRmdcShip(this);
+		if (this.isNew()) {
+			HistoryRmdcShipLocalServiceUtil.addHistoryRmdcShip(this);
+		}
+		else {
+			HistoryRmdcShipLocalServiceUtil.updateHistoryRmdcShip(this);
+		}
 	}
 
 	@Override

@@ -14,7 +14,6 @@
 
 package vn.gt.dao.nhapcanh.service.persistence;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import vn.gt.dao.nhapcanh.model.PassengerList;
@@ -159,7 +158,4 @@ public interface PassengerListPersistence extends BasePersistence<PassengerList>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public PassengerList remove(PassengerList passengerList)
-		throws SystemException;
 }

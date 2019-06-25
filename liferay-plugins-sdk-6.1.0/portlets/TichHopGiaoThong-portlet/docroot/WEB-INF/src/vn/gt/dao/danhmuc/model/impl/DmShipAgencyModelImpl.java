@@ -127,6 +127,8 @@ public class DmShipAgencyModelImpl extends BaseModelImpl<DmShipAgency>
 	}
 
 	public void setId(int id) {
+		_columnBitmask = -1L;
+
 		_id = id;
 	}
 

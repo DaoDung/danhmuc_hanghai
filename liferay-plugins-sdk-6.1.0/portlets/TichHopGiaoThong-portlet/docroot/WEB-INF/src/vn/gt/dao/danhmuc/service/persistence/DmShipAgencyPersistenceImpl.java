@@ -173,6 +173,17 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmShipAgency> dmShipAgencies) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmShipAgency dmShipAgency : dmShipAgencies) {
+			EntityCacheUtil.removeResult(DmShipAgencyModelImpl.ENTITY_CACHE_ENABLED,
+				DmShipAgencyImpl.class, dmShipAgency.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm ship agency with the primary key. Does not add the dm ship agency to the database.
 	 *
@@ -191,20 +202,6 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 	/**
 	 * Removes the dm ship agency with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm ship agency
-	 * @return the dm ship agency that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm ship agency with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmShipAgency remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm ship agency with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm ship agency
 	 * @return the dm ship agency that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmShipAgencyException if a dm ship agency with the primary key could not be found
@@ -212,24 +209,38 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 	 */
 	public DmShipAgency remove(int id)
 		throws NoSuchDmShipAgencyException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm ship agency with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm ship agency
+	 * @return the dm ship agency that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmShipAgencyException if a dm ship agency with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmShipAgency remove(Serializable primaryKey)
+		throws NoSuchDmShipAgencyException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmShipAgency dmShipAgency = (DmShipAgency)session.get(DmShipAgencyImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmShipAgency == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmShipAgencyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmShipAgencyPersistence.remove(dmShipAgency);
+			return remove(dmShipAgency);
 		}
 		catch (NoSuchDmShipAgencyException nsee) {
 			throw nsee;
@@ -240,19 +251,6 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm ship agency from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmShipAgency the dm ship agency
-	 * @return the dm ship agency that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmShipAgency remove(DmShipAgency dmShipAgency)
-		throws SystemException {
-		return super.remove(dmShipAgency);
 	}
 
 	@Override
@@ -274,11 +272,7 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmShipAgencyModelImpl.ENTITY_CACHE_ENABLED,
-			DmShipAgencyImpl.class, dmShipAgency.getPrimaryKey());
+		clearCache(dmShipAgency);
 
 		return dmShipAgency;
 	}
@@ -975,7 +969,7 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 	public void removeByShipAgencyCode(String shipAgencyCode)
 		throws SystemException {
 		for (DmShipAgency dmShipAgency : findByShipAgencyCode(shipAgencyCode)) {
-			dmShipAgencyPersistence.remove(dmShipAgency);
+			remove(dmShipAgency);
 		}
 	}
 
@@ -986,7 +980,7 @@ public class DmShipAgencyPersistenceImpl extends BasePersistenceImpl<DmShipAgenc
 	 */
 	public void removeAll() throws SystemException {
 		for (DmShipAgency dmShipAgency : findAll()) {
-			dmShipAgencyPersistence.remove(dmShipAgency);
+			remove(dmShipAgency);
 		}
 	}
 

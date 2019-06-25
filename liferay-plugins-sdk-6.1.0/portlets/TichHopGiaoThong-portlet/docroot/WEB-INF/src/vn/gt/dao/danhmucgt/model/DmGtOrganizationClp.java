@@ -140,7 +140,12 @@ public class DmGtOrganizationClp extends BaseModelImpl<DmGtOrganization>
 	}
 
 	public void persist() throws SystemException {
-		DmGtOrganizationLocalServiceUtil.updateDmGtOrganization(this);
+		if (this.isNew()) {
+			DmGtOrganizationLocalServiceUtil.addDmGtOrganization(this);
+		}
+		else {
+			DmGtOrganizationLocalServiceUtil.updateDmGtOrganization(this);
+		}
 	}
 
 	@Override

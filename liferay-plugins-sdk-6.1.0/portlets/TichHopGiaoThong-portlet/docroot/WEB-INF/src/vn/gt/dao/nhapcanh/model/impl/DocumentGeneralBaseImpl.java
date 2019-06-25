@@ -39,6 +39,11 @@ public abstract class DocumentGeneralBaseImpl extends DocumentGeneralModelImpl
 	 * Never modify or reference this class directly. All methods that expect a document general model instance should use the {@link DocumentGeneral} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DocumentGeneralLocalServiceUtil.updateDocumentGeneral(this);
+		if (this.isNew()) {
+			DocumentGeneralLocalServiceUtil.addDocumentGeneral(this);
+		}
+		else {
+			DocumentGeneralLocalServiceUtil.updateDocumentGeneral(this);
+		}
 	}
 }

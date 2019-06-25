@@ -95,14 +95,6 @@ public class DmGtVersionUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmGtVersion remove(DmGtVersion dmGtVersion)
-		throws SystemException {
-		return getPersistence().remove(dmGtVersion);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmGtVersion update(DmGtVersion dmGtVersion, boolean merge)

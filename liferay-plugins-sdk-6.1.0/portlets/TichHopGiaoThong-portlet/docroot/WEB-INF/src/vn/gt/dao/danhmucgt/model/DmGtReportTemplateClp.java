@@ -148,7 +148,12 @@ public class DmGtReportTemplateClp extends BaseModelImpl<DmGtReportTemplate>
 	}
 
 	public void persist() throws SystemException {
-		DmGtReportTemplateLocalServiceUtil.updateDmGtReportTemplate(this);
+		if (this.isNew()) {
+			DmGtReportTemplateLocalServiceUtil.addDmGtReportTemplate(this);
+		}
+		else {
+			DmGtReportTemplateLocalServiceUtil.updateDmGtReportTemplate(this);
+		}
 	}
 
 	@Override

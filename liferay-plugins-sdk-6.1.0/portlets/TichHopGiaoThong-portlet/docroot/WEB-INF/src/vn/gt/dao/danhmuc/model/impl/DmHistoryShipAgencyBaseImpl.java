@@ -39,6 +39,11 @@ public abstract class DmHistoryShipAgencyBaseImpl
 	 * Never modify or reference this class directly. All methods that expect a dm history ship agency model instance should use the {@link DmHistoryShipAgency} interface instead.
 	 */
 	public void persist() throws SystemException {
-		DmHistoryShipAgencyLocalServiceUtil.updateDmHistoryShipAgency(this);
+		if (this.isNew()) {
+			DmHistoryShipAgencyLocalServiceUtil.addDmHistoryShipAgency(this);
+		}
+		else {
+			DmHistoryShipAgencyLocalServiceUtil.updateDmHistoryShipAgency(this);
+		}
 	}
 }

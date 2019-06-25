@@ -100,7 +100,12 @@ public class DmSyncCategoryClp extends BaseModelImpl<DmSyncCategory>
 	}
 
 	public void persist() throws SystemException {
-		DmSyncCategoryLocalServiceUtil.updateDmSyncCategory(this);
+		if (this.isNew()) {
+			DmSyncCategoryLocalServiceUtil.addDmSyncCategory(this);
+		}
+		else {
+			DmSyncCategoryLocalServiceUtil.updateDmSyncCategory(this);
+		}
 	}
 
 	@Override

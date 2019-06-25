@@ -95,14 +95,6 @@ public class DmShipAgencyUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static DmShipAgency remove(DmShipAgency dmShipAgency)
-		throws SystemException {
-		return getPersistence().remove(dmShipAgency);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static DmShipAgency update(DmShipAgency dmShipAgency, boolean merge)

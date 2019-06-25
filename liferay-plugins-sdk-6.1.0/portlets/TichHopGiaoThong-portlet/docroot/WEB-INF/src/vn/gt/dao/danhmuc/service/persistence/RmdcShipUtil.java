@@ -95,13 +95,6 @@ public class RmdcShipUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static RmdcShip remove(RmdcShip rmdcShip) throws SystemException {
-		return getPersistence().remove(rmdcShip);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static RmdcShip update(RmdcShip rmdcShip, boolean merge)

@@ -196,7 +196,12 @@ public class DmHistoryPortClp extends BaseModelImpl<DmHistoryPort>
 	}
 
 	public void persist() throws SystemException {
-		DmHistoryPortLocalServiceUtil.updateDmHistoryPort(this);
+		if (this.isNew()) {
+			DmHistoryPortLocalServiceUtil.addDmHistoryPort(this);
+		}
+		else {
+			DmHistoryPortLocalServiceUtil.updateDmHistoryPort(this);
+		}
 	}
 
 	@Override

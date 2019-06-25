@@ -39,6 +39,11 @@ public abstract class CrewListBaseImpl extends CrewListModelImpl
 	 * Never modify or reference this class directly. All methods that expect a crew list model instance should use the {@link CrewList} interface instead.
 	 */
 	public void persist() throws SystemException {
-		CrewListLocalServiceUtil.updateCrewList(this);
+		if (this.isNew()) {
+			CrewListLocalServiceUtil.addCrewList(this);
+		}
+		else {
+			CrewListLocalServiceUtil.updateCrewList(this);
+		}
 	}
 }

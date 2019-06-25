@@ -95,13 +95,6 @@ public class CrewListUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static CrewList remove(CrewList crewList) throws SystemException {
-		return getPersistence().remove(crewList);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static CrewList update(CrewList crewList, boolean merge)

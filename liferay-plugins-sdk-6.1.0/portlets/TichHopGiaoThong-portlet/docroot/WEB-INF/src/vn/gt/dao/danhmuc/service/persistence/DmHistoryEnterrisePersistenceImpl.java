@@ -223,6 +223,17 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@Override
+	public void clearCache(List<DmHistoryEnterrise> dmHistoryEnterrises) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DmHistoryEnterrise dmHistoryEnterrise : dmHistoryEnterrises) {
+			EntityCacheUtil.removeResult(DmHistoryEnterriseModelImpl.ENTITY_CACHE_ENABLED,
+				DmHistoryEnterriseImpl.class, dmHistoryEnterrise.getPrimaryKey());
+		}
+	}
+
 	/**
 	 * Creates a new dm history enterrise with the primary key. Does not add the dm history enterrise to the database.
 	 *
@@ -241,20 +252,6 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 	/**
 	 * Removes the dm history enterrise with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the dm history enterrise
-	 * @return the dm history enterrise that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a dm history enterrise with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryEnterrise remove(Serializable primaryKey)
-		throws NoSuchModelException, SystemException {
-		return remove(((Integer)primaryKey).intValue());
-	}
-
-	/**
-	 * Removes the dm history enterrise with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
 	 * @param id the primary key of the dm history enterrise
 	 * @return the dm history enterrise that was removed
 	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryEnterriseException if a dm history enterrise with the primary key could not be found
@@ -262,24 +259,38 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 	 */
 	public DmHistoryEnterrise remove(int id)
 		throws NoSuchDmHistoryEnterriseException, SystemException {
+		return remove(Integer.valueOf(id));
+	}
+
+	/**
+	 * Removes the dm history enterrise with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the dm history enterrise
+	 * @return the dm history enterrise that was removed
+	 * @throws vn.gt.dao.danhmuc.NoSuchDmHistoryEnterriseException if a dm history enterrise with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DmHistoryEnterrise remove(Serializable primaryKey)
+		throws NoSuchDmHistoryEnterriseException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			DmHistoryEnterrise dmHistoryEnterrise = (DmHistoryEnterrise)session.get(DmHistoryEnterriseImpl.class,
-					Integer.valueOf(id));
+					primaryKey);
 
 			if (dmHistoryEnterrise == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
 				throw new NoSuchDmHistoryEnterriseException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					id);
+					primaryKey);
 			}
 
-			return dmHistoryEnterrisePersistence.remove(dmHistoryEnterrise);
+			return remove(dmHistoryEnterrise);
 		}
 		catch (NoSuchDmHistoryEnterriseException nsee) {
 			throw nsee;
@@ -290,19 +301,6 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 		finally {
 			closeSession(session);
 		}
-	}
-
-	/**
-	 * Removes the dm history enterrise from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param dmHistoryEnterrise the dm history enterrise
-	 * @return the dm history enterrise that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public DmHistoryEnterrise remove(DmHistoryEnterrise dmHistoryEnterrise)
-		throws SystemException {
-		return super.remove(dmHistoryEnterrise);
 	}
 
 	@Override
@@ -324,11 +322,7 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		EntityCacheUtil.removeResult(DmHistoryEnterriseModelImpl.ENTITY_CACHE_ENABLED,
-			DmHistoryEnterriseImpl.class, dmHistoryEnterrise.getPrimaryKey());
+		clearCache(dmHistoryEnterrise);
 
 		return dmHistoryEnterrise;
 	}
@@ -1825,7 +1819,7 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 		throws SystemException {
 		for (DmHistoryEnterrise dmHistoryEnterrise : findBySyncVersion(
 				syncVersion)) {
-			dmHistoryEnterrisePersistence.remove(dmHistoryEnterrise);
+			remove(dmHistoryEnterrise);
 		}
 	}
 
@@ -1839,7 +1833,7 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 		throws SystemException {
 		for (DmHistoryEnterrise dmHistoryEnterrise : findByEnterpriseCode(
 				enterpriseCode)) {
-			dmHistoryEnterrisePersistence.remove(dmHistoryEnterrise);
+			remove(dmHistoryEnterrise);
 		}
 	}
 
@@ -1853,7 +1847,7 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 		throws SystemException {
 		for (DmHistoryEnterrise dmHistoryEnterrise : findByEnterpriseTaxCode(
 				enterpriseTaxCode)) {
-			dmHistoryEnterrisePersistence.remove(dmHistoryEnterrise);
+			remove(dmHistoryEnterrise);
 		}
 	}
 
@@ -1864,7 +1858,7 @@ public class DmHistoryEnterrisePersistenceImpl extends BasePersistenceImpl<DmHis
 	 */
 	public void removeAll() throws SystemException {
 		for (DmHistoryEnterrise dmHistoryEnterrise : findAll()) {
-			dmHistoryEnterrisePersistence.remove(dmHistoryEnterrise);
+			remove(dmHistoryEnterrise);
 		}
 	}
 

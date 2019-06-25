@@ -95,14 +95,6 @@ public class ResponseBoUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static ResponseBo remove(ResponseBo responseBo)
-		throws SystemException {
-		return getPersistence().remove(responseBo);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static ResponseBo update(ResponseBo responseBo, boolean merge)

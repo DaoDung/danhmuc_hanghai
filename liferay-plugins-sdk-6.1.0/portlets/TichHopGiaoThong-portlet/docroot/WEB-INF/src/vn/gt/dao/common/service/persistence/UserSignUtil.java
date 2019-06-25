@@ -95,13 +95,6 @@ public class UserSignUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static UserSign remove(UserSign userSign) throws SystemException {
-		return getPersistence().remove(userSign);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static UserSign update(UserSign userSign, boolean merge)
