@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped floating width="250">
+    <v-navigation-drawer app clipped floating width="250" style="overflow: auto;">
       <jx-hanghai-filter-left
 				ref="filterleft"
         :type="type"
@@ -116,7 +116,7 @@ export default {
     doRolesInit (allLoad) {
       let vm = this
       let filterleft = vm.$refs.filterleft
-      if (vm.documentTypeCode !== 0 && (vm.type === 'ke_hoach' || vm.type === 'thu_tuc')) {
+      if (vm.documentTypeCode !== 0 && (vm.type === 'ke_hoach' || vm.type === 'thu_tuc' || vm.type === 'quan_ly_tau')) {
         let filter = {
           documentType: vm.documentTypeCode
         }

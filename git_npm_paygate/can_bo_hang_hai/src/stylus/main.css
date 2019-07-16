@@ -720,3 +720,24 @@ table.freezeFirstColumn tbody th:first-child {
   position: -webkit-sticky;
   left: 0;
 }
+
+.input-group.input-group--selection-controls label {
+  left: 20px;
+}
+
+.input-group label {
+  font-size: 13px;
+}
+
+
+input.input-number-hh {
+  width: 100%;
+  padding: 6px 0px;
+  outline: 0;
+  border-bottom: 1px solid #9c9797;
+  border-color: #9c9797;
+}
+input.input-number-hh:focus {
+  border-width: 0 0 2px;
+  border-color: #1976d2;
+}

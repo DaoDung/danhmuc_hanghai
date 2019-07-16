@@ -6,7 +6,7 @@
       </content-placeholders>
       <div v-else style="max-width: 1220px;">
         <div style="display: flex; background-color: #fff;">
-          <div class="search-top">
+          <div class="search-top" v-if="listShowSearchDate.includes(code)">
             <span style="margin: 0 10px;">
               Ngày: 
             </span>
@@ -33,14 +33,39 @@
             <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopTauAll = !menuTopTauAll">date_range</v-icon>
           </div>
           <div class="search-top-right">
-             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
+            <v-btn v-if="!documentName && listCodeAdd.includes(code)" flat small class="mx-0" @click="themMoi()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Thêm mới</v-btn> 
+
+            <v-btn v-if="documentName" flat small class="mx-0" @click="themMoiSuDungTauLai()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng tàu lai</v-btn> 
+            <span v-if="documentName">|</span>
+
+            <v-btn v-if="documentName" flat small class="mx-0" @click="themMoiSuDungHoaTieu()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng hoa tiêu</v-btn> 
+            <span>|</span>
+
+             <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
              <span>|</span>
-             <v-btn flat small class="mx-0" style="text-transform: none;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
+
+             <v-btn flat small class="mx-0" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">save</v-icon> Xuất file</v-btn>
           </div>
         </div>
+        
+        <datetime-picker
+        v-model="adv"
+        :first-day="1"
+        :show-dst="false"
+        :show-hours="false"
+        :show-minutes="false"
+        :show-seconds="false"
+        @keyup.enter="searchAdvTable()"
+        @change-value="changeDate"
+        class="px-1 py-1 mx-0 my-0"
+        ></datetime-picker>
+
+        <content-placeholders v-if="loadingTableAlll">
+          <content-placeholders-img />
+          <content-placeholders-heading />
+        </content-placeholders>
 
         <vue-scrolling-table
-          class="ml-2"
           :scroll-horizontal="scrollHorizontal"
           :scroll-vertical="scrollVertical"
           :sync-header-scroll="syncHeaderScroll"
@@ -48,8 +73,8 @@
           :include-footer="includeFooter"
           :dead-area-color="deadAreaColor"
           :class="{ freezeFirstColumn: freezeFirstColumn }"
-          style="max-width: 1095px;"
-          v-if="code !== 'ViTriTauRoiCang'"
+          style="max-width: 1097px;"
+          v-else-if="code !== 'DanhSachViTriNeoDauTaiCang' && !loadingTableAlll"
         >
           <template slot="thead">
             <tr style="background: #eaeaea;">
@@ -78,7 +103,7 @@
                   item-value="itemValue"
                   :items="itemsSup[item.items]"
                   v-model="adv[item.id]"
-                  @keyup.enter="searchAdvTable()"
+                  @input="searchAdvTable()"
                   class="px-1 py-0 mx-0 my-0"
                 ></v-select>
                 <datetime-picker
@@ -89,8 +114,9 @@
                   :show-hours="false"
                   :show-minutes="false"
                   :show-seconds="false"
-                  @change="searchAdvTable()"
-                  class="px-1 py-0 mx-0 my-0"
+                  @keyup.enter="searchAdvTable()"
+                  @change-value="changeDate"
+                  class="px-1 py-1 mx-0 my-0"
                 ></datetime-picker>
               </th>
             </tr>
@@ -100,8 +126,8 @@
               <td class="text-xs-center" style="padding-top: 5px; width: 2%;" :style="headersDsTauAll[0]['style']">
                 {{ pageDataTableAll * 15 - 15 + index + 1 }}
               </td>
-              <td v-if="key !== 'id'" class="text-xs-center" v-for="(value, key) in item" style="padding-top: 5px;">
-                {{value}}
+              <td v-if="itemKey.id !== 'stt'" @click="toDetailTauBien(item)" class="text-xs-center" v-for="(itemKey, index) in headersDsTauAll" style="padding-top: 5px;">
+                {{item[itemKey.id]}}
               </td>
             </tr>
           </template>
@@ -137,7 +163,14 @@ import support from '@/store/support.json'
 import VueScrollingTable from 'vue-scrolling-table'
 Vue.use(GridPlugin)
 export default {
-  props: ['code', 'type', 'documentTypeCode', 'documentStatusCode'],
+  props: {
+    code: '',
+    type: '',
+    documentYear: '',
+    documentName: '',
+    documentTypeCode: '',
+    documentStatusCode: ''
+  },
   components: {
     'tiny-pagination': TinyPagination,
     'datetime-picker': DatetimePicker,
@@ -147,6 +180,8 @@ export default {
     grid: [Group]
   },
   data: () => ({
+    listCodeAdd: ['DanhSachTauBien', 'DanhSachPhuongTienThuyNoiDia', 'DanhSachTauDenCang', 'DanhSachTauRoiCang', 'DanhSachNeoTau', 'DanhSachSuaChuaTau', 'DanhSachHaXuong', 'DanhSachThuTau', 'DanhSachDuTau', 'DanhSachGhiChuCanhBao', 'DanhSachKhangNghiHangHai', 'DanhSachKeHoachChuyenTuyen', 'DanhSachHoaTieuDanTau', 'DanhSachTauLaiHoTro', 'DanhSachTauDiChuyen'],
+    listShowSearchDate: ['DanhSachViTriNeoDauTaiCang', 'DanhSachTauDenCang', 'DanhSachTauDiChuyen', 'DanhSachNeoTau'],
     scrollHorizontal: true,
     scrollVertical: true,
     syncHeaderScroll: true,
@@ -157,128 +192,23 @@ export default {
     adv: {},
     itemsSup: {
     },
-    itemsDsTauAll: [
-      {
-        id: 1,
-        tenPtDSTND: 'tenPtDSTND',
-        loaiTauDSTND: 'loaiTauDSTND',
-        tauKeoDSTND: 'tauKeoDSTND',
-        gtDSTND: 'gtDSTND',
-        dwtDSTND: 'dwtDSTND',
-        soNgToiDaDSTND: 'soNgToiDaDSTND',
-        loaDSTND: 'loaDSTND',
-        soBangDSTND: 'soBangDSTND',
-        breadthDSTND: 'breadthDSTND',
-        soBangNtDSTND: 'soBangNtDSTND',
-        capPtDSTND: 'ascbcbcb',
-        congSuatMayDSTND: 'congSuatMayDSTND',
-        chuTauDSTND: 'chuTauDSTND',
-        diaChiDSTND: 'diaChiDSTND',
-        thuyenTruongDSTND: 'thuyenTruongDSTND',
-        hangBangDSTND: 'hangBangDSTND',
-        mayTruongDSTND: 'mayTruongDSTND',
-        hangBangMtDSTND: 'hangBangMtDSTND'
-      },
-      {
-        id: 2,
-        tenPtDSTND: 'tenPtDSTND',
-        loaiTauDSTND: 'loaiTauDSTND',
-        tauKeoDSTND: 'tauKeoDSTND',
-        gtDSTND: 'gtDSTND',
-        dwtDSTND: 'dwtDSTND',
-        soNgToiDaDSTND: 'soNgToiDaDSTND',
-        loaDSTND: 'loaDSTND',
-        soBangDSTND: 'soBangDSTND',
-        breadthDSTND: 'breadthDSTND',
-        soBangNtDSTND: 'soBangNtDSTND',
-        capPtDSTND: 'ascbcbcb',
-        congSuatMayDSTND: 'congSuatMayDSTND',
-        chuTauDSTND: 'chuTauDSTND',
-        diaChiDSTND: 'diaChiDSTND',
-        thuyenTruongDSTND: 'thuyenTruongDSTND',
-        hangBangDSTND: 'hangBangDSTND',
-        mayTruongDSTND: 'mayTruongDSTND',
-        hangBangMtDSTND: 'hangBangMtDSTND'
-      },
-      {
-        id: 3,
-        tenPtDSTND: 'tenPtDSTND',
-        loaiTauDSTND: 'loaiTauDSTND',
-        tauKeoDSTND: 'tauKeoDSTND',
-        gtDSTND: 'gtDSTND',
-        dwtDSTND: 'dwtDSTND',
-        soNgToiDaDSTND: 'soNgToiDaDSTND',
-        loaDSTND: 'loaDSTND',
-        soBangDSTND: 'soBangDSTND',
-        breadthDSTND: 'breadthDSTND',
-        soBangNtDSTND: 'soBangNtDSTND',
-        capPtDSTND: 'ascbcbcb',
-        congSuatMayDSTND: 'congSuatMayDSTND',
-        chuTauDSTND: 'chuTauDSTND',
-        diaChiDSTND: 'diaChiDSTND',
-        thuyenTruongDSTND: 'thuyenTruongDSTND',
-        hangBangDSTND: 'hangBangDSTND',
-        mayTruongDSTND: 'mayTruongDSTND',
-        hangBangMtDSTND: 'hangBangMtDSTND'
-      },
-      {
-        id: 4,
-        tenPtDSTND: 'tenPtDSTND',
-        loaiTauDSTND: 'loaiTauDSTND',
-        tauKeoDSTND: 'tauKeoDSTND',
-        gtDSTND: 'gtDSTND',
-        dwtDSTND: 'dwtDSTND',
-        soNgToiDaDSTND: 'soNgToiDaDSTND',
-        loaDSTND: 'loaDSTND',
-        soBangDSTND: 'soBangDSTND',
-        breadthDSTND: 'breadthDSTND',
-        soBangNtDSTND: 'soBangNtDSTND',
-        capPtDSTND: 'ascbcbcb',
-        congSuatMayDSTND: 'congSuatMayDSTND',
-        chuTauDSTND: 'chuTauDSTND',
-        diaChiDSTND: 'diaChiDSTND',
-        thuyenTruongDSTND: 'thuyenTruongDSTND',
-        hangBangDSTND: 'hangBangDSTND',
-        mayTruongDSTND: 'mayTruongDSTND',
-        hangBangMtDSTND: 'hangBangMtDSTND'
-      }
-    ],
+    itemsDsTauAll: [],
     totalDsAll: 0,
     pageDataTableAll: 1,
     menuTopTauAll: false,
     searchTopTauAll: '',
     dateSearchTopTauAll: '',
-    groupData: [
-      {
-        tenTau: 'qqqeqe',
-        quocTich: 'eqeqe',
-        cauPhao: 'eeee',
-        ngayDen: '11/10/2018',
-        ngaygioVaoCau: '11/10/2018 06:00',
-        benCang: 'bến cảng 1'
-      },
-      {
-        tenTau: 'qqqeqe',
-        quocTich: 'eqeqe',
-        cauPhao: 'eeee',
-        ngayDen: '11/10/2018',
-        ngaygioVaoCau: '11/10/2018 06:00',
-        benCang: 'bến cảng 2'
-      },
-      {
-        tenTau: 'qqqeqe',
-        quocTich: 'eqeqe',
-        cauPhao: 'eeee',
-        ngayDen: '11/10/2018',
-        ngaygioVaoCau: '11/10/2018 06:00',
-        benCang: 'bến cảng 3'
-      }
-    ],
-    groupOptions: { columns: ['benCang'] }
+    groupData: [],
+    groupOptions: { columns: ['benCang'] },
+    urlDanhSach: '',
+    loadingTableAlll: false
   }),
   computed: {
     loading () {
       return this.$store.getters.loading
+    },
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
     },
     headersDsTauAll () {
       var vm = this
@@ -290,8 +220,8 @@ export default {
         case 'DanhSachPhuongTienThuyNoiDia': {
           return support.headersDsThuyNoiDia
         }
-        case 'headersTauRoiCang': {
-          return support.headersDsTauBien
+        case 'DanhSachTauRoiCang': {
+          return support.headersTauRoiCang
         }
         case 'DanhSachTauDenCang': {
           return support.headersTauDenCang
@@ -342,7 +272,7 @@ export default {
     var vm = this
     let query = vm.$router.history.current.query
     if (query.hasOwnProperty('page') && query['page'] !== 1) {
-      vm.pageDataTableAll = query['page']
+      vm.pageDataTableAll = parseInt(query['page']) ? parseInt(query['page']) : 1
     } else {
       vm.pageDataTableAll = 1
     }
@@ -350,8 +280,6 @@ export default {
     vm.loading = true
     param = {
       type: vm.type,
-      documentTypeCode: vm.documentTypeCode,
-      documentStatusCode: vm.documentStatusCode,
       start: vm.pageDataTableAll * 15 - 15,
       end: vm.pageDataTableAll * 15
     }
@@ -360,11 +288,15 @@ export default {
         param[key] = query[key]
       }
     }
-    vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
-      vm.itemsDsTauAll = result.data
-      vm.totalDsAll = result.total
-      vm.loading = false
+    vm.changeUrlGetList().then(function (result) {
+      param['url'] = vm.urlDanhSach
+      console.log('vm.urlDanhSach+++++++++++++++', vm.urlDanhSach)
+      vm.loadDataTable(param)
     })
+  },
+  mounted () {
+    var vm = this
+    vm.loadDataOther()
   },
   watch: {
     // adv: {
@@ -381,14 +313,14 @@ export default {
       let vm = this
       let query = newRoute.query
       if (query.hasOwnProperty('page')) {
-        vm.pageDataTableAll = query['page']
+        vm.pageDataTableAll = parseInt(query['page']) ? parseInt(query['page']) : 1
+      } else {
+        vm.pageDataTableAll = 1
       }
       let param = null
       vm.loading = true
       param = {
         type: vm.type,
-        documentTypeCode: vm.documentTypeCode,
-        documentStatusCode: vm.documentStatusCode,
         start: vm.pageDataTableAll * 15 - 15,
         end: vm.pageDataTableAll * 15
       }
@@ -397,14 +329,194 @@ export default {
           param[key] = query[key]
         }
       }
-      vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
-        vm.itemsDsTauAll = result.data
-        vm.totalDsAll = result.total
-        vm.loading = false
+      vm.changeUrlGetList().then(function (result) {
+        param['url'] = vm.urlDanhSach
+        console.log('vm.urlDanhSach+++++++++++++++', vm.urlDanhSach)
+        vm.loadDataTable(param)
+        vm.loadDataOther()
       })
     }
   },
   methods: {
+    themMoi () {
+      var vm = this
+      if (vm.documentName && vm.documentName !== '0') {
+        vm.$router.push({
+          path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/0'
+        })
+      } else {
+        vm.$router.push({
+          path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/0/' + vm.code + '/detail'
+        })
+      }
+    },
+    loadDataOther () {
+      var vm = this
+      vm.headersDsTauAll.forEach(function (item, index) {
+        if (item['type'] === 'select') {
+          if (item.id === 'shipTypeCode') {
+            vm.loadShipType()
+          } else if (item.id === 'flagStateOfShip') {
+            vm.loadFlagStateOfShip()
+          } else if (item.id === 'thang') {
+            vm.itemsSup['thangItems'] = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+          }
+        }
+      })
+    },
+    changeDate: function (data) {
+      var vm = this
+      vm.searchAdvTable()
+    },
+    changeUrlGetList: function (val) {
+      var vm = this
+      return new Promise(function (resolve, reject) {
+        vm.loadingInitData.then(function (result) {
+          switch (vm.code) {
+            case 'DanhSachTauBien': {
+              vm.urlDanhSach = result['getVmaShip_Ship_URL']
+              break
+            }
+            case 'DanhSachPhuongTienThuyNoiDia': {
+              vm.urlDanhSach = result['getVmaShip_Boat_URL']
+              break
+            }
+            case 'DanhSachTauRoiCang': {
+              vm.urlDanhSach = result['getVmaItinerarySchedule_Leave_URL']
+              break
+            }
+            case 'DanhSachTauDenCang': {
+              vm.urlDanhSach = result['getVmaItinerarySchedule_Come_URL']
+              break
+            }
+            case 'DanhSachTauDiChuyen': {
+              vm.urlDanhSach = result['getVmaScheduleShiftingURL']
+              break
+            }
+            case 'DanhSachNeoTau': {
+              vm.urlDanhSach = result['getVmaScheduleAnchorage_Ship_URL']
+              break
+            }
+            case 'DanhSachTauLaiHoTro': {
+              vm.urlDanhSach = result['getVmaScheduleTugboatURL']
+              break
+            }
+            case 'DanhSachHoaTieuDanTau': {
+              vm.urlDanhSach = result['getVmaSchedulePilotURL']
+              break
+            }
+            case 'DanhSachXepDoHang': {
+              vm.urlDanhSach = result['getDanhSachXepDoHang']
+              break
+            }
+            case 'DanhSachNhapTachDoan': {
+              vm.urlDanhSach = result['getVmaScheduleMergingURL']
+              break
+            }
+            case 'DanhSachSuaChuaTau': {
+              vm.urlDanhSach = result['getVmaScheduleShipyardURL']
+              break
+            }
+            case 'DanhSachHaXuong': {
+              vm.urlDanhSach = result['getVmaScheduleLaunchingURL']
+              break
+            }
+            case 'DanhSachThuTau': {
+              vm.urlDanhSach = result['getVmaScheduleTestingURL']
+              break
+            }
+            case 'DanhSachDuTau': {
+              vm.urlDanhSach = result['getVmaScheduleSecurityURL']
+              break
+            }
+            case 'DanhSachGhiChuCanhBao': {
+              vm.urlDanhSach = result['getDanhSachGhiChuCanhBao']
+              break
+            }
+            case 'DanhSachKhangNghiHangHai': {
+              vm.urlDanhSach = result['getDanhSachKhangNghiHangHai']
+              break
+            }
+            default: {
+              vm.urlDanhSach = result['getVmaScheduleXlineURL']
+            }
+          }
+          resolve(true)
+        }).catch(function (xhr) {
+          reject(false)
+        })
+      })
+    },
+    loadDataTable: function (param) {
+      var vm = this
+      console.log('vm.code++++++++++', vm.code)
+      if (vm.code === 'DanhSachTauBien') {
+        param['shipBoat'] = 'SHIP'
+      }
+      if (vm.code === 'DanhSachPhuongTienThuyNoiDia') {
+        param['shipBoat'] = 'BOAT'
+      }
+      if (vm.code === 'DanhSachTauDenCang') {
+        param['shipBoat'] = 'SHIP'
+        param['shipPosition'] = 1
+      }
+      if (vm.code === 'DanhSachTauRoiCang') {
+        param['shipBoat'] = 'SHIP'
+        param['shipPosition'] = 2
+      }
+      vm.loadingTableAlll = true
+      console.log('param++++++++++++', param)
+      vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
+        vm.itemsDsTauAll = result.data
+        vm.totalDsAll = result.total
+        vm.loading = false
+        vm.loadingTableAlll = false
+      })
+    },
+    loadFlagStateOfShip: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_STATE'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        vm.flagStateOfShipItems = result
+        if (Array.isArray(result)) {
+          result = result.map(item => {
+            return {
+              itemText: item.stateName,
+              itemValue: item.stateCode
+            }
+          })
+          vm.itemsSup['quocTichItems'] = result
+        } else {
+          vm.itemsSup['quocTichItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadShipType: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_SHIP_TYPE',
+        applyShip: 1
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          result = result.map(item => {
+            return {
+              itemText: item.shipTypeNameVN,
+              itemValue: item.shipTypeCode
+            }
+          })
+          vm.itemsSup['shipTypeItems'] = result
+        } else {
+          vm.itemsSup['shipTypeItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
     searchAdvTable () {
       var vm = this
       let current = vm.$router.history.current
@@ -427,6 +539,12 @@ export default {
         }
       })
     },
+    parseDate (date) {
+      if (!date) return null
+      console.log(date.split('-'))
+      const [year, month, day] = date.split('-')
+      return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`
+    },
     paggingData (config) {
       let vm = this
       let current = vm.$router.history.current
@@ -442,6 +560,37 @@ export default {
       vm.$router.push({
         path: current.path + queryString
       })
+    },
+    themMoiSuDungTauLai () {
+      var vm = this
+      vm.$router.push({
+        path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/DanhSachTauLaiHoTro/0'
+      })
+    },
+    themMoiSuDungHoaTieu () {
+      var vm = this
+      vm.$router.push({
+        path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/DanhSachHoaTieuDanTau/0'
+      })
+    },
+    toDetailTauBien (item) {
+      var vm = this
+      var id = 0
+      if (vm.code === 'DanhSachTauDenCang' || vm.code === 'DanhSachTauRoiCang') {
+        id = item['vmaItineraryScheduleId']
+      } else {
+        id = item['id']
+      }
+      console.log('id-----tau+++++++++++++++', id)
+      if (vm.documentName && vm.documentName !== '0') {
+        vm.$router.push({
+          path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/' + id
+        })
+      } else {
+        vm.$router.push({
+          path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/' + id + '/' + vm.code + '/detail'
+        })
+      }
     },
     refreshSearch () {
       var vm = this

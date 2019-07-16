@@ -266,6 +266,10 @@
         "lanh_dao": "lãnh đạo",
         "van_thu": "văn thư"
     },
+    "langUITau": {
+        "ke_hoach": "Kế hoạch tàu đến rời",
+        "thu_tuc": "Thủ tục"
+    },
     "data_state": {  
         "AD": "ANDORRA",
         "AE": "UNITED ARAB EMIRATES",

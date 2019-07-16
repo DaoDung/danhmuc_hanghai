@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-navigation-drawer app clipped floating width="250" class="px-0 py-0">
+  <div style="background-color: #fff;">
+    <v-navigation-drawer app clipped floating width="250" class="px-0 py-0" style="overflow: auto;">
       <jx-hanghai-detail-part 
         :thanh_phan_ho_so_api="getThanhPhanHoSo"
         :type="type"

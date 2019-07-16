@@ -5,6 +5,8 @@
       <danh-sach-tau-all
         :code="code"
         :type="type"
+        :documentYear="''"
+        :documentName="''"
         :documentTypeCode="documentTypeCode"
         :documentStatusCode="documentStatusCode"
       >
@@ -20,7 +22,7 @@ import supportData from '../store/support_data.json'
 import DanhSachTauAll from './hang_hai/DanhSachTauAll.vue'
 
 export default {
-  props: ['code', 'type', 'documentTypeCode', 'documentStatusCode'],
+  props: ['type', 'documentTypeCode', 'documentStatusCode', 'code'],
   components: {
     'danh-sach-tau-all': DanhSachTauAll
   },
@@ -36,11 +38,24 @@ export default {
   created () {
     var vm = this
     vm.$nextTick(function () {
+      vm.changeHeader({
+        type: vm.code
+      })
     })
   },
   watch: {
+    code: function (val) {
+      var vm = this
+      vm.changeHeader({
+        type: val
+      })
+    }
   },
   methods: {
+    changeHeader (item) {
+      var vm = this
+      vm.$emit('changeHeader', item.type)
+    }
   },
   filters: {
     money (value) {

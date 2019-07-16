@@ -40,6 +40,81 @@
         </ul>
       </li>
     </ul>
+
+    <div class="row-header" style="height: 38px;overflow: hidden;">
+      <div class="background-triangle-big" :to="'/ho-so-phuong-tien/' + type + '/' + document_name + '/' + document_year + '/' + document_type_code"> QUẢN LÝ TÀU BIỂN </div>
+      <div class="layout row wrap header_tools row-blue">
+      </div>
+    </div>
+    
+    <div class="flex xs12">
+      <v-list> 
+        
+        <v-list-tile v-for="(subItem, subIndex) in itemsTauBien['items']"
+            v-bind:key="subIndex"
+            :disabled="subItem['available'] === false"
+            :class='{"list--group__header--active": (thanhPhanSelected===subItem.type)}'
+            @click="selectThanhPhanTauBien(subItem, subIndex)"
+        >
+
+            <v-list-tile-action style="padding-left: 12px;"> 
+              <img src="/hang-hai-npm-theme/images/folder_on.png" alt="gt"/>
+            </v-list-tile-action>
+
+            <v-list-tile-content> 
+              <v-list-tile-title> {{ subItem.title }} </v-list-tile-title>  
+              <span v-if="subItem.counter > -1 && subItem.type !== 'DanhSachTauDenCang' && subItem.type !== 'DanhSachTauDiChuyen'" class="status__counter">
+                {{subItem.counter}}
+              </span>
+              <span v-else-if="subItem.type !== 'DanhSachTauDenCang' && subItem.type !== 'DanhSachTauDiChuyen'" class="status__counter">
+                <v-progress-circular :width="1" :size="16" indeterminate color="red"></v-progress-circular>
+              </span>
+            </v-list-tile-content>
+            <v-list-tile-action v-if="subItem.type === 'DanhSachTauDenCang' && subItem.type === 'DanhSachTauDiChuyen'">
+              <v-icon color="primary" v-if="subItem['available']">done</v-icon>
+              <v-icon class="orange--text" v-else>warning</v-icon>
+            </v-list-tile-action>
+        </v-list-tile>
+
+        <!-- <v-list-group :value="itemsTauBien['id_active']" 
+          v-bind:key="itemsTauBien['id_active']">
+          <v-list-tile slot="activator" :to="'/ho-so-phuong-tien/' + type + '/' + document_name + '/' + document_year + '/' + document_type_code">
+            <v-list-tile-action style="padding-left: 12px;"> 
+              <img src="/hang-hai-npm-theme/images/folder_on.png" alt="gt"/>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ itemsTauBien.title }}</v-list-tile-title>
+              <span class="status__counter">{{ itemsTauBien.counter }}</span> 
+            </v-list-tile-content>
+          </v-list-tile>
+
+          <v-list-tile v-for="(subItem, subIndex) in itemsTauBien['items']"
+            v-bind:key="subIndex"
+            :to="{path: '/ho-so-phuong-tien/' + type + '/' + document_name + '/' + document_year + '/' + document_type_code + '/' + subItem.type, 
+                  query: {
+                    'page': 1
+                  }
+                  }">
+
+            <v-list-tile-action style="padding-left: 12px;"> 
+              <img src="/hang-hai-npm-theme/images/folder_on.png" alt="gt"/>
+            </v-list-tile-action>
+
+            <v-list-tile-content> 
+              <v-list-tile-title> {{ subItem.title }} </v-list-tile-title>  
+              <span v-if="subItem.counter > -1" class="status__counter">
+                {{subItem.counter}}
+              </span>
+              <span v-else class="status__counter">
+                <v-progress-circular :width="1" :size="16" indeterminate color="red"></v-progress-circular>
+              </span>
+            </v-list-tile-content>
+
+          </v-list-tile>
+
+        </v-list-group>  -->
+      </v-list>
+    </div>
   </div>
 </template>
 
@@ -47,6 +122,7 @@
 import axios from 'axios'
 const COMPONENT_NAME = 'jx-hanghai-detail-part'
 import { eventBus } from '../../event-bus/eventBus.js'
+import support from '../../store/support.json'
 
 export default {
   name: COMPONENT_NAME,
@@ -61,15 +137,37 @@ export default {
     document_name: '',
     document_year: 0
   },
+  computed: {
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
+    }
+  },
   data () {
     return {
       thanhPhanLists: [],
       thanhPhanSelected: '',
       loadingList: true,
-      messageTypeTemp: 0
+      messageTypeTemp: 0,
+      itemsTauBien: support.filter_part_tau
     }
   },
   methods: {
+    loadRoleFilterStatus: function () {
+      var vm = this
+      let filter = {
+        documentType: vm.document_type_code
+      }
+      vm.$store.getters.roleFilterStatus(filter).then(function (result) {
+        // if (result && Array.isArray(result)) {
+        //   for (var i = 0; i < result.length; i++) {
+        //     if (result[i].id_active === 'quan_ly_tau') {
+        //       vm.itemsTauBien = result[i]
+        //       // vm.doTauBienFilterCount()
+        //     }
+        //   }
+        // }
+      })
+    },
     backtolistpdf: function () {
       this.thanhPhanSelected = 0
       this.$router.push({ path: '/ho-so/' + this.type + '/' + this.document_name + '/' + this.document_year + '/' + this.document_type_code + '/' + this.document_status_code,
@@ -86,6 +184,7 @@ export default {
       }
       vm.thanh_phan_ho_so_api = url
       vm.reloadThanhPhan()
+      vm.loadRoleFilterStatus()
     },
     reloadThanhPhan: function () {
       var vm = this
@@ -110,11 +209,75 @@ export default {
             vm.thanhPhanLists = serializable
             eventBus.$emit('thanhphanlist', vm.thanhPhanLists)
             vm.loadingList = false
+            vm.checkAvailableKhDenCang()
           })
           .catch(function (error) {
             console.log(error)
             vm.loadingList = false
           })
+      }
+      // vm.doTauBienFilterCount()
+    },
+    doTauBienFilterCount () {
+      let vm = this
+      vm.loadingInitData.then(function (result) {
+        var listDS = vm.itemsTauBien.items
+        for (var i = 0; i < listDS.length; i++) {
+          let item = listDS[i]
+          let param = null
+          param = {
+            start: 0,
+            end: 5,
+            url: result[item.url]
+          }
+          vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
+            result['total'] = result['total'] ? result['total'] : 0
+            vm.changeCounter(i, result.total)
+          })
+        }
+      })
+    },
+    changeCounter (index, total) {
+      var vm = this
+      console.log('index++++++++++', index)
+      console.log('vm.itemsTauBien.items[i]++++++++', vm.itemsTauBien.items)
+      vm.itemsTauBien.items[index]['counter'] = total
+    },
+    checkAvailableKhDenCang () {
+      var vm = this
+      let available = true
+      if (vm.thanhPhanLists.length) {
+        for (var i = 0; i < vm.thanhPhanLists.length; i++) {
+          if (vm.thanhPhanLists[i].code === 'NC_3') {
+            vm.itemsTauBien['items'].forEach(function (item) {
+              if (item.type === 'DanhSachTauDenCang') {
+                item['available'] = vm.thanhPhanLists[i].available
+              }
+            })
+            available = vm.thanhPhanLists[i].available
+          }
+        }
+      }
+      console.log('available+++++++++++', available)
+      return available
+    },
+    selectThanhPhanTauBien: function (item, index) {
+      var vm = this
+      vm.thanhPhanSelected = item.type
+      if (item.type === 'DanhSachTauDenCang' || vm.type === 'DanhSachTauDiChuyen') {
+        if (item['state'] === 1 && item['available']) {
+          vm.$router.push({
+            path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.document_name + '/' + vm.document_year + '/' + vm.document_type_code + '/' + item.type
+          })
+        } else {
+          vm.$router.push({
+            path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.document_name + '/' + vm.document_year + '/' + vm.document_type_code + '/DanhSachTauDenCang'
+          })
+        }
+      } else {
+        vm.$router.push({
+          path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.document_name + '/' + vm.document_year + '/' + vm.document_type_code + '/' + item.type
+        })
       }
     },
     selectThanhPhan: function (item, index, event) {
