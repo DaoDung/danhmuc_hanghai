@@ -20,7 +20,6 @@
 
 <script>
 import DetailPart from './hang_hai/hanghai_detail_part.vue'
-
 export default {
   props: ['type', 'documentName', 'documentYear', 'documentTypeCode', 'documentStatusCode'],
   components: {

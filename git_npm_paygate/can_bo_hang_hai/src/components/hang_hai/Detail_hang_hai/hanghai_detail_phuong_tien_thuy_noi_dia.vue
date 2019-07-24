@@ -2,7 +2,7 @@
   <div style="width: 100%; background: #fff; position: relative;" class="extFormXuLy">
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
-        <v-flex xs6><v-flex style="margin: 8px 0 9px 0;" class="text ml-3" xs12><h3>PT TND {{detailPTTND.phuong_tien}} &nbsp;&nbsp;{{detailPTTND.registryNumber}}</h3> </v-flex></v-flex>
+        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>PT TNĐ {{detailPTTND.phuong_tien}} &nbsp;&nbsp;{{detailPTTND.registryNumber}}</h3> </v-flex></v-flex>
         <v-flex xs6 class="text-xs-right pl-3">
           <v-flex xs12 style="display: flex; margin-top: 4px; height: 21px; justify-content: flex-end;">
             <v-btn
@@ -61,9 +61,12 @@
         </v-flex>
       </v-layout>
     </v-flex>
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
       ref="formPTTND"
       v-model="validFormPTTND"
+      :style="{'opacity': disabledForm  || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm"
       lazy-validation
       class="mt-2"
    >
@@ -303,6 +306,8 @@ export default {
   },
   directives: {money: VMoney},
   data: () => ({
+    loadingDetail: false,
+    disabledForm: false,
     errorsMessage: {
     },
     homeValue: 350000,
@@ -405,7 +410,8 @@ export default {
     vm.loadShipType()
     if (vm.id && vm.id !== '0') {
       vm.loadPhuongTienThuyNoiDia()
-    } else {
+    } else if (vm.documentName && vm.documentName !== '0') {
+      vm.loadInitData()
     }
   },
   methods: {
@@ -537,6 +543,18 @@ export default {
         console.log(xhr)
       })
     },
+    loadInitData: function () {
+      var vm = this
+      let param = {
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
+      }
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
+      })
+    },
     validNumberInput: function () {
       var vm = this
       var validGT = true
@@ -592,10 +610,15 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailPTTND', data).then(function (result) {
-        vm.detailPTTND = result
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailPTTND = result
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     themPhuongTienThuyNoiDia: function () {

@@ -4,7 +4,7 @@
         <content-placeholders-img />
         <content-placeholders-heading />
       </content-placeholders>
-      <div v-else style="max-width: 1220px;">
+      <div style="max-width: 1100px;" v-else>
         <div style="display: flex; background-color: #fff;">
           <div class="search-top" v-if="listShowSearchDate.includes(code)">
             <span style="margin: 0 10px;">
@@ -19,6 +19,7 @@
               transition="scale-transition"
               offset-y
               full-width
+              :style="{}"
               max-width="290px"
               min-width="290px"
             >
@@ -33,13 +34,14 @@
             <v-icon size="17" style="margin-left: 10px; cursor: pointer;" @click="menuTopTauAll = !menuTopTauAll">date_range</v-icon>
           </div>
           <div class="search-top-right">
-            <v-btn v-if="!documentName && listCodeAdd.includes(code)" flat small class="mx-0" @click="themMoi()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Thêm mới</v-btn> 
+            <v-btn v-if="listCodeAdd.includes(code) && code !== 'DanhSachTauLaiHoTro' && code !== 'DanhSachHoaTieuDanTau'" flat small class="mx-0" @click="themMoi()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Thêm mới</v-btn>
+            <span v-if="listCodeAdd.includes(code) && code !== 'DanhSachTauLaiHoTro' && code !== 'DanhSachHoaTieuDanTau'">|</span>
 
-            <v-btn v-if="documentName" flat small class="mx-0" @click="themMoiSuDungTauLai()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng tàu lai</v-btn> 
-            <span v-if="documentName">|</span>
+            <v-btn v-if="documentName && code === 'DanhSachTauLaiHoTro'" flat small class="mx-0" @click="themMoiSuDungTauLai()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng tàu lai</v-btn> 
+            <span v-if="documentName && code === 'DanhSachTauLaiHoTro'">|</span>
 
-            <v-btn v-if="documentName" flat small class="mx-0" @click="themMoiSuDungHoaTieu()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng hoa tiêu</v-btn> 
-            <span>|</span>
+            <v-btn v-if="documentName && code === 'DanhSachHoaTieuDanTau'" flat small class="mx-0" @click="themMoiSuDungHoaTieu()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">add</v-icon> Sử dụng hoa tiêu</v-btn> 
+            <span v-if="documentName && code === 'DanhSachHoaTieuDanTau'">|</span>
 
              <v-btn flat small class="mx-0" @click="refreshSearch()" style="text-transform: none; color: #1d52e8;"> <v-icon size="17">refresh</v-icon> Refresh</v-btn> 
              <span>|</span>
@@ -48,18 +50,6 @@
           </div>
         </div>
         
-        <datetime-picker
-        v-model="adv"
-        :first-day="1"
-        :show-dst="false"
-        :show-hours="false"
-        :show-minutes="false"
-        :show-seconds="false"
-        @keyup.enter="searchAdvTable()"
-        @change-value="changeDate"
-        class="px-1 py-1 mx-0 my-0"
-        ></datetime-picker>
-
         <content-placeholders v-if="loadingTableAlll">
           <content-placeholders-img />
           <content-placeholders-heading />
@@ -72,8 +62,7 @@
           :sync-footer-scroll="syncFooterScroll"
           :include-footer="includeFooter"
           :dead-area-color="deadAreaColor"
-          :class="{ freezeFirstColumn: freezeFirstColumn }"
-          style="max-width: 1097px;"
+          :class="{ freezeFirstColumn: freezeFirstColumn, 'fullWidthTauLai': code === 'DanhSachTauLaiHoTro', 'fullWidthHaXuong': code === 'DanhSachHaXuong', 'fullWidthGhiChu': code === 'DanhSachGhiChuCanhBao' }"
           v-else-if="code !== 'DanhSachViTriNeoDauTaiCang' && !loadingTableAlll"
         >
           <template slot="thead">
@@ -87,10 +76,10 @@
               </th>
             </tr>
 
-            <tr>
+            <tr style="position: relative;">
               <th :style="headersDsTauAll[0]['style']">
               </th>
-              <th v-for="(item, index) in headersDsTauAll" v-if="item.id !== 'stt'">
+              <th v-for="(item, index) in headersDsTauAll" v-if="item.id !== 'stt'" style="position: relative;">
                 <v-text-field
                   v-if="item['type'] === 'text'"
                   v-model="adv[item.id]"
@@ -111,8 +100,8 @@
                   v-model="adv[item.id]"
                   :first-day="1"
                   :show-dst="false"
-                  :show-hours="false"
-                  :show-minutes="false"
+                  :show-hours="true"
+                  :show-minutes="true"
                   :show-seconds="false"
                   @keyup.enter="searchAdvTable()"
                   @change-value="changeDate"
@@ -122,7 +111,7 @@
             </tr>
           </template>
           <template slot="tbody">
-            <tr v-for="(item, index) in itemsDsTauAll" :key="item.id">
+            <tr v-for="(item, index) in itemsDsTauAll" :key="item.id" style="cursor: pointer;">
               <td class="text-xs-center" style="padding-top: 5px; width: 2%;" :style="headersDsTauAll[0]['style']">
                 {{ pageDataTableAll * 15 - 15 + index + 1 }}
               </td>
@@ -133,14 +122,14 @@
           </template>
         </vue-scrolling-table>
 
-        <ejs-grid v-else :dataSource='groupData' :allowGrouping='true' :groupSettings='groupOptions' height='150px'>
+        <ejs-grid v-else :dataSource='itemsDsTauAll' :allowGrouping='true' :groupSettings='groupOptions' height='150px'>
             <e-columns>
-                <e-column field='tenTau' headerText='Tên tàu' textAlign='Center' width=120></e-column>
-                <e-column field='benCang' headerText='Bến cảng' textAlign='Center' width=120></e-column>
-                <e-column field='quocTich' headerText='Quốc tịch' textAlign='Center' width=150></e-column>
-                <e-column field='cauPhao' headerText='Cầu/ phao' textAlign='Center' width=150></e-column>
-                <e-column field='ngayDen' headerText='Ngày đến' textAlign='Center' width=150></e-column>
-                <e-column field='ngaygioVaoCau' headerText='Ngày/ giờ vào cầu' textAlign='Center' width=150></e-column>
+                <e-column field='shipName' headerText='Tên tàu' textAlign='Center' width=120></e-column>
+                <e-column field='anchoringPortWharfName' headerText='Bến cảng' textAlign='Center' width=120></e-column>
+                <e-column field='flagStateOfShip' headerText='Quốc tịch' textAlign='Center' width=150></e-column>
+                <e-column field='no' headerText='Cầu/ phao' textAlign='Center' width=150></e-column>
+                <e-column field='anchoringDateFrom' headerText='Ngày đến' textAlign='Center' width=150></e-column>
+                <e-column field='anchoringDateFrom' headerText='Ngày/ giờ vào cầu' textAlign='Center' width=150></e-column>
             </e-columns>
         </ejs-grid>
 
@@ -159,6 +148,7 @@ import Vue from 'vue'
 import { GridPlugin, Group } from '@syncfusion/ej2-vue-grids'
 import TinyPagination from './hanghai_pagination.vue'
 import DatetimePicker from './DatetimePicker.vue'
+import DatetimePicker2 from './DatetimePicker_bk2.vue'
 import support from '@/store/support.json'
 import VueScrollingTable from 'vue-scrolling-table'
 Vue.use(GridPlugin)
@@ -169,17 +159,20 @@ export default {
     documentYear: '',
     documentName: '',
     documentTypeCode: '',
-    documentStatusCode: ''
+    documentStatusCode: '',
+    noticeShipType: ''
   },
   components: {
     'tiny-pagination': TinyPagination,
     'datetime-picker': DatetimePicker,
+    'datetime-picker-2': DatetimePicker2,
     'vue-scrolling-table': VueScrollingTable
   },
   provide: {
     grid: [Group]
   },
   data: () => ({
+    ccc: '',
     listCodeAdd: ['DanhSachTauBien', 'DanhSachPhuongTienThuyNoiDia', 'DanhSachTauDenCang', 'DanhSachTauRoiCang', 'DanhSachNeoTau', 'DanhSachSuaChuaTau', 'DanhSachHaXuong', 'DanhSachThuTau', 'DanhSachDuTau', 'DanhSachGhiChuCanhBao', 'DanhSachKhangNghiHangHai', 'DanhSachKeHoachChuyenTuyen', 'DanhSachHoaTieuDanTau', 'DanhSachTauLaiHoTro', 'DanhSachTauDiChuyen'],
     listShowSearchDate: ['DanhSachViTriNeoDauTaiCang', 'DanhSachTauDenCang', 'DanhSachTauDiChuyen', 'DanhSachNeoTau'],
     scrollHorizontal: true,
@@ -199,11 +192,15 @@ export default {
     searchTopTauAll: '',
     dateSearchTopTauAll: '',
     groupData: [],
-    groupOptions: { columns: ['benCang'] },
+    groupOptions: { columns: ['anchoringPortWharfName'] },
     urlDanhSach: '',
     loadingTableAlll: false
   }),
   computed: {
+    itineraryNo () {
+      var vm = this
+      return vm.$store.getters.itineraryNo
+    },
     loading () {
       return this.$store.getters.loading
     },
@@ -359,7 +356,23 @@ export default {
           } else if (item.id === 'flagStateOfShip') {
             vm.loadFlagStateOfShip()
           } else if (item.id === 'thang') {
-            vm.itemsSup['thangItems'] = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            vm.itemsSup['thangItems'] = support.thangItems
+          } else if (item.id === 'khongGiaiQuyetRoiCang') {
+            vm.itemsSup['khongGiaiQuyetRoiCangItems'] = [{
+              itemText: 'Tạm dừng',
+              itemValue: 1
+            }, {
+              itemText: 'Không yêu cầu',
+              itemValue: 0
+            }]
+          } else if (item.id === 'coHienThiCanhBao') {
+            vm.itemsSup['coHienThiCanhBaoItems'] = [{
+              itemText: 'Có',
+              itemValue: 1
+            }, {
+              itemText: 'Không',
+              itemValue: 0
+            }]
           }
         }
       })
@@ -373,6 +386,10 @@ export default {
       return new Promise(function (resolve, reject) {
         vm.loadingInitData.then(function (result) {
           switch (vm.code) {
+            case 'DanhSachViTriNeoDauTaiCang': {
+              vm.urlDanhSach = result['getVmaScheduleAnchorage_Port_URL']
+              break
+            }
             case 'DanhSachTauBien': {
               vm.urlDanhSach = result['getVmaShip_Ship_URL']
               break
@@ -430,7 +447,7 @@ export default {
               break
             }
             case 'DanhSachGhiChuCanhBao': {
-              vm.urlDanhSach = result['getDanhSachGhiChuCanhBao']
+              vm.urlDanhSach = result['getVmaItineraryRemarksURL']
               break
             }
             case 'DanhSachKhangNghiHangHai': {
@@ -463,6 +480,12 @@ export default {
       if (vm.code === 'DanhSachTauRoiCang') {
         param['shipBoat'] = 'SHIP'
         param['shipPosition'] = 2
+      }
+      if (vm.documentName && vm.documentName !== '0') {
+        param['itineraryNo'] = ''
+      }
+      if (vm.code === 'DanhSachTauLaiHoTro') {
+        param['noticeShipType'] = vm.noticeShipType ? vm.noticeShipType : 4
       }
       vm.loadingTableAlll = true
       console.log('param++++++++++++', param)
@@ -512,6 +535,146 @@ export default {
           vm.itemsSup['shipTypeItems'] = result
         } else {
           vm.itemsSup['shipTypeItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadDonVi: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_REPRESENTATIVE'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['representativeItems'] = result.map(item => {
+            return {
+              itemText: item['repNameVN'],
+              itemValue: item['repCode']
+            }
+          })
+        } else {
+          vm.itemsSup['representativeItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadsecurityLevel: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_SECURITY_LEVEL'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['securityLevelItems'] = result.map(item => {
+            return {
+              itemText: item['securityLevelName'],
+              itemValue: item['securityLevelCode']
+            }
+          })
+        } else {
+          vm.itemsSup['securityLevelItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadPortWharf: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_PORT_WHARF'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['portWharfItems'] = result.map(item => {
+            return {
+              itemText: item['portWharfNameVN'],
+              itemValue: item['portWharfCode']
+            }
+          })
+        } else {
+          vm.itemsSup['portWharfItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadShipAgency: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_SHIP_AGENCY'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['shipAgencyItems'] = result.map(item => {
+            return {
+              itemText: item['shipAgencyNameVN'],
+              itemValue: item['shipAgencyCode']
+            }
+          })
+        } else {
+          vm.itemsSup['shipAgencyItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadPortHarbour: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_PORT_HARBOUR'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['portHarbourItems'] = result.map(item => {
+            return {
+              itemText: item['portHarbourNameVN'],
+              itemValue: item['portHarbourCode']
+            }
+          })
+        } else {
+          vm.itemsSup['portHarbourItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadPurpose: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_PURPOSE'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['purposeItems'] = result.map(item => {
+            return {
+              itemText: item['purposeName'],
+              itemValue: item['purposeCode']
+            }
+          })
+        } else {
+          vm.itemsSup['purposeItems'] = []
+        }
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+    },
+    loadCargo: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_CARGO_ON_BOARD'
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        if (Array.isArray(result)) {
+          vm.itemsSup['cargoItems'] = result.map(item => {
+            return {
+              itemText: item['goodsTypeNameVN'],
+              itemValue: item['goodsTypeCode']
+            }
+          })
+        } else {
+          vm.itemsSup['cargoItems'] = []
         }
       }).catch(function (xhr) {
         console.log(xhr)
@@ -578,8 +741,24 @@ export default {
       var id = 0
       if (vm.code === 'DanhSachTauDenCang' || vm.code === 'DanhSachTauRoiCang') {
         id = item['vmaItineraryScheduleId']
-      } else {
-        id = item['id']
+      } else if (vm.code === 'DanhSachTauLaiHoTro') {
+        id = item['vmaScheduleTugboatId']
+      } else if (vm.code === 'DanhSachHoaTieuDanTau') {
+        id = item['vmaSchedulePilotId']
+      } else if (vm.code === 'DanhSachSuaChuaTau') {
+        id = item['vmaScheduleShipyardId']
+      } else if (vm.code === 'DanhSachNhapTachDoan') {
+        id = item['vmaScheduleMergingId']
+      } else if (vm.code === 'DanhSachHaXuong') {
+        id = item['vmaScheduleLaunchingId']
+      } else if (vm.code === 'DanhSachThuTau') {
+        id = item['vmaScheduleTestingId']
+      } else if (vm.code === 'DanhSachDuTau') {
+        id = item['vmaScheduleSecurityId']
+      } else if (vm.code === 'DanhSachGhiChuCanhBao') {
+        id = item['vmaItineraryRemarksId']
+      } else if (vm.code === 'DanhSachTauBien' || vm.code === 'DanhSachPhuongTienThuyNoiDia') {
+        id = item['vmaShipId']
       }
       console.log('id-----tau+++++++++++++++', id)
       if (vm.documentName && vm.documentName !== '0') {

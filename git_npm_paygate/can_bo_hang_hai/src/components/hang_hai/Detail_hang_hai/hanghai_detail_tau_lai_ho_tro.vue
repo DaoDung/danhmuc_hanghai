@@ -3,7 +3,9 @@
     
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
-        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>Tàu lai hỗ trợ</h3> </v-flex></v-flex>
+        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12>
+          <h3>Tàu lai hỗ trợ <span @click="showWarning = !showWarning" style="cursor: pointer; color: orange;" v-if="warningTauLaiHoTro['show']" color="warning">(Cảnh báo)</span></h3> </v-flex>
+        </v-flex>
         <v-flex xs6 class="text-xs-right pl-3" v-if="!documentName || documentName === '0'">
           <v-flex xs12 style="display: flex; margin-top: 4px; height: 21px; justify-content: flex-end;">
             <v-btn
@@ -132,32 +134,28 @@
             </v-btn>
           </v-flex>
         </v-flex>
-        <v-expansion-panel class="my-0" v-if="warningTauLaiHoTro['show']">
-          <v-expansion-panel-content v-bind:value="false">
-            <div slot="header" style=""><span class="text-bold primary--text pl-2"> Cảnh báo </span></div>
-            <v-card>
-              <v-card-title class="pt-0 px-0 adv__search__container">
-                <v-alert
-                  style="width: 100%;"
-                  :value="true"
-                  color="warning"
-                  icon="priority_high"
-                  outline
-                  >
-                  <div v-html="warningTauLaiHoTro['message']" ></div>
-                  <div v-html="warningTauLaiHoTro['message']"></div>
-                </v-alert>
-              </v-card-title>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+        <v-card v-if="showWarning" style="width: 100%;">
+          <v-card-title class="pt-0 py-0 px-0 adv__search__container">
+            <v-alert
+              class="my-0"
+              style="width: 100%;"
+              :value="true"
+              color="warning"
+              icon="priority_high"
+              outline
+              >
+              <div v-html="item" v-for="(item, index) in warningTauLaiHoTro['message']"></div>
+            </v-alert>
+          </v-card-title>
+        </v-card>
       </v-layout>
     </v-flex>
-
+    
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
       ref="formTauLaiHoTro"
-      :style="{'opacity': disabledForm ? '0.6' : 1, 'pointer-events': disabledForm ? 'none' : 'auto'}"
-      :disabled="disabledForm"
+      :style="{'opacity': (disabledForm || loadingDetail) ? '0.6' : 1, 'pointer-events': (disabledForm || loadingDetail) ? 'none' : 'auto'}"
+      :disabled="disabledForm || loadingDetail"
       v-model="validFormTauLaiHoTro"
       lazy-validation
       class="mt-2"
@@ -230,8 +228,8 @@
                 clearable
                 autocomplete
                 :items="portWharfItems"
-                item-text="text"
-                item-value="value"
+                item-text="portWharfNameVN"
+                item-value="portWharfCode"
                 v-model="detailTauLaiHoTro['anchoringPortWharfCode']"
                 class="py-0 my-0"
                 placeholder="Chọn vị trí"
@@ -294,9 +292,9 @@
                 <v-select
                 clearable
                 autocomplete
-                :items="purposeItems"
-                item-text="purposeName"
-                item-value="purposeCode"
+                :items="shipItems"
+                item-text="shipName"
+                item-value="shipCode"
                 v-model="detailTauLaiHoTro['purposeCode']"
                 class="py-0 my-0"
                 placeholder="Tàu lai"
@@ -361,9 +359,9 @@
                 <v-select
                 clearable
                 autocomplete
-                :items="shipTypeCodeItems"
-                item-text="shipTypeCode"
-                item-value="shipTypeName"
+                :items="shipTypeItems"
+                item-text="shipTypeNameVN"
+                item-value="shipTypeCode"
                 v-model="detailTauLaiHoTro.shipTypeCode"
                 class="py-0 my-0"
                 placeholder="Chọn loại tàu"
@@ -378,8 +376,8 @@
                 clearable
                 autocomplete
                 :items="securityLevelItems"
-                item-text="text"
-                item-value="value"
+                item-text="securityLevelName"
+                item-value="securityLevelCode"
                 v-model="detailTauLaiHoTro.securityLevelCode"
                 class="py-0 my-0"
                 placeholder="Chọn cấp độ an ninh"
@@ -494,12 +492,13 @@
                   </v-flex>
                   <v-flex xs12 sm8>
                     <v-select
+                    return-object
                     clearable
                     autocomplete
                     :items="shipItems"
                     item-text="shipName"
                     item-value="shipCode"
-                    v-model="listTauLai[index]['shipCode']"
+                    v-model="listTauLai[index]['ship']"
                     class="py-0 my-0"
                     placeholder="Tàu lai"
                     ></v-select>
@@ -513,12 +512,13 @@
                   </v-flex>
                   <v-flex xs12 sm8>
                     <v-select
+                    return-object
                     clearable
                     autocomplete
                     :items="tugboatCompanyItems"
                     item-text="tugboatCompanyName"
                     item-value="tugboatCompanyCode"
-                    v-model="listTauLai[index]['tugboatCompanyCode']"
+                    v-model="listTauLai[index]['tugboatCompany']"
                     class="py-0 my-0"
                     placeholder="Công ty tàu lai"
                     ></v-select>
@@ -552,7 +552,7 @@
 // import axios from 'axios'
 import DatetimePicker from '../DatetimePicker.vue'
 import {VMoney} from 'v-money'
-import {eventBus} from '../../../event-bus/eventBus.js'
+// import {eventBus} from '../../../event-bus/eventBus.js'
 import toastr from 'toastr'
 toastr.options = {
   'closeButton': true,
@@ -575,11 +575,12 @@ export default {
   },
   directives: {money: VMoney},
   data: () => ({
-    otherData: {},
+    loadingDetail: false,
     errorsMessage: {},
+    showWarning: false,
     warningTauLaiHoTro: {
       show: false,
-      message: ''
+      message: []
     },
     disabledForm: false,
     listTauLai: [],
@@ -704,6 +705,9 @@ export default {
         vm.loadChanelList()
         vm.loadsecurityLevel()
         vm.loadDonVi()
+        vm.loadFlagStateOfShip()
+        vm.loadTugboatCompany()
+        vm.loadTugboatItems()
       }
       if (newVal && newVal !== 0) {
         vm.loadTauLaiHoTro()
@@ -711,9 +715,16 @@ export default {
     }
   },
   computed: {
-    // principal: function () {
-    //   return this.homeValue - this.downpayment
-    // }
+    otherData: function () {
+      console.log('otherData______________', this.$store.getters.otherData)
+      return this.$store.getters.otherData
+    },
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
+    },
+    itineraryNo () {
+      return this.$store.getters.itineraryNo
+    }
   },
   created () {
     var vm = this
@@ -726,25 +737,31 @@ export default {
     vm.loadChanelList()
     vm.loadsecurityLevel()
     vm.loadDonVi()
+    vm.loadFlagStateOfShip()
+    vm.loadTugboatCompany()
+    vm.loadTugboatItems()
     if (vm.id && vm.id !== '0') {
       vm.loadTauLaiHoTro()
     } else {
       vm.loadInitData()
     }
   },
-  destroyed () {
-    var vm = this
-    eventBus.$off('otherDataTauLai', vm.initOtherData)
-  },
-  mounted () {
-    var vm = this
-    eventBus.$on('otherDataTauLai', vm.initOtherData)
-    console.log('otherData+++++++++++++TAU LAI_________________', vm.otherData)
-  },
   methods: {
-    initOtherData: function (data) {
+    loadTugboatCompany: function () {
       var vm = this
-      vm.otherData = data
+      let param = {
+        categoryId: 'DM_VMA_TUGBOAT_COMPANY'
+      }
+      if (vm.id && vm.id !== '0') {
+        delete param['isDelete']
+      } else {
+        param['isDelete'] = 0
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        vm.tugboatCompanyItems = result
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
     },
     loadsecurityLevel: function () {
       var vm = this
@@ -809,6 +826,31 @@ export default {
       }).catch(function (xhr) {
         console.log(xhr)
       })
+    },
+    loadTugboatItems: function () {
+      var vm = this
+      let param = {
+        categoryId: 'DM_VMA_TUGBOAT'
+      }
+      if (vm.id && vm.id !== '0') {
+        delete param['isDelete']
+      } else {
+        param['isDelete'] = 0
+      }
+      vm.$store.dispatch('loadDataDm', param).then(function (result) {
+        vm.shipItems = result
+      }).catch(function (xhr) {
+        console.log(xhr)
+      })
+      // vm.loadingInitData.then(function (initData) {
+      //   let param = {
+      //     url: initData['getVmaScheduleTugboatURL']
+      //   }
+      //   vm.$store.dispatch('loadDanhSachTauBien', param).then(function (result) {
+      //     vm.shipItems = result.data ? result.data : []
+      //     console.log('shiptype++++++++++++', vm.shipItems)
+      //   })
+      // })
     },
     loadShipAgency: function () {
       var vm = this
@@ -909,24 +951,50 @@ export default {
     loadTauLaiHoTro: function () {
       var vm = this
       let data = {
-        'id': vm.id
+        'id': vm.id,
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetaiTauLaiHoTro', data).then(function (result) {
-        vm.detailTauLaiHoTro = result
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailTauLaiHoTro = Object.assign(vm.detailTauLaiHoTro, vm.parseTimeTau(result))
+          vm.detailTauLaiHoTro['tugboatList'] = result['tugboatList'] ? result['tugboatList'] : []
+          vm.listTauLai = result['tugboatList'] ? result['tugboatList'].map(item => {
+            return {
+              ship: {
+                shipName: item['shipName'],
+                shipCode: item['shipCode']
+              },
+              tugboatCompany: {
+                tugboatCompanyName: item['tugboatCompanyName'],
+                tugboatCompanyCode: item['tugboatCompanyCode']
+              },
+              ...item
+            }
+          }) : []
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     loadInitData: function () {
       var vm = this
-      let data = {
-        'id': vm.id,
-        'documentName': vm.documentName
+      let param = {
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
       }
-      vm.$store.dispatch('loadVmaShip', data).then(function (result) {
-        vm.detailTauLaiHoTro = Object.assign(vm.detailTauLaiHoTro, result)
+      vm.loadInitData = true
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailTauLaiHoTro = Object.assign(vm.detailTauLaiHoTro, vm.parseTimeTau(result))
+        vm.loadInitData = false
       }).catch(function (xhr) {
-        console.log(xhr)
+        vm.loadInitData = false
       })
     },
     luuTauDraftTauLaiHoTro: function () {
@@ -947,7 +1015,7 @@ export default {
       vm.detailTauLaiHoTro['state'] = 'CONFIRM'
       vm.luuTauLaiHoTro()
     },
-    parseTimeTauLaiHoTro: function (modelTauLaiHoTro) {
+    parseTimeTau: function (modelTauLaiHoTro) {
       var vm = this
       if (!modelTauLaiHoTro) {
         console.log('valid tau di chuyen', modelTauLaiHoTro)
@@ -955,8 +1023,8 @@ export default {
       }
       modelTauLaiHoTro['tugDateFrom'] = vm.parseTimeStamp(modelTauLaiHoTro['tugDateFrom'])
       modelTauLaiHoTro['tugDateTo'] = vm.parseTimeStamp(modelTauLaiHoTro['tugDateTo'])
-      modelTauLaiHoTro['anchoringDateFrom'] = vm.parseTimeStamp(modelTauLaiHoTro['anchoringDateFrom'])
-      modelTauLaiHoTro['anchoringDateTo'] = vm.parseTimeStamp(modelTauLaiHoTro['anchoringDateTo'])
+      // modelTauLaiHoTro['anchoringDateFrom'] = vm.parseTimeStamp(modelTauLaiHoTro['anchoringDateFrom'])
+      // modelTauLaiHoTro['anchoringDateTo'] = vm.parseTimeStamp(modelTauLaiHoTro['anchoringDateTo'])
       return modelTauLaiHoTro
     },
     parseTimeStamp: function (time) {
@@ -975,13 +1043,33 @@ export default {
     themTauLaiHoTro: function () {
       var vm = this
       vm.detailTauLaiHoTro['id'] = ''
+      vm.detailTauLaiHoTro['certificateNo'] = vm.otherData['certificateNo']
+      vm.detailTauLaiHoTro['itineraryNo'] = ''
+      vm.detailTauLaiHoTro['tugboatList'] = ''
+      var listTau = []
+      vm.listTauLai.forEach(function (item) {
+        listTau.push({
+          shipCode: item.ship['shipCode'],
+          shipName: item.ship['shipName'],
+          tugboatCompanyCode: item.tugboatCompany['tugboatCompanyCode'],
+          tugboatCompanyName: item.tugboatCompany['tugboatCompanyName'],
+          power: item['power'],
+          unitPower: 'HP',
+          nameOfShip: vm.detailTauLaiHoTro['nameOfShip'],
+          portofAuthority: vm.detailTauLaiHoTro['maritimeCode'] ? vm.detailTauLaiHoTro['maritimeCode'] : ''
+        })
+      })
+      vm.detailTauLaiHoTro['json'] = JSON.stringify(listTau)
       if (vm.$refs.formTauLaiHoTro.validate()) {
         vm.$store.dispatch('addTauLaiHoTro', vm.detailTauLaiHoTro).then(function (result) {
-          vm.detailTauLaiHoTro = vm.parseTimeTauLaiHoTro(result)
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Lưu thất bại, vui lòng thử lại!')
             toastr.error(result.message)
           } else {
+            vm.detailTauLaiHoTro = Object.assign(vm.detailTauLaiHoTro, vm.parseTimeTau(result))
+            vm.detailTauLaiHoTro['tugboatList'] = result['tugboatList']
+            vm.listTauLai = result['tugboatList']
+            vm.changeIdUrl(result['vmaScheduleTugboatId'])
             toastr.success('Lưu thành công!')
           }
         }).catch(function (xhr) {
@@ -989,12 +1077,19 @@ export default {
         })
       }
     },
-    deletePhuongTienThuyNoiDia: function () {
+    deleteTauLaiHoTro: function () {
       var vm = this
       let data = {
-        id: vm.id
+        vmaScheduleTugboatId: vm.id
       }
-      vm.$store.dispatch('deletePhuongTienThuyNoiDia', data).then(function (result) {
+      vm.$store.dispatch('deleteTauLaiHoTro', data).then(function (result) {
+        if (result.hasOwnProperty('errorCode')) {
+          toastr.error('Xóa thất bại, vui lòng thử lại!')
+          toastr.error(result.message)
+        } else {
+          toastr.success('Xóa phương tiện thành công!')
+        }
+        vm.changeIdUrl('0')
       }).catch(function (xhr) {
         console.log(xhr)
       })
@@ -1010,8 +1105,33 @@ export default {
     luuTauLaiHoTro: function () {
       var vm = this
       if (vm.$refs.formTauLaiHoTro.validate()) {
-        vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.detailTauLaiHoTro).then(function (result) {
-          vm.detailTauLaiHoTro = vm.parseTimeTauLaiHoTro(result)
+        vm.detailTauLaiHoTro['json'] = JSON.stringify(vm.listTauLai)
+        var listTau = []
+        vm.detailTauLaiHoTro['tugboatList'] = ''
+        vm.listTauLai.forEach(function (item) {
+          console.log('item++++++++++', item)
+          listTau.push({
+            shipCode: item.ship['shipCode'],
+            shipName: item.ship['shipName'],
+            tugboatCompanyCode: item.tugboatCompany['tugboatCompanyCode'],
+            tugboatCompanyName: item.tugboatCompany['tugboatCompanyName'],
+            power: item['power'],
+            unitPower: 'HP',
+            nameOfShip: vm.detailTauLaiHoTro['nameOfShip'],
+            portofAuthority: ''
+          })
+        })
+        vm.detailTauLaiHoTro['json'] = JSON.stringify(listTau)
+        vm.$store.dispatch('editTauLaiHoTro', vm.detailTauLaiHoTro).then(function (result) {
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Lưu thất bại, vui lòng thử lại!')
+            toastr.error(result.message)
+          } else {
+            vm.detailTauLaiHoTro = Object.assign(vm.detailTauLaiHoTro, vm.parseTimeTau(result))
+            vm.detailTauLaiHoTro['tugboatList'] = result['tugboatList']
+            vm.listTauLai = result['tugboatList']
+            toastr.success('Lưu phương tiện thành công!')
+          }
         }).catch(function (xhr) {
           console.log(xhr)
         })

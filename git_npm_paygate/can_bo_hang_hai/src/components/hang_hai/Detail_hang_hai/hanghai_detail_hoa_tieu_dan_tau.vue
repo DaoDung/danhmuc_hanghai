@@ -2,7 +2,7 @@
   <div style="width: 100%; background: #fff; position: relative;" class="extFormXuLy">
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
-        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>Hoa tiêu dẫn tàu</h3> </v-flex></v-flex>
+        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>Hoa tiêu dẫn tàu <span @click="showWarning = !showWarning" style="cursor: pointer; color: orange;" v-if="warningHoaTieuDanTau['show']" color="warning">(Cảnh báo)</span></h3> </v-flex></v-flex>
         <v-flex xs6 class="text-xs-right pl-3" v-if="!documentName || documentName === '0'">
           <v-flex xs12 style="display: flex; height: 21px; margin-top: 4px; justify-content: flex-end;">
             <v-btn
@@ -120,31 +120,27 @@
           </v-flex>
         </v-flex>
 
-        <v-expansion-panel class="my-0" v-if="warningHoaTieuDanTau['show']">
-          <v-expansion-panel-content v-bind:value="false">
-            <div slot="header" style=""><span class="text-bold primary--text pl-2"> Cảnh báo </span></div>
-            <v-card>
-              <v-card-title class="pt-0 px-0 adv__search__container">
-                <v-alert
-                  style="width: 100%;"
-                  :value="true"
-                  color="warning"
-                  icon="priority_high"
-                  outline
-                  >
-                  <div v-html="warningHoaTieuDanTau['message']" ></div>
-                  <div v-html="warningHoaTieuDanTau['message']"></div>
-                </v-alert>
-              </v-card-title>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+        <v-card v-if="showWarning" style="width: 100%;">
+          <v-card-title class="pt-0 px-0 adv__search__container">
+            <v-alert
+              style="width: 100%;"
+              :value="true"
+              color="warning"
+              icon="priority_high"
+              outline
+              >
+              <div v-html="item" v-for="(item, index) in warningHoaTieuDanTau['message']"></div>
+            </v-alert>
+          </v-card-title>
+        </v-card>
       </v-layout>
     </v-flex>
+
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
       ref="formHoaTieuDanTau"
-      :style="{'opacity': disabledForm ? '0.6' : 1, 'pointer-events': disabledForm ? 'none' : 'auto'}"
-      :disabled="disabledForm"
+      :style="{'opacity': (disabledForm || loadingDetail) ? '0.6' : 1, 'pointer-events': (disabledForm || loadingDetail) ? 'none' : 'auto'}"
+      :disabled="disabledForm || loadingDetail"
       v-model="validFormHoaTieuDanTau"
       lazy-validation
       class="mt-2"
@@ -367,8 +363,8 @@
                 clearable
                 autocomplete
                 :items="shipTypeItems"
-                item-text="shipTypeCode"
-                item-value="shipTypeName"
+                item-text="shipTypeNameVN"
+                item-value="shipTypeCode"
                 v-model="detailHoaTieuDanTau.shipTypeCode"
                 class="py-0 my-0"
                 placeholder="Chọn loại tàu"
@@ -383,7 +379,7 @@
                 clearable
                 autocomplete
                 :items="securityLevelItems"
-                item-text="securiyLevelName"
+                item-text="securityLevelName"
                 item-value="securityLevelCode"
                 v-model="detailHoaTieuDanTau.securityLevelCode"
                 class="py-0 my-0"
@@ -500,11 +496,12 @@
                   <v-flex xs12 sm8>
                     <v-select
                     clearable
+                    return-object
                     autocomplete
                     :items="pilotItems"
                     item-text="pilotName"
                     item-value="pilotCode"
-                    v-model="listHoaTieu[index]['pilotCode']"
+                    v-model="listHoaTieu[index]['pilot']"
                     class="py-0 my-0"
                     placeholder="Hoa tiêu"
                     ></v-select>
@@ -519,11 +516,12 @@
                   <v-flex xs12 sm8>
                     <v-select
                     clearable
+                    return-object
                     autocomplete
                     :items="pilotCategoryItems"
                     item-text="pilotCategoryName"
                     item-value="pilotCategoryCode"
-                    v-model="listHoaTieu[index]['pilotCategoryCode']"
+                    v-model="listHoaTieu[index]['pilotCategory']"
                     class="py-0 my-0"
                     placeholder="Hạng hoa tiêu"
                     ></v-select>
@@ -536,7 +534,7 @@
                     <label>Cty hoa tiêu</label>
                   </v-flex>
                   <v-flex xs12 sm5>
-                    <v-text-field class="py-0 my-0" placeholder="Nhập công suất" v-model="listHoaTieu[index]['pilotCompanyName']"
+                    <v-text-field class="py-0 my-0" placeholder="Nhập công ty" v-model="listHoaTieu[index]['pilotCompanyName']"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm3>
@@ -579,10 +577,13 @@ export default {
   },
   directives: {money: VMoney},
   data: () => ({
+    loadingDetail: false,
+    errorsMessage: {},
     disabledForm: false,
+    showWarning: false,
     warningHoaTieuDanTau: {
       show: false,
-      message: ''
+      message: []
     },
     listHoaTieu: [],
     formatClearanceHeight: {
@@ -716,9 +717,12 @@ export default {
     // }
   },
   computed: {
-    // principal: function () {
-    //   return this.homeValue - this.downpayment
-    // }
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
+    },
+    itineraryNo () {
+      return this.$store.getters.itineraryNo
+    }
   },
   created () {
     var vm = this
@@ -742,7 +746,9 @@ export default {
     if (vm.id && vm.id !== '0') {
       vm.loadHoaTieuDanTau()
     } else {
-      vm.loadInitData()
+      if (vm.documentName) {
+        vm.loadInitData()
+      }
     }
   },
   methods: {
@@ -943,21 +949,41 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailHoaTieuDanTau', data).then(function (result) {
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailHoaTieuDanTau = Object.assign(vm.detailHoaTieuDanTau, vm.parseTimeTau(result))
+          vm.detailHoaTieuDanTau['pilotList'] = result['pilotList'] ? result['pilotList'] : []
+          vm.listHoaTieu = result['pilotList'] ? result['pilotList'].map(item => {
+            return {
+              pilot: {
+                pilotName: item['pilotName'],
+                pilotCode: item['pilotCode']
+              },
+              pilotCategory: {
+                pilotCategoryName: item['pilotCategoryName'],
+                pilotCategoryCode: item['pilotCategoryCode']
+              },
+              ...item
+            }
+          }) : []
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     loadInitData: function () {
       var vm = this
-      let data = {
-        'id': vm.id,
-        'documentName': vm.documentName
+      let param = {
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
       }
-      vm.$store.dispatch('loadVmaShip', data).then(function (result) {
-        vm.detailHoaTieuDanTau = Object.assign(vm.detailHoaTieuDanTau, result)
-      }).catch(function (xhr) {
-        console.log(xhr)
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailHoaTieuDanTau = Object.assign(vm.detailHoaTieuDanTau, vm.parseTimeTau(result))
       })
     },
     luuDraftHoaTieuDanTau: function () {
@@ -982,13 +1008,31 @@ export default {
       var vm = this
       vm.detailHoaTieuDanTau['id'] = ''
       vm.detailHoaTieuDanTau['listHoaTieu'] = JSON.stringify(vm.listHoaTieu)
+      vm.detailHoaTieuDanTau['itineraryNo'] = ''
+      vm.detailHoaTieuDanTau['pilotList'] = ''
+      var listHT = []
+      vm.listHoaTieu.forEach(function (item) {
+        listHT.push({
+          pilotName: item.pilot['pilotName'],
+          pilotCode: item.pilot['pilotCode'],
+          pilotCategoryName: item.pilotCategory['pilotCategoryName'],
+          pilotCategoryCode: item.pilotCategory['pilotCategoryCode'],
+          pilotCompanyName: item['pilotCompanyName'],
+          nameOfShip: vm.detailHoaTieuDanTau['nameOfShip'],
+          portofAuthority: ''
+        })
+      })
+      vm.detailHoaTieuDanTau['json'] = JSON.stringify(listHT)
       if (vm.$refs.formHoaTieuDanTau.validate()) {
         vm.$store.dispatch('addHoaTieuDanTau', vm.detailHoaTieuDanTau).then(function (result) {
-          vm.detailHoaTieuDanTau = result
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Thêm thất bại, vui lòng thử lại!')
             toastr.error(result.message)
           } else {
+            vm.detailHoaTieuDanTau = Object.assign(vm.detailHoaTieuDanTau, vm.parseTimeTau(result))
+            vm.detailHoaTieuDanTau['pilotList'] = result['pilotList']
+            vm.listHoaTieu = result['pilotList']
+            vm.changeIdUrl(result['vmaSchedulePilotId'])
             toastr.success('Thêm phương tiện thành công!')
           }
         }).catch(function (xhr) {
@@ -996,7 +1040,7 @@ export default {
         })
       }
     },
-    deletePhuongTienThuyNoiDia: function () {
+    deleteHoaTieuDanTau: function () {
       var vm = this
       let data = {
         id: vm.id
@@ -1008,6 +1052,7 @@ export default {
         } else {
           toastr.success('Xóa phương tiện thành công!')
         }
+        vm.changeIdUrl('0')
       }).catch(function (xhr) {
         console.log(xhr)
       })
@@ -1023,13 +1068,28 @@ export default {
     luuHoaTieuDanTau: function () {
       var vm = this
       if (vm.$refs.formHoaTieuDanTau.validate()) {
-        vm.detailHoaTieuDanTau['listHoaTieu'] = JSON.stringify(vm.listHoaTieu)
-        vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.detailHoaTieuDanTau).then(function (result) {
-          vm.detailHoaTieuDanTau = result
+        var listHT = []
+        vm.detailHoaTieuDanTau['pilotList'] = ''
+        vm.listHoaTieu.forEach(function (item) {
+          listHT.push({
+            pilotName: item.pilot['pilotName'],
+            pilotCode: item.pilot['pilotCode'],
+            pilotCategoryName: item.pilotCategory['pilotCategoryName'],
+            pilotCategoryCode: item.pilotCategory['pilotCategoryCode'],
+            pilotCompanyName: item['pilotCompanyName'],
+            nameOfShip: vm.detailHoaTieuDanTau['nameOfShip'],
+            portofAuthority: ''
+          })
+        })
+        vm.detailHoaTieuDanTau['json'] = JSON.stringify(listHT)
+        vm.$store.dispatch('editHoaTieuDanTau', vm.detailHoaTieuDanTau).then(function (result) {
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Lưu thất bại, vui lòng thử lại!')
             toastr.error(result.message)
           } else {
+            vm.detailHoaTieuDanTau = Object.assign(vm.detailHoaTieuDanTau, vm.parseTimeTau(result))
+            vm.detailHoaTieuDanTau['pilotList'] = result['pilotList']
+            vm.listHoaTieu = result['pilotList']
             toastr.success('Lưu phương tiện thành công!')
           }
         }).catch(function (xhr) {
@@ -1044,6 +1104,43 @@ export default {
     deleteHoaTieu: function (item, index) {
       var vm = this
       vm.listHoaTieu.splice(index, 1)
+    },
+    parseTimeTau: function (modelHoaTieuDanTau) {
+      var vm = this
+      if (!modelHoaTieuDanTau) {
+        console.log('valid tau den', modelHoaTieuDanTau)
+        return
+      }
+      modelHoaTieuDanTau['pilotDateFrom'] = vm.parseTimeStamp(modelHoaTieuDanTau['pilotDateFrom'])
+      modelHoaTieuDanTau['pilotDateTo'] = vm.parseTimeStamp(modelHoaTieuDanTau['pilotDateTo'])
+      modelHoaTieuDanTau['pilotDateFrom'] = vm.parseTimeStamp(modelHoaTieuDanTau['pilotDateFrom'])
+      modelHoaTieuDanTau['pilotDateTo'] = vm.parseTimeStamp(modelHoaTieuDanTau['pilotDateTo'])
+      return modelHoaTieuDanTau
+    },
+    parseTimeStamp: function (time) {
+      var resultTime = ''
+      if (!time) {
+        console.log('valid time!', time)
+        return
+      }
+      if (typeof time === 'string') {
+        time = parseInt(time)
+      }
+      var date = new Date(time)
+      resultTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes()
+      return resultTime
+    },
+    changeIdUrl: function (id) {
+      var vm = this
+      if (vm.documentName) {
+        vm.$router.push({
+          path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/' + id
+        })
+      } else {
+        vm.$router.push({
+          path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/' + id + '/' + vm.code + '/detail'
+        })
+      }
     },
     quayLai: function () {
       var vm = this

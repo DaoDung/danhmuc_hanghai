@@ -62,7 +62,14 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-form ref="form" class="v-formmm">
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
+    <v-form 
+      ref="form" 
+      :style="{'opacity': disabledForm  || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm" 
+      lazy-validation 
+      class="v-formmm"
+    >
       <v-layout row wrap class="formm_den" pa-2>
         <v-flex md5>
           <v-layout row wrap>
@@ -522,6 +529,11 @@
 <script>
   import {VMoney} from 'v-money'
   import DatetimePicker from '../DatetimePicker.vue'
+  import toastr from 'toastr'
+  toastr.options = {
+    'closeButton': true,
+    'timeOut': '3000'
+  }
   export default {
     props: {
       type: '',
@@ -539,6 +551,8 @@
     directives: {money: VMoney},
     data () {
       return {
+        loadingDetail: false,
+        disabledForm: false,
         boxx: true,
         pttndTauDenCang: {},
         khoi_luong: {
@@ -616,7 +630,8 @@
       vm.loadDonVi()
       if (vm.id && vm.id !== '0') {
         vm.loadPTTND_DenCang()
-      } else {
+      } else if (vm.documentName && vm.documentName !== '0') {
+        vm.loadInitData()
       }
     },
     methods: {
@@ -769,21 +784,46 @@
         let data = {
           'id': vm.id
         }
+        vm.loadingDetail = true
         vm.$store.dispatch('loadDetail_PTTND_DenCang', data).then(function (result) {
+          if (!result.hasOwnProperty('errorCode')) {
+            vm.pttndTauDenCang = result
+          }
+          vm.loadingDetail = false
         }).catch(function (xhr) {
           console.log(xhr)
+          vm.loadingDetail = false
         })
       },
       themPTTNDTauDenCang: function () {
         var vm = this
-        vm.detailTauDenCang['id'] = ''
+        vm.pttndTauDenCang['id'] = ''
         if (vm.$refs.formTauDenCang.validate()) {
-          vm.$store.dispatch('addPTTNDTauDenCang', vm.detailTauDenCang).then(function (result) {
-            vm.detailTauDenCang = result
+          vm.$store.dispatch('addPTTNDTauDenCang', vm.pttndTauDenCang).then(function (result) {
+            if (result.hasOwnProperty('errorCode')) {
+              toastr.error('Thêm thất bại, vui lòng thử lại!')
+              toastr.error(result.message)
+            } else {
+              vm.pttndTauDenCang = Object.assign(vm.pttndTauDenCang, vm.parseTimeTau(result))
+              vm.changeIdUrl(result['vmaShipId'])
+              toastr.success('Thêm thành công!')
+            }
           }).catch(function (xhr) {
             console.log(xhr)
           })
         }
+      },
+      loadInitData: function () {
+        var vm = this
+        let param = {
+          itineraryNo: vm.itineraryNo,
+          documentName: vm.documentName,
+          documentYear: vm.documentYear,
+          type: 'VIEW'
+        }
+        vm.$store.dispatch('loadInitData', param).then(function (result) {
+          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
+        })
       },
       deletePTTNDTauDenCang: function () {
         var vm = this
@@ -791,21 +831,70 @@
           id: vm.id
         }
         vm.$store.dispatch('deletePTTNDTauDenCang', data).then(function (result) {
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Xóa thất bại!')
+            toastr.error(result.message)
+          } else {
+            vm.changeIdUrl('0')
+            toastr.success('Xóa thành công!')
+          }
         }).catch(function (xhr) {
           console.log(xhr)
         })
       },
       lamMoi: function () {
         var vm = this
-        vm.detailTauDenCang = {}
+        vm.pttndTauDenCang = {}
       },
       luuTauDenCang: function () {
         var vm = this
         if (vm.$refs.formTauDenCang.validate()) {
-          vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.detailTauDenCang).then(function (result) {
-            vm.detailTauDenCang = result
+          vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.pttndTauDenCang).then(function (result) {
+            vm.pttndTauDenCang = result
+            if (result.hasOwnProperty('errorCode')) {
+              toastr.error('Lưu thất bại, vui lòng thử lại!')
+              toastr.error(result.message)
+            } else {
+              vm.pttndTauDenCang = Object.assign(vm.pttndTauDenCang, vm.parseTimeTau(result))
+              toastr.success('Lưu thành công!')
+            }
           }).catch(function (xhr) {
             console.log(xhr)
+          })
+        }
+      },
+      parseTimeTau: function (modelPTTNDTauDenCang) {
+        var vm = this
+        if (!modelPTTNDTauDenCang) {
+          console.log('valid tau den', modelPTTNDTauDenCang)
+          return
+        }
+        modelPTTNDTauDenCang['timeOfArrival'] = vm.parseTimeStamp(modelPTTNDTauDenCang['timeOfArrival'])
+        modelPTTNDTauDenCang['expiredDate'] = vm.parseTimeStamp(modelPTTNDTauDenCang['expiredDate'])
+        return modelPTTNDTauDenCang
+      },
+      parseTimeStamp: function (time) {
+        var resultTime = ''
+        if (!time) {
+          console.log('valid time!', time)
+          return
+        }
+        if (typeof time === 'string') {
+          time = parseInt(time)
+        }
+        var date = new Date(time)
+        resultTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes()
+        return resultTime
+      },
+      changeIdUrl: function (id) {
+        var vm = this
+        if (vm.documentName) {
+          vm.$router.push({
+            path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/' + id
+          })
+        } else {
+          vm.$router.push({
+            path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/' + id + '/' + vm.code + '/detail'
           })
         }
       },

@@ -2,7 +2,7 @@
   <div style="background: #fff;" class="">
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
-        <v-flex xs6><v-flex style="margin: 8px 0 9px 0;" class="text ml-3" xs12><h3>Tàu biển</h3> </v-flex></v-flex>
+        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>Tàu biển</h3> </v-flex></v-flex>
         <v-flex xs6 class="text-xs-right pl-3">
           <v-flex xs12 style="display: flex; margin-top: 4px; height: 21px; justify-content: flex-end;">
             <v-btn
@@ -61,8 +61,10 @@
         </v-flex>
       </v-layout>
     </v-flex>
-
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
+      :style="{'opacity': disabledForm || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm || loadingDetail"
       ref="formTauBien"
       v-model="validFormTauBien"
       lazy-validation
@@ -397,6 +399,8 @@ export default {
   directives: {money: VMoney},
   data: () => {
     return {
+      disabledForm: false,
+      loadingDetail: false,
       errorsMessage: {
         // messageNT: '',
         // messageGT: '',
@@ -686,12 +690,17 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailTauBien', data).then(function (result) {
         console.log('result++++++++++++++', result)
-        vm.detailTauBien = result
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailTauBien = result
+        }
+        vm.loadingDetail = false
         console.log('vm.detailTauBien++++++++++++++', vm.detailTauBien)
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     validNumberInput: function () {

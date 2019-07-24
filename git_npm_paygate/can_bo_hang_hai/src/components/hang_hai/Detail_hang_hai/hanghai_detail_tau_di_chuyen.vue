@@ -3,7 +3,7 @@
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
         <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12>
-          <h3>Kế hoạch tàu di chuyển <span @click="showWarning = !showWarning" style="cursor: pointer; color: orange;" v-if="warningTauNeoDau" color="warning">(Cảnh báo)</span></h3> </v-flex>
+          <h3>Kế hoạch tàu di chuyển <span @click="showWarning = !showWarning" style="cursor: pointer; color: orange;" v-if="warningTauDiChuyen['show']" color="warning">(Cảnh báo)</span></h3> </v-flex>
         </v-flex>
         <v-flex xs6 class="text-xs-right pl-3" v-if="!documentName || documentName === '0'">
           <v-flex xs12 style="display: flex; margin-top: 4px; height: 21px; justify-content: flex-end;">
@@ -24,7 +24,7 @@
               small
               class="mx-0 my-0"
               style="text-transform: none; color: #007bff; font-weight: normal;"
-              @click="deleteTauDenCang()"
+              @click="deleteTauDiChuyen()"
             >
               <v-icon size="20" color="red">close</v-icon>Xóa
             </v-btn>
@@ -135,25 +135,26 @@
         </v-flex>
 
         <v-card v-if="showWarning" style="width: 100%;">
-          <v-card-title class="pt-0 px-0 adv__search__container">
+          <v-card-title class="pt-0 py-0 px-0 adv__search__container">
             <v-alert
+              class="my-0"
               style="width: 100%;"
               :value="true"
               color="warning"
               icon="priority_high"
               outline
               >
-              <div v-html="warningTauNeoDau['message']" ></div>
-              <div v-html="warningTauNeoDau['message']"></div>
+              <div v-html="item" v-for="(item, index) in warningTauDiChuyen['message']"></div>
             </v-alert>
           </v-card-title>
         </v-card>
       </v-layout>
     </v-flex>
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
       ref="formTauDiChuyen"
-      :style="{'opacity': disabledForm ? '0.6' : 1, 'pointer-events': disabledForm ? 'none' : 'auto'}"
-      :disabled="disabledForm"
+      :style="{'opacity': disabledForm || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm || loadingDetail"
       v-model="validFormTauDiChuyen"
       lazy-validation
       class="mt-2"
@@ -424,7 +425,7 @@
               <v-flex xs9 class="">
                 <v-text-field clearable  placeholder="Nhập số IMO"  v-model="detailTauDiChuyen.imoNumber"
                 ></v-text-field>
-              </v-flex>
+              </v-flex>.
             </v-layout>
 
             <v-layout row wrap>
@@ -573,7 +574,7 @@
 import DatetimePicker from '../DatetimePicker.vue'
 import {VMoney} from 'v-money'
 import toastr from 'toastr'
-import {eventBus} from '../../../event-bus/eventBus.js'
+// import {eventBus} from '../../../event-bus/eventBus.js'
 toastr.options = {
   'closeButton': true,
   'timeOut': '3000'
@@ -595,12 +596,13 @@ export default {
   },
   directives: {money: VMoney},
   data: () => ({
+    loadingDetail: false,
     showWarning: false,
     errorsMessage: {},
     disabledForm: false,
-    warningTauNeoDau: {
+    warningTauDiChuyen: {
       show: true,
-      message: ''
+      message: []
     },
     formatClearanceHeight: {
       decimal: '.',
@@ -714,9 +716,12 @@ export default {
     }
   },
   computed: {
-    // principal: function () {
-    //   return this.homeValue - this.downpayment
-    // }
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
+    },
+    itineraryNo () {
+      return this.$store.getters.itineraryNo
+    }
   },
   created () {
     var vm = this
@@ -739,7 +744,9 @@ export default {
     if (vm.id && vm.id !== '0') {
       vm.loadTauDiChuyen()
     } else {
-      vm.loadInitData()
+      if (vm.documentName) {
+        vm.loadInitData()
+      }
     }
   },
   methods: {
@@ -921,14 +928,14 @@ export default {
     },
     loadInitData: function () {
       var vm = this
-      let data = {
-        'id': vm.id,
-        'documentName': vm.documentName
+      let param = {
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
       }
-      vm.$store.dispatch('loadVmaShip', data).then(function (result) {
-        vm.detailTauDiChuyen = Object.assign(vm.detailTauDiChuyen, result)
-      }).catch(function (xhr) {
-        console.log(xhr)
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailTauDiChuyen = Object.assign(vm.detailTauDiChuyen, vm.parseTimeTau(result))
       })
     },
     luuTauDraftTauDiChuen: function () {
@@ -949,7 +956,7 @@ export default {
       vm.detailTauDiChuyen['state'] = 'CONFIRM'
       vm.luuTauDiChuyen()
     },
-    parseTimeTauDiChuyen: function (modelTauDiChuyen) {
+    parseTimeTau: function (modelTauDiChuyen) {
       var vm = this
       if (!modelTauDiChuyen) {
         console.log('valid tau di chuyen', modelTauDiChuyen)
@@ -976,10 +983,15 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailTauDiChuyen', data).then(function (result) {
-        vm.detailTauDiChuyen = vm.parseTimeTauDiChuyen(result)
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailTauDiChuyen = Object.assign(vm.detailTauDiChuyen, vm.parseTimeTau(result))
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     themTauDiChuyen: function () {
@@ -987,7 +999,7 @@ export default {
       vm.detailTauDiChuyen['id'] = ''
       if (vm.$refs.formTauDiChuyen.validate()) {
         vm.$store.dispatch('addTauDiChuyen', vm.detailTauDiChuyen).then(function (result) {
-          vm.detailTauDiChuyen = vm.parseTimeTauDiChuyen(result)
+          vm.detailTauDiChuyen = Object.assign(vm.detailTauDiChuyen, vm.parseTimeTau(result))
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Thêm thất bại, vui lòng thử lại!')
             toastr.error(result.message)
@@ -1000,22 +1012,25 @@ export default {
         })
       }
     },
-    deletePhuongTienThuyNoiDia: function () {
+    deleteTauDiChuyen: function () {
       var vm = this
       let data = {
         id: vm.id
       }
-      vm.$store.dispatch('deleteTauDiChuyen', data).then(function (result) {
-        if (result.hasOwnProperty('errorCode')) {
-          toastr.error('Xóa thất bại, vui lòng thử lại!')
-          toastr.error(result.message)
-        } else {
-          vm.changeIdUrl('0')
-          toastr.success('Xóa thành công!')
-        }
-      }).catch(function (xhr) {
-        console.log(xhr)
-      })
+      var cf = confirm('Bạn có muốn xóa!')
+      if (cf) {
+        vm.$store.dispatch('deleteTauDiChuyen', data).then(function (result) {
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Xóa thất bại, vui lòng thử lại!')
+            toastr.error(result.message)
+          } else {
+            vm.changeIdUrl('0')
+            toastr.success('Xóa thành công!')
+          }
+        }).catch(function (xhr) {
+          console.log(xhr)
+        })
+      }
     },
     lamMoi: function () {
       var vm = this
@@ -1029,7 +1044,7 @@ export default {
       var vm = this
       if (vm.$refs.formTauDiChuyen.validate()) {
         vm.$store.dispatch('editTauDiChuyen', vm.detailTauDiChuyen).then(function (result) {
-          vm.detailTauDiChuyen = vm.parseTimeTauDiChuyen(result)
+          vm.detailTauDiChuyen = Object.assign(vm.detailTauDiChuyen, vm.parseTimeTau(result))
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Lưu thất bại, vui lòng thử lại!')
             toastr.error(result.message)
@@ -1047,8 +1062,9 @@ export default {
       vm.$router.push({
         path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/DanhSachTauLaiHoTro/0'
       })
-      eventBus.$emit('otherDataTauLai', {
-        certificateNo: vm.detailTauDiChuyen['certificateNo']
+      vm.$store.commit('setOtherData', {
+        certificateNo: vm.detailTauDiChuyen['certificateNo'],
+        itineraryNo: vm.detailTauDiChuyen['itineraryNo']
       })
     },
     changeIdUrl: function (id) {

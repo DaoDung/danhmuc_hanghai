@@ -61,8 +61,13 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    
-    <v-from ref="formKhangCao" v-model="validFormKhangCao">
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
+    <v-from ref="formKhangCao" 
+      :style="{'opacity': disabledForm  || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm" 
+      lazy-validation 
+      v-model="validFormKhangCao"
+    >
       <v-layout row wrap class="pl-3 mt-4">
         <v-flex xs5 class="ml-5">
           <v-layout row wrap>
@@ -281,6 +286,11 @@
 </template>
 <script>
 import DatetimePicker from '../DatetimePicker.vue'
+import toastr from 'toastr'
+toastr.options = {
+  'closeButton': true,
+  'timeOut': '3000'
+}
 export default {
   props: {
     type: '',
@@ -293,10 +303,19 @@ export default {
     documentYear: ''
   },
   data: () => ({
+    loadingDetail: false,
+    disabledForm: false,
     detailKhangCao: {},
     shipTypeItems: [],
     validFormKhangCao: {},
-    securityLevelItems: []
+    securityLevelItems: [],
+    flagStateOfShipItems: [],
+    portWharfItems: [],
+    shipAgencyItems: [],
+    portHarbourItems: [],
+    purposeItems: [],
+    cargoItems: [],
+    chanelListItems: []
   }),
   components: {
     'datetime-picker': DatetimePicker
@@ -320,7 +339,8 @@ export default {
     vm.loadFlagStateOfShip()
     if (vm.id && vm.id !== '0') {
       vm.loadKhangCao()
-    } else {
+    } else if (vm.documentName && vm.documentName !== '0') {
+      vm.loadInitData()
     }
   },
   methods: {
@@ -473,9 +493,15 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailKhangCao', data).then(function (result) {
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailKhangCao = Object.assign(vm.detailKhangCao, vm.parseTimeTau(result))
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     themKhangCao: function () {
@@ -483,7 +509,14 @@ export default {
       vm.detailKhangCao['id'] = ''
       if (vm.$refs.formKhangCao.validate()) {
         vm.$store.dispatch('addKhangCao', vm.detailKhangCao).then(function (result) {
-          vm.detailKhangCao = result
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Thêm thất bại, vui lòng thử lại!')
+            toastr.error(result.message)
+          } else {
+            vm.detailKhangCao = Object.assign(vm.detailKhangCao, vm.parseTimeTau(result))
+            vm.changeIdUrl(result['vmaItineraryProtest'])
+            toastr.success('Thêm phương tiện thành công!')
+          }
         }).catch(function (xhr) {
           console.log(xhr)
         })
@@ -495,8 +528,27 @@ export default {
         id: vm.id
       }
       vm.$store.dispatch('deleteKhangCao', data).then(function (result) {
+        if (result.hasOwnProperty('errorCode')) {
+          toastr.error('Xóa thất bại!')
+          toastr.error(result.message)
+        } else {
+          toastr.success('Xóa thành công!')
+        }
+        vm.changeIdUrl('0')
       }).catch(function (xhr) {
         console.log(xhr)
+      })
+    },
+    loadInitData: function () {
+      var vm = this
+      let param = {
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
+      }
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
       })
     },
     lamMoi: function () {
@@ -507,9 +559,52 @@ export default {
       var vm = this
       if (vm.$refs.formKhangCao.validate()) {
         vm.$store.dispatch('editKhangCao', vm.detailKhangCao).then(function (result) {
-          vm.detailKhangCao = result
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Lưu thất bại, vui lòng thử lại!')
+            toastr.error(result.message)
+          } else {
+            vm.detailKhangCao = Object.assign(vm.detailKhangCao, vm.parseTimeTau(result))
+            toastr.success('Lưu phương tiện thành công!')
+          }
         }).catch(function (xhr) {
           console.log(xhr)
+        })
+      }
+    },
+    parseTimeTau: function (modelHaXuong) {
+      var vm = this
+      if (!modelHaXuong) {
+        console.log('valid ha xuong', modelHaXuong)
+        return
+      }
+      modelHaXuong['timeOfDeparture'] = vm.parseTimeStamp(modelHaXuong['timeOfDeparture'])
+      modelHaXuong['timeOfArrival'] = vm.parseTimeStamp(modelHaXuong['timeOfArrival'])
+      modelHaXuong['launchingFrom'] = vm.parseTimeStamp(modelHaXuong['launchingFrom'])
+      modelHaXuong['launchingTo'] = vm.parseTimeStamp(modelHaXuong['launchingTo'])
+      return modelHaXuong
+    },
+    parseTimeStamp: function (time) {
+      var resultTime = ''
+      if (!time) {
+        console.log('valid time!', time)
+        return
+      }
+      if (typeof time === 'string') {
+        time = parseInt(time)
+      }
+      var date = new Date(time)
+      resultTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes()
+      return resultTime
+    },
+    changeIdUrl: function (id) {
+      var vm = this
+      if (vm.documentName) {
+        vm.$router.push({
+          path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/' + id
+        })
+      } else {
+        vm.$router.push({
+          path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/' + id + '/' + vm.code + '/detail'
         })
       }
     },

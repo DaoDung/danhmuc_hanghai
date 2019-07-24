@@ -44,7 +44,7 @@
 import HangHaiDetailDanhSachTauDenCang from './hang_hai/Detail_hang_hai/hanghai_detail_tau_den_cang.vue'
 import HangHaiDetailDanhSachTauDiChuyen from './hang_hai/Detail_hang_hai/hanghai_detail_tau_di_chuyen.vue'
 import DanhSachTauAll from './hang_hai/DanhSachTauAll.vue'
-
+import {eventBus} from '@/event-bus/eventBus.js'
 export default {
   // props: ['type', 'documentTypeCode', 'documentStatusCode', 'id', 'code', 'statusCode'],
   props: {
@@ -80,6 +80,7 @@ export default {
     vm.$nextTick(function () {
       vm.reloadDetail()
     })
+    eventBus.$emit('selectTPTauBien', vm.code)
   },
   watch: {
     '$route': function (newRoute, oldRoute) {

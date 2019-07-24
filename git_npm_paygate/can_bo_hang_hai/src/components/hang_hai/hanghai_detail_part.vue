@@ -53,6 +53,7 @@
         <v-list-tile v-for="(subItem, subIndex) in itemsTauBien['items']"
             v-bind:key="subIndex"
             :disabled="subItem['available'] === false"
+            :style="{'background': (thanhPhanSelected===subItem.type) ? '#dcdada' : ''}"
             :class='{"list--group__header--active": (thanhPhanSelected===subItem.type)}'
             @click="selectThanhPhanTauBien(subItem, subIndex)"
         >
@@ -142,6 +143,15 @@ export default {
       return this.$store.getters.loadingInitData
     }
   },
+  created () {
+    var vm = this
+    vm.loadItineraryNo()
+    eventBus.$on('selectTPTauBien', vm.changeThanhPhanSelected)
+  },
+  destroyed () {
+    var vm = this
+    eventBus.$off('selectTPTauBien', vm.changeThanhPhanSelected)
+  },
   data () {
     return {
       thanhPhanLists: [],
@@ -152,6 +162,20 @@ export default {
     }
   },
   methods: {
+    changeThanhPhanSelected: function (data) {
+      var vm = this
+      console.log('changeThanhPhanSelected++++++++++++++++', data)
+      vm.thanhPhanSelected = data
+    },
+    loadItineraryNo: function () {
+      var vm = this
+      let param = {
+        documentName: vm.document_name,
+        documentYear: vm.document_year,
+        type: vm.type
+      }
+      vm.$store.dispatch('loadItineraryNo', param)
+    },
     loadRoleFilterStatus: function () {
       var vm = this
       let filter = {

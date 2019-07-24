@@ -1,14 +1,7 @@
 <template>
     <div class="input-group date" style="border-bottom: 1px solid #949494;">
-      <v-menu
-        :close-on-content-click="false"
-        :nudge-width="200"
-        v-model="menuDate"
-        offset-x
-        >
-        <!-- class="bootstrap-datetimepicker-widget dropdown-menu" -->
-        <masked-input v-model="value" mask="11/11/1111 11:11" @change="handlerChange()" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)" />
-        <v-icon size="16" slot="activator" @click="toggleDisplay"
+      <masked-input v-model="value" mask="11/11/1111 11:11" @change="handlerChange()" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)" />
+      <v-icon size="16" slot="activator" @click="toggleDisplay"
         style="
             position: absolute;
             right: 8px !important;
@@ -16,8 +9,15 @@
             font-size: 20px !important;
             cursor: pointer;
         ">event</v-icon>
+      <v-menu
+        :close-on-content-click="false"
+        :nudge-width="200"
+        v-model="menuDate"
+        offset-x
+        >
+        <!-- class="bootstrap-datetimepicker-widget dropdown-menu" -->
         <v-card>
-          <div >
+          <div class="bootstrap-datetimepicker-widget-2 dropdown-menu">
             <ul style="padding: 0px;z-index: 20;">
                 <li>
                     <div class="datepicker">
@@ -100,7 +100,7 @@
                                     <td v-if="showHours">
                                         <a href="#" class="btn" @click.prevent="decrementHours">&#x25BC;</a>
                                     </td>
-                                    <td v-if="showHours" @click.prevent="showMyself = false" class="separator red--text text--darken-3" style="cursor: pointer;">Ok</td>
+                                    <td v-if="showHours" @click.prevent="selectDateOK()" class="separator red--text text--darken-3" style="cursor: pointer;">Ok</td>
                                     <td v-if="showMinutes">
                                         <a href="#" class="btn" @click.prevent="decrementMinutes">&#x25BC;</a>
                                     </td>
@@ -118,20 +118,6 @@
         </div>
         </v-card>
       </v-menu>
-
-        <masked-input v-model="value" mask="11/11/1111 11:11" @change="handlerChange()" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)" />
-        <!-- <v-text-field
-          v-model="value" mask="11/11/1111 11:11" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)"
-          class="my-0 py-0"
-        ></v-text-field> -->
-        <v-icon size="16" @click="toggleDisplay"
-        style="
-            position: absolute;
-            right: 8px !important;
-            top: 8px !important;
-            font-size: 20px !important;
-            cursor: pointer;
-        ">event</v-icon>
     </div>
 </template>
 
@@ -334,6 +320,11 @@
           this.originalValue = (moment(this.value, 'DD/MM/YYYY HH:mm').locale('vi').format('DD/MM/YYYY HH:mm'))
         }
         this.showMyself = !this.showMyself
+      },
+      selectDateOK () {
+        var vm = this
+        vm.showMyself = false
+        vm.menuDate = !vm.menuDate
       }
     },
     filters: {

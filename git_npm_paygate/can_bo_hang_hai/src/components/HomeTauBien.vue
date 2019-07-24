@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped floating width="250" style="overflow: auto; padding: 0;">
+    <v-navigation-drawer app clipped floating width="250" class="px-0 py-0" style="overflow: auto; padding: 0;">
       <jx-hanghai-filter-left
         ref="filterleft"
         :type="type"

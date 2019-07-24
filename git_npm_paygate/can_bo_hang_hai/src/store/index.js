@@ -17,7 +17,9 @@ export const store = new Vuex.Store({
     error: null,
     docTypes: null,
     roleFilterStatus: null,
-    userSignsData: null
+    userSignsData: null,
+    otherData: {},
+    itineraryNo: {}
   },
   actions: {
     clearError ({commit}) {
@@ -228,6 +230,60 @@ export const store = new Vuex.Store({
           axios.get(state.initData.getRoleFilterStatus, param).then(function (response) {
             let serializable = response.data
             commit('setRoleFilterStatus', serializable)
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadDetailGiuTau ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'vmaScheduleSecurityId': filter.id
+            }
+          }
+          axios.get(state.initData.getVmaScheduleSecurity_Detail_URL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadDetailHaXuong ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'vmaScheduleLaunchingId': filter.id
+            }
+          }
+          axios.get(state.initData.getVmaScheduleLaunching_Detail_URL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadDetailSuaChua ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'vmaScheduleShipyardId': filter.id
+            }
+          }
+          axios.get(state.initData.getVmaScheduleShipyard_Detail_URL, param).then(function (response) {
+            let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
             console.log(error)
@@ -470,14 +526,13 @@ export const store = new Vuex.Store({
         store.dispatch('loadInitResource').then(function (result) {
           let param = {
             params: {
-              'id': data.id,
+              'vmaSchedulePilotId': data.id,
               'documentType': data.documentType,
               'documentName': data.documentName,
-              'documentYear': data.documentYear,
-              'type': data.type
+              'documentYear': data.documentYear
             }
           }
-          axios.get(state.initData.getDetailHoaTieuDanTau, param).then(function (response) {
+          axios.get(state.initData.getVmaSchedulePilot_Detail_URL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -550,13 +605,13 @@ export const store = new Vuex.Store({
         store.dispatch('loadInitResource').then(function (result) {
           let param = {
             params: {
-              'id': data.id,
+              'vmaScheduleTugboatId': data.id,
               'documentType': data.documentType,
               'documentName': data.documentName,
               'documentYear': data.documentYear
             }
           }
-          axios.get(state.initData.getDetailTauBien, param).then(function (response) {
+          axios.get(state.initData.getVmaScheduleTugboat_Detail_URL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -575,6 +630,102 @@ export const store = new Vuex.Store({
             }
           }
           axios.get(state.initData.getVmaItinerarySchedule_Detail_URL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    deleteKhangCao ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.deleteVmaItineraryProtestURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    deleteTauLaiHoTro ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.deleteVmaScheduleTugboatURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    deleteTauDiChuyen ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.deleteVmaScheduleShiftingURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    deleteTauDenCang ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.deleteVmaItineraryScheduleURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    addKhangCao ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.addVmaItineraryProtestURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    addThaXuong ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.addVmaScheduleLaunchingURL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -624,6 +775,86 @@ export const store = new Vuex.Store({
             params: data
           }
           axios.get(state.initData.deleteTauBien, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    editGiuTau ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.updateVmaScheduleSecurityURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    editThaXuong ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.updateVmaScheduleLaunchingURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    editSuaChua ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.updateVmaScheduleShipyardURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    editHoaTieuDanTau ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.updateVmaSchedulePilotURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    editTauLaiHoTro ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.updateVmaScheduleTugboatURL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -688,6 +919,38 @@ export const store = new Vuex.Store({
             params: data
           }
           axios.get(state.initData.addVmaShipURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    addGiuTau ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.addVmaScheduleSecurityURL, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    addSuaChua ({commit, state}, data) {
+      return new Promise((resolve, reject) => {
+        let param = {
+          params: data
+        }
+        store.dispatch('loadInitResource').then(function (result) {
+          axios.get(state.initData.addVmaScheduleShipyardURL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -767,7 +1030,7 @@ export const store = new Vuex.Store({
           params: data
         }
         store.dispatch('loadInitResource').then(function (result) {
-          axios.get(state.initData.addTauLaiHoTro, param).then(function (response) {
+          axios.get(state.initData.addVmaScheduleTugboatURL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -783,7 +1046,7 @@ export const store = new Vuex.Store({
           params: data
         }
         store.dispatch('loadInitResource').then(function (result) {
-          axios.get(state.initData.addHoaTieuDanTau, param).then(function (response) {
+          axios.get(state.initData.addVmaSchedulePilotURL, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -851,6 +1114,48 @@ export const store = new Vuex.Store({
             }
           }
           axios.get(state.initData.getThongTinKhaiBaoTable, param).then(function (response) {
+            let serializable = response.data
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadItineraryNo ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'documentName': filter.documentName,
+              'documentYear': filter.documentYear,
+              'type': filter.type
+            }
+          }
+          axios.get(state.initData.getMessageType23EXT, param).then(function (response) {
+            let serializable = response.data
+            commit('setItineraryNo', serializable)
+            resolve(serializable)
+          }).catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
+        })
+      })
+    },
+    loadInitData ({commit, state}, filter) {
+      return new Promise((resolve, reject) => {
+        store.dispatch('loadInitResource').then(function (result) {
+          let param = {
+            params: {
+              'itineraryNo': filter.itineraryNo,
+              'documentName': filter.documentName,
+              'documentYear': filter.documentYear,
+              'type': filter.type
+            }
+          }
+          axios.get(state.initData.getInitData, param).then(function (response) {
             let serializable = response.data
             resolve(serializable)
           }).catch(function (error) {
@@ -999,11 +1304,20 @@ export const store = new Vuex.Store({
     },
     setRoleFilterStatus (state, payload) {
       state.roleFilterStatus = payload
+    },
+    setOtherData (state, payload) {
+      state.otherData = payload
+    },
+    setItineraryNo (state, payload) {
+      state.itineraryNo = payload
     }
   },
   getters: {
     loading (state) {
       return state.loading
+    },
+    itineraryNo (state) {
+      return state.itineraryNo
     },
     loadingTable (state) {
       return state.loadingTable
@@ -1036,6 +1350,9 @@ export const store = new Vuex.Store({
           resolve(state.docTypes)
         })
       }
+    },
+    otherData (state) {
+      return state.otherData
     },
     roleFilterStatus (state) {
       return (filter) => {

@@ -61,7 +61,10 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-form ref="form" class="v-formmm">
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
+    <v-form ref="form" 
+    :style="{'opacity': disabledForm  || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm" lazy-validation class="v-formmm">
         <v-layout row wrap class="formm_den" pa-2>
           <v-flex md5>
             <v-layout row wrap>
@@ -455,6 +458,11 @@
 <script>
   import {VMoney} from 'v-money'
   import DatetimePicker from '../DatetimePicker.vue'
+  import toastr from 'toastr'
+  toastr.options = {
+    'closeButton': true,
+    'timeOut': '3000'
+  }
   export default {
     props: {
       type: '',
@@ -472,6 +480,8 @@
     directives: {money: VMoney},
     data () {
       return {
+        loadingDetail: false,
+        disabledForm: false,
         boxx: true,
         pttndRoiCang: {},
         khoi_luong: {
@@ -549,7 +559,8 @@
       vm.loadDonVi()
       if (vm.id && vm.id !== '0') {
         vm.loadPTTND_RoiCang()
-      } else {
+      } else if (vm.documentName && vm.documentName !== '0') {
+        vm.loadInitData()
       }
     },
     methods: {
@@ -697,23 +708,47 @@
           console.log(xhr)
         })
       },
+      loadInitData: function () {
+        var vm = this
+        let param = {
+          itineraryNo: vm.itineraryNo,
+          documentName: vm.documentName,
+          documentYear: vm.documentYear,
+          type: 'VIEW'
+        }
+        vm.$store.dispatch('loadInitData', param).then(function (result) {
+          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
+        })
+      },
       loadPTTND_RoiCang: function () {
         var vm = this
         let data = {
           'id': vm.id
         }
+        vm.loadingDetail = true
         vm.$store.dispatch('loadDetail_PTTND_RoiCang', data).then(function (result) {
-          vm.pttndRoiCang = result
+          if (!result.hasOwnProperty('errorCode')) {
+            vm.pttndRoiCang = result
+          }
+          vm.loadingDetail = true
         }).catch(function (xhr) {
           console.log(xhr)
+          vm.loadingDetail = true
         })
       },
       themPTTNDTauRoiCang: function () {
         var vm = this
-        vm.detailTauDenCang['id'] = ''
+        vm.pttndRoiCang['id'] = ''
         if (vm.$refs.formTauDenCang.validate()) {
-          vm.$store.dispatch('addPTTNDTauRoiCang', vm.detailTauDenCang).then(function (result) {
-            vm.pttndRoiCang = result
+          vm.$store.dispatch('addPTTNDTauRoiCang', vm.pttndRoiCang).then(function (result) {
+            if (result.hasOwnProperty('errorCode')) {
+              toastr.error('Thêm thất bại, vui lòng thử lại!')
+              toastr.error(result.message)
+            } else {
+              vm.pttndRoiCang = Object.assign(vm.pttndRoiCang, vm.parseTimeTau(result))
+              vm.changeIdUrl(result['vmaShipId'])
+              toastr.success('Thêm thành công!')
+            }
           }).catch(function (xhr) {
             console.log(xhr)
           })
@@ -725,22 +760,70 @@
           id: vm.id
         }
         vm.$store.dispatch('deletePTTNDTauRoiCang', data).then(function (result) {
-          vm.pttndRoiCang = {}
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Xóa thất bại!')
+            toastr.error(result.message)
+          } else {
+            toastr.success('Xóa thành công!')
+          }
+          vm.changeIdUrl('0')
         }).catch(function (xhr) {
           console.log(xhr)
         })
       },
       lamMoi: function () {
         var vm = this
-        vm.detailTauDenCang = {}
+        vm.pttndRoiCang = {}
       },
       luuPTTNDTauRoiCang: function () {
         var vm = this
         if (vm.$refs.formTauDenCang.validate()) {
-          vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.detailTauDenCang).then(function (result) {
-            vm.detailTauDenCang = result
+          vm.$store.dispatch('editPhuongTienThuyNoiDia', vm.pttndRoiCang).then(function (result) {
+            if (result.hasOwnProperty('errorCode')) {
+              toastr.error('Lưu thất bại, vui lòng thử lại!')
+              toastr.error(result.message)
+            } else {
+              vm.pttndRoiCang = Object.assign(vm.pttndRoiCang, vm.parseTimeTau(result))
+              toastr.success('Lưu thành công!')
+            }
           }).catch(function (xhr) {
             console.log(xhr)
+          })
+        }
+      },
+      parseTimeTau: function (modelPTTNDTauRoiCang) {
+        var vm = this
+        if (!modelPTTNDTauRoiCang) {
+          console.log('valid tau den', modelPTTNDTauRoiCang)
+          return
+        }
+        modelPTTNDTauRoiCang['timeOfDeparture'] = vm.parseTimeStamp(modelPTTNDTauRoiCang['timeOfDeparture'])
+        modelPTTNDTauRoiCang['timeOfApproval'] = vm.parseTimeStamp(modelPTTNDTauRoiCang['timeOfApproval'])
+        modelPTTNDTauRoiCang['expiredDate'] = vm.parseTimeStamp(modelPTTNDTauRoiCang['expiredDate'])
+        return modelPTTNDTauRoiCang
+      },
+      parseTimeStamp: function (time) {
+        var resultTime = ''
+        if (!time) {
+          console.log('valid time!', time)
+          return
+        }
+        if (typeof time === 'string') {
+          time = parseInt(time)
+        }
+        var date = new Date(time)
+        resultTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes()
+        return resultTime
+      },
+      changeIdUrl: function (id) {
+        var vm = this
+        if (vm.documentName) {
+          vm.$router.push({
+            path: '/ho-so-phuong-tien/' + vm.type + '/' + vm.documentName + '/' + vm.documentYear + '/' + vm.documentTypeCode + '/' + vm.code + '/' + id
+          })
+        } else {
+          vm.$router.push({
+            path: '/tau-bien/' + vm.type + '/' + vm.documentTypeCode + '/' + vm.documentStatusCode + '/' + id + '/' + vm.code + '/detail'
           })
         }
       },

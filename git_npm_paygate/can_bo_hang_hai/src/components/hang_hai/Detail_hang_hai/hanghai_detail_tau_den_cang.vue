@@ -2,7 +2,9 @@
   <div style="width: 100%; background: #fff; position: relative;" class="extFormXuLy">
     <v-flex xs12 style="background: #e6e1e1;">
       <v-layout row wrap >
-        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12><h3>Kế hoạch tàu đến cảng</h3> </v-flex></v-flex>
+        <v-flex xs6><v-flex style="margin: 8px 0 9px 0; color: #1976d2;" class="text ml-3" xs12>
+          <h3>Kế hoạch tàu đến cảng <span @click="showWarning = !showWarning" style="cursor: pointer; color: orange;" v-if="warningTauDen['show']" color="warning">(Cảnh báo)</span></h3> </v-flex>
+        </v-flex>
         
         <v-flex xs6 class="text-xs-right pl-3" v-if="!documentName || documentName === '0'">
           <v-flex xs12 style="display: flex; margin-top: 4px; height: 21px; justify-content: flex-end;">
@@ -121,30 +123,26 @@
           </v-flex>
         </v-flex>
 
-        <v-expansion-panel class="my-0" v-if="warningTauDen['show']">
-          <v-expansion-panel-content v-bind:value="false">
-            <div slot="header" style=""><span class="text-bold primary--text pl-2"> Cảnh báo </span></div>
-            <v-card>
-              <v-card-title class="pt-0 px-0 adv__search__container">
-                <v-alert
-                  style="width: 100%;"
-                  :value="true"
-                  color="warning"
-                  icon="priority_high"
-                  outline
-                  >
-                  <div v-html="warningTauDen['message']" ></div>
-                  <div v-html="warningTauDen['message']"></div>
-                </v-alert>
-              </v-card-title>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+        <v-card v-if="showWarning" style="width: 100%;">
+          <v-card-title class="pt-0 py-0 px-0 adv__search__container">
+            <v-alert
+              class="my-0"
+              style="width: 100%;"
+              :value="true"
+              color="warning"
+              icon="priority_high"
+              outline
+              >
+              <div v-html="item" v-for="(item, index) in warningTauDen['message']"></div>
+            </v-alert>
+          </v-card-title>
+        </v-card>
       </v-layout>
     </v-flex>
+    <v-progress-linear v-if="loadingDetail" :indeterminate="true"></v-progress-linear>
     <v-form
-      :style="{'opacity': disabledForm ? '0.6' : 1, 'pointer-events': disabledForm ? 'none' : 'auto'}"
-      :disabled="disabledForm"
+      :style="{'opacity': disabledForm || loadingDetail ? '0.6' : 1, 'pointer-events': disabledForm || loadingDetail ? 'none' : 'auto'}"
+      :disabled="disabledForm || loadingDetail"
       ref="formTauDenCang"
       v-model="validFormTauDenCang"
       lazy-validation
@@ -424,7 +422,7 @@
 
             <v-layout row wrap>
               <v-flex xs5 class="pt-1 text-xs-center pr-1"></v-flex>
-              <v-flex  xs7 class="">
+              <v-flex xs7 class="">
                 <v-checkbox clearable v-model="detailTauDenCang.hasTugBoat" hide-details style="height:15px;" label="Tàu chưa vào cảng" class=""></v-checkbox>
               </v-flex>
             </v-layout>
@@ -643,11 +641,12 @@ export default {
   },
   directives: {money: VMoney},
   data: () => ({
+    loadingDetail: false,
     errorsMessage: {},
+    showWarning: false,
     warningTauDen: {
-      show: true,
-      message: {
-      }
+      show: false,
+      message: []
     },
     disabledForm: false,
     formatClearanceHeight: {
@@ -731,7 +730,8 @@ export default {
     flagStateOfShipItems: [],
     vmaShip: {},
     tempDocument: {},
-    vmaShipOwner: {}
+    vmaShipOwner: {},
+    vmaShipAgency: {}
   }),
   watch: {
     // notification (notification) {
@@ -740,7 +740,9 @@ export default {
     documentName (val) {
       var vm = this
       if (val && val !== '0') {
-        vm.disabledForm = true
+        if (!vm.id || vm.id === '0') {
+          vm.disabledForm = true
+        }
       }
     },
     id (val) {
@@ -762,9 +764,12 @@ export default {
     }
   },
   computed: {
-    // principal: function () {
-    //   return this.homeValue - this.downpayment
-    // }
+    loadingInitData () {
+      return this.$store.getters.loadingInitData
+    },
+    itineraryNo () {
+      return this.$store.getters.itineraryNo
+    }
   },
   created () {
     var vm = this
@@ -786,7 +791,9 @@ export default {
     if (vm.id && vm.id !== '0') {
       vm.loadTauDenCang()
     } else {
-      vm.loadInitData()
+      if (vm.documentName) {
+        vm.loadInitData()
+      }
     }
   },
   methods: {
@@ -955,107 +962,27 @@ export default {
       let data = {
         'id': vm.id
       }
+      vm.loadingDetail = true
       vm.$store.dispatch('loadDetailTauDenCang', data).then(function (result) {
-        vm.detailTauDenCang = vm.parseTimeTauDenCang(result)
+        if (!result.hasOwnProperty('errorCode')) {
+          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
+        }
+        vm.loadingDetail = false
       }).catch(function (xhr) {
         console.log(xhr)
+        vm.loadingDetail = false
       })
     },
     loadInitData: function () {
       var vm = this
-      let data = {
-        'id': vm.id,
-        'documentName': vm.documentName,
-        'documentYear': vm.documentYear,
-        'type': vm.type
-      }
-      vm.$store.dispatch('loadDetailHoSo', data).then(function (result) {
-        vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, {
-          callSign: result['callSign'],
-          shipName: result['shipName'],
-          flagStateOfShip: result['stateCode'],
-          imoNumber: result['imo'],
-          shipTypeCode: result['shipTypeCode'],
-          nt: result['nt'],
-          dwt: result['dwt']
-        })
-        vm.tempDocument = result
-      }).catch(function (xhr) {
-        console.log(xhr)
-      })
-    },
-    loadInitVmaShip: function () {
-      var vm = this
-      let data = {
-        'id': vm.id,
-        'imoNumber': vm.detailTauDenCang['imoNumber'],
-        'callSign': vm.detailTauDenCang['callSign']
-      }
-      vm.$store.dispatch('loadDanhSachTauBien', data).then(function (result) {
-        if (result.total) {
-          var dataItem = result.data[0]
-          vm.vmaShip = dataItem
-          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, {
-            breadth: dataItem['breadth'],
-            clearanceHeight: dataItem['clearanceHeight'],
-            power: dataItem['power'],
-            loa: dataItem['loa'],
-            maxDraft: dataItem['maxDraft']
-          })
-        } else {
-          vm.warningTauDen.message['1'] = '- Chưa có thông tin tàu!'
-        }
-      }).catch(function (xhr) {
-        console.log(xhr)
-      })
-    },
-    loadInitVmaShipOwner: function (data) {
-      var vm = this
       let param = {
-        categoryId: 'DM_VMA_SHIP_OWNER'
+        itineraryNo: vm.itineraryNo,
+        documentName: vm.documentName,
+        documentYear: vm.documentYear,
+        type: 'VIEW'
       }
-      for (var key in data) {
-        param[key] = data[key]
-      }
-      vm.$store.dispatch('loadDataDm', param).then(function (result) {
-        if (result.total) {
-          var dataItem = result.data[0]
-          if (param.hasOwnProperty('isShipOwner')) {
-            vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, {
-              shipOwnersName: dataItem['shipOwnersName']
-            })
-          } else {
-            vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, {
-              shipOperatorName: dataItem['shipOperatorName']
-            })
-          }
-          vm.vmaShipOwner = dataItem
-        }
-      }).catch(function (xhr) {
-        console.log(xhr)
-      })
-    },
-    loadInitTemp_noticeShipMessage: function () {
-      var vm = this
-      let data = {
-        'id': vm.id,
-        'documentName': vm.documentName,
-        'documentYear': vm.documentYear
-      }
-      vm.$store.dispatch('loadLenhDieuDongEXT', data).then(function (result) {
-        if (result) {
-          var dataItem = result.detail
-          vm.vmaShip = dataItem
-          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, {
-            shownDraftxF: dataItem['shownDraftxF'],
-            shownDraftxA: dataItem['shownDraftxA'],
-            numberShiftingOrder: dataItem['numberShiftingOrder'],
-            numberShiftingOrder: dataItem['numberShiftingOrder'],
-            numberShiftingOrder: dataItem['numberShiftingOrder'],
-          })
-        }
-      }).catch(function (xhr) {
-        console.log(xhr)
+      vm.$store.dispatch('loadInitData', param).then(function (result) {
+        vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
       })
     },
     luuTauDen: function () {
@@ -1085,7 +1012,7 @@ export default {
       vm.detailTauDenCang['markedAsArrival'] = 1
       if (vm.$refs.formTauDenCang.validate()) {
         vm.$store.dispatch('addVmaItinerarySchedule', vm.detailTauDenCang).then(function (result) {
-          vm.detailTauDenCang = vm.parseTimeTauDenCang(result)
+          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Thêm thất bại, vui lòng thử lại!')
             toastr.error(result.message)
@@ -1099,23 +1026,26 @@ export default {
         })
       }
     },
-    deletePhuongTienThuyNoiDia: function () {
+    deleteTauDenCang: function () {
       var vm = this
-      let data = {
-        id: vm.id
-      }
-      vm.$store.dispatch('deletePhuongTienThuyNoiDia', data).then(function (result) {
-        if (result.hasOwnProperty('errorCode')) {
-          toastr.error('Xóa thất bại!')
-          toastr.error(result.message)
-        } else {
-          toastr.success('Xóa thành công!')
+      var cf = confirm('Bạn muốn xóa dữ liệu này!')
+      if (cf) {
+        let data = {
+          vmaItineraryScheduleId: vm.id
         }
-        vm.changeIdUrl('0')
-      }).catch(function (xhr) {
-        console.log(xhr)
-        toastr.error('Xóa thất bại, vui lòng thử lại!')
-      })
+        vm.$store.dispatch('deleteTauDenCang', data).then(function (result) {
+          if (result.hasOwnProperty('errorCode')) {
+            toastr.error('Xóa thất bại!')
+            toastr.error(result.message)
+          } else {
+            toastr.success('Xóa thành công!')
+          }
+          vm.changeIdUrl('0')
+        }).catch(function (xhr) {
+          console.log(xhr)
+          toastr.error('Xóa thất bại, vui lòng thử lại!')
+        })
+      }
     },
     activeForm: function () {
       var vm = this
@@ -1129,7 +1059,7 @@ export default {
       var vm = this
       if (vm.$refs.formTauDenCang.validate()) {
         vm.$store.dispatch('updateVmaItinerarySchedule', vm.detailTauDenCang).then(function (result) {
-          vm.detailTauDenCang = vm.parseTimeTauDenCang(result)
+          vm.detailTauDenCang = Object.assign(vm.detailTauDenCang, vm.parseTimeTau(result))
           if (result.hasOwnProperty('errorCode')) {
             toastr.error('Lưu thất bại, vui lòng thử lại!')
             toastr.error(result.message)
@@ -1142,7 +1072,7 @@ export default {
         })
       }
     },
-    parseTimeTauDenCang: function (modelTauDen) {
+    parseTimeTau: function (modelTauDen) {
       var vm = this
       if (!modelTauDen) {
         console.log('valid tau den', modelTauDen)
