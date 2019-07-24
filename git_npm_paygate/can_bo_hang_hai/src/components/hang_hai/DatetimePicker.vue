@@ -1,12 +1,16 @@
 <template>
     <div class="input-group date" style="border-bottom: 1px solid #949494;">
-        <masked-input v-model="value" mask="11/11/1111 11:11" @input="selectStringToDate(value)" />
+        <masked-input v-model="value" mask="11/11/1111 11:11" @change="handlerChange()" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)" />
+        <!-- <v-text-field
+          v-model="value" mask="11/11/1111 11:11" @keyup.enter="handlerKeyUpEnter()" @input="selectStringToDate(value)"
+          class="my-0 py-0"
+        ></v-text-field> -->
         <v-icon size="16" @click="toggleDisplay"
         style="
             position: absolute;
-            right: 8px;
-            top: 8px;
-            font-size: 20px;
+            right: 8px !important;
+            top: 8px !important;
+            font-size: 20px !important;
             cursor: pointer;
         ">event</v-icon>
         <div v-show="showMyself" class="bootstrap-datetimepicker-widget dropdown-menu">
@@ -211,6 +215,7 @@
         return momentObject.locale(this.locale).format('MMMM YYYY')
       },
       selectStringToDate (value) {
+        console.log('input!!!!!!!!!!!')
         if (value !== null && value !== undefined && value !== '' && value.indexOf('_') === -1) {
           this.selectedDateTimeObject = moment(this.value, 'DD/MM/YYYY HH:mm')
           this.currentMonth = this.selectedDateTimeObject
@@ -219,12 +224,21 @@
           this.$emit('input', '')
         }
       },
+      handlerKeyUpEnter (value) {
+        console.log('enter!!!!!!!!!!')
+        this.$emit('keyup.enter', '')
+      },
+      handlerChange (value) {
+        console.log('change!!!!!!!!!!')
+        this.$emit('change', '')
+      },
       selectDate (date) {
         this.selectedDateTimeObject = date.hours(this.selectedDateTimeObject.hours())
           .minutes(this.selectedDateTimeObject.minutes())
           .seconds(this.selectedDateTimeObject.seconds())
         this.currentMonth = this.selectedDateTimeObject
         this.$emit('input', this.selectedDateTimeObject.locale('vi').format('DD/MM/YYYY HH:mm'))
+        this.$emit('change-value', this.selectedDateTimeObject.locale('vi').format('DD/MM/YYYY HH:mm'))
       },
 
       goPrev () {

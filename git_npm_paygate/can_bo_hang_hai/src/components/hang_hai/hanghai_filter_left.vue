@@ -173,7 +173,25 @@
           </v-list-tile-content>
 
         </v-list-tile>
-				
+
+        <v-list-tile 
+          v-bind:key="quan_ly_thu_tuc_tau"
+          :to="{path: '/quan-ly-tau-bien/' + type + '/' + 0 + '/' + 0             
+                }">
+
+          <v-list-tile-action> 
+            <v-icon color="primary">description</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content> 
+            <v-list-tile-title> Quản lý thủ tuc tàu thuyền </v-list-tile-title>  
+            <!-- <span :id="'tt_count_'+item.code" class="status__counter">
+              <v-progress-circular :width="1" :size="16" indeterminate color="red"></v-progress-circular>
+            </span> -->
+          </v-list-tile-content>
+
+        </v-list-tile>
+
 			</div>
 
     </div>
@@ -233,13 +251,12 @@
       </v-list-tile>
     </div>
 
-    <div class="flex xs12" v-if="type === 'ke_hoach' || type === 'thu_tuc' || type === 'quan_ly_tau'">
+    <!-- <div class="flex xs12" v-if="type === 'ke_hoach' || type === 'thu_tuc' || type === 'quan_ly_tau'">
       <v-list v-if="document_type_code != 0" class="py-0 nav_trang_thai_ho_so"> 
         <v-list-group v-for="(item, index) in role_filter_status" v-if="item.id_active === 'quan_ly_tau'"
           :value="item.id_active === type" 
           v-bind:key="index">
-          <v-list-tile slot="activator"
-          :to="'/quan-ly-tau-bien/DanhSachTauBien/' + item.id_active + '/' + document_type_code + '/' + 0">
+          <v-list-tile slot="activator" :to="'/quan-ly-tau-bien/quan_ly_tau/' + document_type_code + '/' + document_status_code + '/DanhSachTauBien'">
             <v-list-tile-action> 
               <v-icon color="primary">{{ item.action }}</v-icon> 
             </v-list-tile-action>
@@ -251,7 +268,7 @@
 
           <v-list-tile v-for="(subItem, subIndex) in item.items"
             v-bind:key="subIndex"
-            :to="{path: '/quan-ly-tau-bien/' + subItem.type + '/' + item.id_active + '/' + document_type_code + '/' + subItem.code, 
+            :to="{path: '/quan-ly-tau-bien/quan_ly_tau/' + document_type_code + '/' + document_status_code + '/' + subItem.type, 
                   query: {
                     'page': 1
                   }
@@ -275,7 +292,7 @@
 
         </v-list-group> 
       </v-list>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -288,6 +305,7 @@ const COMPONENT_NAME = 'jx-hanghai-filter-left'
 export default {
   name: COMPONENT_NAME,
   props: {
+    id: '',
     name: String,
     group_id: 0,
     document_type_api: '',

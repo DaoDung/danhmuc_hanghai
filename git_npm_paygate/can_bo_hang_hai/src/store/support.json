@@ -1,5 +1,7 @@
 {
   "renderURLInit": "?p_p_id=kehoachaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit",
+  "renderURLInit2": "?p_p_id=vma_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit",
+  "renderURLInit3": "?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit",
   "headersDsDuTau": [
     {
       "text": "STT",
@@ -17,35 +19,35 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTauDSDT",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Thời gian đến",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianDenDSDT",
+      "id": "timeOfArrival",
       "type": "time"
     },
     {
       "text": "Thời gian đi",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianDiDSDT",
+      "id": "timeOfDeparture",
       "type": "time"
     },
     {
       "text": "Ngày bắt giữ",
       "align": "center",
       "sortable": false,
-      "id": "ngayBatDuDSDT",
+      "id": "securityDate",
       "type": "time"
     },
     {
       "text": "Ngày giải tỏa",
       "align": "center",
       "sortable": false,
-      "id": "ngayGiaiToaDSDT",
+      "id": "evacuateDate",
       "type": "time"
     },
     {
@@ -59,35 +61,36 @@
       "text": "Cơ quan ra quyết định <br> bắt giữ",
       "align": "center",
       "sortable": false,
-      "id": "coQuanRaQuyetDinhBatDuDSDT",
+      "display": "securityCompanyName",
+      "id": "securityOfficeCode",
       "type": "text"
     },
     {
       "text": "Địa điểm <br> bắt dữ",
       "align": "center",
       "sortable": false,
-      "id": "diaDiemBatDuDSDT",
+      "id": "securityPlace",
       "type": "text"
     },
     {
       "text": "Cơ quan ra quyết định <br> giải tỏa",
       "align": "center",
       "sortable": false,
-      "id": "coQuanRaQuyetDinhGiaiToaDSDT",
+      "id": "evacuateCompanyName",
       "type": "text"
     },
     {
       "text": "SQĐ bắt giữ",
       "align": "center",
       "sortable": false,
-      "id": "sqdBatDuDSDT",
+      "id": "securityOfficialNo",
       "type": "text"
     },
     {
       "text": "SQĐ giải tỏa",
       "align": "center",
       "sortable": false,
-      "id": "sqdGiaiToaDSDT",
+      "id": "evacuateOfficialNo",
       "type": "text"
     }
   ],
@@ -108,14 +111,14 @@
       "text": "Ghi chú tàu",
       "align": "center",
       "sortable": false,
-      "id": "ghiChuTauDSGC",
+      "id": "remarks",
       "type": "text"
     },
     {
       "text": "Có hiển thị cảnh báo",
       "align": "center",
       "sortable": false,
-      "id": "coHienThiCanhBaoDSGC",
+      "id": "coHienThiCanhBao",
       "type": "select",
       "items": "coHienThiCanhBaoItems"
     },
@@ -123,23 +126,23 @@
       "text": "Ngày ghi chú",
       "align": "center",
       "sortable": false,
-      "id": "ngayGhiChuDSGC",
+      "id": "securityDate",
       "type": "time"
     },
     {
       "text": "Ngày hết hiệu lực ghi chú",
       "align": "center",
       "sortable": false,
-      "id": "ngayHetHieuLucDSGC",
+      "id": "evacuateDate",
       "type": "time"
     },
     {
       "text": "Không giải quyết rời cảng",
       "align": "center",
       "sortable": false,
-      "id": "khongGiaiQuyetDSGC",
+      "id": "khongGiaiQuyetRoiCang",
       "type": "select",
-      "items": "coHienThiCanhBaoItems"
+      "items": "khongGiaiQuyetRoiCangItems"
     }
   ],
   "headersDsHaXuong": [
@@ -159,49 +162,49 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTauDSHX",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Thời gian đến",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianDenDSHX",
+      "id": "timeOfArrival",
       "type": "time"
     },
     {
       "text": "Thời gian đi",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianDiDSHX",
+      "id": "timeOfDeparture",
       "type": "time"
     },
     {
       "text": "Thời gian bắt đầu <br> thả xuồng",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianBDTX",
+      "id": "launchingFrom",
       "type": "time"
     },
     {
       "text": "Thời gian kết thúc <br> thả xuồng",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianKTTX",
+      "id": "launchingTo",
       "type": "time"
     },
     {
       "text": "Mục đích thả xuồng",
       "align": "center",
       "sortable": false,
-      "id": "mucDichTX",
+      "id": "launchingReason",
       "type": "text"
     },
     {
       "text": "Khu vực thả xuồng",
       "align": "center",
       "sortable": false,
-      "id": "khuVucThaXuong",
+      "id": "launchingPlace",
       "type": "text"
     }
   ],
@@ -222,21 +225,21 @@
       "text": "Tàu",
       "align": "center",
       "sortable": false,
-      "id": "tau",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Lượt",
       "align": "center",
       "sortable": false,
-      "id": "luot",
+      "id": "noticeShipType",
       "type": "text"
     },
     {
       "text": "Hoa tiêu",
       "align": "center",
       "sortable": false,
-      "id": "hoaTieu",
+      "id": "pilotName",
       "type": "text"
     },
     {
@@ -250,42 +253,42 @@
       "text": "Bến cảng <br> lên tàu",
       "align": "center",
       "sortable": false,
-      "id": "benCangLenTau",
+      "id": "anchoringPortHarbourCode",
       "type": "text"
     },
     {
       "text": "Vị trí <br> lên tàu",
       "align": "center",
       "sortable": false,
-      "id": "viTriLenTau",
+      "id": "anchoringPortWharfCode",
       "type": "text"
     },
     {
       "text": "Bến cảng <br> rời tàu",
       "align": "center",
       "sortable": false,
-      "id": "benCangRoiTau",
+      "id": "shiftingPortHarbourCode",
       "type": "text"
     },
     {
       "text": "Vị trí <br> rời tàu",
       "align": "center",
       "sortable": false,
-      "id": "viTriRoiTau",
+      "id": "shiftingPortHarbourCode",
       "type": "text"
     },
     {
       "text": "Thời gian <br> lên tàu",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianLenTau",
+      "id": "timeOfPilotOnBoard",
       "type": "time"
     },
     {
       "text": "Thời gian <br> rời tàu",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianRoiTau",
+      "id": "timeOfDeparture",
       "type": "time"
     }
   ],
@@ -306,14 +309,14 @@
       "text": "Đơn vị khai thác",
       "align": "center",
       "sortable": false,
-      "id": "donViKhaiThacKHCT",
+      "id": "shipOperatorName",
       "type": "text"
     },
     {
       "text": "Tháng",
       "align": "center",
       "sortable": false,
-      "id": "thangKHCT",
+      "id": "thang",
       "type": "select",
       "items": "thangItems"
     },
@@ -321,7 +324,7 @@
       "text": "Số chuyến trong tháng",
       "align": "center",
       "sortable": false,
-      "id": "soChuyenKHCT",
+      "id": "voyageNumber",
       "type": "text"
     }
   ],
@@ -342,42 +345,42 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTauDSKN",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Nội dung",
       "align": "center",
       "sortable": false,
-      "id": "noiDUngDSKN",
+      "id": "remarks",
       "type": "text"
     },
     {
       "text": "Thời gian nhận <br> kháng cáo",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianNhanKhangCaoDSKN",
+      "id": "protestDate",
       "type": "time"
     },
     {
       "text": "Đại lý",
       "align": "center",
       "sortable": false,
-      "id": "daiLyDSKN",
+      "id": "shipAgencyName",
       "type": "text"
     },
     {
       "text": "Chủ tàu",
       "align": "center",
       "sortable": false,
-      "id": "chuTauDSKN",
+      "id": "shipOwnerName",
       "type": "text"
     },
     {
       "text": "Khai thác",
       "align": "center",
       "sortable": false,
-      "id": "khaiThacDSKN",
+      "id": "shipOperatorCode",
       "type": "text"
     }
   ],
@@ -399,49 +402,50 @@
       "align": "center",
       "sortable": false,
       "type": "select",
-      "id": "tenTau"
+      "id": "shipName"
     },
     {
       "text": "Thời gian <br> bắt đầu",
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "thoiGianBatDau"
+      "id": "anchoringDateFrom"
     },
     {
       "text": "Mục đích neo",
       "align": "center",
       "sortable": false,
       "type": "text",
-      "id": "mucDichNeo"
+      "id": "purposeCode"
     },
     {
       "text": "Thời gian <br> kết thúc",
       "align": "left",
       "sortable": false,
       "type": "select",
-      "id": "thoiGianKetThuc"
+      "id": "anchoringDateTo"
     },
     {
       "text": "Vị trí neo",
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "viTriNeo"
+      "display": "anchoringPortWharfCode",
+      "id": "anchoringPortWharfCode"
     },
     {
       "text": "Giờ neo",
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "gioNeo"
+      "id": "anchoringDuration"
     },
     {
       "text": "Neo bổ sung",
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "neoBoSung",
+      "id": "sequenceNo",
       "items": "neoBoSungItems"
     },
     {
@@ -472,20 +476,20 @@
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "daiLy"
+      "id": "shipAgencyName"
     },
     {
       "text": "Chủ tàu",
       "align": "left",
       "sortable": false,
       "type": "text",
-      "id": "chuTau"
+      "id": "shipOwnerCode"
     },
     {
       "text": "Khai thác",
       "align": "left",
       "sortable": false,
-      "type": "text",
+      "type": "shipOperatorName",
       "id": "khaiThac"
     }
   ],
@@ -506,14 +510,14 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTauDSSCT",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Thời gian đến",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianDenDSSCT",
+      "id": "timeOfArrival",
       "type": "time"
     },
     {
@@ -527,7 +531,7 @@
       "text": "Đơn vị sửa chữa",
       "align": "center",
       "sortable": false,
-      "id": "donViSuaChuaDSSCT",
+      "id": "shipYardCompanyName",
       "type": "text"
     },
     {
@@ -541,21 +545,21 @@
       "text": "Lý do sửa",
       "align": "center",
       "sortable": false,
-      "id": "lyDoSuaDSSCT",
+      "id": "repairingReason",
       "type": "text"
     },
     {
       "text": "Từ ngày",
       "align": "center",
       "sortable": false,
-      "id": "tuNgayDSSCT",
+      "id": "repairingFrom",
       "type": "time"
     },
     {
       "text": "Đến ngày",
       "align": "center",
       "sortable": false,
-      "id": "denNgayDSSCT",
+      "id": "repairingTo",
       "type": "time"
     }
   ],
@@ -576,14 +580,14 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTauDSTB",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Đại lý",
       "align": "center",
       "sortable": false,
-      "id": "daiLyDSTB",
+      "id": "shipAgencyName",
       "type": "text"
     },
     {
@@ -597,113 +601,113 @@
       "text": "Quốc tịch",
       "align": "center",
       "sortable": false,
-      "id": "quocTichDSTB",
+      "id": "flagStateOfShip",
       "type": "text"
     },
     {
       "text": "Hô hiệu",
       "align": "center",
       "sortable": false,
-      "id": "hoHieuDSTB",
+      "id": "callSign",
       "type": "text"
     },
     {
       "text": "Chủ tàu",
       "align": "center",
       "sortable": false,
-      "id": "chuTauDSTB",
+      "id": "companyName",
       "type": "text"
     },
     {
       "text": "Người <br> khai thác",
       "align": "center",
       "sortable": false,
-      "id": "ngKhaiThacDSTB",
+      "id": "shipOperatorName",
       "type": "text"
     },
     {
       "text": "Loại tàu",
       "align": "center",
       "sortable": false,
-      "id": "loaiTauDSTB",
+      "id": "shipTypeMT",
       "type": "text"
     },
     {
       "text": "Cấp độ <br> an ninh",
       "align": "center",
       "sortable": false,
-      "id": "capDoAnNinhDSTB",
+      "id": "securityLevelName",
       "type": "text"
     },
     {
       "text": "GT",
       "align": "center",
       "sortable": false,
-      "id": "gtDSTB",
+      "id": "gt",
       "type": "text"
     },
     {
       "text": "DWT",
       "align": "center",
       "sortable": false,
-      "id": "dwtDSTB",
+      "id": "dwt",
       "type": "text"
     },
     {
       "text": "Phân loại",
       "align": "center",
       "sortable": false,
-      "id": "phanLoaiDSTB",
+      "id": "shipTypeCode",
       "type": "select",
-      "items": "phanLoaiItems"
+      "items": "shipTypeItems"
     },
     {
       "text": "NT",
       "align": "center",
       "sortable": false,
-      "id": "ntDSTB",
+      "id": "nt",
       "type": "text"
     },
     {
       "text": "Loa (m)",
       "align": "center",
       "sortable": false,
-      "id": "loaDSTB",
+      "id": "loa",
       "type": "text"
     },
     {
       "text": "Breadth (m)",
       "align": "center",
       "sortable": false,
-      "id": "breadthDSTB",
+      "id": "breadth",
       "type": "text"
     },
     {
       "text": "Draft",
       "align": "center",
       "sortable": false,
-      "id": "drafDSTB",
+      "id": "shownDraftxA",
       "type": "text"
     },
     {
       "text": "Chiều cao <br> t.không (m)",
       "align": "center",
       "sortable": false,
-      "id": "chieuCaoDSTB",
+      "id": "clearanceHeight",
       "type": "text"
     },
     {
       "text": "Mớn nước mũi <br> (m)",
       "align": "center",
       "sortable": false,
-      "id": "monNuocMuiDSTB",
+      "id": "shownDraftxF",
       "type": "text"
     },
     {
       "text": "Mớn nước t.kế <br> (m)",
       "align": "center",
       "sortable": false,
-      "id": "monNuocTkeDSTB",
+      "id": "maxDraft",
       "type": "text"
     }
   ],
@@ -724,233 +728,21 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTau3",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Quốc tịch",
       "align": "center",
       "sortable": false,
-      "id": "quocTich2",
+      "id": "flagStateOfShip",
       "type": "text"
     },
     {
       "text": "Hô hiệu",
       "align": "center",
       "sortable": false,
-      "id": "hoHieu2",
-      "type": "text"
-    },
-    {
-      "text": "GT",
-      "align": "center",
-      "sortable": false,
-      "id": "gt2",
-      "type": "text"
-    },
-    {
-      "text": "DWT",
-      "align": "center",
-      "sortable": false,
-      "id": "dwt2",
-      "type": "text"
-    },
-    {
-      "text": "Chiều dài",
-      "align": "center",
-      "sortable": false,
-      "id": "chieuDai2",
-      "type": "text"
-    },
-    {
-      "text": "Mớn nước",
-      "align": "center",
-      "sortable": false,
-      "id": "monNuoc2",
-      "type": "text"
-    },
-    {
-      "text": "Loại hàng hóa",
-      "align": "center",
-      "sortable": false,
-      "id": "loaiHangHoa2",
-      "type": "text"
-    },
-    {
-      "text": "Vị trí neo đậu",
-      "align": "center",
-      "sortable": false,
-      "id": "viTriNeoDau2",
-      "type": "text"
-    },
-    {
-      "text": "Dự kiến đến VT",
-      "align": "center",
-      "sortable": false,
-      "id": "duKienDenVt2",
-      "type": "text"
-    },
-    {
-      "text": "Thời gian đến VT",
-      "align": "center",
-      "sortable": false,
-      "id": "thoiGianRoiVt2",
-      "type": "text"
-    },
-    {
-      "text": "Đại lý",
-      "align": "center",
-      "sortable": false,
-      "id": "daiLy3",
-      "type": "text"
-    },
-    {
-      "text": "Tuyến luồng",
-      "align": "center",
-      "sortable": false,
-      "id": "tuyenLuong2",
-      "type": "text"
-    }
-  ],
-  "headersKHTauDiChuyen": [
-    {
-      "text": "STT",
-      "align": "center",
-      "sortable": false,
-      "id": "stt",
-      "type": "text",
-      "style": {
-        "width": "3em",
-        "min-width": "3em",
-        "max-width": "3em"
-      }
-    },
-    {
-      "text": "Tên tàu",
-      "align": "center",
-      "sortable": false,
-      "id": "tenTauKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Quốc tịch",
-      "align": "center",
-      "sortable": false,
-      "id": "quocTichKHDD",
-      "type": "select",
-      "items": "quocTichItems"
-    },
-    {
-      "text": "Hô hiệu",
-      "align": "center",
-      "sortable": false,
-      "id": "hoHieuKHDD",
-      "type": "text"
-    },
-    {
-      "text": "GT",
-      "align": "center",
-      "sortable": false,
-      "id": "gtKHDD",
-      "type": "text"
-    },
-    {
-      "text": "DWT",
-      "align": "center",
-      "sortable": false,
-      "id": "dwtKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Chiều dài",
-      "align": "center",
-      "sortable": false,
-      "id": "chieuDaiKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Mớn nước",
-      "align": "center",
-      "sortable": false,
-      "id": "monNuocKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Loại hàng hóa",
-      "align": "center",
-      "sortable": false,
-      "id": "loaiHangHoaKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Vị trí neo đậu <br> từ",
-      "align": "center",
-      "sortable": false,
-      "id": "viTriNeoDauTuKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Vị trí neo đậu <br> đến",
-      "align": "center",
-      "sortable": false,
-      "id": "viTriNeoDauDenKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Giờ rời",
-      "align": "center",
-      "sortable": false,
-      "id": "gioRoiKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Đại lý",
-      "align": "center",
-      "sortable": false,
-      "id": "daiLyKHDD",
-      "type": "text"
-    },
-    {
-      "text": "Tuyến luồng",
-      "align": "center",
-      "sortable": false,
-      "id": "tuyenLuongKHDD",
-      "type": "text"
-    }
-  ],
-  "headersTauRoiCang": [
-    {
-      "text": "STT",
-      "align": "center",
-      "sortable": false,
-      "id": "stt",
-      "type": "text",
-      "style": {
-        "width": "3em",
-        "min-width": "3em",
-        "max-width": "3em"
-      }
-    },
-    {
-      "text": "Tên tàu",
-      "align": "center",
-      "sortable": false,
-      "id": "tenTau2",
-      "type": "text"
-    },
-    {
-      "text": "Quốc tịch",
-      "align": "center",
-      "sortable": false,
-      "id": "quocTich",
-      "type": "select",
-      "items": "quocTichItems"
-    },
-    {
-      "text": "Hô hiệu",
-      "align": "center",
-      "sortable": false,
-      "id": "hoHieu",
+      "id": "callSign",
       "type": "text"
     },
     {
@@ -971,28 +763,240 @@
       "text": "Chiều dài",
       "align": "center",
       "sortable": false,
-      "id": "chieuDai",
-      "type": "text"
+      "id": "chieuDai2",
+      "type": "loa"
     },
     {
       "text": "Mớn nước",
       "align": "center",
       "sortable": false,
-      "id": "monNuoc",
+      "id": "maxDraft",
       "type": "text"
     },
     {
       "text": "Loại hàng hóa",
       "align": "center",
       "sortable": false,
-      "id": "loaiHangHoa",
+      "id": "cargoType",
       "type": "text"
     },
     {
       "text": "Vị trí neo đậu",
       "align": "center",
       "sortable": false,
-      "id": "viTriNeoDau",
+      "id": "anchoringPortWharfCode",
+      "type": "text"
+    },
+    {
+      "text": "Dự kiến đến VT",
+      "align": "center",
+      "sortable": false,
+      "id": "duKienDenVt2",
+      "type": "text"
+    },
+    {
+      "text": "Thời gian đến VT",
+      "align": "center",
+      "sortable": false,
+      "id": "timeOfArrival",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "shipAgencyName",
+      "type": "text"
+    },
+    {
+      "text": "Tuyến luồng",
+      "align": "center",
+      "sortable": false,
+      "id": "chanelCodeList",
+      "type": "text"
+    }
+  ],
+  "headersKHTauDiChuyen": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "shipName",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "flagStateOfShip",
+      "type": "select",
+      "items": "quocTichItems"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "callSign",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gt",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwt",
+      "type": "text"
+    },
+    {
+      "text": "Chiều dài",
+      "align": "center",
+      "sortable": false,
+      "id": "loa",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước",
+      "align": "center",
+      "sortable": false,
+      "id": "maxDraft",
+      "type": "text"
+    },
+    {
+      "text": "Loại hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "cargoType",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu <br> từ",
+      "align": "center",
+      "sortable": false,
+      "id": "from_",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu <br> đến",
+      "align": "center",
+      "sortable": false,
+      "id": "to_",
+      "type": "text"
+    },
+    {
+      "text": "Giờ rời",
+      "align": "center",
+      "sortable": false,
+      "id": "gioRoiKHDD",
+      "type": "text"
+    },
+    {
+      "text": "Đại lý",
+      "align": "center",
+      "sortable": false,
+      "id": "arrivalShipAgency",
+      "type": "text"
+    },
+    {
+      "text": "Tuyến luồng",
+      "align": "center",
+      "sortable": false,
+      "id": "chanelCodeList",
+      "type": "text"
+    }
+  ],
+  "headersTauRoiCang": [
+    {
+      "text": "STT",
+      "align": "center",
+      "sortable": false,
+      "id": "stt",
+      "type": "text",
+      "style": {
+        "width": "3em",
+        "min-width": "3em",
+        "max-width": "3em"
+      }
+    },
+    {
+      "text": "Tên tàu",
+      "align": "center",
+      "sortable": false,
+      "id": "shipName",
+      "type": "text"
+    },
+    {
+      "text": "Quốc tịch",
+      "align": "center",
+      "sortable": false,
+      "id": "flagStateOfShip",
+      "type": "select",
+      "items": "quocTichItems"
+    },
+    {
+      "text": "Hô hiệu",
+      "align": "center",
+      "sortable": false,
+      "id": "callSign",
+      "type": "text"
+    },
+    {
+      "text": "GT",
+      "align": "center",
+      "sortable": false,
+      "id": "gt",
+      "type": "text"
+    },
+    {
+      "text": "DWT",
+      "align": "center",
+      "sortable": false,
+      "id": "dwt",
+      "type": "text"
+    },
+    {
+      "text": "Chiều dài",
+      "align": "center",
+      "sortable": false,
+      "id": "loa",
+      "type": "text"
+    },
+    {
+      "text": "Mớn nước",
+      "align": "center",
+      "sortable": false,
+      "id": "maxDraft",
+      "type": "text"
+    },
+    {
+      "text": "Loại hàng hóa",
+      "align": "center",
+      "sortable": false,
+      "id": "cargoType",
+      "type": "text"
+    },
+    {
+      "text": "Vị trí neo đậu",
+      "align": "center",
+      "sortable": false,
+      "id": "anchoringPortWharfCode",
       "type": "text"
     },
     {
@@ -1006,14 +1010,14 @@
       "text": "Đại lý",
       "align": "center",
       "sortable": false,
-      "id": "daiLy3",
+      "id": "departureShipAgency",
       "type": "text"
     },
     {
       "text": "Tuyến luồng",
       "align": "center",
       "sortable": false,
-      "id": "tuyenLuong",
+      "id": "chanelCodeList",
       "type": "text"
     }
   ],
@@ -1034,56 +1038,14 @@
       "text": "Tàu",
       "align": "center",
       "sortable": false,
-      "id": "tau",
+      "id": "nameOfShip",
       "type": "text"
     },
     {
       "text": "Lượt",
       "align": "center",
       "sortable": false,
-      "id": "luot",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 1",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai1",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 2",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai2",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 3",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai3",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 4",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai4",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 5",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai5",
-      "type": "text"
-    },
-    {
-      "text": "Tàu lai 6",
-      "align": "center",
-      "sortable": false,
-      "id": "tauLai6",
+      "id": "noticeShipType",
       "type": "text"
     },
     {
@@ -1104,14 +1066,14 @@
       "text": "Thời gian <br> bắt đầu",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianBatDau",
+      "id": "tugDateFrom",
       "type": "time"
     },
     {
       "text": "Thời gian <br> kết thúc",
       "align": "center",
       "sortable": false,
-      "id": "thoiGianKetThuc",
+      "id": "tugDateTo",
       "type": "time"
     }
   ],
@@ -1132,7 +1094,7 @@
       "text": "Tên tàu",
       "align": "center",
       "sortable": false,
-      "id": "tenTau4",
+      "id": "shipName",
       "type": "text"
     },
     {
@@ -1245,14 +1207,14 @@
       "text": "Tên phương tiện",
       "align": "center",
       "sortable": false,
-      "id": "tenPtDSTND",
+      "id": "shipName",
       "type": "text"
     },
     {
       "text": "Loại tàu",
       "align": "center",
       "sortable": false,
-      "id": "loaiTauDSTND",
+      "id": "shipTypeCode",
       "type": "text"
     },
     {
@@ -1266,14 +1228,14 @@
       "text": "GT",
       "align": "center",
       "sortable": false,
-      "id": "gtDSTND",
+      "id": "gt",
       "type": "text"
     },
     {
       "text": "DWT",
       "align": "center",
       "sortable": false,
-      "id": "dwtDSTND",
+      "id": "dwt",
       "type": "text"
     },
     {
@@ -1287,21 +1249,21 @@
       "text": "LOA <br> (m)",
       "align": "center",
       "sortable": false,
-      "id": "loaDSTND",
+      "id": "loa",
       "type": "text"
     },
     {
       "text": "Số bằng TT",
       "align": "center",
       "sortable": false,
-      "id": "soBangDSTND",
+      "id": "pilotCertificateNo",
       "type": "text"
     },
     {
       "text": "Breadth",
       "align": "center",
       "sortable": false,
-      "id": "breadthDSTND",
+      "id": "breadth",
       "type": "text"
     },
     {
@@ -1322,28 +1284,28 @@
       "text": "Công suất <br> máy",
       "align": "center",
       "sortable": false,
-      "id": "congSuatMayDSTND",
+      "id": "power",
       "type": "text"
     },
     {
       "text": "Chủ tàu",
       "align": "center",
       "sortable": false,
-      "id": "chuTauDSTND",
+      "id": "shipOwnerCode",
       "type": "text"
     },
     {
       "text": "Địa chỉ",
       "align": "center",
       "sortable": false,
-      "id": "diaChiDSTND",
+      "id": "address",
       "type": "text"
     },
     {
       "text": "Thuyền trưởng",
       "align": "center",
       "sortable": false,
-      "id": "thuyenTruongDSTND",
+      "id": "nameOfMaster",
       "type": "text"
     },
     {
@@ -1357,7 +1319,7 @@
       "text": "Máy trưởng",
       "align": "center",
       "sortable": false,
-      "id": "mayTruongDSTND",
+      "id": "chiefOfEngineer",
       "type": "text"
     },
     {
@@ -1367,5 +1329,454 @@
       "id": "hangBangMtDSTND",
       "type": "text"
     }
-  ]
+  ],
+  "TPHS_ThongTinTauBien": [
+    {
+      "name": "Giấy tờ tàu",
+      "code": "GIAYTOTAU"
+    },
+    {
+      "name": "Hành trình tàu",
+      "code": "HANHTRINHTAU"
+    },
+    {
+      "name": "Vị trí neo đậu",
+      "code": "VITRINEODAU"
+    },
+    {
+      "name": "Dich chuyển vị trí",
+      "code": "DICHCHUYENVITRI"
+    },
+    {
+      "name": "Sửa chữa",
+      "code": "SUACHUA"
+    },
+    {
+      "name": "Hạ xuồng",
+      "code": "HAXUONG"
+    },
+    {
+      "name": "Thử tàu",
+      "code": "THUTAU"
+    },
+    {
+      "name": "Giữ tàu",
+      "code": "GIUTAU"
+    },
+    {
+      "name": "Vi phạm giấy phép",
+      "code": "VIPHAMGIAYPHEP"
+    },
+    {
+      "name": "Ghi chú, cảnh báo",
+      "code": "GHICHUCANHBAO"
+    },
+    {
+      "name": "Lịch sử thay đổi",
+      "code": "LÍCHUTHAYDOI"
+    }
+  ],
+  "TPHS_ThongTinPTTND": [
+    {
+      "name": "Giấy tờ phương tiện",
+      "code": "GIAYTOPHUONGTIEN"
+    },
+    {
+      "name": "Hành trình phương tiện",
+      "code": "HANHTRINHPHUONGTIEN"
+    },
+    {
+      "name": "Vị trí neo đậu",
+      "code": "VITRINEODAU"
+    },
+    {
+      "name": "Vi phạm giấy phép",
+      "code": "VIPHAMGIAYPHEP"
+    },
+    {
+      "name": "Ghi chú, cảnh báo",
+      "code": "GHICHUCANHBAO"
+    },
+    {
+      "name": "Lịch sử thay đổi",
+      "code": "LICHSUTHAYDOI"
+    }
+  ],
+  "thangItems": [{
+    "itemText": "1",
+    "itemValue": 1
+  }, {
+    "itemText": "2",
+    "itemValue": 2
+  }, {
+    "itemText": "3",
+    "itemValue": 3
+  }, {
+    "itemText": "4",
+    "itemValue": 4
+  }, {
+    "itemText": "5",
+    "itemValue": 5
+  }, {
+    "itemText": "6",
+    "itemValue": 6
+  }, {
+    "itemText": "7",
+    "itemValue": 7
+  }, {
+    "itemText": "8",
+    "itemValue": 8
+  }, {
+    "itemText": "9",
+    "itemValue": 9
+  }, {
+    "itemText": "10",
+    "itemValue": 10
+  }, {
+    "itemText": "11",
+    "itemValue": 11
+  }, {
+    "itemText": "12",
+    "itemValue": 12
+  }],
+  "role_filter_status_ke_hoach": {
+    "id": -3,
+    "index": 3,
+    "title": "Quản lý tàu biển & PTTNĐ",
+    "id_active": "quan_ly_tau",
+    "action_active": "folder_open",
+    "items": [
+      {
+        "id": 30,
+        "title": "Tàu biển",
+        "counter": "_ _",
+        "code": 300,
+        "type": "DanhSachTauBien",
+        "url": "getVmaShip_Ship_URL"
+      },
+      {
+        "id": 31,
+        "title": "Phương tiện TNĐ",
+        "counter": "_ _",
+        "code": 301,
+        "type": "DanhSachPhuongTienThuyNoiDia",
+        "url": "getVmaShip_Boat_URL"
+      },
+      {
+        "id": 32,
+        "title": "Vị trí neo đậu tại cảng",
+        "counter": "_ _",
+        "code": 302,
+        "type": "DanhSachViTriNeoDauTaiCang",
+        "url": ""
+      },
+      {
+        "id": 33,
+        "title": "Kế hoạch tàu rời cảng",
+        "counter": "_ _",
+        "code": 303,
+        "type": "DanhSachTauRoiCang",
+        "url": "getVmaItinerarySchedule_Leave_URL"
+      },
+      {
+        "id": 34,
+        "title": "Kế hoạch tàu đến cảng",
+        "counter": "_ _",
+        "code": 304,
+        "type": "DanhSachTauDenCang",
+        "url": "getVmaItinerarySchedule_Come_URL"
+      },
+      {
+        "id": 35,
+        "title": "Kế hoạch tàu dịch chuyển",
+        "counter": "_ _",
+        "code": 305,
+        "type": "DanhSachTauDiChuyen",
+        "url": "getVmaScheduleShiftingURL"
+      },
+      {
+        "id": 36,
+        "title": "Tàu neo đậu",
+        "counter": "_ _",
+        "code": 306,
+        "type": "DanhSachNeoTau",
+        "url": "getVmaScheduleAnchorage_Ship_URL"
+      },
+      {
+        "id": 37,
+        "title": "Tàu lai hỗ trợ",
+        "counter": "_ _",
+        "code": 307,
+        "type": "DanhSachTauLaiHoTro",
+        "url": "getVmaScheduleTugboatURL"
+      },
+      {
+        "id": 38,
+        "title": "Hoa tiêu dẫn tàu",
+        "counter": "_ _",
+        "code": 308,
+        "type": "DanhSachHoaTieuDanTau",
+        "url": "getVmaSchedulePilotURL"
+      },
+      {
+        "id": 39,
+        "title": "Xếp, dỡ hàng",
+        "counter": "_ _",
+        "code": 309,
+        "type": "DanhSachXepDoHang",
+        "url": "getDanhSachXepDoHang"
+      },
+      {
+        "id": 40,
+        "title": "Nhập, tách đoàn",
+        "counter": "_ _",
+        "code": 400,
+        "type": "DanhSachNhapTachDoan",
+        "url": "getVmaScheduleMergingURL"
+      },
+      {
+        "id": 41,
+        "title": "Sửa chữa\t",
+        "counter": "_ _",
+        "code": 401,
+        "type": "DanhSachSuaChuaTau",
+        "url": "getVmaScheduleShipyardURL"
+      },
+      {
+        "id": 42,
+        "title": "Hạ xuồng",
+        "counter": "_ _",
+        "code": 402,
+        "type": "DanhSachHaXuong",
+        "url": "getVmaScheduleLaunchingURL"
+      },
+      {
+        "id": 43,
+        "title": "Thử tàu",
+        "counter": "_ _",
+        "code": 403,
+        "type": "DanhSachThuTau",
+        "url": "getVmaScheduleTestingURL"
+      },
+      {
+        "id": 44,
+        "title": "Giữ tàu",
+        "counter": "_ _",
+        "code": 404,
+        "type": "DanhSachDuTau",
+        "url": "getVmaScheduleSecurityURL"
+      },
+      {
+        "id": 45,
+        "title": "Ghi chú, cảnh báo",
+        "counter": "_ _",
+        "code": 405,
+        "type": "DanhSachGhiChuCanhBao",
+        "url": ""
+      },
+      {
+        "id": 46,
+        "title": "Kháng nghị hàng hải",
+        "counter": "_ _",
+        "code": 406,
+        "type": "DanhSachKhangNghiHangHai",
+        "url": ""
+      },
+      {
+        "id": 47,
+        "title": "KH tàu chạy chuyên tuyến",
+        "counter": "_ _",
+        "code": 407,
+        "type": "DanhSachKeHoachChuyenTuyen",
+        "url": ""
+      }
+    ],
+    "action": "folder",
+    "active": false,
+    "type": -3
+  },
+  "role_filter_status_thu_tuc": {
+    "id": -3,
+    "index": 3,
+    "title": "Quản lý tàu biển & PTTNĐ",
+    "id_active": "quan_ly_tau",
+    "action_active": "folder_open",
+    "items": [
+      {
+        "id": 30,
+        "title": "Tàu biển",
+        "counter": "_ _",
+        "code": 300,
+        "type": "DanhSachTauBien",
+        "url": "getVmaShip_Ship_URL"
+      },
+      {
+        "id": 31,
+        "title": "Phương tiện TNĐ",
+        "counter": "_ _",
+        "code": 301,
+        "type": "DanhSachPhuongTienThuyNoiDia",
+        "url": "getVmaShip_Boat_URL"
+      },
+      {
+        "id": 33,
+        "title": "Thủ tục tàu đến cảng",
+        "counter": "_ _",
+        "code": 303,
+        "type": "DanhSachTauDenCang",
+        "url": "getVmaItinerarySchedule_Come_URL"
+      },
+      {
+        "id": 35,
+        "title": "Thủ tục tàu rời cảng",
+        "counter": "_ _",
+        "code": 305,
+        "type": "DanhSachTauRoiCang",
+        "url": "getVmaItinerarySchedule_Leave_URL"
+      },
+      {
+        "id": 37,
+        "title": "Xếp dỡ hàng",
+        "counter": "_ _",
+        "code": 307,
+        "type": "DanhSachXepDoHang",
+        "url": "getDanhSachXepDoHang"
+      },
+      {
+        "id": 36,
+        "title": "Tàu neo đậu",
+        "counter": "_ _",
+        "code": 306,
+        "type": "DanhSachNeoTau",
+        "url": "getVmaScheduleAnchorage_Ship_URL"
+      },
+      {
+        "id": 45,
+        "title": "Ghi chú, cảnh báo",
+        "counter": "_ _",
+        "code": 405,
+        "type": "DanhSachGhiChuCanhBao",
+        "url": "getVmaShip_Boat_URL"
+      },
+      {
+        "id": 46,
+        "title": "Kháng nghị hàng hải",
+        "counter": "_ _",
+        "code": 406,
+        "type": "DanhSachKhangNghiHangHai",
+        "url": "getVmaShip_Boat_URL"
+      }
+    ],
+    "action": "folder",
+    "active": false,
+    "type": -3
+  },
+  "filter_part_tau": {
+    "id": -3,
+    "index": 3,
+    "title": "Quản lý tàu biển & PTTNĐ",
+    "id_active": "quan_ly_tau",
+    "action_active": "folder_open",
+    "items": [
+      {
+        "id": 32,
+        "title": "Vị trí neo đậu tại cảng",
+        "counter": "_ _",
+        "code": 302,
+        "type": "DanhSachViTriNeoDauTaiCang",
+        "url": ""
+      },
+      {
+        "id": 33,
+        "title": "Kế hoạch tàu rời cảng",
+        "counter": "_ _",
+        "code": 303,
+        "type": "DanhSachTauRoiCang",
+        "url": "getVmaItinerarySchedule_Leave_URL"
+      },
+      {
+        "id": 34,
+        "title": "Kế hoạch tàu đến cảng",
+        "counter": "_ _",
+        "code": 304,
+        "type": "DanhSachTauDenCang",
+        "url": "getVmaItinerarySchedule_Come_URL"
+      },
+      {
+        "id": 35,
+        "title": "Kế hoạch tàu dịch chuyển",
+        "counter": "_ _",
+        "code": 305,
+        "type": "DanhSachTauDiChuyen",
+        "url": "getVmaScheduleShiftingURL"
+      },
+      {
+        "id": 37,
+        "title": "Tàu lai hỗ trợ",
+        "counter": "_ _",
+        "code": 307,
+        "type": "DanhSachTauLaiHoTro",
+        "url": "getVmaScheduleTugboatURL"
+      },
+      {
+        "id": 38,
+        "title": "Hoa tiêu dẫn tàu",
+        "counter": "_ _",
+        "code": 308,
+        "type": "DanhSachHoaTieuDanTau",
+        "url": "getVmaSchedulePilotURL"
+      },
+      {
+        "id": 41,
+        "title": "Sửa chữa\t",
+        "counter": "_ _",
+        "code": 401,
+        "type": "DanhSachSuaChuaTau",
+        "url": "getVmaScheduleShipyardURL"
+      },
+      {
+        "id": 40,
+        "title": "Nhập, tách đoàn",
+        "counter": "_ _",
+        "code": 400,
+        "type": "DanhSachNhapTachDoan",
+        "url": "getVmaScheduleMergingURL"
+      },
+      {
+        "id": 42,
+        "title": "Hạ xuồng",
+        "counter": "_ _",
+        "code": 402,
+        "type": "DanhSachHaXuong",
+        "url": "getVmaScheduleLaunchingURL"
+      },
+      {
+        "id": 43,
+        "title": "Thử tàu",
+        "counter": "_ _",
+        "code": 403,
+        "type": "DanhSachThuTau",
+        "url": "getVmaScheduleTestingURL"
+      },
+      {
+        "id": 44,
+        "title": "Giữ tàu",
+        "counter": "_ _",
+        "code": 404,
+        "type": "DanhSachDuTau",
+        "url": "getVmaScheduleSecurityURL"
+      },
+      {
+        "id": 45,
+        "title": "Ghi chú, cảnh báo",
+        "counter": "_ _",
+        "code": 405,
+        "type": "DanhSachGhiChuCanhBao",
+        "url": "getDanhSachGhiChuCanhBao"
+      }
+    ],
+    "action": "folder",
+    "active": false,
+    "type": -3
+  }
 }

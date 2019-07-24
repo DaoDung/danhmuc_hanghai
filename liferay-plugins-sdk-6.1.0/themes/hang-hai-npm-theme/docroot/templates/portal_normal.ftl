@@ -14,7 +14,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	
-	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/app.141aed186f600c66d0284a9a0bc7be97.css" rel="stylesheet">
+	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/app.7cf31e00385508a0aa4d49b779bd6c11.css" rel="stylesheet">
 	<link type="text/css" href="${themeDisplay.getPathThemeRoot()}css/base-style.css?t=123132211" rel="stylesheet">
 
 </head>
@@ -54,10 +54,10 @@
 
         ${theme.wrapPortlet("portlet.ftl", content_include)}
     </#if>
-	<div id="app"></div>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/manifest.07d498c5ca0f8b124b82.js"></script>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/vendor.1ecf1e12ddef5b65aa5a.js"></script>
-	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/app.96948868d9ce9417216a.js"></script>
+	<div id="app"></div> 
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/manifest.39b2d969b884ceabd223.js"></script>
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/vendor.befc6e033c51dc38991c.js"></script>
+	<script type="text/javascript" src="${themeDisplay.getPathThemeRoot()}js/app.1261b04be83d8ab922d4.js"></script>
 	
 	<footer id="footer"> 
 		<div class="owner">
