@@ -1,0 +1,139 @@
+/* width */
+* {
+  box-sizing: border-box
+}
+.row{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px grey; 
+    border-radius: 10px;
+  }
+   
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(151, 143, 143, 0.473); 
+    border-radius: 10px;
+  }
+  
+
+  ::-webkit-scrollbar-thumb:hover {
+    background:rgba(151, 143, 143, 0.473);
+  }
+  .theme--light.v-table thead th{
+    color: rgb(0, 0, 0);
+  }
+
+  .teal--text.text--darken-2 {
+    color: #fff!important;
+    caret-color: #fff!important;
+}
+
+.v-list__tile__title {
+  height: 25px;
+  line-height: 24px;
+  position: relative;
+  text-align: left;
+}
+.theme--light.v-table thead tr:first-child {
+  border-bottom: 0px !important;
+}
+thead tr th {
+  color: #000 !important;
+  border-left: 1px solid !important; 
+}
+.theme--light.v-table thead th {
+  color: #000 !important;
+}
+table.v-table tbody td {
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+#danh-sach {
+  width: 100%;
+}
+.filter-danhmuc {
+  border-bottom: 1px solid #e1e2e1;
+}
+.container {
+  padding: 10px !important;
+}
+.action-table{
+  margin-left: 5px;
+  margin-right: 5px;
+  color: darkblue;
+}
+.action-table:hover{
+  cursor: pointer;
+}
+.btn-danhmnuc{
+  padding: 5px 12px;
+  font-weight: bold;
+  background: #0b72ba;
+  color: #fff;
+  border-radius: 5px;
+  height: 28px;
+  margin: 0 5px;
+}
+.btn-group-danhmuc{
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  align-items: center;
+}
+/* .v-table__overflow {
+  overflow-x:hidden !important;
+} */
+.tableEventList__class {
+ overflow-x: auto;
+}
+
+td {
+  border: 1px solid rgba(0, 0, 0, 0.44) !important;
+}
+table {
+  border: 1px solid rgba(0, 0, 0, 0.44) !important;
+}
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700 !important;
+}
+.btn-danhmnuc a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.v-list__tile {
+  font-size: 13px !important;
+  height: 35px !important;
+  padding: 0 10px !important;
+  border-bottom: 1px dashed #d4caca !important;
+}
+.v-text-field {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+}
+.v-input__slot{
+  margin-bottom: 0px !important;
+}
+.container.grid-list-md .layout .flex {
+  padding: 3px !important;
+}
+.td-trangthai{
+  color: red;
+}
+
+.v-input--selection-controls.v-input .v-label {
+  font-size: 13px !important;
+  color: black !important
+}
