@@ -97,11 +97,11 @@
           no-data-text = "Không có dữ liệu"
           :headers = "headers"
           :items = "categoryList"
-          :rows-per-page-items="[10, 20, 30, 100]"
+          hide-actions
           >
             <template slot="items" slot-scope="props">
               <tr>
-                <td class="text-xs-center">{{ props.item.stt }}</td>
+                <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.securityOfficeCode  }}</td>
                 <td class="text-xs-center">{{ props.item.companyName }}</td>
                 <td>{{ props.item.companyAddress}}</td>
@@ -119,15 +119,25 @@
             </template>
           </v-data-table>
         </div>
+        <div class="text-xs-right layout wrap" style="position: relative;">
+          <div class="flex pagging-table px-2"> 
+            <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination> 
+          </div>
+        </div>
       </v-container>
     </v-flex>
   </div>
 </template>
 <script>
-
+import TinyPagination from '../hanghai_pagination.vue'
 export default {
+  components: {
+    'tiny-pagination': TinyPagination,
+  },
   data () {
     return {
+      pagesize: 10,
+      page: 1,
       maritime: [],
       selectSecurityOfficeCode: '',
       selectCompanyName: '',
@@ -203,14 +213,11 @@ export default {
     categoryId () {
       return this.$route.query.categoryId 
     },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
+    },
     categoryList () {
-      let data = this.$store.getters["category/categoryListItems"]
-      data.map((item,index) =>{
-        if (true) {
-          item['stt']= index + 1
-        }
-      })
-      return data
+      return this.$store.getters["category/categoryListItems"]
     },
     link () {
       let url = "http://10.21.201.75:8081/group/lanh-dao/quan-ly-thu-tuc-tau-bien?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=reportExel&p_p_cacheability=cacheLevelPage"
@@ -238,10 +245,7 @@ export default {
         .then(res => {
             vm.maritime = res.data
         })
-      vm.$store.dispatch('category/getMaritimeCurrent')
-          .then(res => {
-          vm.selectMaritime = res.maritimeCode     
-          })
+      vm.selectMaritime = vm.maritimeCurrent.maritimeCode
     })
   },
   watch: {
@@ -259,6 +263,8 @@ export default {
       this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'them-danh-muc', id: 0}})
     },
     search () {
+      this.pagesize = 10
+      this.page = 1
   
       let params = {
         categoryId: this.categoryId,
@@ -267,7 +273,9 @@ export default {
         companyName: this.selectCompanyName,
         companyAddress: this.selectCompanyAddress,
         contactEmail: this.selectContactEmail,
-        telNo: this.selectTelNo
+        telNo: this.selectTelNo,
+        start: 0,
+        end: 10
       }
       this.$store.dispatch('category/searchCategoryListItems', params)
         .then()
@@ -281,6 +289,25 @@ export default {
       }
       this.$store.dispatch("category/reportExel", params)
         .then()    
+    },
+    paggingData (config) {
+      this.pagesize = config.pagesize
+      this.page = config.page
+      let vm = this
+      let params = {
+        categoryId: this.categoryId,
+        maritimeCode: this.selectMaritime,
+        // securityOfficeCode: this.selectSecurityOfficeCode,
+        companyName: this.selectCompanyName,
+        companyAddress: this.selectCompanyAddress,
+        contactEmail: this.selectContactEmail,
+        telNo: this.selectTelNo,
+        start: config.page*config.pagesize - config.pagesize,
+        end:  config.page*config.pagesize
+      };
+      this.$store
+        .dispatch("category/searchCategoryListItems", params)
+        .then();
     }   
   }
 }

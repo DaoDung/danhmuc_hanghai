@@ -52,11 +52,11 @@
           no-data-text = "Không có dữ liệu"
           :headers = "headers"
           :items = "categoryList"
-          :rows-per-page-items="[10, 20, 30, 100]"
+          hide-actions
           >
             <template slot="items" slot-scope="props">
               <tr>
-                <td class="text-xs-center">{{ props.item.stt }}</td>
+                <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.code0 }}</td>
                 <td class="text-xs-center">{{ props.item.name }}</td>
                 <td class="text-xs-center">{{ props.item.maritimeNameVN }}</td>
@@ -70,15 +70,26 @@
             </template>
           </v-data-table>
         </div>
+        <div class="text-xs-right layout wrap" style="position: relative;">
+          <div class="flex pagging-table px-2"> 
+            <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination> 
+          </div>
+        </div>
       </v-container>
     </v-flex>
   </div>
 </template>
 <script>
-export default {
+import TinyPagination from '../hanghai_pagination.vue'
 
+export default {
+  components: {
+    'tiny-pagination': TinyPagination,
+  },
   data () {
     return {
+      pagesize: 10,
+      page: 1,
       maritime: [],
       selectMaritime: '',
       headers: [
@@ -125,14 +136,11 @@ export default {
     categoryId () {
         return this.$route.query.categoryId 
     },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
+    },
     categoryList () {
-      let data = this.$store.getters["category/categoryListItems"]
-      data.map((item,index) =>{
-        if (true) {
-          item['stt']= index + 1
-        }
-      })
-      return data
+      return this.$store.getters["category/categoryListItems"]
     },
     khuVucHangHai () {
       return this.$store.getters["category/KhuVucHangHai"]
@@ -159,40 +167,54 @@ export default {
             vm.maritime = res.data
         }, error => {
       })
-      vm.$store.dispatch('category/getMaritimeCurrent')
-          .then(res => {
-          vm.selectMaritime = res.maritimeCode     
-          }, error => {
-      })
+      vm.selectMaritime = vm.maritimeCurrent.maritimeCode
     })
     
   },
   methods: {
     editCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.dataItemId}})
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.node2}})
     },
     delCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'xoa-danh-muc', id: item.dataItemId}})
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'xoa-danh-muc', id: item.node2}})
     },
     addCategory () {
       this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'them-danh-muc', id: 0}})
     },
     infoCategory (item) {
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'chi-tiet-danh-muc', id: item.dataItemId}})
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'chi-tiet-danh-muc', id: item.node2}})
     },
     search () {
+      this.pagesize = 10
+      this.page = 1
       let vm = this
       if (typeof this.selectMaritime == "undefined") {
         this.selectMaritime = ''
       }
       let params = {
         categoryId: this.categoryId,
-        maritimeCode: this.selectMaritime
+        maritimeCode: this.selectMaritime,
+        start: 0,
+        end: 10
       }
       this.$store.dispatch('category/searchCategoryListItems', params)
         .then()
+    },
+    paggingData (config) {
+      this.pagesize = config.pagesize
+      this.page = config.page
+      let vm = this
+      let params = {
+        categoryId: this.categoryId,
+        maritimeCode: this.selectMaritime,
+        start: config.page*config.pagesize - config.pagesize,
+        end:  config.page*config.pagesize
+      };
+      this.$store
+        .dispatch("category/searchCategoryListItems", params)
+        .then();
     }
   }
 }

@@ -186,6 +186,34 @@
               </v-layout>
             </v-flex>
             <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Giá dịch vụ (đồng/giờ):</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.vndUnitPrice"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Giá dịch vụ (USD/giờ):</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.usdUnitPrice"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
               <v-layout>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ghi chú:</label>
@@ -244,7 +272,9 @@ export default {
         breadth: "",
         clearanceHeight: "",
         displacement: "",
-        remarks: ""
+        remarks: "",
+        vndUnitPrice: "",
+        usdUnitPrice: ""
       }
     };
   },
@@ -254,6 +284,9 @@ export default {
     },
     id() {
       return this.$route.query.id;
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -302,7 +335,9 @@ export default {
         clearanceHeight: this.categoryModel.clearanceHeight,
         breadth: this.categoryModel.breadth,
         maritimeCode: this.categoryModel.maritimeCode,
-        syncVersion: this.categoryModel.syncVersion
+        syncVersion: this.categoryModel.syncVersion,
+        vndUnitPrice: this.categoryModel.vndUnitPrice,
+        usdUnitPrice: this.categoryModel.usdUnitPrice
       };
 
       await this.$store
@@ -351,7 +386,9 @@ export default {
         displacement: this.categoryModel.displacement,
         clearanceHeight: this.categoryModel.clearanceHeight,
         breadth: this.categoryModel.breadth,
-        maritimeCode: this.categoryModel.maritimeCode
+        maritimeCode: this.categoryModel.maritimeCode,
+        vndUnitPrice: this.categoryModel.vndUnitPrice,
+        usdUnitPrice: this.categoryModel.usdUnitPrice
       };
 
       await this.$store
@@ -387,6 +424,8 @@ export default {
             vm.categoryModel.breadth = res.breadth;
             vm.categoryModel.displacement = res.displacement;
             vm.categoryModel.syncVersion = res.syncVersion;
+            vm.categoryModel.vndUnitPrice = res.vndUnitPrice;
+            vm.categoryModel.usdUnitPrice = res.usdUnitPrice;
 
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
@@ -413,10 +452,8 @@ export default {
           vm.tugBoatCompany = res;
         });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+        vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
         this.$store
           .dispatch("category/getDanhMuc", {
             categoryId: "DM_VMA_TUGBOAT_COMPANY",

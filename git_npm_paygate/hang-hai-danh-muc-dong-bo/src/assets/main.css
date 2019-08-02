@@ -12,19 +12,17 @@
   
  
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 3px grey; 
-    border-radius: 10px;
+
   }
    
 
   ::-webkit-scrollbar-thumb {
     background: rgba(151, 143, 143, 0.473); 
-    border-radius: 10px;
   }
   
 
   ::-webkit-scrollbar-thumb:hover {
-    background:rgba(151, 143, 143, 0.473);
+    
   }
   .theme--light.v-table thead th{
     color: rgb(0, 0, 0);
@@ -136,4 +134,7 @@ label {
 .v-input--selection-controls.v-input .v-label {
   font-size: 13px !important;
   color: black !important
+}
+.v-input{
+  font-size: 13px;
 }

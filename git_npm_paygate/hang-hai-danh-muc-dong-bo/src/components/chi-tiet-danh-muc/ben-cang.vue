@@ -167,6 +167,9 @@ export default {
     },
     id() {
       return this.$route.query.id;
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -184,9 +187,16 @@ export default {
   watch: {
     portRegionCodeModel(val) {
       let vm = this;
-      this.$store.dispatch("category/getCangBienHangHai", val).then(res => {
-        vm.categoryModel.portCodeHH = res.portCodeHH;
-      });
+      let khuVuc = this.KhuVucHangHai.find(e => e.portRegionCode === val)
+      if(khuVuc.portCodeRef === ''){
+         vm.categoryModel.portCodeHH = khuVuc.portCodeCB;
+      } else {
+        this.$store
+          .dispatch("category/getDetailCategory", {categoryId: 'DM_DATAITEM_GROUP107', node2: khuVuc.portCodeRef})
+          .then(res => {
+            vm.categoryModel.portCodeHH = res.name
+          })
+      }
       this.categoryModel.portRegion = val;
     }
   },
@@ -295,19 +305,17 @@ export default {
                 ":" +
                 (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
             }
-            vm.portRegionCodeModel = vm.categoryModel.portRegion;
             vm.selectMaritime = vm.categoryModel.portRegionCode;
           });
         this.$store
           .dispatch("category/getDanhMuc", { categoryId: "DM_PORT_REGION", maritimeCode: vm.categoryModel.portRegionCode })
           .then(res => {
             this.KhuVucHangHai = res;
+            vm.portRegionCodeModel = vm.categoryModel.portRegion;
           });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+        vm.categoryModel.maritimeCode = this.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = this.maritimeCurrent.maritimeNameVN;
         this.$store
           .dispatch("category/getDanhMuc", {
             categoryId: "DM_PORT_REGION",

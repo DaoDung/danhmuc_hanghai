@@ -7,9 +7,9 @@ const state = {
   categoryTableItems: [],
   totalCategoryTableItems: 0,
   categoryListItems: [],
-  PortRegionNameVNs: [],
-  KhuVucHangHai: [],
-  Category: {}
+  Category: {},
+  maritimeCurrent: {},
+  totalCategory: 0
 }
 
 const getters = {
@@ -31,14 +31,14 @@ const getters = {
   categoryModel: (state) => {
     return state.categoryModel
   },
-  PortRegionNameVNs: (state) => {
-    return state.PortRegionNameVNs
-  },
-  KhuVucHangHai: (state) => {
-    return state.KhuVucHangHai
-  },
   Category: (state) => {
     return state.Category
+  },
+  maritimeCurrent: (state) => {
+    return state.maritimeCurrent
+  },
+  totalCategory: (state) => {
+    return state.totalCategory
   }
 }
 
@@ -88,6 +88,7 @@ const actions = {
       let cb = (categoryList) => {
         let data = categoryList.data
         commit('setCategoryListItems', data)
+        commit('setTotalCategory', categoryList.total)
         resolve(data)
       }
       let errorCb = (error) => {
@@ -120,21 +121,10 @@ const actions = {
       categoryApi.getMaritime({url: getters.Url.getMaritimes, params: queries}, cb, errorCb)
     }) 
   },
-  async getPortRegionNameVNs ({ commit, getters }, queries) {
-    return new Promise((resolve, reject) => {
-      let cb = (PortRegionNameVNs) => {
-        commit('setPortRegionNameVNs', PortRegionNameVNs.data)
-        resolve(PortRegionNameVNs)
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
-      categoryApi.getPortRegionNameVNs({url: getters.Url.getPortRegionNameVNs, params: queries}, cb, errorCb)
-    }) 
-  },
-  async getMaritimeCurrent ({ getters }, queries) {
+  async getMaritimeCurrent ({ commit, getters }, queries) {
     return new Promise((resolve, reject) => {
       let cb = (MaritimeCurrent) => {
+        commit('setMaritimeCurrent', MaritimeCurrent)
         resolve(MaritimeCurrent)
       }
       let errorCb = (error) => {
@@ -183,6 +173,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       let cb = (categoryList) => {
         commit('setCategoryListItems', categoryList.data)
+        commit('setTotalCategory', categoryList.total)
         resolve(categoryList.data)
       }
       let errorCb = (error) => {
@@ -193,40 +184,6 @@ const actions = {
   },
   setCategoryModel ({ commit}, queries) {
     commit('setCategoryModel', queries)
-  },
-  async getKhuVucHangHai ({ commit, getters }, queries) {
-    return new Promise((resolve, reject) => {
-      let cb = (KhuVucHangHai) => {
-        commit('setKhuVucHangHai', KhuVucHangHai.data)
-        resolve(KhuVucHangHai.data)
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
-      categoryApi.getKhuVucHangHai({url: getters.Url.getDetailDmCategories, params: queries}, cb, errorCb)
-    }) 
-  },
-  async getBenCang ({getters }, queries) {
-    return new Promise((resolve, reject) => {
-      let cb = (BenCang) => {
-        resolve(BenCang.data)
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
-      categoryApi.getBenCang({url: getters.Url.getBenCang, params: queries}, cb, errorCb)
-    }) 
-  },
-  async getCangBienHangHai ({getters }, queries) {
-    return new Promise((resolve, reject) => {
-      let cb = (CangBienHangHai) => {
-        resolve(CangBienHangHai)
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
-      categoryApi.getCangBienHangHai({url: getters.Url.getCangBienHangHai, params: queries}, cb, errorCb)
-    }) 
   },
   async setCategory({ commit}, queries) {
     commit('setCategory', queries)
@@ -282,14 +239,14 @@ const mutations = {
   setCategoryModel (state, payload) {
     state.categoryModel = payload
   },
-  setPortRegionNameVNs (state, payload) {
-    state.PortRegionNameVNs = payload
-  },
-  setKhuVucHangHai (state, payload) {
-    state.KhuVucHangHai = payload
-  },
   setCategory (state, payload) {
     state.Category = payload
+  },
+  setMaritimeCurrent (state, payload) {
+    state.maritimeCurrent = payload
+  },
+  setTotalCategory (state, payload) {
+    state.totalCategory = payload
   }
  }
 

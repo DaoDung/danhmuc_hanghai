@@ -6,8 +6,6 @@
         <v-select
           v-bind:items="totalPagesData"
           v-model="currentPage"
-          item-text="text"
-          item-value="value"
           autocomplete
           @input="goToPage"
         ></v-select>

@@ -242,7 +242,7 @@ export default {
         }
         if (this.$route.query.aticon === 'sua-danh-muc') {
           if (!!v === false) {
-            return 'Chưa nhập MST'
+            return true
           } else {
             return this.errorsTaxCode || 'Mã số thuế bị trùng'
           }
@@ -291,6 +291,9 @@ export default {
     },
     id() {
       return this.$route.query.id;
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -463,10 +466,8 @@ export default {
             vm.selectMaritime = vm.categoryModel.maritimeCode;
           });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+        vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
         let date = new Date();
         vm.categoryModel.modifiedDate =
           date.getDate() +

@@ -32,6 +32,7 @@ export default {
       var getUrl1 = await vm.$store.dispatch("category/getUrl")
       //var getUrl2 = await vm.$store.dispatch("category/getUrl2")
       //console.log('call success', getUrl1, getUrl2)
+      var maritimeCurrent = await vm.$store.dispatch("category/getMaritimeCurrent")
       vm.isLoading = false
     });
   }

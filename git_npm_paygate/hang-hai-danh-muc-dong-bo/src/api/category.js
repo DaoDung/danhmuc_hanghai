@@ -656,7 +656,7 @@ const hasServer = {
      })
   },
   getCategoryListItems (query, cb, errorcb) {
-    axios.get(query.url + '&categoryId=' + query.params + '&start=-1&end=-1')
+    axios.get(query.url + '&categoryId=' + query.params + '&start=0&end=10')
      .then((res) => {
       const result = res.data
       cb(result) 
@@ -668,7 +668,7 @@ const hasServer = {
   addCategoryListItems (query, cb, errorcb) {
     let Url = query.url + '&LAN_CAP_MOI_DU_LIEU=LAN_CAP_MOI_DU_LIEU'
     for (const key in query.params) {
-      if (query.params[key] !== '') {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
         Url += '&' + key + '=' + query.params[key]
       }
     }
@@ -684,7 +684,7 @@ const hasServer = {
   editCategoryListItems (query, cb, errorcb) {
     let Url = query.url + '&LAN_SUA_DU_LIEU=LAN_SUA_DU_LIEU'
     for (const key in query.params) {
-      if (query.params[key] !== '') {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
         Url += '&' + key + '=' + query.params[key]
       }
     }
@@ -700,7 +700,7 @@ const hasServer = {
   deleteCategoryListItems (query, cb, errorcb) {
     let Url = query.url + '&LAN_XOA_DU_LIEU=LAN_XOA_DU_LIEU'
     for (const key in query.params) {
-      if (query.params[key] !== '') {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
         Url += '&' + key + '=' + query.params[key]
       }
     }
@@ -716,7 +716,7 @@ const hasServer = {
   getDetailCategory (query, cb, errorcb) {
     let Url = query.url
     for (const key in query.params) {
-      if (query.params[key] !== '') {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
         Url += '&' + key + '=' + query.params[key]
       }
     }
@@ -757,47 +757,7 @@ const hasServer = {
         Url += '&' + key + '=' + query.params[key]
       }
     }
-    axios.get(Url + '&start=-1&end=-1')
-     .then((res) => {
-      const result = res.data
-      cb(result) 
-     })
-     .catch(function (error) {
-      errorcb(error)
-     })
-  },
-  getPortRegionNameVNs (query, cb, errorcb) {
-    axios.get(query.url + '&start=-1&end=-1')
-     .then((res) => {
-      const result = res.data
-      cb(result) 
-     })
-     .catch(function (error) {
-      errorcb(error)
-     })
-  },
-  getKhuVucHangHai (query, cb, errorcb) {
-    axios.get(query.url + '&categoryId=DM_PORT_REGION&start=-1&end=-1')
-     .then((res) => {
-      const result = res.data
-      cb(result) 
-     })
-     .catch(function (error) {
-      errorcb(error)
-     })
-  },
-  getBenCang (query, cb, errorcb) {
-    axios.get(query.url + '&portRegionCode=' + query.params + '&start=-1&end=-1')
-     .then((res) => {
-      const result = res.data
-      cb(result) 
-     })
-     .catch(function (error) {
-      errorcb(error)
-     })
-  },
-  getCangBienHangHai (query, cb, errorcb) {
-    axios.get(query.url + '&portRegionCode=' + query.params + '&start=-1&end=-1')
+    axios.get(Url)
      .then((res) => {
       const result = res.data
       cb(result) 
@@ -850,4 +810,4 @@ const hasServer = {
   },
 }  
 //export default hasClient hasServer
-export default hasClient
+export default hasServer

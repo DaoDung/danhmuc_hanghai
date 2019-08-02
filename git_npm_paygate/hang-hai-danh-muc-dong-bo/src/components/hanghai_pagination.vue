@@ -1,44 +1,46 @@
 <template>
   <div>
     <div style="text-align: left;position: absolute;line-height: 46px;">Tổng số <span class="text-bold primary--text">{{total}}</span> bản ghi. </div>
-    <div v-if="total > 0" class="vue-tiny-pagination pagination layout" style="justify-content: flex-end; -webkit-justify-content: flex-end;">
-      <div class="px-3 xs4 flex">
-        <v-select
-          v-bind:items="totalPagesData"
-          v-model="currentPage"
-          item-text="text"
-          item-value="value"
-          autocomplete
-          @input="goToPage"
-        ></v-select>
-      </div>
-      <ul class="tiny-pagination" :class="customClass">
-        <li class="page-item" :class="classFirstPage">
-          <button @click.prevent="lastPageLast" :class="classFirstPage" class="pagination__navigation">
-            <i aria-hidden="true" class="material-icons icon">first_page</i>
-          </button>
-        </li>
-        <li class="page-item" :class="classFirstPage">
-          <button @click.prevent="lastPage" :class="classFirstPage" class="pagination__navigation" style="border-left: 0;">
-            <i aria-hidden="true" class="material-icons icon">chevron_left</i>
-          </button>
-        </li>
-        <li class="page-item" style="margin-right: 0;">
-          <button class="pagination__navigation pagination__navigation--disabled text-bold primary--text" style="border-right: 0; border-left: 0;">
-            {{titlePage}}
-          </button>
-        </li>
-        <li class="page-item" :class="classLastPage" style="margin-right: 0;">
-          <button @click.prevent="nextPage" :class="classLastPage" class="pagination__navigation" style="border-left: 0;">
-            <i aria-hidden="true" class="material-icons icon">chevron_right</i>
-          </button>
-        </li>
-        <li class="page-item" :class="classLastPage">
-          <button @click.prevent="nextPageLast" :class="classLastPage" class="pagination__navigation">
-            <i aria-hidden="true" class="material-icons icon">last_page</i>
-          </button>
-        </li>
-      </ul>
+    <div v-if="total > 0" class="pagination" style="justify-content: flex-end; -webkit-justify-content: flex-end;width: 376px;float: right;">
+      <v-layout  align-center justify-end row fill-height>
+        <div class="xs2 flex">
+          <v-select
+            v-model="pagesize"
+            v-bind:items="pageSizeData"
+            @input="goToPage"
+            width="47"
+          ></v-select>
+        </div>
+        <div class="xs5 flex">
+          <ul class="tiny-pagination" :class="customClass">
+            <li class="page-item" :class="classFirstPage">
+              <button @click.prevent="lastPageLast" class="pagination__navigation">
+                <i aria-hidden="true" class="material-icons icon">first_page</i>
+              </button>
+            </li>
+            <li class="page-item" :class="classFirstPage">
+              <button @click.prevent="lastPage" class="pagination__navigation" style="border-left: 0;">
+                <i aria-hidden="true" class="material-icons icon">chevron_left</i>
+              </button>
+            </li>
+            <li class="page-item" style="margin-right: 0;">
+              <button class="pagination__navigation pagination__navigation--disabled text-bold primary--text" style="border-right: 0; border-left: 0;">
+                {{page}}
+              </button>
+            </li>
+            <li class="page-item" :class="classLastPage" style="margin-right: 0;">
+              <button  @click.prevent="nextPage" class="pagination__navigation" style="border-right: 0;">
+                <i aria-hidden="true" class="material-icons icon">chevron_right</i>
+              </button>
+            </li>
+            <li class="page-item" :class="classLastPage">
+              <button @click.prevent="nextPageLast" class="pagination__navigation">
+                <i aria-hidden="true" class="material-icons icon">last_page</i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </v-layout>
     </div>
   </div>
 </template>
@@ -49,122 +51,114 @@ const COMPONENT_NAME = 'TinyPagination'
 export default {
   name: COMPONENT_NAME,
   props: {
-    total: {
-      type: Number,
-      required: true
-    },
     page: {
       type: Number,
       default: 1
     },
-    lang: {
-      type: String,
-      default: 'en'
-    },
-    customClass: {
-      type: String
-    },
-    limits: {
-      type: Array,
-      default () {
-        return [10, 15, 20, 50, 100]
-      }
-    },
-    showLimit: {
-      type: Boolean,
-      default: true
+    pagesize: {
+      type: Number,
+      default: 10
     }
   },
   data () {
     return {
-      version: '0.2.1',
-      currentPage: 1,
-      currentLimit: 15,
-      translations: {
-        en: {
-          prev: 'Previous',
-          title: 'Page',
-          next: 'Next'
-        }
-      },
-      availableLanguages: ['en']
+      pageSizeData: [10, 20, 30, 100]
     }
   },
   created () {
-    this.currentPage = this.page
+   console.log(this.total)
   },
   computed: {
-    translation () {
-      return this.availableLanguages.includes(this.lang)
-        ? this.translations[this.lang]
-        : this.translations['en']
+    total () {
+      return this.$store.getters["category/totalCategory"]
     },
-    totalPages () {
-      return Math.ceil(this.total / this.currentLimit)
-    },
-    totalPagesData () {
-      var totalDatas = []
-      var data = {}
-      for (var index = 1; index <= this.totalPages; ++index) {
-        data = {
-          value: index,
-          text: 'Trang ' + index
-        }
-        totalDatas.push(data)
-      }
-      return totalDatas
-    },
-    titlePage () {
-      return `${this.currentPage}`
-    },
-    classFirstPage () {
-      return {
-        'c-not-allowed pagination__navigation--disabled': this.currentPage === 1
-      }
-    },
-    classLastPage () {
-      return {
-        'c-not-allowed pagination__navigation--disabled': this.currentPage === this.totalPages
-      }
+    pageMax () {
+      return Math.ceil(this.total/this.pagesize)
     }
   },
   methods: {
-    nextPage () {
-      if (this.currentPage !== this.totalPages) {
-        this.currentPage += 1
+    nextPageLast () {
+      if(this.page < this.pageMax) {
         this.$emit('tiny:change-page', {
-          page: this.currentPage
+          page: this.pageMax,
+          pagesize: this.pagesize
+        })
+      }
+    },
+    nextPage () {
+      if(this.page !== this.pageMax) {
+        this.page += 1
+        this.$emit('tiny:change-page', {
+          page: this.page,
+          pagesize: this.pagesize
         })
       }
     },
     lastPage () {
-      if (this.currentPage > 1) {
-        this.currentPage -= 1
+      if(this.page > 1) {
+        this.page -= 1
         this.$emit('tiny:change-page', {
-          page: this.currentPage
+          page: this.page,
+          pagesize: this.pagesize
         })
       }
     },
-    nextPageLast () {
-      this.currentPage = this.totalPages
-      this.$emit('tiny:change-page', {
-        page: this.totalPages
-      })
-    },
     lastPageLast () {
-      this.currentPage = 1
-      this.$emit('tiny:change-page', {
-        page: 1
-      })
+      if(this.page > 1) {
+        this.$emit('tiny:change-page', {
+          page: 1,
+          pagesize: this.pagesize
+        })
+      }
     },
     goToPage () {
+      this.page = 1,
       this.$emit('tiny:change-page', {
-        page: this.currentPage
+        page: 1,
+        pagesize: this.pagesize
       })
-    },
-    onLimitChange () {
-      this.currentPage = 1
     }
   }
 }
 </script>
+<style>
+.tiny-pagination {
+    display: flex;
+    list-style: none;
+    margin: .2rem 0;
+    padding: .2rem 0;
+}
+.page-item {
+  margin: .2rem .05rem;
+}
+body .pagination button {
+    box-shadow: none;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 13px;
+    width: 28px;
+    height: 30px;
+    
+}
+.pagination__navigation .material-icons{
+  font-size: 17px;
+  line-height: 30px;
+}
+.pagination {
+  margin: 0px 0;
+}
+</style>
+
+<style scoped>
+.v-input{
+  font-size: 13px;
+}
+.v-select__selection--comma{
+  margin: 0px 0px 0px 0px;
+}
+.pagination__navigation i{
+  color: #0000008a;
+}
+</style>
+

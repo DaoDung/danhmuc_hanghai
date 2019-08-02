@@ -331,6 +331,9 @@ export default {
     },
     id() {
       return this.$route.query.id;
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -495,10 +498,8 @@ export default {
             this.pilotCategory = res;
           });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+        vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
         let date = new Date();
         vm.categoryModel.modifiedDate =
           date.getDate() +

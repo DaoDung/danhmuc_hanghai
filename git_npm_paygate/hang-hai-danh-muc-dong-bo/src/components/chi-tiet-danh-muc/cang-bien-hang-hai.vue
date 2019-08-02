@@ -132,6 +132,9 @@ export default {
     },
     id() {
       return this.$route.query.id;
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -225,7 +228,7 @@ export default {
       if (this.$route.query.aticon !== "them-danh-muc") {
         let params = {
           categoryId: this.categoryId,
-          dataitemId: this.id
+          node2: this.id
         };
         await this.$store
           .dispatch("category/getDetailCategory", params)
@@ -257,10 +260,10 @@ export default {
             vm.selectMaritime = res.node1;
           });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+
+        vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
+
         let date = new Date();
         vm.categoryModel.validatedFrom =
           date.getDate() +

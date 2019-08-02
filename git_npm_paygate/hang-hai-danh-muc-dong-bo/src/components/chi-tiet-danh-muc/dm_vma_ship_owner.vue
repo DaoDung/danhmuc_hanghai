@@ -282,7 +282,7 @@ export default {
         }
         if (this.$route.query.aticon === 'sua-danh-muc') {
           if (!!v === false) {
-            return 'Chưa nhập Mã chủ tàu (MST)/ Người khai thác'
+            return true
           } else {
             return this.errorsTaxCode || 'Mã số thuế bị trùng'
           }
@@ -292,7 +292,7 @@ export default {
         } 
         if (this.switch1 === false) {
           if (!!v === false) {
-            return 'Chưa nhập Mã chủ tàu (MST)/ Người khai thác'
+            return true
           } else {
             return this.errorsTaxCode || 'Mã số thuế bị trùng'
           }
@@ -338,8 +338,8 @@ export default {
     id() {
       return this.$route.query.id;
     },
-    KhuVucHangHai() {
-      return this.$store.getters["category/KhuVucHangHai"];
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -524,10 +524,8 @@ export default {
             vm.selectMaritime = vm.categoryModel.maritimeCode;
           });
       } else {
-        await this.$store.dispatch("category/getMaritimeCurrent").then(res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        });
+        vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+        vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
         vm.selectMaritime = vm.categoryModel.maritimeCode;
         let date = new Date();
         vm.categoryModel.modifiedDate =

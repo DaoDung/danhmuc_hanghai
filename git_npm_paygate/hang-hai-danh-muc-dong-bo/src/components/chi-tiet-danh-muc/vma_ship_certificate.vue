@@ -159,6 +159,9 @@ export default {
     },
     KhuVucHangHai() {
       return this.$store.getters["category/KhuVucHangHai"];
+    },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
     }
   },
   created() {
@@ -179,12 +182,6 @@ export default {
     },
     portRegionCodeModel(val) {
       let vm = this;
-      this.$store.dispatch("category/getCangBienHangHai", val).then(
-        res => {
-          vm.categoryModel.portCodeHH = res.portCodeHH;
-        },
-        error => {}
-      );
       this.categoryModel.portRegion = val;
     }
   },
@@ -259,13 +256,8 @@ export default {
         },
         error => {}
       );
-      await this.$store.dispatch("category/getMaritimeCurrent").then(
-        res => {
-          vm.categoryModel.maritimeCode = res.maritimeCode;
-          vm.categoryModel.maritimeNameVN = res.maritimeNameVN;
-        },
-        error => {}
-      );
+      vm.categoryModel.maritimeCode = vm.maritimeCurrent.maritimeCode;
+      vm.categoryModel.maritimeNameVN = vm.maritimeCurrent.maritimeNameVN;
       if (this.$route.query.aticon !== "them-danh-muc") {
         let params = {
           categoryId: this.categoryId,
