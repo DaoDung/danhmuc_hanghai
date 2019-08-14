@@ -112,6 +112,9 @@
       <vmaship v-else-if="this.categoryId === 'VMA_SHIP'  && !isLoading"
       ></vmaship>
 
+      <vmatransactiondepartment v-else-if="this.categoryId === 'VMA_TRANSACTION_DEPARTMENT'  && !isLoading"
+      ></vmatransactiondepartment>
+
   </div>
 </template>
 <script>
@@ -155,7 +158,7 @@ import dmvmatugboat from './danh-sach-danh-muc/dm_vma_tugboat'
 import vmapilotviolation from './danh-sach-danh-muc/vma_pilot_violation'
 import vmashipcertificate from './danh-sach-danh-muc/vma_ship_certificate'
 import vmaship from './danh-sach-danh-muc/vma_ship'
-
+import vmatransactiondepartment from './danh-sach-danh-muc/vma_transaction_department'
 
 
 export default {
@@ -194,7 +197,8 @@ export default {
     dmvmatugboat,
     vmapilotviolation, 
     vmashipcertificate,
-    vmaship
+    vmaship,
+    vmatransactiondepartment
   },
   data() {
     return {

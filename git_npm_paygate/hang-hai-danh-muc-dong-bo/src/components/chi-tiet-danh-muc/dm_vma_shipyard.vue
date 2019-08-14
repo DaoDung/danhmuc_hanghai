@@ -209,26 +209,6 @@
 <script>
 import axios from 'axios'
 
-function callApiCheckTaxCode (query, cb, errorcb) {
-  let url = 'http://10.21.201.75:8081/group/lanh-dao/quan-ly-thu-tuc-tau-bien?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=checkMST&p_p_cacheability=cacheLevelPage'
-  url += '&taxCode=' + query + '&type=2'
-  axios.get(url).then( res => {
-      cb(res.data)
-    }).catch( error => {
-      errorcb(error)
-    })
-}
-async function checkTaxCode (val) {
-  return new Promise((resolve, reject) => {
-    let cb = (data) => {
-      resolve(data)
-    }
-    let errorcb = error => {
-      reject(error)
-    }
-    callApiCheckTaxCode(val, cb, errorcb)
-  })
-}
 export default {
   data() {
     return {
@@ -294,6 +274,9 @@ export default {
     },
     maritimeCurrent () {
       return this.$store.getters["category/maritimeCurrent"]
+    },
+    originUrl () {
+      return this.$store.getters["category/Url"]
     }
   },
   created() {
@@ -312,25 +295,24 @@ export default {
       }
     },
     taxCodeModel (val) {
-      if (this.$route.query.aticon === 'sua-danh-muc') {
-        if (val === this.categoryModel.taxCode) {
-          this.errorsTaxCode = true
+      let vm = this
+      if (vm.$route.query.aticon === 'sua-danh-muc'  && val !== '') {
+        if (val === vm.categoryModel.taxCode) {
+          vm.errorsTaxCode = true
         } else {
-          checkTaxCode(val).then(
+          vm.checkTaxCode(val).then(
             res => {
-              this.errors = res.status === '200' ? [] : ['Mã số thuế đã tồn tại']
-              this.errorsTaxCode = res.status === '200'
-              console.log(this.errorsTaxCode)
+              vm.errors = res.status === '200' ? [] : ['Mã số thuế đã tồn tại']
+              vm.errorsTaxCode = res.status === '200'
             }
           )
         }
       }
-      if (this.$route.query.aticon === 'them-danh-muc') {
-        checkTaxCode(val).then(
+      if (this.$route.query.aticon === 'them-danh-muc'  && val !== '') {
+        vm.checkTaxCode(val).then(
             res => {
-              this.errors = res.status === '200' ? [] : ['Mã số thuế đã tồn tại']
-              this.errorsTaxCode = res.status === '200'
-              console.log(this.errorsTaxCode)
+              vm.errors = res.status === '200' ? [] : ['Mã số thuế đã tồn tại']
+              vm.errorsTaxCode = res.status === '200'
             }
           )
       }
@@ -482,14 +464,29 @@ export default {
 
         vm.selectMaritime = vm.categoryModel.maritimeCode;
       }
+    },
+    callApiCheckTaxCode (query, cb, errorcb) {
+      let vm = this
+      let url = vm.originUrl.checkMST + '&taxCode=' + query + '&type=2'
+      axios.get(url).then( res => {
+          cb(res.data)
+        }).catch( error => {
+          errorcb(error)
+        })
+    },
+    async checkTaxCode (val) {
+      let vm = this
+      return new Promise((resolve, reject) => {
+        let cb = (data) => {
+          resolve(data)
+        }
+        let errorcb = error => {
+          reject(error)
+        }
+        vm.callApiCheckTaxCode(val, cb, errorcb)
+      })
     }
   }
 };
 </script>
 
-<style>
-.form_ben_cang .v-input__slot {
-  border: 1px solid #949494;
-  border-bottom: 0px;
-}
-</style>

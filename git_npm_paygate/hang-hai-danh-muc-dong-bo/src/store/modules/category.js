@@ -68,7 +68,7 @@ const actions = {
       categoryApi.getUrl2(queries, cb, errorCb)
     })
   },
-  async getCategoryTableItems ({ commit }, queries) {
+  async getCategoryTableItems ({ commit, getters }, queries) {
     return new Promise((resolve, reject) => {
       let cb = (categoryTable) => {
         let data = categoryTable.data
@@ -80,7 +80,7 @@ const actions = {
     
         reject(error)
       }
-      categoryApi.getCategoryTableItems(queries, cb, errorCb)
+      categoryApi.getCategoryTableItems({url: getters.Url.getDmSyncCategories}, cb, errorCb)
     }) 
   },
   async getCategoryListItems ({ commit, getters }, queries) {
@@ -219,6 +219,53 @@ const actions = {
         reject(error)
       }
       categoryApi.getDanhMuc2({url: getters.Url2.getVmaShip_Ship_URL, params: queries}, cb, errorCb)
+    }) 
+  },
+  async getUsers ({commit, getters }, queries) {
+    return new Promise((resolve, reject) => {
+      let cb = (Users) => {
+        commit('setTotalCategory', Users.total)
+        resolve(Users.data)
+      }
+      let errorCb = (error) => {
+        reject(error)
+      }
+      categoryApi.getUsers({url: getters.Url.getUsers, params: queries}, cb, errorCb)
+    }) 
+  },
+  async getVmaTransactionTypes ({getters }, queries) {
+    return new Promise((resolve, reject) => {
+      let cb = (Data) => {
+        resolve(Data.data)
+      }
+      let errorCb = (error) => {
+        reject(error)
+      }
+      categoryApi.getVmaTransactionTypes({url: getters.Url.getVmaTransactionTypes, params: queries}, cb, errorCb)
+    }) 
+  },
+  async updateUserPort ({getters }, queries) {
+    return new Promise((resolve, reject) => {
+      let cb = (Data) => {
+        resolve(Data)
+      }
+      let errorCb = (error) => {
+        reject(error)
+      }
+      let url =[]
+      let departmentCode = queries.departmentCode
+      queries.users.forEach(function(element) {
+        let params = {
+          departmentCode: departmentCode,
+          userId: element.userId,
+          status: element.status
+        }
+        let callApi = categoryApi.updateUserPort({url: getters.Url.updateUserPort, params: params}, cb, errorCb)
+        url.push(callApi)
+      })
+      console.log(url)
+      Promise.all(url)
+
     }) 
   },
 }

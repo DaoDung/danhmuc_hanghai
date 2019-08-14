@@ -112,6 +112,9 @@
                         <!-------->
       <vmaship v-if="this.$route.query.categoryId=== 'VMA_SHIP'"
       ></vmaship>
+
+      <vmatransactiondepartment  v-if="this.$route.query.categoryId === 'VMA_TRANSACTION_DEPARTMENT'"
+      ></vmatransactiondepartment>
   </div>
 
 </template>
@@ -155,6 +158,7 @@ import dmvmatugboat from './chi-tiet-danh-muc/dm_vma_tugboat'
 import vmapilotviolation from './chi-tiet-danh-muc/vma_pilot_violation'
 import vmashipcertificate from './chi-tiet-danh-muc/vma_ship_certificate'
 import vmaship from './chi-tiet-danh-muc/vma_ship'
+import vmatransactiondepartment from './chi-tiet-danh-muc/vma_transaction_department'
 
 export default {
   components: {
@@ -191,7 +195,8 @@ export default {
     dmvmatugboat,
     vmapilotviolation, 
     vmashipcertificate,
-    vmaship
+    vmaship,
+    vmatransactiondepartment
   },
   data() {
     return {

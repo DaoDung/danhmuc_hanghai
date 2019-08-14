@@ -219,10 +219,5 @@ export default {
   }
 };
 </script>
-<style>
-.form_tuyen_luong .v-input__slot {
-  border: 1px solid #949494;
-  border-bottom: 0px;
-}
-</style>
+
 

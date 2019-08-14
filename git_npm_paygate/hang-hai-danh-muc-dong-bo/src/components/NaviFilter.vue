@@ -32,7 +32,8 @@ export default {
         "DM_VMA_SHIP_OWNER",
         "DM_VMA_SHIPYARD",
         "DM_VMA_SECURITY_OFFICE",
-        "DM_VMA_SHIP_TYPE"
+        "DM_VMA_SHIP_TYPE",
+        "VMA_TRANSACTION_DEPARTMENT"
       ]
     };
   },

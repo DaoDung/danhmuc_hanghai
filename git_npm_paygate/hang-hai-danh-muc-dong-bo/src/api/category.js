@@ -162,6 +162,11 @@ window._categoryTable = [
     "categoryId": 'DM_VMA_SHIPYARD',
     "categoryDescription": 'DM_VMA_SHIPYARD',
     "url" : 'UrlKhuVucHangHai'
+  },
+  {
+    "categoryId": 'VMA_TRANSACTION_DEPARTMENT',
+    "categoryDescription": 'VMA_TRANSACTION_DEPARTMENT',
+    "url" : 'UrlKhuVucHangHai'
   }
 ]
 window.UrlKhuVucHangHai = [
@@ -623,7 +628,12 @@ const hasClient = {
 
   }
 }
-const endPoit = 'http://10.21.201.75:8081/group/lanh-dao?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit'
+
+var renderURLInit = "?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit"
+var orginURL = window.location.href
+var endPoit = orginURL.substr(0, orginURL.lastIndexOf('#')) + renderURLInit
+
+
 const hasServer = {
   getUrl (query, cb, errorCb) {
     axios.get(endPoit)
@@ -646,7 +656,7 @@ const hasServer = {
      })
   },
   getCategoryTableItems (query, cb, errorcb) {
-    axios.get("http://10.21.201.75:8081/group/lanh-dao/quan-ly-thu-tuc-tau-bien?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getDmSyncCategories&p_p_cacheability=cacheLevelPage&start=-1&end=-1")
+    axios.get(query.url + '&start=-1&end=-1')
      .then((res) => {
       const result = res.data
       cb(result) 
@@ -781,6 +791,49 @@ const hasServer = {
      .catch(function (error) {
       errorcb(error)
      })
+  },
+  getUsers (query, cb, errorcb) {
+    let Url = query.url
+    for (const key in query.params) {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+        Url += '&' + key + '=' + query.params[key]
+      }
+    }
+    axios.get(Url)
+     .then((res) => {
+      const result = res.data
+      cb(result) 
+     })
+     .catch(function (error) {
+      errorcb(error)
+     })
+  },
+  getVmaTransactionTypes (query, cb, errorcb) {
+    let Url = query.url
+    for (const key in query.params) {
+      if (query.params[key] !== '') {
+        Url += '&' + key + '=' + query.params[key]
+      }
+    }
+    axios.get(Url + '&start=-1&end=-1')
+     .then((res) => {
+      const result = res.data
+      cb(result) 
+     })
+     .catch(function (error) {
+      errorcb(error)
+     })
+  },
+  updateUserPort (query, cb, errorcb) {
+    let Url = query.url + '&departmentCode=' + query.params.departmentCode + '&userId=' + query.params.userId + '&status=' + query.params.status
+    axios.get(Url)
+      .then((res) => {
+      const result = res.data
+      cb(result) 
+      })
+      .catch(function (error) {
+      errorcb(error)
+      })
   },
   reportExel (query, cb, errorcb) {
     axios.get(query.url + '&reportId='+ query.params.reportId)

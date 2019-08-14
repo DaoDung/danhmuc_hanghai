@@ -6,75 +6,32 @@
           <v-layout row wrap>
             <v-flex xs3>
               <v-layout align-center>
-                <v-flex xs6>
+                <v-flex xs5>
                   <label>Cảng vụ hàng hải:</label>
                 </v-flex>
-                <v-flex xs8>
+                <v-flex xs7>
                   <v-autocomplete
                     v-model="selectMaritime"
-                    persistent-hint
                     :items="maritime"
                     item-text="cityCode"
                     item-value="maritimeCode"
+                    width="30"
+                  
                     height="15"
-                      >
-                        <template v-slot:append-outer>
-
-                        </template>
-                  </v-autocomplete>
+                  ></v-autocomplete>
                 </v-flex>
               </v-layout>
-            </v-flex>
-            <!-- <v-flex xs3>
+            </v-flex>          
+            <v-flex xs3>
               <v-layout align-center>
                 <v-flex xs5>
-                  <label>Chủ tàu/ Người khai thác(MST):</label>
+                  <label>Tên phòng ban:</label>
                 </v-flex>
                 <v-flex xs7>
                   <v-text-field
-                    v-model="selectTaxCode"
+                    v-model="departmentName"
                     height="15"
-                  ></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-flex> -->
-            <v-flex xs4>
-              <v-layout align-center>
-                <v-flex xs6>
-                  <label>Chủ tàu / Người khai thác:</label>
-                </v-flex>
-                <v-flex xs7>
-                <v-text-field
-                  v-model="selectCompanyName"
-                  height="15"
-                ></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-flex>
-
-            <v-flex xs2>
-              <v-layout align-center>
-                <v-flex xs4>
-                  <label>Địa chỉ:</label>
-                </v-flex>
-                <v-flex xs9>
-                <v-text-field
-                  v-model="selectCompanyAddress"
-                  height="15"
-                ></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex xs3>
-              <v-layout align-center>
-                <v-flex xs4>
-                  <label>Số điện thoại:</label>
-                </v-flex>
-                <v-flex xs8>
-                <v-text-field
-                  v-model="selectTelNo "
-                  height="15"
-                ></v-text-field>
+                  ></v-text-field> 
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -89,6 +46,7 @@
         </v-container>
       </div>
     </v-flex>
+
     <v-flex xs12>
       <v-container fluid grid-list-md>
         <div class="tableEventList__class">
@@ -96,17 +54,15 @@
           id = "table_search"
           no-data-text = "Không có dữ liệu"
           :headers = "headers"
-          :items = "categoryList"
+          :items = "danhSach"
           hide-actions
           >
             <template slot="items" slot-scope="props">
               <tr>
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
-                <td class="text-xs-center">{{ props.item.shipOwnerCode  }}</td>
-                <td class="text-xs-center">{{ props.item.companyName}}</td>
-                <td>{{ props.item.companyAddress}}</td>
-                <td class="text-xs-center">{{ props.item.telNo}}</td>
-                <td class="text-xs-center" :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
+                <td class="text-xs-center">{{ props.item.departmentCode}}</td>
+                <td class="text-xs-center">{{ props.item.departmentName}}</td>
+                <td class="text-xs-center">{{ props.item.maritimeNameVN }}</td>
                 <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                   <span @click="editCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Sửa</strong></span>
@@ -127,7 +83,6 @@
 </template>
 <script>
 import TinyPagination from '../hanghai_pagination.vue'
-
 export default {
   components: {
     'tiny-pagination': TinyPagination,
@@ -136,56 +91,40 @@ export default {
     return {
       pagesize: 10,
       page: 1,
-      selectShipOwnerCode: '',
-      selectTaxCode: '',
-      selectCompanyName: '',
-      selectCompanyAddress: '',
-      selectTelNo: '',
-      selectPilotCategoryCode: '',
-      maritime: [],
+      departmentName: '',
       selectMaritime: '',
+      maritime: [],
+      danhSach: [],
       headers: [
         {
           sortable: false,
           text: 'STT',
-          value: 'name',
-          align: 'center'
+          align: 'center',
+          value: 'name'
         },
         {
           sortable: false,
-          text: 'Mã chủ tàu/ Người khai thác',
-          value: 'name',
-          align: 'center'
+          text: 'Mã phòng ban',
+          align: 'center',
+          value: 'name'
         },
         {
           sortable: false,
-          text: 'Tên chủ tàu / Người khai thác' ,
-          value: 'city',
-          align: 'center'
+          text: 'Tên phòng ban',
+          align: 'center',
+          value: 'country'
         },
         {
           sortable: false,
-          text: 'Địa chỉ',
-          value: 'salary',
-          align: 'center'
-        },
-        {
-          sortable: false,
-          text: 'Số điện thoại',
-          value: 'salary',
-          align: 'center'
-        },
-        {
-          sortable: false,
-          text: 'Trạng thái',
-          value: 'salary',
-          align: 'center'
+          text: 'Cảng vụ hàng hải',
+          align: 'center',
+          value: 'city'
         },
         {
           sortable: false,
           text: 'Thao tác',
-          value: 'salary',
-          align: 'center'
+          align: 'center',
+          value: 'city'
         }
       ],     
     }
@@ -205,13 +144,9 @@ export default {
       let url = originUrl.reportExel
       let params = {
         reportId: this.categoryId,
-        maritimeCode: this.selectMaritime,
-        // shipOwnerCode: this.selectShipOwnerCode,
-        taxCode: this.selectTaxCode,
-        companyName: this.selectCompanyName,
-        companyAddress: this.selectCompanyAddress,
-        telNo: this.selectTelNo
-      }
+        departmentName: this.departmentName,
+        maritimeCode: this.selectMaritime
+      };
       for (const key in params) {
         if (params[key] !== '' && typeof params[key] != "undefined") {
           url += '&' + key + '=' + params[key]
@@ -221,51 +156,63 @@ export default {
     }
   },
   created () {
-    let vm = this
-    this.$nextTick( () => {
-      vm.$store.dispatch('category/getMaritime')
-        .then(res => {
-            vm.maritime = res.data
-        })
-      vm.selectMaritime = vm.maritimeCurrent.maritimeCode
-    })
+    let vm = this;
+    this.$nextTick(() => {
+      vm.$store.dispatch("category/getMaritime").then(
+        res => {
+          vm.maritime = res.data;
+          vm.danhSach = vm.categoryList
+          vm.danhSach.map(item => {
+            let lt = vm.maritime.find(i => i.maritimeCode === item.portOfAuthority)
+            item['maritimeNameVN'] = lt.maritimeNameVN
+            return item
+          })
+        }
+      );
+    });
   },
   watch: {
+    categoryList () {
+      let vm = this
+      vm.danhSach = vm.categoryList
+      vm.danhSach.map(item => {
+        let lt = vm.maritime.find(i => i.maritimeCode === item.portOfAuthority)
+        item['maritimeNameVN'] = lt.maritimeNameVN
+        return item
+      })
+    }
   },
   methods: {
     editCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.shipOwnerCode}})
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.departmentCode}})
     },
     delCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'xoa-danh-muc', id: item.shipOwnerCode}})
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'xoa-danh-muc', id: item.departmentCode}})
     },
     addCategory () {
       this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'them-danh-muc', id: 0}})
     },
-    search () {
+    infoCategory (item) {
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'chi-tiet-danh-muc', id: item.departmentCode}})
+    },
+    search() {
       this.pagesize = 10
       this.page = 1
-      if (typeof this.selectTaxCode == "undefined") {
-        this.selectTaxCode = ''
+      if (typeof this.selectMaritime == "undefined") {
+        this.selectMaritime = ''
       }
       let params = {
         categoryId: this.categoryId,
-        maritimeCode: this.selectMaritime,
-        // shipOwnerCode: this.selectShipOwnerCode,
-        taxCode: this.selectTaxCode,
-        companyName: this.selectCompanyName,
-        companyAddress: this.selectCompanyAddress,
-        telNo: this.selectTelNo,
+        departmentName: this.departmentName,
+        portOfAuthority: this.selectMaritime,
         start: 0,
         end: 10
-      }
-      this.$store.dispatch('category/searchCategoryListItems', params)
-        .then()
-    },
-    infoCategory (item) {
-      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'chi-tiet-danh-muc', id: item.shipOwnerCode}})
+      };
+      this.$store
+        .dispatch("category/searchCategoryListItems", params)
+        .then();
     },
     reportExel () {
       let params = {
@@ -280,23 +227,22 @@ export default {
       let vm = this
       let params = {
         categoryId: this.categoryId,
-        maritimeCode: this.selectMaritime,
-        // shipOwnerCode: this.selectShipOwnerCode,
-        taxCode: this.selectTaxCode,
-        companyName: this.selectCompanyName,
-        companyAddress: this.selectCompanyAddress,
-        telNo: this.selectTelNo,
+        departmentName: this.departmentName,
+        portOfAuthority: this.selectMaritime,
         start: config.page*config.pagesize - config.pagesize,
         end:  config.page*config.pagesize
       };
       this.$store
         .dispatch("category/searchCategoryListItems", params)
         .then();
-    }   
-  }
+    }
+  } 
 }
 </script>
+<style>
 
+
+</style>
 <style scoped>
 .v-input{
   font-size: 13px;

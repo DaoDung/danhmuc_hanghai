@@ -480,10 +480,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.form_ben_cang .v-input__slot {
-  border: 1px solid #949494;
-  border-bottom: 0px;
-}
-</style>

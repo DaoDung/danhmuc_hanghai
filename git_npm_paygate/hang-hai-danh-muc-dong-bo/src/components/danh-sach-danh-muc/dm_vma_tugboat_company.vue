@@ -203,16 +203,11 @@ export default {
       return this.$store.getters["category/maritimeCurrent"]
     },
     categoryList () {
-      let data = this.$store.getters["category/categoryListItems"]
-      data.map((item,index) =>{
-        if (true) {
-          item['stt']= index + 1
-        }
-      })
-      return data
+      return this.$store.getters["category/categoryListItems"]
     },
     link () {
-      let url = "http://10.21.201.75:8081/group/lanh-dao/quan-ly-thu-tuc-tau-bien?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=reportExel&p_p_cacheability=cacheLevelPage"
+      let originUrl = this.$store.getters["category/Url"]
+      let url = originUrl.reportExel
       let params = {
         reportId: this.categoryId,
         maritimeCode: this.selectMaritime,
@@ -229,7 +224,18 @@ export default {
     }
   },
   created () {
-   return this.$store.getters["category/categoryListItems"]
+      let vm = this
+      this.$nextTick( () => {
+        vm.$store.dispatch('category/getMaritime')
+          .then(res => {
+              vm.maritime = res.data
+          })
+        vm.$store.dispatch('category/getMaritimeCurrent')
+            .then(res => {
+            vm.selectMaritime = res.maritimeCode     
+            })
+      })
+
   },
   watch: {
   },
