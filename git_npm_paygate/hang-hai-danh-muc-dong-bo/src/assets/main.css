@@ -138,3 +138,7 @@ label {
 .v-input{
   font-size: 13px;
 }
+.v-text-field {
+    padding-top: 0px;
+    margin-top: 0px;
+}

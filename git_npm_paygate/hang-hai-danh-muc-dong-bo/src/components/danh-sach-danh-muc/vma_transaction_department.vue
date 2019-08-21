@@ -157,18 +157,29 @@ export default {
   },
   created () {
     let vm = this;
-    this.$nextTick(() => {
-      vm.$store.dispatch("category/getMaritime").then(
+    this.$nextTick(async () => {
+      vm.selectMaritime = vm.maritimeCurrent.maritimeCode
+      await vm.$store.dispatch("category/getMaritime").then(
         res => {
           vm.maritime = res.data;
+        });
+      let params = {
+        categoryId: vm.categoryId,
+        departmentName: vm.departmentName,
+        portOfAuthority: vm.selectMaritime,
+        start: 0,
+        end: 10
+      };
+      vm.$store
+        .dispatch("category/searchCategoryListItems", params)
+        .then(res => {
           vm.danhSach = vm.categoryList
           vm.danhSach.map(item => {
             let lt = vm.maritime.find(i => i.maritimeCode === item.portOfAuthority)
             item['maritimeNameVN'] = lt.maritimeNameVN
             return item
           })
-        }
-      );
+        });
     });
   },
   watch: {

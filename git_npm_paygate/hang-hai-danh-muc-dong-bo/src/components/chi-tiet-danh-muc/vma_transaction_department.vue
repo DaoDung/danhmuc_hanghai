@@ -119,7 +119,49 @@
         </v-layout>
       </v-container>
     </div>
-    <div id="danh-sach" v-if="this.$route.query.aticon !== 'them-danh-muc'">
+    <v-dialog
+      v-model="dialog"
+      width="428px"
+    >
+      <v-card>
+          <v-card-title>
+            <span class="headline">Thay đổi phòng ban</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Tên tài khoản" readonly v-model="userModel.firstName"></v-text-field><br>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field label="Địa chỉ email" readonly v-model="userModel.emailAddress"></v-text-field><br>
+                </v-col>
+                <v-col cols="12">
+                  <v-autocomplete
+                    label="Phòng ban"
+                    v-model="selectPhongBan"
+                    persistent-hint
+                    :items="danhSachPhongBan"
+                    item-text="departmentName"
+                    item-value="departmentCode" 
+                    height="15"   
+                      >
+                        <template v-slot:append-outer>
+
+                        </template>
+                  </v-autocomplete>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat text @click="dialog = false">Thoát</v-btn>
+            <v-btn color="blue darken-1" flat text @click="UpdateUser">Cập nhập</v-btn>
+          </v-card-actions>
+        </v-card>
+    </v-dialog>
+    <div id="danh-sach" v-if="this.$route.query.aticon === 'sua-danh-muc'">
       <v-flex xs12>
         <div class="title-chitiet text-md-center" style="padding-top: 5px; height: 20px;">
           <strong class="title-chitiet-danh-muc">Danh sách tài khoản</strong>
@@ -127,12 +169,12 @@
       </v-flex>
       <v-flex xs12>
         <v-container fluid grid-list-md>
-          <div class="tableEventList__class" style="width:90%;margin: 0 auto; overflow: hidden;">
+          <div class="tableEventList__class" style="width:70%;margin: 0 auto; overflow: hidden;">
             <v-container>
               <v-layout>
-                <v-flex xs7>
+                <v-flex xs12>
                   <v-layout wrap row>
-                    <v-flex xs7>
+                    <v-flex xs5>
                       <v-layout align-center>
                         <v-flex xs3>
                           <label>Phòng ban:</label>
@@ -165,70 +207,31 @@
                         >
                         <template slot="headers" scope="props">
                           <tr>
-                            <th style="width: 30px; padding: 0px 5px;">
-                              <v-checkbox
-                                primary
-                                hide-details
-                                @click.native="toggleAll"
-                                :input-value="props.all"
-                                :indeterminate="props.indeterminate"
-                              ></v-checkbox>
-                            </th>
                             <th v-for="header in props.headers" :key="header.text"
                             >
                               {{ header.text }}
                             </th>
+                            <th></th>
                           </tr>
                         </template>
                         <template slot="items" scope="props">
-                          <tr :active="props.selected" @click="props.selected = !props.selected">
-                            <td class="text-xs-right" style="width: 30px; padding: 0px 5px;">
-                              <v-checkbox
-                                primary
-                                hide-details
-                                :input-value="props.selected"
-                              ></v-checkbox>
-                            </td>
-                            <td class="text-xs-center">{{ props.index }}</td>
+                          <tr>
+                            <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                             <td class="text-xs-center">{{ props.item.emailAddress }}</td>
                             <td class="text-xs-center">{{ props.item.firstName }}</td>
+                            <td class="text-xs-center">{{ props.item.departmentName }}</td>
+                            <td class="text-xs-center"> <span @click="thayDoiPhongBan(props.item)" class="action-table"><strong>Thay đổi phòng ban</strong></span></td>
                           </tr>
                         </template>
                       </v-data-table>
                     </v-flex>
                   </v-layout> 
                 </v-flex>
-                <v-flex xs5>
-                  <v-card
-                    class="mx-auto"
-                    max-width="344"
-                    flat
-                  >
-                    <v-card-text>
-                      <label>Phòng ban:</label>
-                      <v-autocomplete
-                        v-model="selectPhongBan"
-                        persistent-hint
-                        :items="danhSachPhongBan"
-                        item-text="departmentName"
-                        item-value="departmentCode" 
-                        height="15"   
-                          >
-                            <template v-slot:append-outer>
-
-                            </template>
-                      </v-autocomplete>
-                    </v-card-text>
-                    <v-card-actions>
-                      <button  @click="ghiLai" class="btn-chi-tiet-danhmuc" style="height:26px;">Ghi lại</button>
-                    </v-card-actions>
-                  </v-card>
-                </v-flex>
               </v-layout>
             </v-container>
 
           </div>
-          <div class="text-xs-right layout wrap" style="width: 52%;margin-left: 67px;">
+          <div class="text-xs-right layout wrap" style="width: 70%;margin: 0 auto;">
             <div class="flex pagging-table px-2">
               <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination>
             </div>
@@ -246,6 +249,7 @@ export default {
   },
   data() {
     return {
+      dialog: false,
       selected: [],
       pagesize: 10,
       page: 1,
@@ -268,6 +272,16 @@ export default {
         transactionTypeVND: "",
         transactionTypeVND: ""
       },
+      userModel: {
+        departmentCode: "",
+        departmentName: "",
+        emailAddress: "",
+        firstName: "",
+        portCode: "",
+        screenName: "",
+        status: 0,
+        userId: 0
+      },
       headers: [
         {
           sortable: false,
@@ -282,6 +296,11 @@ export default {
         {
           sortable: false,
           text: "Tên tài khoản",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Phòng ban",
           align: "center"
         }
       ],
@@ -332,17 +351,27 @@ export default {
     }
   },
   methods: {
-    ghiLai () {
-      if(this.selected.length && this.selectPhongBan){
-        this.$store.dispatch('category/updateUserPort', { users: this.selected, departmentCode: this.selectPhongBan})
-        this.searchPhongBan = this.selectPhongBan
+    thayDoiPhongBan (item) {
+      this.dialog = true
+      this.userModel = item
+    },
+    async UpdateUser () {
+      if(this.selectPhongBan){
+        let vm = this
+        await this.$store.dispatch('category/updateUserPort', {user: this.userModel, departmentCode: this.selectPhongBan})
+        this.dialog = false
+        vm.$store
+          .dispatch("category/getUsers", {departmentCode: vm.searchPhongBan})
+          .then(res => {
+            vm.users = res;
+          });
       }
     },
-    toggleAll () {
-      if (this.selected.length) this.selected = []
-      else this.selected = this.users.slice()
-      console.log(this.selected)
-    },
+    // toggleAll () {
+    //   if (this.selected.length) this.selected = []
+    //   else this.selected = this.users.slice()
+    //   console.log(this.selected)
+    // },
     submit() {
       if (this.$route.query.aticon === "sua-danh-muc") {
         if (this.$refs.form.validate()) {
@@ -419,7 +448,7 @@ export default {
         vm.maritime = res.data;
       });
       this.$store
-        .dispatch("category/getDanhMuc", {categoryId: "VMA_TRANSACTION_DEPARTMENT"})
+        .dispatch("category/getDanhMuc", {categoryId: "VMA_TRANSACTION_DEPARTMENT", portOfAuthority: vm.maritimeCurrent.maritimeCode})
         .then(res => {
           this.danhSachPhongBan = res;
         });
@@ -448,8 +477,6 @@ export default {
             vm.transactionType = res;
           });
       } else {
-        console.log(vm.maritimeCurrent)
-        console.log(this.maritimeCurrent)
         vm.categoryModel.portOfAuthority = vm.maritimeCurrent.maritimeCode;
         vm.selectMaritime = vm.categoryModel.portOfAuthority;
         console.log()

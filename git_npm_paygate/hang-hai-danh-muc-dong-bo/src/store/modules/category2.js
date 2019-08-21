@@ -1,10 +1,7 @@
-import categoryApi from '@/api/category'
-const syncCatalog = RepositoryFactory.get('syncCatalog')
+import categoryApi from '@/repositories/RepositoryFactory'
+
 const state = {
   Url: {},
-  categoryModel: {},
-  categoryTableItems: [],
-  totalCategoryTableItems: 0,
   categoryListItems: [],
   Category: {},
   maritimeCurrent: {},
