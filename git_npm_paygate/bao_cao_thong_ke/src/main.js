@@ -8,4 +8,4 @@ new Vue({
   vuetify,
   store: store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#BaoCao-PhanMemNghiepVu')
