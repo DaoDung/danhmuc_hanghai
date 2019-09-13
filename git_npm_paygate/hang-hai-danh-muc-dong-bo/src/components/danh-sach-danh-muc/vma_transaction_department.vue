@@ -63,7 +63,7 @@
                 <td class="text-xs-center">{{ props.item.departmentCode}}</td>
                 <td class="text-xs-center">{{ props.item.departmentName}}</td>
                 <td class="text-xs-center">{{ props.item.maritimeNameVN }}</td>
-                <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                   <span @click="editCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Sửa</strong></span>
                   <span @click="delCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Xóa</strong></span>

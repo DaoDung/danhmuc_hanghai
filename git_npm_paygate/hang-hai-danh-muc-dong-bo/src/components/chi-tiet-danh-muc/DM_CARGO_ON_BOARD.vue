@@ -30,7 +30,7 @@
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly></v-text-field>
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

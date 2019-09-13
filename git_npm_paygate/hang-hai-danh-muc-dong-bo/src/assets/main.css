@@ -142,3 +142,25 @@ label {
     padding-top: 0px;
     margin-top: 0px;
 }
+#app table.v-table tbody td:first-child, table.v-table tbody td:not(:first-child), table.v-table tbody th:first-child, table.v-table tbody th:not(:first-child), table.v-table thead td:first-child, table.v-table thead td:not(:first-child), table.v-table thead th:first-child, table.v-table thead th:not(:first-child) {
+  padding: 0 8px!important;
+}
+
+#app input[type="text"], #app input[type="password"], #app input[type="file"], #app input[type="submit"], #app input[type="button"], #app input[type="reset"], #app select, #app textarea, #app .textarea, #app button {
+  background-image: none!important;
+  background-repeat: no-repeat;
+  border: none!important;
+  border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+  /* font: 1em Arial,Helvetica,Verdana,sans-serif; */
+  /* padding: 5px 1px; */
+}
+
+button.btn-danhmnuc:hover {
+  background: #0b72ba;
+  color: white;
+}
+
+button.btn-chi-tiet-danhmuc:hover{
+  background: #0b72ba;
+  color: #fff;
+}

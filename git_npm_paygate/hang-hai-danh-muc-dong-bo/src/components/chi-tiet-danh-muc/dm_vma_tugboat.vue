@@ -39,7 +39,7 @@
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -129,6 +129,7 @@
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     required
                     :rules="powerRules"
+                    
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -146,6 +147,7 @@
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     required
                     :rules="loaRules"
+                    
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -163,6 +165,7 @@
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     required
                     :rules="breadthRules"
+                    
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -180,6 +183,7 @@
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     required
                     :rules="displacementRules"
+                    
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -194,6 +198,7 @@
                   <v-text-field
                     v-model="categoryModel.vndUnitPrice"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -207,6 +212,7 @@
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.usdUnitPrice"
+                    
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
                   ></v-text-field>
@@ -244,9 +250,17 @@
   </div>
 </template>
 <script>
+import {VMoney} from 'v-money'
 export default {
+  directives: {money: VMoney},
   data() {
     return {
+      money: {
+        decimal: ',',
+        thousands: '.',
+        precision: 2,
+        masked: false
+      },
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
       shipNameRules: [v => !!v || "Chưa nhập tên tàu lai"],
       breadthRules: [v => !!v || "Chưa nhập chiều rộng lớn nhất "],

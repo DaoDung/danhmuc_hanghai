@@ -38,7 +38,7 @@
                   <label for>Thời điểm cập nhật:</label>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -138,6 +138,60 @@
               </v-layout>
             </v-flex>
             <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Lượng chiếm nước toàn tải:</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.dwt"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    
+                    :rules="dwtRules"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Chiều dài lớn nhất Lmax(m):</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.loa"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    
+                    :rules="loaRules"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Mớn nước thiết kế(m):</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.maxDraft"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    :rules="maxDraftRules"
+                    
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
               <v-layout>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ghi chú:</label>
@@ -168,7 +222,10 @@
   </div>
 </template>
 <script>
+import {VMoney} from 'v-money'
+
 export default {
+  directives: {money: VMoney},
   data() {
     return {
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
@@ -176,10 +233,19 @@ export default {
       portWharfNameRules: [v => !!v || "Chưa nhập tên Cầu cảng"],
       portRegionCodeRules: [v => !!v || "Chưa chọn Khu vực hàng hải"],
       portHarbourCodeRules: [v => !!v || "Chưa chọn Bến Cảng"],
+      dwtRules: [v => !!v || "Chưa nhập lượng chiếm nước toàn tải"],
+      loaRules: [v => !!v || "Chưa nhập chiều dài lớn nhất Lmax(m)"],
+      maxDraftRules: [v => !!v || "Chưa nhập mớn nước thiết kế(m)"],
       maritime: [],
       selectMaritime: "",
       portRegionCodeModel: "",
       btnText: "",
+      money: {
+        decimal: ',',
+        thousands: '.',
+        precision: 2,
+        masked: false
+      },
       categoryModel: {
         syncVersion: "",
         modifiedDate: "",
@@ -193,7 +259,10 @@ export default {
         portRegionCode: "",
         portCodeBC: "",
         portHarbourCode: "",
-        cityCode: ""
+        cityCode: "",
+        dwt: '',
+        loa: '',
+        maxDraft: ''
       },
       BenCang: [],
       KhuVucHangHai: []
@@ -279,7 +348,10 @@ export default {
         portWharfNameVN: this.categoryModel.portWharfName,
         note: this.categoryModel.note,
         portWharfCode: this.id,
-        syncVersion: this.categoryModel.syncVersion
+        syncVersion: this.categoryModel.syncVersion,
+        dwt: this.categoryModel.dwt,
+        loa: this.categoryModel.loa,
+        maxDraft: this.categoryModel.maxDraft
       };
 
       await this.$store
@@ -305,7 +377,10 @@ export default {
         note: this.categoryModel.note,
         portRegionCode: this.categoryModel.portRegionCode,
         portHarbourCode: this.categoryModel.portHarbourCode,
-        portWharfNameVN: this.categoryModel.portWharfName
+        portWharfNameVN: this.categoryModel.portWharfName,
+        dwt: this.categoryModel.dwt,
+        loa: this.categoryModel.loa,
+        maxDraft: this.categoryModel.maxDraft
       };
 
       await this.$store
@@ -337,6 +412,9 @@ export default {
             vm.categoryModel.portCodeBC = res.portCodeBC;
             vm.categoryModel.portHarbourCode = res.portHarbourCode;
             vm.categoryModel.syncVersion = res.syncVersion;
+            vm.categoryModel.dwt = res.dwt;
+            vm.categoryModel.loa = res.loa;
+            vm.categoryModel.maxDraft = res.maxDraft;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

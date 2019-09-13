@@ -133,9 +133,12 @@
                 <td class="text-xs-center">{{ props.item.portCodeBC}}</td>
                 <td class="text-xs-center">{{ props.item.portHarbourCode}}</td>
                 <td class="text-xs-center">{{ props.item.portRegionNameVN}}</td>
+                <td class="text-xs-center">{{ props.item.dwt}}</td>
+                <td class="text-xs-center">{{ props.item.loa}}</td>
+                <td class="text-xs-center">{{ props.item.maxDraft}}</td>
                 <td class="text-xs-center">{{ props.item.node}}</td>
                 <td class="text-xs-center"  :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
-                <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                   <span @click="editCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Sửa</strong></span>
                   <span @click="delCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Xóa</strong></span>
@@ -207,6 +210,24 @@ export default {
           text: 'Khu vực hàng hải',
           value: 'salary',
           align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Lượng chiếm lước toàn tải',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Chiều dài lớn nhất',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Mớn nước thiết kế(m)',
+          value: 'salary',
+          align: 'center'        
         },
         {
           sortable: false,

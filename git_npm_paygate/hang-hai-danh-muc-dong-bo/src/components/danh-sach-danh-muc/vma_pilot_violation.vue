@@ -57,7 +57,7 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="date"
-                        prepend-icon="event"
+                        
                         readonly
                         v-on="on"
                       ></v-text-field>
@@ -100,7 +100,7 @@
                 <td>{{ props.item.violationDate}}</td>
                 <td>{{ props.item.violationDescription}}</td>
                 <td>{{ props.item.troubleshooting}}</td>
-                <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                   <span @click="editCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Sửa</strong></span>
                   <span @click="delCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Xóa</strong></span>

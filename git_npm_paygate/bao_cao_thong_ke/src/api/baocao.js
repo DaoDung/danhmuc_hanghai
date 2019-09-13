@@ -19,7 +19,15 @@ export default {
   getMaritimeCurrent(url, query) {
     return Repository.get(`${url}`);
   },
-  getMaritimes(url, query) {
+  getMaritimes(url) {
     return Repository.get(`${url}`);
+  },
+  getVmaReportCategory(url, query){
+    let queries = {
+      start: -1,
+      end: -1
+    }
+    Object.assign(queries, query)
+    return Repository.get(`${url}`, {params: queries});
   }
 };

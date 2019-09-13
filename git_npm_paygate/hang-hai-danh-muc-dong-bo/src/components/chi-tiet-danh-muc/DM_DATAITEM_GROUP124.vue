@@ -30,7 +30,7 @@
                   <label for>Thời điểm cập nhật</label>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.validatedFrom" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.validatedFrom"  readonly
                   height="25"
                   ></v-text-field>
                 </v-flex>

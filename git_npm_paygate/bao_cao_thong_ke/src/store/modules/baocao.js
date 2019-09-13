@@ -22,41 +22,29 @@ const  getters = {
 const actions = {
   async getURLInit ({ commit }, queries) {
     return new Promise((resolve, reject) => {
-      let cb = (Url) => {
-        commit('setUrl', Url)
-        resolve(Url)   
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
       BaoCaoApi.getURLInit()
         .then(
           (res) => {
             const result = res.data
-            cb(result) 
+            commit('setUrl', result)
+            resolve(result)   
           }
         ).catch(function (error) {
-          errorCb(error)
+          reject(error)
         })
     })
   },
   async getMaritimeCurrent ({ commit, getters }, queries) {
     return new Promise((resolve, reject) => {
-      let cb = (MaritimeCurrent) => {
-        commit('setMaritimeCurrent', MaritimeCurrent)
-        resolve(MaritimeCurrent)
-      }
-      let errorCb = (error) => {
-        reject(error)
-      }
       let url = getters.Url.getMaritimeCurrent
       BaoCaoApi.getMaritimeCurrent(url)
         .then( res => {
           const result = res.data
-          cb(result) 
+          commit('setMaritimeCurrent', result)
+          resolve(result)
         })
         .catch( err => {
-          errorCb(err)
+          reject(err)
         })
     })
   }

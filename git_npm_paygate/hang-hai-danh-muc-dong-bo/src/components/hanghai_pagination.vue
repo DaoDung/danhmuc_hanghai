@@ -15,12 +15,12 @@
           <ul class="tiny-pagination" :class="customClass">
             <li class="page-item" :class="classFirstPage">
               <button @click.prevent="lastPageLast" class="pagination__navigation">
-                <i aria-hidden="true" class="material-icons icon">first_page</i>
+                <span>&lt;&lt;</span>
               </button>
             </li>
             <li class="page-item" :class="classFirstPage">
               <button @click.prevent="lastPage" class="pagination__navigation" style="border-left: 0;">
-                <i aria-hidden="true" class="material-icons icon">chevron_left</i>
+                <span>&lt;</span>
               </button>
             </li>
             <li class="page-item" style="margin-right: 0;">
@@ -30,12 +30,12 @@
             </li>
             <li class="page-item" :class="classLastPage" style="margin-right: 0;">
               <button  @click.prevent="nextPage" class="pagination__navigation" style="border-right: 0;">
-                <i aria-hidden="true" class="material-icons icon">chevron_right</i>
+                <span>&gt;</span>
               </button>
             </li>
             <li class="page-item" :class="classLastPage">
               <button @click.prevent="nextPageLast" class="pagination__navigation">
-                <i aria-hidden="true" class="material-icons icon">last_page</i>
+                <span>&gt;&gt;</span>
               </button>
             </li>
           </ul>

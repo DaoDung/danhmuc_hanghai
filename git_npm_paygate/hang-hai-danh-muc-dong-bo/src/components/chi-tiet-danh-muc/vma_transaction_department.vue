@@ -124,7 +124,7 @@
       width="428px"
     >
       <v-card>
-          <v-card-title>
+          <v-card-title style="background: #0b72ba; color: white;">
             <span class="headline">Thay đổi phòng ban</span>
           </v-card-title>
           <v-card-text>
@@ -156,12 +156,18 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat text @click="dialog = false">Thoát</v-btn>
-            <v-btn color="blue darken-1" flat text @click="UpdateUser">Cập nhập</v-btn>
+            <button
+              class="btn-chi-tiet-danhmuc"
+              @click="dialog = false"
+            >Thoát</button>
+            <button
+              class="btn-chi-tiet-danhmuc"
+              @click="UpdateUser"
+            >Cập nhập</button>
           </v-card-actions>
         </v-card>
     </v-dialog>
-    <div id="danh-sach" v-if="this.$route.query.aticon === 'sua-danh-muc'">
+    <div id="danh-sach" v-if="this.$route.query.aticon === 'sua-danh-muc' || this.$route.query.aticon === 'chi-tiet-danh-muc'">
       <v-flex xs12>
         <div class="title-chitiet text-md-center" style="padding-top: 5px; height: 20px;">
           <strong class="title-chitiet-danh-muc">Danh sách tài khoản</strong>
@@ -220,7 +226,7 @@
                             <td class="text-xs-center">{{ props.item.emailAddress }}</td>
                             <td class="text-xs-center">{{ props.item.firstName }}</td>
                             <td class="text-xs-center">{{ props.item.departmentName }}</td>
-                            <td class="text-xs-center"> <span @click="thayDoiPhongBan(props.item)" class="action-table"><strong>Thay đổi phòng ban</strong></span></td>
+                            <td class="text-xs-center"> <span @click="thayDoiPhongBan(props.item)" class="action-table" v-if="searchPhongBan === categoryModel.departmentCode"><strong>Thay đổi phòng ban</strong></span></td>
                           </tr>
                         </template>
                       </v-data-table>

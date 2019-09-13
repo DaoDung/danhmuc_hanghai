@@ -7,6 +7,7 @@
             <strong class="title-chitiet-danh-muc">Thông tin Tuyến luồng</strong>
           </div>
         </v-flex>
+        <br><br>
         <v-flex xs12>
           <v-form ref="form" lazy-validation class="form-chi-tiet-danh-muc">
             <v-flex xs12>
@@ -32,7 +33,7 @@
                   <label for>Thời điểm cập nhật:</label>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.validatedFrom" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.validatedFrom"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>

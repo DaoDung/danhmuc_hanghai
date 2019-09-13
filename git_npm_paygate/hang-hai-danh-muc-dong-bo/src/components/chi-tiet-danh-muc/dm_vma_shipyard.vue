@@ -45,7 +45,7 @@
                   <label for>Thời điểm cập nhật:</label>
                 </v-flex>
                 <v-flex xs12 md3>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -430,7 +430,7 @@ export default {
             vm.categoryModel.faxNo = res.faxNo;
             vm.categoryModel.remarks = res.remarks;
             vm.categoryModel.syncVersion = res.syncVersion;
-            vm.categoryModel.taxCodeModel = vm.categoryModel.taxCode
+            vm.taxCodeModel = vm.categoryModel.taxCode
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

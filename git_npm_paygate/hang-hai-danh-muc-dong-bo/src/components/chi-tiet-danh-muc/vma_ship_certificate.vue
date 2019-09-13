@@ -36,7 +36,7 @@
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>

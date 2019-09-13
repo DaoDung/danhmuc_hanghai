@@ -38,7 +38,7 @@
                 <td>{{ props.item.comment}}</td>
                 <td>{{ props.item.isExamined}}</td>
                 <td>{{ props.item.mandatory}}</td>
-                <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                 </td>              
               </tr>

@@ -48,7 +48,7 @@
                 <v-flex xs12 md3>
                   <v-text-field
                     v-model="categoryModel.validatedFrom"
-                    prepend-icon="event"
+                    
                     readonly
                     height="25"
                   ></v-text-field>
@@ -110,6 +110,7 @@ export default {
       maritime: [],
       selectMaritime: "",
       categoryModel: {
+        dataItemId: '',
         syncVersion: "",
         validatedFrom: "",
         maritimeCode: "",
@@ -172,7 +173,7 @@ export default {
     async editCategory() {
       let params = {
         categoryId: this.categoryId,
-        dataitemId: this.id,
+        dataitemId: this.categoryModel.dataItemId,
         name: this.categoryModel.name,
         node2: this.categoryModel.node2,
         code0: this.categoryModel.code0,
@@ -191,7 +192,7 @@ export default {
     async delCategory() {
       let params = {
         categoryId: this.categoryId,
-        dataitemId: this.id,
+        dataitemId: this.categoryModel.dataItemId,
         syncVersion: this.categoryModel.syncVersion
       };
 
@@ -233,7 +234,7 @@ export default {
         await this.$store
           .dispatch("category/getDetailCategory", params)
           .then(res => {
-            vm.categoryModel.dataitemId = res.dataItemId;
+            vm.categoryModel.dataItemId = res.dataItemId;
             vm.categoryModel.shortName = res.shortName;
             vm.categoryModel.name = res.name;
             vm.categoryModel.code0 = res.code0;

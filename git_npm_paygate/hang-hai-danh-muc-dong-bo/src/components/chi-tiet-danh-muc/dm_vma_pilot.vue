@@ -46,7 +46,7 @@
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="categoryModel.modifiedDate" prepend-icon="event" readonly
+                  <v-text-field v-model="categoryModel.modifiedDate"  readonly
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -169,7 +169,7 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="categoryModel.pilotBOD"
-                        prepend-icon="event"
+                        
                         readonly
                         v-on="on"
                         height="25"
@@ -206,7 +206,7 @@
                     <template v-slot:activator="{ on }">
                       <v-text-field
                         v-model="categoryModel.pilotCertificateDate"
-                        prepend-icon="event"
+                        
                         readonly
                         v-on="on"
                         height="25"

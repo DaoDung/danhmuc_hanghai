@@ -1,5 +1,4 @@
 import categoryApi from '@/api/category'
-const syncCatalog = RepositoryFactory.get('syncCatalog')
 const state = {
   Url: {},
   categoryModel: {},

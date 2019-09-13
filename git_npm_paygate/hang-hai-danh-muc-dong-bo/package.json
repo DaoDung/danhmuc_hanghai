@@ -8,18 +8,23 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@chenfengyuan/vue-number-input": "^1.1.1",
+    "@mdi/font": "^4.2.95",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
+    "v-money": "^0.8.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-i18n": "^8.11.2",
     "vue-loading-overlay": "^3.2.0",
     "vue-router": "^3.0.6",
     "vue-scroll": "^2.1.12",
+    "vue-the-mask": "^0.11.1",
     "vuetify": "^1.5.5",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",

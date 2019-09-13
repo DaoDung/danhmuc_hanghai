@@ -740,7 +740,7 @@ const hasServer = {
      }) 
   },
   getMaritime (query, cb, errorcb) {
-    axios.get(query.url)
+    axios.get(query.url + '&start=-1&end=-1')
     .then((res) => {
      const result = res.data
      cb(result) 

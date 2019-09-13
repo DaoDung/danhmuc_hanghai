@@ -49,7 +49,7 @@
                   <v-flex xs12 md3>
                     <v-text-field
                       v-model="categoryModel.modifiedDate"
-                      prepend-icon="event"
+                      
                       readonly
                       height="25"
                     ></v-text-field>

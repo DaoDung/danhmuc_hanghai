@@ -33,7 +33,7 @@
                 <td>{{ props.item.flagStateOfShip}}</td>
                 <td>{{ props.item.remarks}}</td>
                 <td>{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
-                <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                 </td>              
               </tr>

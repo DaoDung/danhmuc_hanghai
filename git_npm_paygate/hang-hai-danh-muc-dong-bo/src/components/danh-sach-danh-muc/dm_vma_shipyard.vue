@@ -105,7 +105,6 @@
     <v-flex xs12>
       <v-container fluid grid-list-md>
         <div class="tableEventList__class">
-          <div style="width:1500px;">
             <v-data-table
             id = "table_search"
             no-data-text = "Không có dữ liệu"
@@ -124,7 +123,7 @@
                   <td class="text-xs-center">{{ props.item.telNo}}</td>
                   <td class="text-xs-center">{{ props.item.faxNo}}</td>
                   <td class="text-xs-center" :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
-                  <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
+                  <td class="text-xs-center" style="width: 150px;padding-left: 0px;padding-right: 5px;">
                     <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
                     <span @click="editCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Sửa</strong></span>
                     <span @click="delCategory(props.item)" v-if="props.item.role" class="action-table"><strong>Xóa</strong></span>
@@ -132,7 +131,6 @@
                 </tr>
               </template>
             </v-data-table>
-          </div>
         </div>
         <div class="text-xs-right layout wrap" style="position: relative;">
           <div class="flex pagging-table px-2"> 
