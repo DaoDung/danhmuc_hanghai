@@ -23,7 +23,8 @@
                     :items="maritime"
                     item-text="cityCode"
                     item-value="maritimeCode" 
-                    height="15"   
+                    height="15"
+                    @change="search"  
                       >
                         <template v-slot:append-outer>
 
@@ -44,7 +45,8 @@
                     :items="khuVucHangHai"
                     item-text="portRegionNameVN"
                     item-value="portRegionCode" 
-                    height="15"   
+                    height="15"
+                    @change="search"  
                       >
                         <template v-slot:append-outer>
 
@@ -73,7 +75,8 @@
                     :items="BenCang"
                     item-text="portHarbourNameVN"
                     item-value="portHarbourCode" 
-                    height="15"   
+                    height="15"  
+                    @change="search"   
                   >
                         <template v-slot:append-outer>
 
@@ -98,6 +101,7 @@
                 <v-flex xs7>
                 <v-text-field
                   v-model="selectPortWharfNameVN"
+                  @change="search"  
                   height="15"
                 ></v-text-field>
                 </v-flex>

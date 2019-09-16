@@ -1,5 +1,47 @@
 <template>
   <div id="chi-tiet">
+      <v-alert v-if="isAlertThanhCong" type="success" max-width="200" class="alert-chitiet">
+        Thành công!
+      </v-alert>
+      <v-alert v-if="isAlertThatBai" type="error" max-width="200" class="alert-chitiet">
+        Thất bại!
+      </v-alert>
+      <v-dialog 
+        v-model="diaLogShip"
+        max-width="600"
+      >
+        <v-card>
+          <div id="dialog" style="width:100%; padding: 10px;">
+            <table style="width:100%;">
+                <thead>
+                  <tr>
+                    <th v-for="key in headers" :key="key.text">
+                      <span>{{key.text}}</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(key, index) in ships" :key="index">
+                    <td class="text-xs-center">{{ index + 1 }}</td>
+                    <td class="text-xs-center" style="width:150px;">{{ key.shipName }}</td>
+                    <td class="text-xs-center">{{ key.stateName }}</td>
+                    <td class="text-xs-center">{{ key.imoNumber }}</td>
+                    <td class="text-xs-center">{{ key.callSign }}</td>
+                    <td class="text-xs-center" style="">
+                      <span @click="chonTau(key)" class="action-table"><strong>Chọn</strong></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+
+          <v-card-actions>
+            <div class="flex-grow-1"></div>
+            <v-btn small color="primary" dark @click="diaLogShip = false">Thoát</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-flex xs12>
         <div style="width:100%; font-size: 25px; font-weight: 500; ">
           <span style="">Thông tin tai nạn</span>
@@ -9,6 +51,13 @@
         <v-col cols="6">
           <!--Tên tàu-->
           <v-flex xs12>
+            <v-layout>
+              <v-flex xs3>
+                  <v-btn small color="primary" dark @click="diaLogShip=true">Chọn tàu</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12>
             <v-layout align-center>
               <v-flex xs4 class="text-sm-left">
                 <label for>Tên tàu:</label>
@@ -16,7 +65,7 @@
               </v-flex>
               <v-flex xs8>
                 <v-text-field
-                  v-model="taiNanHangHai.nameOfShip"
+                  v-model="ship.shipName"
                 ></v-text-field>
               </v-flex>
             </v-layout>
@@ -30,7 +79,49 @@
               </v-flex>
               <v-flex xs8>
                 <v-text-field
-                  v-model="taiNanHangHai.flagStateOfShip"
+                  v-model="ship.flagStateOfShip"
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <!--Hô hiệu-->
+          <v-flex xs12>
+            <v-layout align-center>
+              <v-flex xs4 class="text-sm-left">
+                <label for>Hô hiệu:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs8>
+                <v-text-field
+                  v-model="ship.callSign"
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <!--Số IMO-->
+          <v-flex xs12>
+            <v-layout align-center>
+              <v-flex xs4 class="text-sm-left">
+                <label for>Số IMO:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs8>
+                <v-text-field
+                  v-model="ship.imoNumber"
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <!--Số ĐK-->
+          <v-flex xs12>
+            <v-layout align-center>
+              <v-flex xs4 class="text-sm-left">
+                <label for>Số đăng ký:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs8>
+                <v-text-field
+                  v-model="taiNanHangHai.registryNumber"
                 ></v-text-field>
               </v-flex>
             </v-layout>
@@ -141,34 +232,6 @@
               </v-flex>
             </v-layout>
           </v-flex>
-          <!--Số người chết & mất tích-->
-          <v-flex xs12>
-            <v-layout align-center>
-              <v-flex xs4 class="text-sm-left">
-                <label for>Số người chết & mất tích:</label>
-                <span class="red--text">*</span>
-              </v-flex>
-              <v-flex xs8>
-                <v-text-field
-                  v-model="taiNanHangHai.numberOfDead"
-                ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-          <!--Đơn vị điều tra tai nạn-->
-          <v-flex xs12>
-            <v-layout align-center>
-              <v-flex xs4 class="text-sm-left">
-                <label for>Đơn vị điều tra tai nạn:</label>
-                <span class="red--text">*</span>
-              </v-flex>
-              <v-flex xs8>
-                <v-text-field
-                   v-model="taiNanHangHai.investigationOffice"
-                ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-flex>
         </v-col>
         <v-col cols="6">
           <!--Số người bị thương-->
@@ -194,19 +257,6 @@
               <v-flex xs8>
                 <v-text-field
                    v-model="taiNanHangHai.remarksOfCargo"
-                ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-          <!--Chi phí sửa chữa-->
-          <v-flex xs12>
-            <v-layout align-center>
-              <v-flex xs4 class="text-sm-left">
-                <label for>Chi phí sửa chữa:</label>
-              </v-flex>
-              <v-flex xs8>
-                <v-text-field
-                  
                 ></v-text-field>
               </v-flex>
             </v-layout>
@@ -266,25 +316,57 @@
                 <span class="red--text">*</span>
               </v-flex>
               <v-flex xs8>
+                <v-autocomplete
+                    v-model="taiNanHangHai.portofAuthority"
+                    persistent-hint
+                    :items="cangVuHangHai"
+                    item-text="maritimeNameVN"
+                    item-value="maritimeCode"
+                  >
+                    <template v-slot:append-outer></template>
+                </v-autocomplete>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <!--Số người chết & mất tích-->
+          <v-flex xs12>
+            <v-layout align-center>
+              <v-flex xs4 class="text-sm-left">
+                <label for>Số người chết & mất tích:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs8>
                 <v-text-field
-                
+                  v-model="taiNanHangHai.numberOfDead"
                 ></v-text-field>
               </v-flex>
             </v-layout>
           </v-flex>
-          <!--IMO-->
+          <!--Đơn vị điều tra tai nạn-->
           <v-flex xs12>
             <v-layout align-center>
-              <v-flex xs4></v-flex>
-              <v-flex xs8><input type="checkbox" > Có IMO<br></v-flex>
-              <br>
+              <v-flex xs4 class="text-sm-left">
+                <label for>Đơn vị điều tra tai nạn:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs8>
+                <v-autocomplete
+                    v-model="taiNanHangHai.investigationOffice"
+                    persistent-hint
+                    :items="cangVuHangHai"
+                    item-text="maritimeNameVN"
+                    item-value="maritimeCode"
+                  >
+                    <template v-slot:append-outer></template>
+                </v-autocomplete>
+              </v-flex>
             </v-layout>
           </v-flex>
           <!--Có hoa tiêu dẫn tàu-->
           <v-flex xs12>
             <v-layout align-center>
               <v-flex xs4></v-flex>
-              <v-flex xs8><input type="checkbox" v-model="taiNanHangHai.pilotOnBoad"> Có hoa tiêu dẫn tàu<br></v-flex>
+              <v-flex xs8><input type="checkbox" v-model="pilotOnBoadModel"> Có hoa tiêu dẫn tàu<br></v-flex>
               <br>
               <br>
             </v-layout>
@@ -293,7 +375,7 @@
           <v-flex xs12>
             <v-layout align-center>
               <v-flex xs4></v-flex>
-              <v-flex xs8><input type="checkbox"> Có điều tra tai nạn<br></v-flex>
+              <v-flex xs8><input type="checkbox" v-model="makeInvestigationModel"> Có điều tra tai nạn<br></v-flex>
             </v-layout>
           </v-flex>
         </v-col>
@@ -339,17 +421,36 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <!--Ghi chú-->
+          <!--Tóm tắt vụ tại nạn-->
           <v-flex xs12>
             <v-layout align-center>
               <v-flex xs2 class="text-sm-left">
-                <label for>Ghi chú:</label>
+                <label for>Tóm tắt vụ tai nạn:</label>
                 <span class="red--text">*</span>
               </v-flex>
               <v-flex xs10>
                 <v-textarea
                   rows="2"
-                  
+                  v-model="taiNanHangHai.accidentBrief"
+                ></v-textarea>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <!--Kết luận sử lý và kiến nghị-->
+          <v-flex xs12>
+            <v-layout align-center>
+              <v-flex xs2 class="text-sm-left">
+                <label for>Kết luận xử lý và kiến nghị:</label>
+                <span class="red--text">*</span>
+              </v-flex>
+              <v-flex xs10>
+                <v-textarea
+                  rows="2"
+                  v-model="taiNanHangHai.accidentConlusion"
                 ></v-textarea>
               </v-flex>
             </v-layout>
@@ -359,7 +460,7 @@
       <v-row>
         <v-col cols="12">
           <v-flex xs12 class="text-lg-right">
-              <v-btn class="ma-2" color="primary">
+              <v-btn class="ma-2" color="primary" @click="submit">
                 {{btnText}}
               </v-btn >
               <v-btn class="ma-2" @click="quayLai" color="primary">
@@ -372,8 +473,12 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   data: (vm) => ({
+    isAlertThanhCong: false,
+    isAlertThatBai: false,
+    diaLogShip: false,
      btnText: '', 
      loaiTaiNan: [
        {
@@ -425,12 +530,45 @@ export default {
          value: '3'
        }
      ],
+     cangVuHangHai: [],
+     headers: [
+        {
+          sortable: false,
+          text: "STT",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Tên tàu",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Quốc tịch",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "IMO",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Hô hiệu",
+          align: "center"
+        }
+     ],
+     ships: [],
+     ship: {},
      ngayDieuTra: '',
      ngayTaiNan: '',
-     hanNopBaoCao: ''
+     hanNopBaoCao: '',
+     taiNanHangHai: {
+
+     }
   }),
   created() {
-    console.log(this.$route.query.action)
+    console.log('TaiNanHangHai:',this.taiNanHangHai)
     if (this.$route.query.action === "sua-tai-nan") {
       this.btnText = "Cập nhập";
     } 
@@ -440,16 +578,14 @@ export default {
     if (this.$route.query.action === "xoa-tai-nan") {
       this.btnText = "Xóa";
     }
-    this.ngayDieuTraFomated=this.formatDate(this.ngayDieuTra)
-    this.ngayTaiNanFomated= this.formatDate(this.ngayTaiNan)
-    this.hanNopBaoCaoFomated=this.formatDate(this.ngayDieuTra)
-    this.ngayDieuTra = this.taiNanHangHai.investigationDate
-    this.ngayTaiNan = this.taiNanHangHai.accidentTime
-    this.hanNopBaoCao = this.taiNanHangHai.accidentOfficialDate
+    this.getDetail()
   },
   computed: {
-    taiNanHangHai () {
-      return this.$store.getters["TaiNanHangHai/taiNanHangHai"]
+    // taiNanHangHai () {
+    //   return this.$store.getters["TaiNanHangHai/taiNanHangHai"]
+    // }
+    id () {
+      return this.$route.query.id
     }
   },
   watch: {
@@ -464,9 +600,102 @@ export default {
     hanNopBaoCao (val) {
       console.log('hanNopBaoCao change:',val)
       this.hanNopBaoCaoFomated = this.formatDate(val)
+    },
+    pilotOnBoadModel(){
+      return this.taiNanHangHai.pilotOnBoad === '1' ? true : false
+    } ,
+    makeInvestigationModel () {
+      return this.taiNanHangHai.makeInvestigation === '1' ? true : false
     }
   },
   methods: {
+    getDetail () {
+      let vm = this
+      this.$store.dispatch('TaiNanHangHai/getCangVuHangHai').then(
+        res => {
+          vm.cangVuHangHai = res
+          console.log("Cang Vu Hang Hai: ",vm.cangVuHangHai)
+        }
+      )
+      this.$store.dispatch('TaiNanHangHai/getShips').then(
+        res => {
+          vm.ships = res
+        }
+      )
+      if (this.$route.query.action !== 'them-tai-nan') {
+        let params = {
+          id: vm.id
+        }
+        this.$store.dispatch('TaiNanHangHai/getDetailVmaAccidentList', params).then(
+          res => {
+            vm.taiNanHangHai = res
+
+            vm.ngayDieuTra =  new Date(vm.taiNanHangHai.investigationDate).toISOString().substr(0, 10)
+            vm.ngayTaiNan =  new Date(vm.taiNanHangHai.accidentTime).toISOString().substr(0, 10)
+            vm.hanNopBaoCao =  new Date(vm.taiNanHangHai.accidentOfficialDate).toISOString().substr(0, 10)
+            vm.ngayDieuTraFomated=vm.formatDate(vm.ngayDieuTra)
+            vm.ngayTaiNanFomated= vm.formatDate(vm.ngayTaiNan)
+            vm.hanNopBaoCaoFomated=vm.formatDate(vm.ngayDieuTra)
+
+            vm.ship.shipName = vm.taiNanHangHai.nameOfShip
+            vm.ship.imoNumber = vm.taiNanHangHai.imoNumber
+            vm.ship.flagStateOfShip = vm.taiNanHangHai.flagStateOfShip
+            vm.ship.callSign =  vm.taiNanHangHai.callSign
+          }
+        )
+      } else {
+        vm.taiNanHangHai = {
+          id: '',
+          portofAuthority: '',
+          accidentCode: '',
+          numberOfDead: '',
+          acidentTime: '',
+          accidentRegion: '',
+          accidentBrief: '',
+          accidentConslusion: '',
+          accidentType: '',
+          accidentCriticalType: '',
+          nameOfShip: '',
+          accidentTime: '',
+          imoNumber: '',
+          callSign: '',
+          flagStateOfShip: '',
+          registryNumber: '',
+          decisionNo: '',
+          decisionDate: '',
+          decisionOrganization: '',
+          officialDate: '',
+          officiaNo: '',
+          officialPlace: '',
+          violationDate: '',
+          violationPartCode: '',
+          issueDate: '',
+          issueBy: '',
+          violationPartName: '',
+          violationPartAddress: '',
+          representative: '',
+          representativeTitle: '',
+          modifiedDate: '',
+          numberOfInjured: '',
+          investigationDate: '',
+          accidentOfficialDate: '',
+          pilotOnBoad: '0',
+          makeInvestigation: '0'
+        }
+
+        vm.ngayDieuTra = vm.taiNanHangHai.investigationDate
+        vm.ngayTaiNan = vm.taiNanHangHai.accidentTime
+        vm.hanNopBaoCao = vm.taiNanHangHai.accidentOfficialDate
+        vm.ngayDieuTraFomated=vm.formatDate(vm.ngayDieuTra)
+        vm.ngayTaiNanFomated= vm.formatDate(vm.ngayTaiNan)
+        vm.hanNopBaoCaoFomated=vm.formatDate(vm.ngayDieuTra)
+
+        vm.ship.shipName = vm.taiNanHangHai.nameOfShip
+        vm.ship.imoNumber = vm.taiNanHangHai.imoNumber
+        vm.ship.flagStateOfShip = vm.taiNanHangHai.flagStateOfShip
+        vm.ship.callSign =  vm.taiNanHangHai.callSign
+  }
+    },
     quayLai(){
       this.$router.push({name: "danh_sach_tai_nan"})
     },
@@ -481,7 +710,100 @@ export default {
 
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-    }, 
+    },
+    submit () {
+      if (this.$route.query.action === "sua-tai-nan") {
+        this.suaDanhMuc()
+      }
+      if (this.$route.query.action === "them-tai-nan") {
+        this.themTaiNan()
+      }
+    },
+    themTaiNan(){
+      console.log(this.ngayTaiNan)
+      let vm = this
+      for (let key in this.taiNanHangHai){
+        if(key === 'pilotOnBoad'){
+          this.taiNanHangHai[key] = this.pilotOnBoadModel ? '1' : '0'
+        }
+        if(key === 'makeInvestigation'){
+          this.taiNanHangHai[key] = this.makeInvestigationModel? '1' : '0'
+        }
+        if(key === 'accidentTime') {
+          this.taiNanHangHai[key] = this.ngayTaiNan
+        }
+        if(key === 'investigationDate') {
+          this.taiNanHangHai[key] = this.ngayDieuTra
+        }
+        if(key === 'accidentOfficialDate') {
+          this.taiNanHangHai[key] = this.hanNopBaoCao
+        }
+        if(key === 'nameOfShip') {
+          this.taiNanHangHai[key] = this.ship.shipName
+        }
+        if(key === 'imoNumber') {
+          this.taiNanHangHai[key] = this.ship.imoNumber
+        }
+        if(key === 'flagStateOfShip') {
+          this.taiNanHangHai[key] = this.ship.flagStateOfShip
+        }
+        if(key === 'callSign') {
+          this.taiNanHangHai[key] = this.ship.callSign
+        }
+
+      }
+      console.log('Truoc khi them Tai Nan:', this.taiNanHangHai)
+      this.$store.dispatch('TaiNanHangHai/themTaiNan', this.taiNanHangHai).then(
+        res => {
+          console.log('themTaiNan:', res)
+          if (res.status === 1) {
+            vm.isAlertThanhCong = true
+          }
+          else {
+            vm.isAlertThatBai=  true
+          }
+          setTimeout(()=>{
+            vm.isAlertThanhCong = false
+            vm.isAlertThatBai=  false
+          },2000)
+        }
+      );
+    },
+    suaDanhMuc(){
+      let vm = this
+      let params = Object.assign({}, this.taiNanHangHai);
+      console.log(this.taiNanHangHai.pilotOnBoad)
+      console.log(this.taiNanHangHai.makeInvestigation)
+      params['pilotOnBoad'] = this.taiNanHangHai.pilotOnBoad ? '1' : '0'
+      params['makeInvestigation'] = this.taiNanHangHai.makeInvestigation ? '1' : '0'
+      params['accidentTime'] = this.ngayTaiNan
+      params['investigationDate'] = this.ngayDieuTra
+      params['accidentOfficialDate'] = this.hanNopBaoCao
+      params['nameOfShip'] = this.ship.shipName
+      params['imoNumber'] = this.ship.imoNumber
+      params['flagStateOfShip'] =  this.ship.flagStateOfShip
+      params['callSign'] = this.ship.callSign
+      console.log('Truoc khi sua Tai Nan:', params)
+      this.$store.dispatch('TaiNanHangHai/suaTaiNan', params).then(
+        res => {
+          console.log('themTaiNan:', res)
+          if (res.status === 1) {
+            vm.isAlertThanhCong = true
+          }
+          else {
+            vm.isAlertThatBai=  true
+          }
+          setTimeout(()=>{
+            vm.isAlertThanhCong = false
+            vm.isAlertThatBai=  false
+          },2000)
+        }
+      );
+    },
+    chonTau(key) {
+      this.ship = key
+      this.diaLogShip = false
+    }
   }
 };
 </script>
@@ -514,5 +836,12 @@ export default {
   font-size: 14px;
     color: #3563c1;
     font-weight: 700;
+}
+.alert-chitiet{
+  position: fixed;
+  top:0;
+  right: 0;
+  box-shadow: -3px 3px 0px 2px #1fff0824;
+  z-index: 100;
 }
 </style>

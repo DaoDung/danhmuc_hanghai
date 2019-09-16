@@ -17,6 +17,7 @@
                     item-text="cityCode"
                     item-value="maritimeCode"
                     height="15"
+                    @change="search"
                       >
                         <template v-slot:append-outer>
 
@@ -34,6 +35,7 @@
                 <v-text-field
                   v-model="selectPilotCode"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>

@@ -16,7 +16,7 @@
                     item-text="cityCode"
                     item-value="maritimeCode"
                     width="30"
-                  
+                   @change="search"
                     height="15"
                   ></v-autocomplete>
                 </v-flex>
@@ -28,7 +28,7 @@
                   <label>Cảng biển hàng hải:</label>
                 </v-flex>
                 <v-flex xs8>
-                  <v-text-field v-model="selectPortCode" height="15"></v-text-field>
+                  <v-text-field v-model="selectPortCode" height="15"  @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -38,7 +38,7 @@
                   <label>Khu vực hàng hải:</label>
                 </v-flex>
                 <v-flex xs8>
-                  <v-text-field v-model="selectPortRegionNameVN" height="15"></v-text-field>
+                  <v-text-field v-model="selectPortRegionNameVN" height="15"  @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

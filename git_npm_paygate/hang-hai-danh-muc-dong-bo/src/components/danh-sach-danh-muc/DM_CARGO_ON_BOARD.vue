@@ -10,7 +10,7 @@
                   <label>Tên hàng hóa xếp dỡ:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="goodsTypeNameVN" height="15"></v-text-field>
+                  <v-text-field v-model="goodsTypeNameVN" height="15" @change="search"  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

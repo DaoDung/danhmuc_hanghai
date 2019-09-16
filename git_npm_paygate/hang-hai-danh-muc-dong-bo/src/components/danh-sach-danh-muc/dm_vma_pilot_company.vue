@@ -16,7 +16,8 @@
                     :items="maritime"
                     item-text="cityCode"
                     item-value="maritimeCode" 
-                    height="15"   
+                    height="15"
+                     @change="search"
                       >
                         <template v-slot:append-outer>
 
@@ -47,6 +48,7 @@
                 <v-text-field
                   v-model="selectPilotCompanyName"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -60,6 +62,7 @@
                 <v-text-field
                   v-model="selectCompanyAddress"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -73,6 +76,7 @@
                 <v-text-field
                   v-model="selectTelNo"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>

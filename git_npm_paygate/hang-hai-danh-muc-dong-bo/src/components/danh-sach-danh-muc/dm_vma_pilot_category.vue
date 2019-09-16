@@ -26,6 +26,7 @@
                 <v-text-field
                   v-model="selectPilotCategoryName"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>

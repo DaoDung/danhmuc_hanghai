@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <TaiNanHangHai/>
+      <TaiNanHangHai v-if="!isLoading"/>
     </v-content>
   </v-app>
 </template>
@@ -18,6 +18,16 @@ export default {
     isLoading:  false
   }),
   created(){
+    let vm = this
+    vm.isLoading = true
+    this.$nextTick(()=>{
+      vm.$store.dispatch('TaiNanHangHai/getUrlInit').then(
+        res => {
+          vm.isLoading = false
+          console.log('getUrlInit:', res)
+        }
+      );
+    })
   }
 };
 </script>

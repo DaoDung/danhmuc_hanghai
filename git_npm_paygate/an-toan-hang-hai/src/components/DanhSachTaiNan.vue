@@ -1,6 +1,12 @@
 <template>
   <div id="danh-sach">
     <v-layout row wrap>
+      <v-alert v-if="isAlertThanhCong" type="success" max-width="200" class="alert-chitiet">
+        Thành công!
+      </v-alert>
+      <v-alert v-if="isAlertThatBai" type="error" max-width="200" class="alert-chitiet">
+        Thất bại!
+      </v-alert>
       <v-dialog
         v-model="dialog"
         max-width="310"
@@ -80,10 +86,7 @@
                         @change="searchTaiNan"
                       ></v-text-field>
                     </td>
-                    
-                    <td class="td-search">
-                    </td>
-                    <!--Search số hiệu-->
+                    <!--Search hô hiệu-->
                     <td class="td-search">
                       <v-text-field
                         v-model="callSignSearch"
@@ -137,12 +140,6 @@
                         @change="searchTaiNan"
                       ></v-text-field>
                     </td>
-                     <!--Search chi phí sửa chữa-->
-                    <td class="td-search">
-                      <v-text-field
-                      
-                      ></v-text-field>
-                    </td>
                     <td class="td-search">
 
                     </td>
@@ -153,10 +150,17 @@
                     <td class="td-search">
                     </td>
                     <!--Search đơn vị báo cáo-->
-                    <td class="td-search">
-                      <v-text-field
-                      ></v-text-field>
-                    </td>
+                    <!-- <td class="td-search">
+                      <v-select
+                        v-model="portofAuthoritySearch"
+                        autocomplete
+                        :items="cangVuHangHai"
+                        return-object
+                        item-text="cityCode"
+                        item-value="maritimeCode"
+                        @change="searchTaiNan"
+                      ></v-select>
+                    </td> -->
                     <td class="td-search"></td>
                   </tr>
                   <tr v-for="(key, index) in danhSach" :key="index">
@@ -164,7 +168,6 @@
                     <td class="text-xs-center" style="width:150px;">{{ key.nameOfShip }}</td>
                     <td class="text-xs-center">{{ key.flagStateOfShip }}</td>
                     <td class="text-xs-center">{{ key.imoNumber }}</td>
-                    <td class="text-xs-center">Có</td>
                     <td class="text-xs-center">{{ key.callSign }}</td>
                     <td class="text-xs-center">{{ key.registryNumber }}</td>
                     <td class="text-xs-center" style="width:100px;">{{ key.accidentTime }}</td>
@@ -172,12 +175,11 @@
                     <td class="text-xs-center">{{ getLoaiMucDo(key.accidentCriticalType) }}</td>
                     <td class="text-xs-center">{{  key.numberOfDead }}</td>
                     <td class="text-xs-center">{{ key.numberOfInjured }}</td>
-                    <td class="text-xs-center"></td>
-                    <td class="text-xs-center">{{ key.pilotOnBoad ? 'Có':'Không' }}</td>
-                    <td class="text-xs-center" >{{ key.makeInvestigation ? 'Có' : 'Không' }}</td>
+                    <td class="text-xs-center">{{ key.pilotOnBoad === '1' ? 'Có':'Không' }}</td>
+                    <td class="text-xs-center" >{{ key.makeInvestigation === '1' ? 'Có' : 'Không' }}</td>
                     <td class="text-xs-center" style="width:100px;">{{ key.investigationDate }}</td>
                     <td class="text-xs-center" style="width:100px;">{{ key.accidentOfficialDate  }}</td>
-                    <td class="text-xs-center" style="width:150px;"></td>
+                    <!-- <td class="text-xs-center" style="width:150px;"></td> -->
                     <td class="text-xs-center" style="">
                       <span @click="sua(key)" class="action-table"><strong>Sửa</strong></span>
                       <span @click="xoa(key)" class="action-table"><strong>Xóa</strong></span>
@@ -246,6 +248,8 @@ export default {
     'tiny-pagination': TinyPagination,
   },
   data: () => ({
+    isAlertThanhCong: false,
+    isAlertThatBai: false,
       nameOfShipSearch: '',
       flagStateOfShipSearch: '',
       imoNumberSearch: '',
@@ -255,6 +259,7 @@ export default {
       accidentCriticalTypeSearch: '',
       numberOfDeadSearch: '',
       numberOfInjuredSearch: '',
+      portofAuthoritySearch: '',
       dialog: false,
       pagesize: 10,
       page: 1,
@@ -281,12 +286,7 @@ export default {
         },
         {
           sortable: false,
-          text: "Không có IMO",
-          align: "center"
-        },
-        {
-          sortable: false,
-          text: "Số hiệu",
+          text: "Hô hiệu",
           align: "center"
         },
         {
@@ -321,11 +321,6 @@ export default {
         },
         {
           sortable: false,
-          text: "Chi phí sửa chữa",
-          align: "center"
-        },
-        {
-          sortable: false,
           text: "Có hoa tiêu dẫn tàu",
           align: "center"
         },
@@ -344,11 +339,11 @@ export default {
           text: "Hạn nộp báo cáo",
           align: "center"
         },
-        {
-          sortable: false,
-          text: "Đơn vị báo cáo",
-          align: "center"
-        },
+        // {
+        //   sortable: false,
+        //   text: "Đơn vị báo cáo",
+        //   align: "center"
+        // },
         {
           sortable: false,
           text: "Thao tác",
@@ -400,7 +395,8 @@ export default {
           value: '3',
           text: 'Ít nghiêm trọng'
         }
-      ]
+      ],
+      cangVuHangHai: []
   }),
   computed: {
 
@@ -409,6 +405,7 @@ export default {
     let vm = this
     this.$nextTick(()=> {
       vm.getDanhSach()
+      vm.getCangVuHangHai()
     })
   },
   methods: {
@@ -418,6 +415,15 @@ export default {
         res => {
           vm.danhSach = res
           console.log(vm.danhSach)
+        }
+      )
+    },
+    getCangVuHangHai () {
+      let vm = this
+      this.$store.dispatch('TaiNanHangHai/getCangVuHangHai').then(
+        res => {
+          vm.cangVuHangHai = res
+          console.log("Cang Vu Hang Hai: ",vm.cangVuHangHai)
         }
       )
     },
@@ -466,43 +472,43 @@ export default {
       return nameAccidentCriticalType
     },
     them() {
-      let params = {
-        id: 0,
-        portofAuthority: '',
-        accidentCode: '',
-        numberOfDead: '',
-        acidentTime: '',
-        accidentRegion: '',
-        accidentBrief: '',
-        accidentConslusion: '',
-        accidentType: '',
-        accidentCriticalType: '',
-        nameOfShip: '',
-        accidentTime: '',
-        imoNumber: '',
-        callSign: '',
-        flagStateOfShip: '',
-        registryNumber: '',
-        decisionNo: '',
-        decisionDate: '',
-        decisionOrganization: '',
-        officialDate: '',
-        officiaNo: '',
-        officialPlace: '',
-        violationDate: '',
-        violationPartCode: '',
-        issueDate: '',
-        issueBy: '',
-        violationPartName: '',
-        violationPartAddress: '',
-        representative: '',
-        representativeTitle: '',
-        modifiedDate: '',
-        numberOfInjured: '',
-        investigationDate: '',
-        accidentOfficialDate: ''
-      }
-      this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', params)
+      // let params = {
+      //   id: '',
+      //   portofAuthority: '',
+      //   accidentCode: '',
+      //   numberOfDead: '',
+      //   acidentTime: '',
+      //   accidentRegion: '',
+      //   accidentBrief: '',
+      //   accidentConslusion: '',
+      //   accidentType: '',
+      //   accidentCriticalType: '',
+      //   nameOfShip: '',
+      //   accidentTime: '',
+      //   imoNumber: '',
+      //   callSign: '',
+      //   flagStateOfShip: '',
+      //   registryNumber: '',
+      //   decisionNo: '',
+      //   decisionDate: '',
+      //   decisionOrganization: '',
+      //   officialDate: '',
+      //   officiaNo: '',
+      //   officialPlace: '',
+      //   violationDate: '',
+      //   violationPartCode: '',
+      //   issueDate: '',
+      //   issueBy: '',
+      //   violationPartName: '',
+      //   violationPartAddress: '',
+      //   representative: '',
+      //   representativeTitle: '',
+      //   modifiedDate: '',
+      //   numberOfInjured: '',
+      //   investigationDate: '',
+      //   accidentOfficialDate: ''
+      // }
+      // this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', params)
       this.$router.push({name: "chi_tiet_tai_nan", query: {action: 'them-tai-nan'}});
     },
     xoa(item) {
@@ -510,34 +516,61 @@ export default {
       this.item = item
     },
     xoaItem () {
-      this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', )
+      let vm = this
+      this.$store.dispatch('TaiNanHangHai/xoaTaiNan', this.item).then(
+        res => {
+          vm.dialog = false
+          console.log('themDanhMuc:', res)
+          vm.getDanhSach()
+          if (res.status === 1) {
+            vm.isAlertThanhCong= true
+          } else {
+            vm.isAlertThatBai= true
+          }
+          setTimeout(()=>{
+            vm.isAlertThanhCong = false
+            vm.isAlertThatBai= false
+          },2000)
+        }
+      );
     },
     sua(key) {
-      this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', key)
-      this.$router.push({name: "chi_tiet_tai_nan", query: {action: 'sua-tai-nan'}});
+      //this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', key)
+      this.$router.push({name: "chi_tiet_tai_nan", query: {action: 'sua-tai-nan', id: key.id}});
     },
     paggingData (config) {
       this.pagesize = config.pagesize
       this.page = config.page
       let vm = this
       let params = {
-        
+        nameOfShip: this.nameOfShipSearch,
+        flagStateOfShip: this.flagStateOfShipSearch,
+        imoNumber: this.imoNumberSearch,
+        callSign: this.callSignSearch,
+        registryNumber: this.registryNumberSearch,
+        accidentType: this.accidentTypeSearch.value,
+        accidentCriticalType: this.accidentCriticalTypeSearch.value,
+        numberOfDead: this.numberOfDeadSearch,
+        numberOfInjured: this.numberOfInjuredSearch,
       };
       this.$store
         .dispatch("category/getDanhSach", params)
         .then();
     },
     searchTaiNan () {
+      let vm = this
       this.pagesize = 10
       this.page = 1
+      console.log(this.accidentTypeSearch)
+      console.log(this.accidentCriticalTypeSearch)
       const params = {
         nameOfShip: this.nameOfShipSearch,
         flagStateOfShip: this.flagStateOfShipSearch,
         imoNumber: this.imoNumberSearch,
         callSign: this.callSignSearch,
         registryNumber: this.registryNumberSearch,
-        accidentType: this.accidentTypeSearch,
-        accidentCriticalType: this.accidentCriticalTypeSearch,
+        accidentType: this.accidentTypeSearch.value,
+        accidentCriticalType: this.accidentCriticalTypeSearch.value,
         numberOfDead: this.numberOfDeadSearch,
         numberOfInjured: this.numberOfInjuredSearch,
       }
@@ -557,32 +590,32 @@ export default {
   padding: 0 20px;
 }
 
-#danh-sach table {
+#danh-sach table, #dialog table {
 
   border-radius: 3px;
   background-color: #fff;
   overflow-x: auto;
-  border-spacing: 0;
+  border-spacing: 1px;
   border-right: 1px solid #ddd;
   border-top: 1px solid #ddd;
 }
 
-#danh-sach th {
+#danh-sach th, #dialog th {
   background-color: #3563c1!important;
   border-bottom: 1px solid #ddd;
   color: #fff;
   font-size: 13px;
 }
 
-#danh-sach td {
+#danh-sach td, #dialog td {
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
   font-size: 13px;
 }
 
-#danh-sach th,#danh-sach td {
+#danh-sach th,#danh-sach td, #dialog th, #dialog td {
   padding: 5px 10px;
-  border-left: 0.5px solid #ddd;;
+  border-left: 0.5px solid #ddd;
 }
 .td-search {
 

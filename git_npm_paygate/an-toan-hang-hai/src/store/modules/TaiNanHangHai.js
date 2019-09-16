@@ -41,7 +41,40 @@ const actions = {
             let errorCb = (error) => {
                 reject(error)
             }
-            TaiNanHangHai.getDanhSach( {url: getters.url.getdanhsach, params: queries}, cb, errorCb)
+            TaiNanHangHai.getDanhSach( {url: getters.url.getVmaAccidentList, params: queries}, cb, errorCb)
+        })
+    },
+    async getCangVuHangHai ({ commit, getters }, queries) {
+        return new Promise((resolve, reject) => {
+            let cb = (maritimes) => {
+                resolve(maritimes)
+            }
+            let errorCb = (error) => {
+                reject(error)
+            }
+            TaiNanHangHai.getCangVuHangHai( {url: getters.url.getMaritimes, params: queries}, cb, errorCb)
+        })
+    },
+    async getDetailVmaAccidentList ({ commit, getters }, queries) {
+        return new Promise((resolve, reject) => {
+            let cb = (accidentList) => {
+                resolve(accidentList)
+            }
+            let errorCb = (error) => {
+                reject(error)
+            }
+            TaiNanHangHai.getDetailVmaAccidentList( {url: getters.url.getDetailVmaAccidentList, params: queries}, cb, errorCb)
+        })
+    },
+    async getShips ({ commit, getters }, queries) {
+        return new Promise((resolve, reject) => {
+            let cb = (ships) => {
+                resolve(ships)
+            }
+            let errorCb = (error) => {
+                reject(error)
+            }
+            TaiNanHangHai.getShips( queries , cb, errorCb)
         })
     },
     async getMaritimeCurrent ({ commit, getters }, queries) {
@@ -64,7 +97,7 @@ const actions = {
             let errorCb = (error) => {
                 reject(error)
             }
-            TaiNanHangHai.themTaiNan({url: getters.url.themTaiNan, params: queries}, cb, errorCb)
+            TaiNanHangHai.themTaiNan({url: getters.url.updateVmaAccidentList, params: queries}, cb, errorCb)
         })
     },
     async xoaTaiNan ({getters}, queries) {
@@ -75,7 +108,7 @@ const actions = {
             let errorCb = (error) => {
                 reject(error)
             }
-            TaiNanHangHai.xoaTaiNan({url: getters.url.xoaTaiNan, params: queries}, cb, errorCb)
+            TaiNanHangHai.xoaTaiNan({url: getters.url.updateVmaAccidentList, params: queries}, cb, errorCb)
         })
     },
     async suaTaiNan ({getters}, queries) {
@@ -86,7 +119,7 @@ const actions = {
             let errorCb = (error) => {
                 reject(error)
             }
-            TaiNanHangHai.suaTaiNan({url: getters.url.suaTaiNan, params: queries}, cb, errorCb)
+            TaiNanHangHai.suaTaiNan({url: getters.url.updateVmaAccidentList, params: queries}, cb, errorCb)
         })
     },
     setTaiNanHangHai ({ commit,  }, queries) {

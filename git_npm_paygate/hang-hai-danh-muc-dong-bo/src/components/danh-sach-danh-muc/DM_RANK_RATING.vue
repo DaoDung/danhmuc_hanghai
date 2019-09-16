@@ -10,7 +10,7 @@
                   <label>Chức danh thuyền viên:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="rankNameVN"  height="15"></v-text-field>
+                  <v-text-field v-model="rankNameVN"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -20,7 +20,7 @@
                   <label>Tên chức danh thuyền viên (Tiếng Anh):</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="rankName"  height="15"></v-text-field>
+                  <v-text-field v-model="rankName"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

@@ -16,7 +16,8 @@
                     :items="maritime"
                     item-text="cityCode"
                     item-value="maritimeCode" 
-                    height="15"   
+                    height="15"
+                     @change="search"
                       >
                         <template v-slot:append-outer>
 
@@ -44,7 +45,8 @@
                     :items="tugBoatCompany"
                     item-text="tugboatCompanyName"
                     item-value="tugboatCompanyCode" 
-                    height="15"   
+                    height="15"
+                     @change="search" 
                       >
                         <template v-slot:append-outer>
 
@@ -62,6 +64,7 @@
                 <v-text-field
                   v-model="selectShipName "
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -75,6 +78,7 @@
                 <v-text-field
                   v-model="selectPower "
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
                   <span>:</span>
@@ -82,6 +86,7 @@
                 <v-text-field
                   v-model="selectPower2 "
                   height="15"
+                  @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>

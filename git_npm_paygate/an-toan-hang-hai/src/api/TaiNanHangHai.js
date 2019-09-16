@@ -130,7 +130,10 @@ window._danhSachTaiNan = [
 const hasClient = {
     getUrlInit(query, cb, errorCb){
         const url = {
-            getDanhSach: 'asdakjdakslsa'
+            getDanhSach: 'getDanhSach',
+            themTaiNan: 'themTaiNan',
+            xoaTaiNan: 'xoaTaiNan',
+            suaTaiNan: 'suaTaiNan',
         }
         setTimeout(() => cb(url), 100)
     },
@@ -147,6 +150,153 @@ const hasClient = {
             maritimeNameVN: 'Cảng vụ hải Phòng'
         }
         setTimeout(() => cb(resuls), 100)
+    },
+    themTaiNan (query, cb, errorCb) {
+        let result = {}
+        for (let key in  query.params) {
+            if (key === 'id') {
+                result[key]= Math.floor(Math.random() * 10000) + 1
+            }
+            else {
+                result[key] = query.params[key]
+            }
+        }
+        window._danhSachTaiNan.push(result)
+        setTimeout(() => cb(window._danhSachTaiNan), 100)
+    },
+    suaTaiNan (query, cb, errorCb) {
+        let selected = window._danhSachTaiNan.find(item => item.id === query.params.id)
+        window._danhSachTaiNan.splice(window._danhSachTaiNan.indexOf(selected), 1)
+        window._danhSachTaiNan.push(query.params)
+        setTimeout(() => cb(window._danhSachTaiNan), 100)
+    },
+    xoaTaiNan (query, cb, errorCb) {
+        let selected = window._danhSachTaiNan.find(item => item.id === query.params.id)
+        window._danhSachTaiNan.splice(window._danhSachTaiNan.indexOf(selected), 1)
+        setTimeout(() => cb(window._danhSachTaiNan), 100)
     }
 }
-export default hasClient
+const hasServer = {
+    getUrlInit(query, cb, errorCb){
+        axios.get(endPoit)
+            .then((res) => {
+                const result = res.data
+                cb(result) 
+            })
+            .catch(function (error) {
+                errorCb(error)
+            })
+    },
+    getDanhSach(query, cb, errorCb){
+        let Url = query.url
+        for (const key in query.params) {
+          if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+            Url += '&' + key + '=' + query.params[key]
+          }
+        }
+        axios.get(Url)
+         .then((res) => {
+          const result = res.data
+          cb(result) 
+         })
+         .catch(function (error) {
+            errorCb(error)
+         })
+    },
+    getCangVuHangHai (query, cb, errorcb) {
+        axios.get(query.url + '&start=-1&end=-1')
+        .then((res) => {
+         const result = res.data.data
+         cb(result) 
+        })
+        .catch(function (error) {
+         errorcb(error)
+        }) 
+    },
+    getMaritimeCurrent(query, cb, errorCb){
+        axios.get(query.url)
+        .then((res) => {
+         const result = res.data
+         cb(result) 
+        })
+        .catch(function (error) {
+            errorCb(error)
+        }) 
+    },
+    themTaiNan (query, cb, errorCb) {
+        let Url = query.url + '&LAN_CAP_MOI_DU_LIEU=LAN_CAP_MOI_DU_LIEU'
+        for (const key in query.params) {
+          if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+            Url += '&' + key + '=' + query.params[key]
+          }
+        }
+        axios.get(Url)
+         .then((res) => {
+          const result = res.data
+          cb(result) 
+         })
+         .catch(function (error) {
+            errorCb(error)
+        }) 
+    },
+    suaTaiNan (query, cb, errorCb) {
+        let Url = query.url + '&LAN_SUA_DU_LIEU=LAN_SUA_DU_LIEU'
+        for (const key in query.params) {
+          if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+            Url += '&' + key + '=' + query.params[key]
+          }
+        }
+        axios.get(Url)
+         .then((res) => {
+          const result = res.data
+          cb(result) 
+         })
+         .catch(function (error) {
+            errorCb(error)
+         })  
+    },
+    xoaTaiNan (query, cb, errorCb) {
+        let Url = query.url + '&LAN_XOA_DU_LIEU=LAN_XOA_DU_LIEU'
+        for (const key in query.params) {
+          if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+            Url += '&' + key + '=' + query.params[key]
+          }
+        }
+        axios.get(Url)
+         .then((res) => {
+          const result = res.data
+          cb(result) 
+         })
+         .catch(function (error) {
+            errorCb(error)
+         })
+    },
+    getShips (query, cb, errorCb) {
+        let url = '?p_p_id=vma_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=vma_ship_ship&p_p_cacheability=cacheLevelPage&start=-1&end=-1&shipBoat=SHIP'
+        axios.get(url)
+        .then((res) => {
+         const result = res.data.data
+         cb(result) 
+        })
+        .catch(function (error) {
+           errorCb(error)
+        }) 
+    },
+    getDetailVmaAccidentList (query, cb, errorCb) {
+        let Url = query.url
+        for (const key in query.params) {
+          if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+            Url += '&' + key + '=' + query.params[key]
+          }
+        }
+        axios.get(Url)
+         .then((res) => {
+          const result = res.data
+          cb(result) 
+         })
+         .catch(function (error) {
+            errorCb(error)
+         })
+    },
+}
+export default hasServer

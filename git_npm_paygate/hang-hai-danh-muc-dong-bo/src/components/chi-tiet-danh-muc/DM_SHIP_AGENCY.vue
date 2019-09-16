@@ -4,15 +4,15 @@
       <v-layout row wrap>
         <v-flex xs12>
           <div class="title-chitiet">
-            <strong class="title-chitiet-danh-muc">Thông tin Đại lý chủ tàu</strong>
+            <strong class="title-chitiet-danh-muc">Thông tin Đại lý</strong>
           </div>
         </v-flex>
         <v-flex xs12>
-          <form class="form-chi-tiet-danh-muc">
+          <v-form ref="form" lazy-validation class="form-chi-tiet-danh-muc">
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Mã mục đại lý:</label>
+                  <label for>Mã đại lý(MST):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md3>
@@ -20,6 +20,8 @@
                     v-model="categoryModel.shipAgencyCode"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
+                    required
+                    :rules="shipAgencyCodeRules"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -47,21 +49,8 @@
                     v-model="categoryModel.shipAgencyNameVN"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
-                  ></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex xs12>
-              <v-layout align-center>
-                <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Tên đại lý:</label>
-                  <span class="red--text">(*)</span>
-                </v-flex>
-                <v-flex xs12 md8>
-                  <v-text-field
-                    v-model="categoryModel.shipAgencyNameVN"
-                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    height="25"
+                    required
+                    :rules="shipAgencyNameVNRules"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -77,6 +66,8 @@
                     v-model="categoryModel.addressVN"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
+                    required
+                    :rules="addressVNRules"             
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -91,6 +82,7 @@
                     v-model="categoryModel.phone"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
+                    :rules="phoneRules"  
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -119,6 +111,7 @@
                     v-model="categoryModel.email"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
+                    :rules="emailRules" 
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -151,7 +144,7 @@
                 </v-flex>
               </v-layout>
             </v-flex>
-          </form>
+          </v-form>
         </v-flex>
         <v-flex xs12 class="text-lg-right">
           <button
@@ -171,13 +164,18 @@
 export default {
   data() {
     return {
-      date: new Date().toISOString().substr(0, 10),
-      menu: false,
-      modal: false,
-      menu2: false,
       btnText: "",
+      shipAgencyCodeRules: [v => !!v || "Chưa nhập mã đại lý(MST)", v => {
+        if(v.length < 10){
+          return "Mã đại lý (MST) phải ít nhất 10 ký tự"
+        }
+        return true
+      }],
+      shipAgencyNameVNRules: [v => !!v || "Chưa nhập tên đại lý"],
+      addressVNRules: [v => !!v || "Chưa địa chỉ"],
+      phoneRules: [v => /((09|03|07|08|05)+([0-9]{8})\b)/g.test(v) || 'Số điện thoại không hợp lệ'],
+      emailRules: [ v => /.+@.+/.test(v) || 'Email không hợp lệ'],
       categoryModel: {
-        syncVersion: "",
         modifiedDate: "",
         shipAgencyCode: "",
         shipAgencyNameVN: "",
@@ -185,8 +183,9 @@ export default {
         phone: "",
         fax: "",
         email: "",
-        representative1: "",
-        representativeTitle1: ""
+        representative1: '',
+        representativeTitle1: '',
+        syncVersion: '',
       }
     };
   },
@@ -200,32 +199,46 @@ export default {
   },
   created() {
     if (this.$route.query.aticon === "sua-danh-muc") {
-      this.btnText = "Cập nhập bến cảng";
+      this.btnText = "Cập nhập đại lý";
     } else if (this.$route.query.aticon === "them-danh-muc") {
-      this.btnText = "Thêm mới bến cảng";
+      this.btnText = "Thêm mới đại lý";
     } else if (this.$route.query.aticon === "xoa-danh-muc") {
-      this.btnText = "Đánh dấu xóa bến cảng";
+      this.btnText = "Đánh dấu xóa đại lý";
     }
   },
   mounted() {
     this.getDetailCategory();
   },
   methods: {
+    submit() {
+      if (this.$route.query.aticon === "sua-danh-muc") {
+        if (this.$refs.form.validate()) {
+          this.editCategory();
+        }
+      } else if (this.$route.query.aticon === "them-danh-muc") {
+        if (this.$refs.form.validate()) {
+          this.addCategory();
+        }
+      } else if (this.$route.query.aticon === "xoa-danh-muc") {
+        this.delCategory();
+      }
+    },
     back() {
       this.$router.push({
         path: "/danh-sach-danh-muc",
         query: { categoryId: this.$route.query.categoryId }
       });
     },
-    getDetailCategory() {
+    async getDetailCategory() {
       let vm = this;
       if (this.$route.query.aticon !== "them-danh-muc") {
         let params = {
           categoryId: this.categoryId,
           shipAgencyCode: this.id
         };
-        this.$store.dispatch("category/getDetailCategory", params).then(
+        await this.$store.dispatch("category/getDetailCategory", params).then(
           res => {
+
             vm.categoryModel.shipAgencyCode = res.shipAgencyCode;
             vm.categoryModel.shipAgencyNameVN = res.shipAgencyNameVN;
             vm.categoryModel.addressVN = res.addressVN;
@@ -234,6 +247,7 @@ export default {
             vm.categoryModel.email = res.email;
             vm.categoryModel.representative1 = res.representative1;
             vm.categoryModel.representativeTitle1 = res.representativeTitle1;
+            vm.categoryModel.syncVersion = res.syncVersion;
 
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
@@ -252,14 +266,14 @@ export default {
           error => {}
         );
       } else {
-        vm.categoryModel.shipAgencyCode = "";
-        vm.categoryModel.shipAgencyNameVN = "";
-        vm.categoryModel.addressVN = "";
-        vm.categoryModel.phone = "";
-        vm.categoryModel.fax = "";
-        vm.categoryModel.email = "";
-        vm.categoryModel.representative1 = "";
-        vm.categoryModel.representativeTitle1 = "";
+        // vm.categoryModel.shipAgencyCode = "";
+        // vm.categoryModel.shipAgencyNameVN = "";
+        // vm.categoryModel.addressVN = "";
+        // vm.categoryModel.phone = "";
+        // vm.categoryModel.fax = "";
+        // vm.categoryModel.email = "";
+        // vm.categoryModel.representative1 = "";
+        // vm.categoryModel.representativeTitle1 = "";
         let date = new Date();
         vm.categoryModel.modifiedDate =
           date.getDate() +
@@ -272,6 +286,67 @@ export default {
           ":" +
           (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
       }
+    },
+    async editCategory() {
+      let params = {
+        categoryId: this.categoryId,
+        shipAgencyCode: this.categoryModel.shipAgencyCode,
+        shipAgencyNameVN: this.categoryModel.shipAgencyNameVN,
+        phone: this.categoryModel.phone,
+        fax: this.categoryModel.fax,
+        email: this.categoryModel.email,
+        addressVN: this.categoryModel.addressVN,
+        representative1: this.categoryModel.representative1,
+        representativeTitle1: this.categoryModel.representativeTitle1,
+        syncVersion: this.categoryModel.syncVersion
+      };
+      await this.$store
+        .dispatch("category/editCategoryListItems", params)
+        .then();
+      this.$router.push({
+        path: "/danh-sach-danh-muc",
+        query: { categoryId: this.$route.query.categoryId }
+      });
+    },
+    async delCategory() {
+      let params = {
+        categoryId: this.categoryId,
+        shipAgencyCode: this.categoryModel.shipAgencyCode,
+        // shipAgencyNameVN: this.categoryModel.shipAgencyNameVN,
+        // phone: this.categoryModel.phone,
+        // fax: this.categoryModel.fax,
+        // email: this.categoryModel.email
+        // addressVN: this.categoryModel.addressVN
+        syncVersion: this.categoryModel.syncVersion
+      };
+      await this.$store
+        .dispatch("category/deleteCategoryListItems", params)
+        .then();
+      this.$router.push({
+        path: "/danh-sach-danh-muc",
+        query: { categoryId: this.$route.query.categoryId }
+      });
+    },
+    async addCategory() {
+      let params = {
+        categoryId: this.categoryId,
+        shipAgencyCode: this.categoryModel.shipAgencyCode,
+        shipAgencyNameVN: this.categoryModel.shipAgencyNameVN,
+        phone: this.categoryModel.phone,
+        fax: this.categoryModel.fax,
+        email: this.categoryModel.email,
+        addressVN: this.categoryModel.addressVN,
+        representative1: this.categoryModel.representative1,
+        representativeTitle1: this.categoryModel.representativeTitle1,
+      };
+
+      await this.$store
+        .dispatch("category/addCategoryListItems", params)
+        .then();
+      this.$router.push({
+        path: "/danh-sach-danh-muc",
+        query: { categoryId: this.$route.query.categoryId }
+      });
     }
   }
 };

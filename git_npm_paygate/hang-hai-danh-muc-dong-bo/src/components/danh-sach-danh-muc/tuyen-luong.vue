@@ -16,7 +16,7 @@
                     item-text="cityCode"
                     item-value="maritimeCode"
                     width="30"
-                  
+                    @change="search"
                     height="15"
                   ></v-autocomplete>
                 </v-flex>
@@ -31,6 +31,7 @@
                   <v-text-field
                     v-model="name"
                     height="15"
+                    @change="search"
                   ></v-text-field> 
                 </v-flex>
               </v-layout>

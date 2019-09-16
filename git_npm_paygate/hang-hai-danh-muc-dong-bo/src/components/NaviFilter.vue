@@ -1,8 +1,8 @@
 <template>
   <div id="bang-danh-muc">
-    <div class="row-header" id="title-bang-danh-muc" style="height: 38px; overflow: hidden;">
+    <!-- <div class="row-header" id="title-bang-danh-muc" style="height: 38px; overflow: hidden;">
       <div class="background-triangle-big view_tp_pdf">Bảng danh mục</div>
-    </div>
+    </div> -->
     <div class="base-list">
       <ul v-for="(item, index) in catalogTableItems" :key="'v-list-tile'+index" >
         <li  @click="getListCategory(item)"
@@ -33,7 +33,8 @@ export default {
         "DM_VMA_SHIPYARD",
         "DM_VMA_SECURITY_OFFICE",
         "DM_VMA_SHIP_TYPE",
-        "VMA_TRANSACTION_DEPARTMENT"
+        "VMA_TRANSACTION_DEPARTMENT",
+        "DM_SHIP_AGENCY"
       ]
     };
   },

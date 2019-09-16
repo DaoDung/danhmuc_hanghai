@@ -10,7 +10,7 @@
                   <label>Mã số thuế:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="shipAgencyCode"  height="15"></v-text-field>
+                  <v-text-field v-model="shipAgencyCode"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -20,7 +20,7 @@
                   <label>Tên đại lý:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="shipAgencyNameVN"  height="15"></v-text-field>
+                  <v-text-field v-model="shipAgencyNameVN"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -30,7 +30,7 @@
                   <label>Địa chỉ đại lý:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="addressVN"  height="15"></v-text-field>
+                  <v-text-field v-model="addressVN"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -40,13 +40,14 @@
                   <label>Số điện thoại:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="phone"  height="15"></v-text-field>
+                  <v-text-field v-model="phone"  height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
             <v-flex xs12 class="text-xs-center">
               <div class="btn-group-danhmuc">
                   <button @click="search" class="btn-danhmnuc">Tìm kiếm</button>
+                  <button @click="addCategory" class="btn-danhmnuc">Thêm mới</button>
                   <button class="btn-danhmnuc"><a :href="link">Xuất Excel</a></button>
               </div>  
             </v-flex>
@@ -74,13 +75,11 @@
                 <td class="text-xs-center">{{ props.item.phone }}</td>
                 <td class="text-xs-center">{{ props.item.fax }}</td>
                 <td class="text-xs-center">{{ props.item.email }}</td>
-                <td class="text-xs-center">{{ props.item.representative1 }}</td>
-                <td class="text-xs-center">{{ props.item.representativeTitle1 }}</td>
                 <td class="text-xs-center"  :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" : "Đang sử dụng"}}</td>
                 <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
-                  <span @click="infoCategory(props.item)" class="action-table">
-                    <strong>Xem</strong>
-                  </span>
+                  <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
+                  <span @click="editCategory(props.item)" class="action-table"><strong>Sửa</strong></span>
+                  <span @click="delCategory(props.item)" class="action-table"><strong>Xóa</strong></span>
                 </td>             
               </tr>
             </template>
@@ -96,6 +95,7 @@
   </div>
 </template>
 <script>
+import { async } from 'q';
 import TinyPagination from '../hanghai_pagination.vue'
 
 export default {
@@ -143,16 +143,6 @@ export default {
         },
         {
           sortable: false,
-          text: "Người đại diện",
-          align: "center"
-        },
-        {
-          sortable: false,
-          text: "Chức danh",
-          align: "center"
-        },
-        {
-          sortable: false,
           text: "Trạng thái",
           align: "center"
         },
@@ -168,6 +158,9 @@ export default {
     categoryId() {
       return this.$route.query.categoryId;
     },
+    maritimeCurrent () {
+      return this.$store.getters["category/maritimeCurrent"]
+    },
     categoryList () {
       return this.$store.getters["category/categoryListItems"]
     },
@@ -176,10 +169,9 @@ export default {
       let url = originUrl.reportExel
       let params = {
         reportId: this.categoryId,
-        shipAgencyCode: this.shipAgencyCode,
-        shipAgencyNameVN: this.shipAgencyNameVN,
-        addressVN: this.addressVN,
-        phone: this.phone
+        portRegionNameVN: this.selectPortRegionNameVN,
+        maritimeCode: this.selectMaritime,
+        portCode: this.selectPortCode
       };
       for (const key in params) {
         if (params[key] !== '' && typeof params[key] != "undefined") {
@@ -192,6 +184,38 @@ export default {
   created() {
   },
   methods: {
+    editCategory(item) {
+      this.$store.dispatch("category/setCategoryModel", item);
+      this.$router.push({
+        name: "chi_tiet_danh_muc",
+        query: {
+          categoryId: this.$route.query.categoryId,
+          aticon: "sua-danh-muc",
+          id: item.shipAgencyCode
+        }
+      });
+    },
+    delCategory(item) {
+      this.$store.dispatch("category/setCategoryModel", item);
+      this.$router.push({
+        name: "chi_tiet_danh_muc",
+        query: {
+          categoryId: this.$route.query.categoryId,
+          aticon: "xoa-danh-muc",
+          id: item.shipAgencyCode
+        }
+      });
+    },
+    addCategory() {
+      this.$router.push({
+        name: "chi_tiet_danh_muc",
+        query: {
+          categoryId: this.$route.query.categoryId,
+          aticon: "them-danh-muc",
+          id: 0
+        }
+      });
+    },
     infoCategory(item) {
       this.$router.push({
         name: "chi_tiet_danh_muc",
@@ -214,14 +238,7 @@ export default {
         start: 0,
         end: 10
       };
-      this.$store.dispatch("category/searchCategoryListItems", params);
-    },
-    reportExel () {
-      let params = {
-        reportId: this.$route.query.categoryId
-      }
-      this.$store.dispatch("category/reportExel", params)
-        .then()    
+      this.$store.dispatch("category/searchCategoryListItems", params).then();
     },
     paggingData (config) {
       this.pagesize = config.pagesize
@@ -243,6 +260,9 @@ export default {
   }
 };
 </script>
+<style>
+
+</style>
 <style scoped>
 .v-input{
   font-size: 13px;

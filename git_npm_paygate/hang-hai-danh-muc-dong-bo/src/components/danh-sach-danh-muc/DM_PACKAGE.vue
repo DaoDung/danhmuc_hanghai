@@ -10,7 +10,7 @@
                   <label>Mã loại bao kiện:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="packageCode" height="15"></v-text-field>
+                  <v-text-field v-model="packageCode" height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -20,7 +20,7 @@
                   <label>Tên loại bao kiện:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="packageNameVN" height="15"></v-text-field>
+                  <v-text-field v-model="packageNameVN" height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

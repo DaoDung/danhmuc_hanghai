@@ -28,6 +28,7 @@
                 <v-text-field
                   v-model="selectShipTypeName"
                   height="15"
+                   @change="search"
                 ></v-text-field>
                 </v-flex>
               </v-layout>

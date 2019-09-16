@@ -10,7 +10,7 @@
                   <label>Loại tàu thuyền:</label>
                 </v-flex>
                 <v-flex xs7>
-                  <v-text-field v-model="shipTypeNameVN" height="15"></v-text-field>
+                  <v-text-field v-model="shipTypeNameVN" height="15" @change="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-flex>

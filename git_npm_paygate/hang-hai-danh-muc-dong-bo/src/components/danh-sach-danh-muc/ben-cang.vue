@@ -16,7 +16,8 @@
                     :items="maritime"
                     item-text="cityCode"
                     item-value="maritimeCode" 
-                    height="15"   
+                    height="15" 
+                    @change="search"  
                       >
                         <template v-slot:append-outer>
 
@@ -44,7 +45,8 @@
                     :items="khuVucHangHai"
                     item-text="portRegionNameVN"
                     item-value="portRegionCode" 
-                    height="15"   
+                    height="15"
+                    @change="search"  
                       >
                         <template v-slot:append-outer>
 
@@ -67,7 +69,7 @@
                 </v-flex>
                 <v-flex xs9>
                 <v-text-field
-                
+                  @change="search"  
                   v-model="selectBenCang"
                   height="15"
                 ></v-text-field>  

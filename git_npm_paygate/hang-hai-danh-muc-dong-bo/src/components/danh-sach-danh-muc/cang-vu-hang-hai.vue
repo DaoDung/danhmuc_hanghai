@@ -17,6 +17,7 @@
                     item-text="cityCode"
                     item-value="maritimeCode" 
                     height="15"   
+                    @change="search"
                       >
                         <template v-slot:append-outer>
 

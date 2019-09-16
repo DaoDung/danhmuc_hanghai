@@ -15,16 +15,7 @@ export default {
   data: () => ({
   }),
   created(){
-    let vm = this
-    this.$nextTick(()=>{
-     
-      vm.$store.dispatch('TaiNanHangHai/getUrlInit').then(
-        res => {
-          console.log('getUrlInit:', res)
-          vm.$router.push({name: "danh_sach_tai_nan"});
-        }
-      );
-    })
+    this.$router.push({name: "danh_sach_tai_nan"});
   }
 };
 </script>
