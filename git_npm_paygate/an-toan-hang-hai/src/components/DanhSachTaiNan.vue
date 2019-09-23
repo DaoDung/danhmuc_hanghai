@@ -7,6 +7,7 @@
       <v-alert v-if="isAlertThatBai" type="error" max-width="200" class="alert-chitiet">
         Thất bại!
       </v-alert>
+      <!--Dialog xoa-->
       <v-dialog
         v-model="dialog"
         max-width="310"
@@ -38,18 +39,21 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-flex xs12>
-        <div style="width:100%; font-size: 28px;">
+      <!--Dialog chi tiet-->
+      <ChiTietTaiNan :dialogChiTiet="dialogChiTiet" @closeDialog="dialogChiTiet = false" @themTaiNan="themTaiNan" @suaTaiNan="suaTaiNan" :action="action" :id="id"/>
+      <v-flex xs12 class="d-flex justify-space-between">
+        <div style="width:20%; font-size: 28px;">
           <i class="mdi mdi-format-align-justify" aria-hidden="true"></i>
           <span style="margin-left:10px;">Tai nạn hàng hải</span>
         </div>
+        <v-btn class="ma-2" tile color="primary" @click="openDialogThem">
+          <v-icon left>mdi-folder</v-icon> Thêm
+        </v-btn>
       </v-flex>
       <v-flex xs12>
         <div id="bang-danh-sach">
             <v-flex xs12 class="text-lg-right">
-              <v-btn class="ma-2" tile color="primary" @click="them">
-                <v-icon left>mdi-folder</v-icon> Thêm
-              </v-btn>
+
             </v-flex>
             <div style="overflow-x: auto; width: 100%;">
               <table>
@@ -104,7 +108,14 @@
                     </td>
                     <!--Search loại tai nạn-->
                     <td class="td-search">
-                      <v-select
+                      <v-combobox
+                        v-model="accidentTypeSearch"
+                        :items="loaiTaiNan"
+                        item-text="text"
+                        item-value="value"
+                        @change="searchTaiNan"
+                      ></v-combobox>
+                      <!-- <v-select
                         v-model="accidentTypeSearch"
                         autocomplete
                         :items="loaiTaiNan"
@@ -112,11 +123,18 @@
                         item-text="text"
                         item-value="value"
                         @change="searchTaiNan"
-                      ></v-select>
+                      ></v-select> -->
                     </td>
                     <!--Search mức độ-->
                     <td class="td-search">
-                      <v-select
+                      <v-combobox
+                        v-model="accidentCriticalTypeSearch"
+                        :items="mucDo"
+                        item-text="text"
+                        item-value="value"
+                        @change="searchTaiNan"
+                      ></v-combobox>
+                      <!-- <v-select
                         v-model="accidentCriticalTypeSearch"
                         autocomplete
                         :items="mucDo"
@@ -124,7 +142,7 @@
                         item-text="text"
                         item-value="value"
                         @change="searchTaiNan"
-                      ></v-select>
+                      ></v-select> -->
                     </td>
                     <!--Search số người chết-->
                     <td class="td-search">
@@ -164,24 +182,24 @@
                     <td class="td-search"></td>
                   </tr>
                   <tr v-for="(key, index) in danhSach" :key="index">
-                    <td class="text-xs-center">{{ index + 1 }}</td>
-                    <td class="text-xs-center" style="width:150px;">{{ key.nameOfShip }}</td>
-                    <td class="text-xs-center">{{ key.flagStateOfShip }}</td>
-                    <td class="text-xs-center">{{ key.imoNumber }}</td>
-                    <td class="text-xs-center">{{ key.callSign }}</td>
-                    <td class="text-xs-center">{{ key.registryNumber }}</td>
-                    <td class="text-xs-center" style="width:100px;">{{ key.accidentTime }}</td>
-                    <td class="text-xs-center">{{ getLoaiTaiNan(key.accidentType) }}</td>
-                    <td class="text-xs-center">{{ getLoaiMucDo(key.accidentCriticalType) }}</td>
-                    <td class="text-xs-center">{{  key.numberOfDead }}</td>
-                    <td class="text-xs-center">{{ key.numberOfInjured }}</td>
-                    <td class="text-xs-center">{{ key.pilotOnBoad === '1' ? 'Có':'Không' }}</td>
-                    <td class="text-xs-center" >{{ key.makeInvestigation === '1' ? 'Có' : 'Không' }}</td>
-                    <td class="text-xs-center" style="width:100px;">{{ key.investigationDate }}</td>
-                    <td class="text-xs-center" style="width:100px;">{{ key.accidentOfficialDate  }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key)>{{ index + 1 }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) style="width:150px;">{{ key.nameOfShip }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.flagStateOfShip }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.imoNumber }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.callSign }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.registryNumber }}</td>
+                    <td class="text-xs-center" style="width:100px;" @click=openDialogChiTiet(key) >{{ fomatDate(key.accidentTime) }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ getLoaiTaiNan(key.accidentType) }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ getLoaiMucDo(key.accidentCriticalType) }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{  key.numberOfDead }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.numberOfInjured }}</td>
+                    <td class="text-xs-center" @click=openDialogChiTiet(key) >{{ key.pilotOnBoad === '1' ? 'Có':'Không' }}</td>
+                    <td class="text-xs-center"  @click=openDialogChiTiet(key) >{{ key.makeInvestigation === '1' ? 'Có' : 'Không' }}</td>
+                    <td class="text-xs-center" style="width:100px;" @click=openDialogChiTiet(key) >{{ fomatDate(key.investigationDate) }}</td>
+                    <td class="text-xs-center" style="width:100px;" @click=openDialogChiTiet(key) >{{ fomatDate(key.accidentOfficialDate)  }}</td>
                     <!-- <td class="text-xs-center" style="width:150px;"></td> -->
                     <td class="text-xs-center" style="">
-                      <span @click="sua(key)" class="action-table"><strong>Sửa</strong></span>
+                      <!-- <span @click="sua(key)" class="action-table"><strong>Sửa</strong></span> -->
                       <span @click="xoa(key)" class="action-table"><strong>Xóa</strong></span>
                     </td>
                   </tr>
@@ -193,48 +211,7 @@
                 <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination> 
               </div>
             </div>
-            <!-- <v-data-table
-                :headers= "headers"
-                :items= "danhSach"
-                no-data-text = "Không có dữ liệu"
-                hide-default-footer
-              >
-              <template slot="headers" scope="props">
-                <tr>
-                  <th v-for="header in props.headers" :key="header.text"
-                  >
-                    {{ header.text }}
-                  </th>
-                  <th></th>
-                </tr>
-              </template>
-              <template slot="items" slot-scope="props">
-                <tr>
-                  <td class="text-xs-center">{{ props.index + 1 }}</td>
-                  <td class="text-xs-center">{{ props.item.nameOfShip }}</td>
-                  <td class="text-xs-center">{{ props.item.flagStateOfShip }}</td>
-                  <td class="text-xs-center">{{ props.item.imoNumber }}</td>
-                  <td class="text-xs-center">Có</td>
-                  <td class="text-xs-center">{{ props.item.callSign }}</td>
-                  <td class="text-xs-center">{{ props.item.registryNumber }}</td>
-                  <td class="text-xs-center">{{ props.item.accidentTime }}</td>
-                  <td class="text-xs-center">{{ getLoaiTaiNan(props.item.accidentType) }}</td>
-                  <td class="text-xs-center">{{ getLoaiMucDo(props.item.accidentCriticalType) }}</td>
-                  <td class="text-xs-center">{{  props.item.numberOfDead }}</td>
-                  <td class="text-xs-center">{{ props.item.numberOfInjured }}</td>
-                  <td class="text-xs-center"></td>
-                  <td class="text-xs-center">{{ props.item.pilotOnBoad ? 'Có':'Không' }}</td>
-                  <td class="text-xs-center">{{ props.item.makeInvestigation ? 'Có' : 'Không' }}</td>
-                  <td class="text-xs-center">{{ props.item.investigationDate }}</td>
-                  <td class="text-xs-center">{{ props.item.accidentOfficialDate  }}</td>
-                  <td class="text-xs-center"></td>
-                  <td class="text-xs-center" style="width: 210px;padding-left: 0px;padding-right: 5px;">
-                    <span @click="sua(props.item)" class="action-table"><strong>Sửa</strong></span>
-                    <span @click="xoa(props.item)" class="action-table"><strong>Xóa</strong></span>
-                  </td>
-                </tr>
-              </template>
-            </v-data-table> -->
+
         </div>
       </v-flex>
     </v-layout>
@@ -242,12 +219,17 @@
 </template>
 
 <script>
+import { EventBus } from '@/eventbus'
+import { setTimeout } from 'timers';
 import TinyPagination from './pagination.vue'
+import ChiTietTaiNan from './ChiTietTaiNan.vue'
 export default {
   components: {
     'tiny-pagination': TinyPagination,
+    ChiTietTaiNan
   },
   data: () => ({
+    loadData: false,
     isAlertThanhCong: false,
     isAlertThatBai: false,
       nameOfShipSearch: '',
@@ -261,6 +243,9 @@ export default {
       numberOfInjuredSearch: '',
       portofAuthoritySearch: '',
       dialog: false,
+      dialogChiTiet: false,
+      action:'',
+      id: 0,
       pagesize: 10,
       page: 1,
       headers: [
@@ -398,8 +383,7 @@ export default {
       ],
       cangVuHangHai: []
   }),
-  computed: {
-
+  watch: {
   },
   created () {
     let vm = this
@@ -411,7 +395,13 @@ export default {
   methods: {
     getDanhSach () {
       let vm = this
-      this.$store.dispatch('TaiNanHangHai/getDanhSach').then(
+      this.pagesize = 10
+      this.page = 1
+      let params = {
+        start: 0,
+        end: 10
+      }
+      this.$store.dispatch('TaiNanHangHai/getDanhSach', params).then(
         res => {
           vm.danhSach = res
           console.log(vm.danhSach)
@@ -471,45 +461,9 @@ export default {
       }
       return nameAccidentCriticalType
     },
-    them() {
-      // let params = {
-      //   id: '',
-      //   portofAuthority: '',
-      //   accidentCode: '',
-      //   numberOfDead: '',
-      //   acidentTime: '',
-      //   accidentRegion: '',
-      //   accidentBrief: '',
-      //   accidentConslusion: '',
-      //   accidentType: '',
-      //   accidentCriticalType: '',
-      //   nameOfShip: '',
-      //   accidentTime: '',
-      //   imoNumber: '',
-      //   callSign: '',
-      //   flagStateOfShip: '',
-      //   registryNumber: '',
-      //   decisionNo: '',
-      //   decisionDate: '',
-      //   decisionOrganization: '',
-      //   officialDate: '',
-      //   officiaNo: '',
-      //   officialPlace: '',
-      //   violationDate: '',
-      //   violationPartCode: '',
-      //   issueDate: '',
-      //   issueBy: '',
-      //   violationPartName: '',
-      //   violationPartAddress: '',
-      //   representative: '',
-      //   representativeTitle: '',
-      //   modifiedDate: '',
-      //   numberOfInjured: '',
-      //   investigationDate: '',
-      //   accidentOfficialDate: ''
-      // }
-      // this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', params)
-      this.$router.push({name: "chi_tiet_tai_nan", query: {action: 'them-tai-nan'}});
+    openDialogThem() {
+      this.dialogChiTiet = true
+      this.action = 'them-tai-nan'
     },
     xoa(item) {
       this.dialog = true;
@@ -534,9 +488,10 @@ export default {
         }
       );
     },
-    sua(key) {
-      //this.$store.dispatch('TaiNanHangHai/setTaiNanHangHai', key)
-      this.$router.push({name: "chi_tiet_tai_nan", query: {action: 'sua-tai-nan', id: key.id}});
+    openDialogChiTiet(key) {
+      this.dialogChiTiet = true
+      this.action = 'sua-tai-nan'
+      this.id = key.id
     },
     paggingData (config) {
       this.pagesize = config.pagesize
@@ -552,10 +507,15 @@ export default {
         accidentCriticalType: this.accidentCriticalTypeSearch.value,
         numberOfDead: this.numberOfDeadSearch,
         numberOfInjured: this.numberOfInjuredSearch,
+        start: config.page*config.pagesize - config.pagesize,
+        end:  config.page*config.pagesize
       };
-      this.$store
-        .dispatch("category/getDanhSach", params)
-        .then();
+      this.$store.dispatch('TaiNanHangHai/getDanhSach', params).then(
+        res => {
+          vm.danhSach = res
+          console.log(vm.danhSach)
+        }
+      )
     },
     searchTaiNan () {
       let vm = this
@@ -573,6 +533,8 @@ export default {
         accidentCriticalType: this.accidentCriticalTypeSearch.value,
         numberOfDead: this.numberOfDeadSearch,
         numberOfInjured: this.numberOfInjuredSearch,
+        start: 0,
+        end: 10
       }
       this.$store.dispatch('TaiNanHangHai/getDanhSach', params).then(
         res => {
@@ -580,8 +542,58 @@ export default {
           console.log(vm.danhSach)
         }
       )
+    },
+    fomatDate(val){
+      let date = new Date(val)
+      let YYYY = date.getFullYear()
+      let MM = (date.getMonth() + 1) <= 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)
+      let DD = date.getDate() <=10 ? ('0' + date.getDate()) : date.getDate()
+      let HH = date.getHours() <= 10 ? ('0' + date.getHours()) : date.getHours()
+      let II = date.getMinutes() <= 10 ? ('0' + date.getMinutes()) : date.getMinutes()
+      let dateTime =  YYYY + '-' + MM + '-' + DD + ' ' + HH + ':' + II
+      return dateTime
+    },
+    themTaiNan(e) {
+      let vm = this
+      this.$store.dispatch('TaiNanHangHai/themTaiNan', e).then(
+        res => {
+          if (res.status === 1) {
+            vm.dialogChiTiet = false
+            vm.isAlertThanhCong= true
+            vm.getDanhSach()
+          }
+          else {
+            vm.dialogChiTiet = false
+            vm.isAlertThatBai= true
+          }
+          setTimeout(()=>{
+            vm.isAlertThanhCong = false
+            vm.isAlertThatBai= false
+          },2000)
+        }
+      );
+    },
+    suaTaiNan(e) {
+      let vm = this
+      this.$store.dispatch('TaiNanHangHai/suaTaiNan', e).then(
+        res => {
+          if (res.status === 1) {
+            vm.dialogChiTiet = false
+            vm.isAlertThanhCong= true
+            vm.getDanhSach()
+          }
+          else {
+            vm.dialogChiTiet = false
+            vm.isAlertThatBai= true
+          }
+          setTimeout(()=>{
+            vm.isAlertThanhCong = false
+            vm.isAlertThatBai= false
+          },2000)
+        }
+      );
     }
-  }
+  },
 };
 </script>
 <style>
@@ -608,11 +620,12 @@ export default {
 }
 
 #danh-sach td, #dialog td {
-  background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
   font-size: 13px;
 }
-
+#danh-sach tr:hover, #dialog tr:hover{
+  background-color: #88888829;
+}
 #danh-sach th,#danh-sach td, #dialog th, #dialog td {
   padding: 5px 10px;
   border-left: 0.5px solid #ddd;
