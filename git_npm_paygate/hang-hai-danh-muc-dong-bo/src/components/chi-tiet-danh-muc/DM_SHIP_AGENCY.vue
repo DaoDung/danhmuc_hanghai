@@ -82,7 +82,6 @@
                     v-model="categoryModel.phone"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
-                    :rules="phoneRules"  
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -111,7 +110,6 @@
                     v-model="categoryModel.email"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
                     height="25"
-                    :rules="emailRules" 
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -173,8 +171,6 @@ export default {
       }],
       shipAgencyNameVNRules: [v => !!v || "Chưa nhập tên đại lý"],
       addressVNRules: [v => !!v || "Chưa địa chỉ"],
-      phoneRules: [v => /((09|03|07|08|05)+([0-9]{8})\b)/g.test(v) || 'Số điện thoại không hợp lệ'],
-      emailRules: [ v => /.+@.+/.test(v) || 'Email không hợp lệ'],
       categoryModel: {
         modifiedDate: "",
         shipAgencyCode: "",

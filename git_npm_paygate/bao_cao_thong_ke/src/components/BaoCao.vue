@@ -739,7 +739,7 @@ export default {
       }
       var renderURLInit = "?p_p_id=baocaopmnvaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getReportEXCEL&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1"
       var orginURL = window.location.href
-      var endPoit = orginURL.substr(0, orginURL.lastIndexOf('/group')) + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
+      var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
       axios.get(endPoit).then(
         res => {
           console.log(res)

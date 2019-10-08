@@ -2,7 +2,7 @@ import Repository from "./Repository";
 
 var renderURLInit = "?p_p_id=danhmucriengaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1&p_p_resource_id=getURLInit"
 var orginURL = window.location.href
-var endPoit = orginURL.substr(0, orginURL.lastIndexOf('#')) + renderURLInit
+var endPoit = orginURL + renderURLInit
 
 export default {
   getURLInit() {

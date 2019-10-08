@@ -160,7 +160,7 @@
                   <v-dialog
                     ref="dialog2"
                     v-model="modal2"
-                    :return-value.sync="categoryModel.pilotBOD"
+                    :return-value.sync="pilotBOD"
                     persistent
                     lazy
                     full-width
@@ -168,20 +168,20 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="categoryModel.pilotBOD"
+                        v-model="pilotBODFomated"
                         
                         readonly
                         v-on="on"
                         height="25"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="categoryModel.pilotBOD" scrollable>
+                    <v-date-picker v-model="pilotBOD" scrollable>
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
                       <v-btn
                         flat
                         color="primary"
-                        @click="$refs.dialog2.save(categoryModel.pilotBOD)"
+                        @click="$refs.dialog2.save(pilotBOD)"
                       >OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
@@ -192,12 +192,13 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ngày cấp bằng:</label>
+                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-dialog
                     ref="dialog3"
                     v-model="modal3"
-                    :return-value.sync="categoryModel.pilotCertificateDate"
+                    :return-value.sync="pilotCertificateDate"
                     persistent
                     lazy
                     full-width
@@ -205,20 +206,22 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        v-model="categoryModel.pilotCertificateDate"
-                        
+                        v-model="pilotCertificateDateFormated"
+                        @blur="date = parseDate(pilotCertificateDateFormated)"
                         readonly
                         v-on="on"
                         height="25"
+                        required
+                        :rules="pilotCertificateDateRules"
                       ></v-text-field>
                     </template>
-                    <v-date-picker v-model="categoryModel.pilotCertificateDate" scrollable>
+                    <v-date-picker v-model="pilotCertificateDate" scrollable>
                       <v-spacer></v-spacer>
                       <v-btn flat color="primary" @click="modal3 = false">Cancel</v-btn>
                       <v-btn
                         flat
                         color="primary"
-                        @click="$refs.dialog3.save(categoryModel.pilotCertificateDate)"
+                        @click="$refs.dialog3.save(pilotCertificateDate)"
                       >OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
@@ -293,12 +296,17 @@
 export default {
   data() {
     return {
+      pilotBOD: new Date().toISOString().substr(0, 10),
+      pilotBODFomated: '',
+      pilotCertificateDate: new Date().toISOString().substr(0, 10),
+      pilotCertificateDateFormated: '',
       pilotCategoryCodeRules: [v => !!v || "Chưa chọn Hạng hoa tiêu"],
       pilotCertificateNoRules: [v => !!v || "Chưa số hiệu bằng "],
       pilotNoRules: [v => !!v || "Chưa nhập số hiệu công ty "],
       pilotNameRules: [v => !!v || "Chưa nhập tên hoa tiêu"],
       pilotCompanyCodeRules: [v => !!v || "Chưa chọn Công ty hoa tiêu"],
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
+      pilotCertificateDateRules: [v => !!v || "Chưa chọn ngày cấp bằng"], 
       modal: false,
       modal2: false,
       modal3: false,
@@ -336,6 +344,14 @@ export default {
       return this.$store.getters["category/maritimeCurrent"]
     }
   },
+  watch: {
+    pilotCertificateDate (val){
+      this.pilotCertificateDateFormated = this.formatDate(val)
+    },
+    pilotBOD (val) {
+      this.pilotBODFomated = this.formatDate(val)
+    }
+  },
   created() {
     if (this.$route.query.aticon === "sua-danh-muc") {
       this.btnText = "Cập nhập hoa tiêu";
@@ -368,6 +384,18 @@ export default {
         query: { categoryId: this.$route.query.categoryId }
       });
     },
+    parseDate (date) {
+      if (!date) return null
+
+      const [month, day, year] = date.split('/')
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+    },
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     async editCategory() {
       let params = {
         categoryId: this.categoryId,
@@ -376,11 +404,11 @@ export default {
         pilotCode: this.id,
         pilotName: this.categoryModel.pilotName,
         pilotNo: this.categoryModel.pilotNo,
-        pilotBOD: this.categoryModel.pilotBOD,
+        pilotBOD: this.pilotBOD,
         pilotCertificateNo: this.categoryModel.pilotCertificateNo,
         remarks: this.categoryModel.remarks,
         pilotCategoryCode: this.categoryModel.pilotCategoryCode,
-        pilotCertificateDate: this.categoryModel.pilotCertificateDate,
+        pilotCertificateDate: this.pilotCertificateDate,
         maritimeCode: this.categoryModel.maritimeCode,
         syncVersion: this.categoryModel.syncVersion
       };
@@ -426,11 +454,11 @@ export default {
         // pilotCode: this.categoryModel.pilotCode,
         pilotName: this.categoryModel.pilotName,
         pilotNo: this.categoryModel.pilotNo,
-        pilotBOD: this.categoryModel.pilotBOD,
+        pilotBOD: this.pilotBOD,
         pilotCertificateNo: this.categoryModel.pilotCertificateNo,
         remarks: this.categoryModel.remarks,
         pilotCategoryCode: this.categoryModel.pilotCategoryCode,
-        pilotCertificateDate: this.categoryModel.pilotCertificateDate,
+        pilotCertificateDate: this.pilotCertificateDate,
         maritimeCode: this.categoryModel.maritimeCode
       };
 
@@ -460,11 +488,13 @@ export default {
             vm.categoryModel.pilotCompanyName = res.pilotCompanyName;
             vm.categoryModel.pilotCode = res.pilotCode;
             vm.categoryModel.pilotName = res.pilotName;
-            vm.categoryModel.pilotBOD = res.pilotBOD;
+            vm.pilotBOD = res.pilotBOD;
+            vm.pilotBODFomated = this.formatDate(vm.pilotBOD)
             vm.categoryModel.remarks = res.remarks;
             vm.categoryModel.pilotNo = res.pilotNo;
             vm.categoryModel.pilotCertificateNo = res.pilotCertificateNo;
-            vm.categoryModel.pilotCertificateDate = res.pilotCertificateDate;
+            vm.pilotCertificateDate = res.pilotCertificateDate.substr(0, 10);
+            this.pilotCertificateDateFormated = this.formatDate(vm.pilotCertificateDate)
             vm.categoryModel.pilotCategoryCode = res.pilotCategoryCode;
             vm.categoryModel.syncVersion = res.syncVersion;
 

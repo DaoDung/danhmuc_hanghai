@@ -138,7 +138,7 @@
                 <td class="text-xs-center">{{ props.item.pilotCode  }}</td>
                 <td class="text-xs-center">{{ props.item.pilotName }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCompanyName}}</td>
-                <td class="text-xs-center">{{ props.item.pilotBOD}}</td>
+                <td class="text-xs-center">{{ props.item.pilotCertificateDate}}</td>
                 <td class="text-xs-center">{{ props.item.pilotNo}}</td>
                 <td class="text-xs-center">{{ props.item.pilotCertificateNo}}</td>
                 <td class="text-xs-center">{{ props.item.pilotCategoryName}}</td>
@@ -212,7 +212,7 @@ export default {
         },
         {
           sortable: false,
-          text: 'Ngày sinh',
+          text: 'Ngày cấp bằng',
           value: 'salary',
           align: 'center'
         },

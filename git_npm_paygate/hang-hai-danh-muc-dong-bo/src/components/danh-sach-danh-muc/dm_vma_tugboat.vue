@@ -119,6 +119,9 @@
                 <td class="text-xs-center">{{ props.item.shipName }}</td>
                 <td class="text-xs-center">{{ props.item.tugboatCompanyName}}</td>
                 <td class="text-xs-center">{{ props.item.power}}</td>
+                <td class="text-xs-center">{{ props.item.gt}}</td>
+                <td class="text-xs-center">{{ props.item.nt}}</td>
+                <td class="text-xs-center">{{ props.item.dwt}}</td>
                 <td class="text-xs-center">{{ props.item.vndUnitPrice}}</td>
                 <td class="text-xs-center">{{ props.item.usdUnitPrice}}</td>
                 <td class="text-xs-center">{{ props.item.remarks}}</td>
@@ -191,6 +194,24 @@ export default {
         {
           sortable: false,
           text: 'Công suất máy (kW)',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'GT',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'NT',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'DWT',
           value: 'salary',
           align: 'center'
         },

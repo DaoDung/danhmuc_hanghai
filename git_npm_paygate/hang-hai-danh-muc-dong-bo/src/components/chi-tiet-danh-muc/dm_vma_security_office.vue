@@ -69,7 +69,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Cơ quan ra quyết định bắt giữ:</label>
+                  <label for>Cơ quan quyết định bắt giữ:</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -87,14 +87,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Địa chỉ:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.companyAddress"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="companyAddressRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -104,14 +101,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Thư điện tử:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.contactEmail"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="contactEmailRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -121,14 +115,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Số điện thoại:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.telNo"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="telNoRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -138,14 +129,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Số Fax:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.faxNo"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="faxNoRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -186,8 +174,8 @@ export default {
   data() {
     return {
       faxNoRules: [v => !!v || "Chưa nhập fax"],
-      telNoRules: [v => !!v || "Chưa nhập số điện thoại", v => /((09|03|07|08|05)+([0-9]{8})\b)/g.test(v) || 'Số điện thoại không hợp lệ'],
-      contactEmailRules: [v => !!v || "Chưa nhập email" , v => /.+@.+/.test(v) || 'Email không hợp lệ'],
+      telNoRules: [v => !!v || "Chưa nhập số điện thoại"],
+      contactEmailRules: [v => !!v || "Chưa nhập email"],
       companyAddressRules: [v => !!v || "Chưa nhập địa chỉ"],
       companyNameRules: [v => !!v || "Chưa nhập tên công ty"],
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],

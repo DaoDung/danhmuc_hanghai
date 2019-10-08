@@ -141,15 +141,14 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Lượng chiếm nước toàn tải:</label>
-                  <span class="red--text">(*)</span>
+       
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.dwt"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    
-                    :rules="dwtRules"
+              
+                  
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -159,15 +158,15 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Chiều dài lớn nhất Lmax(m):</label>
-                  <span class="red--text">(*)</span>
+                
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.loa"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
+                   
                     
-                    :rules="loaRules"
+                   
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -177,14 +176,14 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Mớn nước thiết kế(m):</label>
-                  <span class="red--text">(*)</span>
+                  
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.maxDraft"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="maxDraftRules"
+                   
+                   
                     
                     height="25"
                   ></v-text-field>
@@ -233,9 +232,6 @@ export default {
       portWharfNameRules: [v => !!v || "Chưa nhập tên Cầu cảng"],
       portRegionCodeRules: [v => !!v || "Chưa chọn Khu vực hàng hải"],
       portHarbourCodeRules: [v => !!v || "Chưa chọn Bến Cảng"],
-      dwtRules: [v => !!v || "Chưa nhập lượng chiếm nước toàn tải"],
-      loaRules: [v => !!v || "Chưa nhập chiều dài lớn nhất Lmax(m)"],
-      maxDraftRules: [v => !!v || "Chưa nhập mớn nước thiết kế(m)"],
       maritime: [],
       selectMaritime: "",
       portRegionCodeModel: "",

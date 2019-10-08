@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="chi-tiet">
     <v-container text-xs-center>
       <v-layout row wrap>
@@ -120,7 +120,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Công suất máy (kW):</label>
+                  <label for>Công suất máy (HP):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -184,6 +184,58 @@
                     required
                     :rules="displacementRules"
                     
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>GT:</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.gt"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    :rules="gtRules"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>NT:</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.nt"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    :rules="ntRules"
+                    
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>DWT:</label>
+                  <span class="red--text">(*)</span>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.dwt"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    required
+                    :rules="dwtRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -268,6 +320,9 @@ export default {
       loaRules: [v => !!v || "Chưa nhập chiều dài lớn nhất"],
       powerRules: [v => !!v || "Chưa nhập công suất tàu lai"],
       tugboatCompanyCodeRules: [v => !!v || "Chưa chọn công ty tàu lai"],
+      gtRules: [v => !!v || "Chưa nhập GT"],
+      ntRules: [v => !!v || "Chưa nhập NT"],
+      dwtRules: [v => !!v || "Chưa nhập DWT"],
       maritime: [],
       tugBoatCompany: [],
       selectMaritime: "",
@@ -288,7 +343,10 @@ export default {
         displacement: "",
         remarks: "",
         vndUnitPrice: "",
-        usdUnitPrice: ""
+        usdUnitPrice: "",
+        gt: '',
+        nt: '',
+        dwt: '',
       }
     };
   },
@@ -351,7 +409,10 @@ export default {
         maritimeCode: this.categoryModel.maritimeCode,
         syncVersion: this.categoryModel.syncVersion,
         vndUnitPrice: this.categoryModel.vndUnitPrice,
-        usdUnitPrice: this.categoryModel.usdUnitPrice
+        usdUnitPrice: this.categoryModel.usdUnitPrice,
+        gt: this.categoryModel.gt,
+        nt: this.categoryModel.nt,
+        dwt: this.categoryModel.dwt
       };
 
       await this.$store
@@ -402,7 +463,10 @@ export default {
         breadth: this.categoryModel.breadth,
         maritimeCode: this.categoryModel.maritimeCode,
         vndUnitPrice: this.categoryModel.vndUnitPrice,
-        usdUnitPrice: this.categoryModel.usdUnitPrice
+        usdUnitPrice: this.categoryModel.usdUnitPrice,
+        gt: this.categoryModel.gt,
+        nt: this.categoryModel.nt,
+        dwt: this.categoryModel.dwt
       };
 
       await this.$store
@@ -440,7 +504,9 @@ export default {
             vm.categoryModel.syncVersion = res.syncVersion;
             vm.categoryModel.vndUnitPrice = res.vndUnitPrice;
             vm.categoryModel.usdUnitPrice = res.usdUnitPrice;
-
+            vm.categoryModel.gt = res.gt;
+            vm.categoryModel.nt = res.nt;
+            vm.categoryModel.dwt = res.dwt;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =
