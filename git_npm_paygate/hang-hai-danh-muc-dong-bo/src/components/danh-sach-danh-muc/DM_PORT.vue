@@ -40,11 +40,13 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.portCode }}</td>
                 <td class="text-xs-center">{{ props.item.portName }}</td>
+                <td class="text-xs-center">{{ getPortType(props.item.portType) }}</td>
                 <td class="text-xs-center"  :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" : "Đang sử dụng"}}</td>
                 <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table">
                     <strong>Xem</strong>
                   </span>
+                  <span @click="editCategory(props.item)" class="action-table"><strong>Sửa</strong></span>
                 </td>
               </tr>
             </template>
@@ -85,6 +87,11 @@ export default {
         {
           sortable: false,
           text: "Tên cảng biển",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Phân loại",
           align: "center"
         },
         {
@@ -167,7 +174,26 @@ export default {
       this.$store
         .dispatch("category/searchCategoryListItems", params)
         .then();
-    }
+    },
+    getPortType (PortType) {
+      let namePortType = ''
+      switch (PortType) {
+        case 0:
+          namePortType = 'Cảng biển'
+          break
+        case 1:
+          namePortType = 'Cảng thủy nội địa'
+          break
+        case 2:
+          namePortType = 'Cảng ngoài đảo (tuyến bờ ra đảo)'
+          break
+      }
+      return namePortType
+    },
+    editCategory (item) {
+      this.$store.dispatch('category/setCategoryModel', item)
+      this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.id}})
+    },
   }
 };
 </script>

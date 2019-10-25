@@ -140,7 +140,9 @@
                 <td class="text-xs-center">{{ props.item.dwt}}</td>
                 <td class="text-xs-center">{{ props.item.loa}}</td>
                 <td class="text-xs-center">{{ props.item.maxDraft}}</td>
-                <td class="text-xs-center">{{ props.item.node}}</td>
+                <td class="text-xs-center">{{ props.item.sequenceNo }}</td>
+                <td class="text-xs-center">{{ getPortWarfType(props.item.portWharfType) }}</td>
+                <td class="text-xs-center"><input type="checkbox"  v-model="props.item.managedVinalines" onclick="return false;"></td>
                 <td class="text-xs-center"  :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
                 <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
@@ -235,7 +237,19 @@ export default {
         },
         {
           sortable: false,
-          text: 'Ghi chú',
+          text: 'Thứ tự hiển thị',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Phân loại',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Thuộc quản lý của Vinalines',
           value: 'salary',
           align: 'center'
         },
@@ -318,6 +332,18 @@ export default {
     }
   },
   methods: {
+    getPortWarfType (portWharfType) {
+      let namePortWharfType = ''
+      switch (portWharfType) {
+        case 0:
+          namePortWharfType = 'Cầu cảng'
+          break
+        case 1:
+          namePortWharfType = 'Điểm neo'
+          break
+      }
+      return namePortWharfType
+    },
     editCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)
       this.$router.push({name: 'chi_tiet_danh_muc', query: {categoryId: this.$route.query.categoryId, aticon: 'sua-danh-muc', id: item.portWharfCode}})

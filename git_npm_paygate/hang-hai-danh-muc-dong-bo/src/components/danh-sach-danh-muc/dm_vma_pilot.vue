@@ -138,7 +138,7 @@
                 <td class="text-xs-center">{{ props.item.pilotCode  }}</td>
                 <td class="text-xs-center">{{ props.item.pilotName }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCompanyName}}</td>
-                <td class="text-xs-center">{{ props.item.pilotCertificateDate}}</td>
+                <td class="text-xs-center">{{ formatDate(props.item.pilotCertificateDate.substr(0, 10))}}</td>
                 <td class="text-xs-center">{{ props.item.pilotNo}}</td>
                 <td class="text-xs-center">{{ props.item.pilotCertificateNo}}</td>
                 <td class="text-xs-center">{{ props.item.pilotCategoryName}}</td>
@@ -432,7 +432,13 @@ export default {
       this.$store
         .dispatch("category/searchCategoryListItems", params)
         .then();
-    }  
+    },
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },  
   }
 }
 </script>

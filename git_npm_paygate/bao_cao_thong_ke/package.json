@@ -11,15 +11,17 @@
     "@fortawesome/fontawesome-free": "^5.10.2",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-loading-overlay": "^3.2.0",
+    "vue-masked-input": "^0.5.2",
     "vue-router": "^3.1.2",
     "vuetify": "^2.0.0",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@mdi/font": "^4.2.95",
+    "@mdi/font": "^4.5.95",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",

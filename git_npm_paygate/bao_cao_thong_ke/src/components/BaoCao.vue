@@ -8,483 +8,263 @@
           <v-btn class="btn-filter" color="primary" @click="xuatExcel">Xuất Excel</v-btn>
         </div>
         <div class="filter-list">
-          <v-layout row wrap>
+          <v-layout  wrap align-center>
             <!--Nhóm báo cáo-->
-            <div class="item-filter">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Nhóm báo cáo:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
+            <v-flex xs12>
+              <v-layout  align-center>
+                <v-flex xs3 align-self="center"><div><label for="" >Nhóm báo cáo:</label></div></v-flex>
+                <v-flex xs9>
+                    <v-select
                         v-model="selectNhomBC"
                         :items="nhomBC"
                         item-text="rptName"
                         item-value="rptCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Mẫu báo cáo-->
-            <div class="item-filter">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Mẫu báo cáo:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
+                        autocomplet
+                    ></v-select>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!-- Mẫu báo cáo -->
+            <v-flex xs12>
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Mẫu báo cáo:</label></v-flex>
+                <v-flex xs9>
+                    <v-select
                         v-model="selectMauBC"
                         :items="mauBC"
                         item-text="rptName"
                         item-value="rptCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
+                       
+                        autocomplet
+                    ></v-select>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!-- Người tạo -->
+            <v-flex xs12>
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Người tạo:</label></v-flex>
+                <v-flex xs9>
+                  <v-text-field
+                      v-model="nguoiTaoBC"
+                      
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!-- Ngày tạo -->
+            <v-flex xs12 >
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Ngày tạo:</label></v-flex>
+                <v-flex xs9 class="ngay-bao-cao">
+                    <v-menu
+                        ref="menu1"
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        full-width
+                        max-width="290px"
+                        min-width="290px"
+                    >
+                        <template v-slot:activator="{ on }">
+                        <v-text-field
+                            v-model="createDateFomated"
+                            hint="MM/DD/YYYY format"
+                            persistent-hint
+                            @blur="date = parseDate(createDateFomated)"
+                            
+                            v-on="on"
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker v-model="createDate" no-title @input="menu1 = false" locale="vn"></v-date-picker>
+                    </v-menu>
+                </v-flex>
+              </v-layout>
+            </v-flex>
             <!--Ngày lập báo cáo-->
-            <div class="item-filter">
-                <div id="date-select" style=" width: 33%; align-items: center;">
-                  <v-select
+            <v-flex xs12>
+              <v-layout wrap>
+                <v-flex xs4>
+                  <v-select style="margin-top: 10px; margin-bottom: 10px;"
                     :items="items"
                     outlined
                     v-model="thongKeTheo"
                   ></v-select>
-                </div>
-            
-                <div style=" width: 100%; margin-top: 8px;">
-                    <div>
-                      <div class="input-groups ngay-bao-cao">
-                          <div class="lable-filter">
-                              <label for="" >Ngày tạo:</label>
-                          </div>
-                          <div class="input-filter">
-                              <v-menu
-                                  ref="menu1"
-                                  v-model="menu1"
-                                  :close-on-content-click="false"
-                                  transition="scale-transition"
-                                  offset-y
-                                  full-width
-                                  max-width="290px"
-                                  min-width="290px"
-                              >
-                                  <template v-slot:activator="{ on }">
-                                  <v-text-field
-                                      v-model="createDateFomated"
-                                      hint="MM/DD/YYYY format"
-                                      persistent-hint
-                                      @blur="date = parseDate(createDateFomated)"
-                                      height="20"
-                                      v-on="on"
-                                  ></v-text-field>
-                                  </template>
-                                  <v-date-picker v-model="createDate" no-title @input="menu1 = false" locale="vn"></v-date-picker>
-                              </v-menu>
-                          </div>
-                      </div>
-                    </div>
-                    <!--Ngày-->
-                    <div v-if="thongKeTheo === 'Ngày'">
-                        <div class="input-groups ngay-bao-cao">
-                            <div class="lable-filter">
-                                <label for="" >Từ ngày:</label>
-                            </div>
-                            <div class="input-filter">
-                                <v-menu
-                                    ref="menu2"
-                                    v-model="menu2"
-                                    :close-on-content-click="false"
-                                    transition="scale-transition"
-                                    offset-y
-                                    full-width
-                                    max-width="290px"
-                                    min-width="290px"
-                                >
-                                    <template v-slot:activator="{ on }">
-                                    <v-text-field
-                                        v-model="fromDateFomated"
-                                        hint="MM/DD/YYYY format"
-                                        persistent-hint
-                                        
-                                        @blur="date = parseDate(fromDateFomated)"
-                                        height="20"
-                                        v-on="on"
-                                    ></v-text-field>
-                                    </template>
-                                    <v-date-picker v-model="fromDate" no-title @input="menu2 = false" locale="vn"></v-date-picker>
-                                </v-menu>
-                            </div>
-                        </div>
-                        <div class="input-groups ngay-bao-cao">
-                            <div class="lable-filter">
-                                <label for="" >Đến ngày:</label>
-                            </div>
-                            <div class="input-filter">
-                                <v-menu
-                                    ref="menu3"
-                                    v-model="menu3"
-                                    :close-on-content-click="false"
-                                    transition="scale-transition"
-                                    offset-y
-                                    full-width
-                                    max-width="290px"
-                                    min-width="290px"
-                                >
-                                    <template v-slot:activator="{ on }">
-                                    <v-text-field
-                                        v-model="toDateFomated"
-                                        hint="MM/DD/YYYY format"
-                                        persistent-hint
-                                        
-                                        @blur="date = parseDate(toDateFomated)"
-                                        height="20"
-                                        v-on="on"
-                                    ></v-text-field>
-                                    </template>
-                                    <v-date-picker v-model="toDate" no-title @input="menu3 = false" locale="vn"></v-date-picker>
-                                </v-menu>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Tháng-->
-                    <div v-if="thongKeTheo === 'Tháng'">
-                        <div class="input-groups">
-                            <div class="lable-filter">
-                                <label for="" >Tháng:</label>
-                            </div>
-                            <div class="input-filter">
-                              <v-autocomplete
-                                  v-model="selectThang"
-                                  :items="thang"
-                                  item-text="name"
-                                  item-value="value"
-                                  height="20"
-                              ></v-autocomplete>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Quý-->
-                    <div v-if="thongKeTheo === 'Quý'">
-                        <div class="input-groups">
-                            <div class="lable-filter">
-                                <label for="" >Quý:</label>
-                            </div>
-                            <div class="input-filter">
-                              <v-autocomplete
-                                  v-model="selectQuy"
-                                  :items="quy"
-                                  item-text="name"
-                                  item-value="value"
-                                  height="20"
-                              ></v-autocomplete>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Năm-->
-                    <div v-if="thongKeTheo === 'Năm'">
-                        <div class="input-groups">
-                            <div class="lable-filter">
-                                <label for="" >Năm:</label>
-                            </div>
-                            <div class="input-filter">
-                              <v-autocomplete
-                                  v-model="selectNam"
-                                  :items="nam"
-                                  height="20"
-                              ></v-autocomplete>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Cảng vụ-->
-            <div class="item-filter" v-if="optionSelect.maritimeCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Cảng vụ:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                        v-model="selectCangVuHangHai"
-                        :items="cangVuHangHai"
-                        item-text="maritimeNameVN"
-                        item-value="maritimeCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Cảng biển-->
-            <div class="item-filter" v-if="optionSelect.portCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Cảng biển:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                        v-model="selectCangBien"
-                        :items="cangBien"
-                        item-text="name"
-                        item-value="node2"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Khu vực HH-->
-            <div class="item-filter" v-if="optionSelect.portRegionCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Khu vực hàng hải:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectKhuVucHH"
-                      :items="khuVucHH"
-                      item-text="portRegionNameVN"
-                      item-value="portRegionCode"
-                      height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Bến cảng-->
-            <div class="item-filter" v-if="optionSelect.portHarbourCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Bến cảng:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectBenCang"
-                        :items="benCang"
-                        item-text="portHarbourNameVN"
-                        item-value="portHarbourCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Cầu cảng-->
-            <div class="item-filter" v-if="optionSelect.portWharfCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Cầu Cảng:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectCauCang"
-                        :items="cauCang"
-                        item-text="portWharfNameVN"
-                        item-value="portWharfCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Phòng ban-->
-            <div class="item-filter" v-if="optionSelect.departmentCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Phòng ban:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectPhongBan"
-                        :items="phongBan"
-                        item-text="departmentName"
-                        item-value="departmentCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Loại tàu-->
-            <div class="item-filter" v-if="optionSelect.shipTypeCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Loại tàu:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectLoaiTau"
-                        :items="loaiTau"
-                        item-text="shipTypeNameVN"
-                        item-value="shipTypeCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Quốc tịch-->
-            <div class="item-filter" v-if="optionSelect.flagStateCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Quốc tịch:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectQuocTich"
-                        :items="quocTich"
-                        item-text="stateName"
-                        item-value="stateCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-              <!--Tuyến Luồng-->
-            <div class="item-filter" v-if="optionSelect.channelCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Tuyến luồng:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectTuyenLuong"
-                        :items="tuyenLuong"
-                        item-text="name"
-                        item-value="dataItemId"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Loại HH-->
-            <div class="item-filter" v-if="optionSelect.cargoCategorySelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Loại HH:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectLoaiHH"
-                      :items="loaiHH"
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Ngày-->
+            <v-flex xs12 v-if="thongKeTheo === 'Ngày'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Từ ngày:</label></v-flex>
+                <v-flex xs9 class="ngay-bao-cao">
+                  <v-menu
+                      ref="menu2"
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      full-width
+                      max-width="290px"
+                      min-width="290px"
+                  >
+                      <template v-slot:activator="{ on }">
+                      <v-text-field
+                          v-model="fromDateFomated"
+                          hint="MM/DD/YYYY format"
+                          persistent-hint
+                          
+                          @blur="date = parseDate(fromDateFomated)"
+                          
+                          v-on="on"
+                      ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="fromDate" no-title @input="menu2 = false" locale="vn"></v-date-picker>
+                  </v-menu>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12 v-if="thongKeTheo === 'Ngày'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Đến ngày:</label></v-flex>
+                <v-flex xs9 class="ngay-bao-cao">
+                  <v-menu
+                      ref="menu3"
+                      v-model="menu3"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      full-width
+                      max-width="290px"
+                      min-width="290px"
+                  >
+                      <template v-slot:activator="{ on }">
+                      <v-text-field
+                          v-model="toDateFomated"
+                          hint="MM/DD/YYYY format"
+                          persistent-hint
+                          
+                          @blur="date = parseDate(toDateFomated)"
+                          
+                          v-on="on"
+                      ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="toDate" no-title @input="menu3 = false" locale="vn"></v-date-picker>
+                  </v-menu>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Tháng-->
+            <v-flex xs12 v-if="thongKeTheo === 'Tháng'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Tháng:</label></v-flex>
+                <v-flex xs9 class="ngay-bao-cao">
+                    <v-menu
+                      ref="menu"
+                      v-model="menuThang"
+                      :close-on-content-click="false"
+                      :return-value.sync="date"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          v-model="month"
+                          readonly
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="month"
+                        type="month"
+                        no-title
+                        scrollable
+                        locale="vn"
+                      >
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menuThang = false">Cancel</v-btn>
+                        <v-btn text color="primary" @click="$refs.menu.save(month)">OK</v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Quý-->
+            <!-- <v-flex xs12 v-if="thongKeTheo === 'Quý'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Quý:</label></v-flex>
+                <v-flex xs9>
+                  <v-autocomplete
+                      v-model="selectQuy"
+                      :items="quy"
                       item-text="name"
-                      item-value="code0"
-                      height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--HT Đơn vị tính-->
-            <div class="item-filter" v-if="false">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >HT chuyến tải:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectHTChuyenTai"
-                        :items="htChuyenTai"
-                        item-text="goodsTypeNameVN"
-                        item-value="goodsTypeCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--HT xếp dỡ-->
-            <div class="item-filter" v-if="optionSelect.cargoUnloadingSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >HT xếp dỡ:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                        v-model="selectHTXepDo"
-                        :items="htXepDo"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Nhóm HH-->
-            <div class="item-filter" v-if="optionSelect.cargoGroupSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Nhóm HH:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectNhomHH"
-                      :items="nhomHH"
-                      height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Đại lý-->
-            <div class="item-filter" v-if="optionSelect.shipAgencyCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Đại lý:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectDaiLy"
-                        :items="daiLy"
-                        item-text="shipAgencyNameVN"
-                        item-value="shipAgencyCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--Chủ tàu-->
-            <div class="item-filter" v-if="optionSelect.shipOwnerCodeSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >Chủ tàu:</label>
-                </div>
-                <div class="input-filter">
-                    <v-autocomplete
-                      v-model="selectChuTau"
-                        :items="chuTau"
-                        item-text="companyName"
-                        item-value="shipOwnerCode"
-                        height="20"
-                    ></v-autocomplete>
-                </div>
-              </div>
-            </div>
-            <!--GT-->
-            <div class="item-filter" v-if="optionSelect.grossTonnageSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >GT:</label>
-                </div>
-                <div class="input-filter">
-                  <v-text-field
-                    v-model="selectGT"
-                    height="20"
-                  ></v-text-field>
-                </div>
-              </div>
-            </div>
-            <!--DWT-->
-            <div class="item-filter" v-if="optionSelect.deadWeightSelect === 1">
-              <div class="input-groups">
-                <div class="lable-filter">
-                   <label for="" >DWT:</label>
-                </div>
-                <div class="input-filter">
-                  <v-text-field
-                    v-model="selectDWT"
-                    height="20"
-                  ></v-text-field>
-                </div>
-              </div>
-            </div>
+                      item-value="value"
+                      
+                  ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> -->
+            <!--Năm-->
+            <v-flex xs12 v-if="thongKeTheo === 'Năm'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Năm:</label></v-flex>
+                <v-flex xs9>
+                  <v-autocomplete
+                      v-model="selectNam"
+                      :items="nam"
+                      
+                  ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Ngày giờ-->
+            <v-flex xs12 v-if="thongKeTheo === 'Ngày giờ'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Từ ngày:</label></v-flex>
+                <v-flex xs9>
+                  <datetime-picker
+                    v-model="fromDateTime"
+                    :first-day="1"
+                    :show-dst="false"
+                    :show-hours="true"
+                    :show-minutes="true"
+                    :show-seconds="false"
+                  ></datetime-picker>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <br>
+            <br>
+            <v-flex xs12 v-if="thongKeTheo === 'Ngày giờ'">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Đến ngày:</label></v-flex>
+                <v-flex xs9>
+                  <datetime-picker
+                    v-model="toDateTime"
+                    :first-day="1"
+                    :show-dst="false"
+                    :show-hours="true"
+                    :show-minutes="true"
+                    :show-seconds="false"
+                  ></datetime-picker>
+                </v-flex>
+              </v-layout>
+            </v-flex>          
           </v-layout>
+        </div>
+        <div class="row-header" style="height: 38px; display:flex; justify-content: space-between; align-items: center; padding: 0 14px; background: white;">
+          <v-btn class="btn-filter" color="primary" @click="boLoc">Bỏ lọc</v-btn>
+          <v-btn class="btn-filter" color="primary" @click="xuatPDF">Xuất PDF</v-btn>
+          <v-btn class="btn-filter" color="primary" @click="xuatExcel">Xuất Excel</v-btn>
         </div>
       </div>
     </div>
     <div id="ketqua-baocao">
       <div class="row-header" style="height: 38px; overflow: hidden;">
-        <div class="background-triangle-big view_tp_pdf">{{tenMauBaoCao ? tenMauBaoCao : 'Mẫu báo cáo'}}</div>
+        <div class="background-triangle-big view_tp_pdf">{{tenMauBaoCao ? tenMauBaoCao : 'Mẫu báo cáo'}}-{{selectMauBC}}</div>
         <div class="layout row wrap header_tools w-100-xs">Từ <span class="text-bold primary--text">&nbsp;{{fromDateFomated}}&nbsp;</span> đến <span class="text-bold primary--text">&nbsp;{{toDateFomated}}</span></div>
       </div>
       <div style="width: 100%; height: 700px;" v-if='!isLoading && (urlPDF === "")'>
@@ -506,9 +286,14 @@
 import axios from "axios"
 
 import { RepositoryFactory } from '@/api/RepositoryFactory'
+import DatetimePicker from './DatetimePicker.vue'
+
 const BaoCaoApi =  RepositoryFactory.get('baocao')
 export default {
   name: 'BaoCao',
+  components: {
+    'datetime-picker': DatetimePicker
+  },
   computed: {
     maritimeCurrent () {
       return this.$store.getters["baocao/maritimeCurrent"]
@@ -540,9 +325,10 @@ export default {
         thang: [{name: 'Tháng 1', value: 0}, {name: 'Tháng 2', value: 1},{name: 'Tháng 3', value: 2},{name: 'Tháng 4', value: 3},{name: 'Tháng 5', value: 4},{name: 'Tháng 6', value: 5},{name: 'Tháng 7', value: 6},{name: 'Tháng 8', value: 7},{name: 'Tháng 9', value: 8},{name: 'Tháng 10', value: 9},{name: 'Tháng 11', value: 10},{name: 'Tháng 12', value: 11}],
         quy: [{name: 'Quý 1', value: 0}, {name: 'Quý 2', value: 1}, {name: 'Quý 3', value: 2}, {name: 'Quý 4', value: 3}],
         nam: [],
-        items: ['Ngày', 'Tháng', 'Quý', 'Năm'],
+        items: ['Ngày', 'Ngày giờ', 'Tháng', 'Năm'],
         selectNhomBC: '',
         selectMauBC: '',
+        nguoiTaoBC: '',
         selectCangVuHangHai: '',
         selectCangBien: '',
         selectKhuVucHH: '',
@@ -573,9 +359,13 @@ export default {
         menu1: false,
         menu2: false,
         menu3: false,
+        menuThang: false,
+        month: new Date().toISOString().substr(0, 7),
         createDate: new Date().toISOString().substr(0, 10),
         fromDate: new Date().toISOString().substr(0, 10),
         toDate: new Date().toISOString().substr(0, 10),
+        fromDateTime: vm.formatDateTime(new Date()),
+        toDateTime: vm.formatDateTime(new Date()),
         createDateFomated: vm.formatDate(new Date().toISOString().substr(0, 10)),
         fromDateFomated: vm.formatDate(new Date().toISOString().substr(0, 10)),
         toDateFomated: vm.formatDate(new Date().toISOString().substr(0, 10)),
@@ -709,14 +499,36 @@ export default {
       link.click()
     },
     xuatPDF() {
+      let fromDate = ''
+      let toDate = ''
+      let date = 0
+      if (this.thongKeTheo === 'Tháng') {
+        const [year, month] = this.month.split('-')
+        let date = new Date(year,month,-1).getDate(); 
+        fromDate = this.month + '-' + '01'
+        toDate = this.month + '-' + (date + 1)
+      }
+      if (this.thongKeTheo === 'Ngày') {
+        fromDate = this.fromDateFomated
+        toDate = this.toDateFomated
+      }
+      if (this.thongKeTheo === 'Ngày giờ') {
+        fromDate = this.fromDateTime
+        toDate = this.toDateTime
+      }
+      if (this.thongKeTheo === 'Năm') {
+        fromDate = this.selectNam + '-01-01'
+        toDate = this.selectNam + '-12-31'
+      }
       let vm = this
       let params = {
         reportCode: this.selectMauBC,
         maritimeCode: this.selectCangVuHangHai || this.maritimeCurrent.maritimeCode,
         createDate: this.createDateFomated,
-        fromDate: this.fromDateFomated,
-        toDate: this.toDateFomated
+        fromDate,
+        toDate
       }
+      console.log('params:', params)
       var renderURLInit = "?p_p_id=baocaopmnvaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getReportPDF&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1"
       var orginURL = window.location.href
       var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
@@ -730,12 +542,33 @@ export default {
       )
     },
     xuatExcel() {
+      let fromDate = ''
+      let toDate = ''
+      let date = 0
+      if (this.thongKeTheo === 'Tháng') {
+        const [year, month] = this.month.split('-')
+        let date = new Date(year,month,-1).getDate(); 
+        fromDate = this.month + '-' + '01'
+        toDate = this.month + '-' + (date + 1)
+      }
+      if (this.thongKeTheo === 'Ngày') {
+        fromDate = this.fromDateFomated
+        toDate = this.toDateFomated
+      }
+      if (this.thongKeTheo === 'Ngày giờ') {
+        fromDate = this.fromDateTime
+        toDate = this.toDateTime
+      }
+      if (this.thongKeTheo === 'Năm') {
+        fromDate = this.selectNam + '-01-01'
+        toDate = this.selectNam + '-12-31'
+      }
       let params = {
         reportCode: this.selectMauBC,
         maritimeCode: this.selectCangVuHangHai || this.maritimeCurrent.maritimeCode,
         createDate: this.createDateFomated,
-        fromDate: this.fromDateFomated,
-        toDate: this.toDateFomated
+        fromDate,
+        toDate
       }
       var renderURLInit = "?p_p_id=baocaopmnvaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getReportEXCEL&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1"
       var orginURL = window.location.href
@@ -790,6 +623,15 @@ export default {
 
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
+    },
+    formatDateTime(date) {
+      let YYYY = date.getFullYear()
+      let MM = (date.getMonth() + 1) < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)
+      let DD = date.getDate() <=10 ? ('0' + date.getDate()) : date.getDate()
+      let HH = date.getHours() <= 10 ? ('0' + date.getHours()) : date.getHours()
+      let II = date.getMinutes() <= 10 ? ('0' + date.getMinutes()) : date.getMinutes()
+      let dateTime =  DD + '/' + MM + '/' + YYYY + ' ' + HH + ':' + II
+      return dateTime
     },
     parseDate (date) {
       if (!date) return null
@@ -894,11 +736,11 @@ export default {
     font-family: 'Roboto', sans-serif;
   }
   #filter-baocao{
-    width: 23%;
+    width: 30%;
     box-shadow: 2px 0 5px -2px #888;
   }
   #ketqua-baocao{
-    width: 87%;
+    width: 70%;
   }
   #BaoCao .btn-filter{
     width: 30%!important;
@@ -917,8 +759,7 @@ export default {
     display: flex;
     align-items: center;
   }
-  #BaoCao .lable-filter{
-    width: 30%;
+  #BaoCao label{
     font-size: 13px;
     font-weight: 600;
     color: #1976D2;
@@ -1044,5 +885,8 @@ export default {
   }
   #BaoCao i{
     font-size: 15px!important;
+  }
+  #BaoCao .v-input input {
+    max-height: 25px;
   }
 </style>

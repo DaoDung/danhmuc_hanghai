@@ -70,6 +70,7 @@
                 <td class="text-xs-center">{{ props.item.portRegionCode }}</td>
                 <td class="text-xs-center">{{ props.item.portRegionNameVN }}</td>
                 <td class="text-xs-center">{{ props.item.name }}</td>
+                <td class="text-xs-center">{{ props.item.sequenceNo }}</td>
                 <td class="text-xs-center" :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" : "Đang sử dụng"}}</td> 
                 <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
                   <span @click="infoCategory(props.item)" class="action-table"><strong>Xem</strong></span>
@@ -126,6 +127,11 @@ export default {
         {
           sortable: false,
           text: "Cảng biển hàng hải",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Thứ tự hiển thị",
           align: "center"
         },
         {

@@ -192,7 +192,6 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ngày cấp bằng:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-dialog
@@ -211,8 +210,6 @@
                         readonly
                         v-on="on"
                         height="25"
-                        required
-                        :rules="pilotCertificateDateRules"
                       ></v-text-field>
                     </template>
                     <v-date-picker v-model="pilotCertificateDate" scrollable>
@@ -232,14 +229,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Số hiệu:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.pilotNo"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="pilotNoRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -249,14 +243,11 @@
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Số bằng:</label>
-                  <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
                   <v-text-field
                     v-model="categoryModel.pilotCertificateNo"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                    required
-                    :rules="pilotCertificateNoRules"
                     height="25"
                   ></v-text-field>
                 </v-flex>
@@ -301,12 +292,10 @@ export default {
       pilotCertificateDate: new Date().toISOString().substr(0, 10),
       pilotCertificateDateFormated: '',
       pilotCategoryCodeRules: [v => !!v || "Chưa chọn Hạng hoa tiêu"],
-      pilotCertificateNoRules: [v => !!v || "Chưa số hiệu bằng "],
       pilotNoRules: [v => !!v || "Chưa nhập số hiệu công ty "],
       pilotNameRules: [v => !!v || "Chưa nhập tên hoa tiêu"],
       pilotCompanyCodeRules: [v => !!v || "Chưa chọn Công ty hoa tiêu"],
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
-      pilotCertificateDateRules: [v => !!v || "Chưa chọn ngày cấp bằng"], 
       modal: false,
       modal2: false,
       modal3: false,

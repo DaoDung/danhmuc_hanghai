@@ -60,7 +60,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Giới hạn chiều dài tối đa:</label>
+                  <label for>Giới hạn chiều dài tối đa(m):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -77,7 +77,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Trọng tải đăng ký toàn phần:</label>
+                  <label for>Dung tích toàn phần:</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -94,7 +94,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Thời gian dẫn tàu an toàn:</label>
+                  <label for>Thời gian dẫn tàu an toàn(giờ):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>

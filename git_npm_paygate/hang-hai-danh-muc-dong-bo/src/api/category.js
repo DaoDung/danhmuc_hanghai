@@ -678,7 +678,7 @@ const hasServer = {
   addCategoryListItems (query, cb, errorcb) {
     let Url = query.url + '&LAN_CAP_MOI_DU_LIEU=LAN_CAP_MOI_DU_LIEU'
     for (const key in query.params) {
-      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined" && query.params[key]) {
         Url += '&' + key + '=' + query.params[key]
       }
     }
@@ -694,7 +694,7 @@ const hasServer = {
   editCategoryListItems (query, cb, errorcb) {
     let Url = query.url + '&LAN_SUA_DU_LIEU=LAN_SUA_DU_LIEU'
     for (const key in query.params) {
-      if (query.params[key] !== '' && typeof query.params[key] != "undefined") {
+      if (query.params[key] !== '' && typeof query.params[key] != "undefined"  && query.params[key]) {
         Url += '&' + key + '=' + query.params[key]
       }
     }

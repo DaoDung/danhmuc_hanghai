@@ -8,7 +8,7 @@
           </div>
         </v-flex>
         <v-flex xs12>
-          <form class="form-chi-tiet-danh-muc">
+          <v-form ref="form" lazy-validation class="form-chi-tiet-danh-muc">
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
@@ -51,7 +51,24 @@
                 </v-flex>
               </v-layout>
             </v-flex>
-          </form>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Phân loại:</label>  
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-autocomplete
+                    v-model="categoryModel.portType"
+                    :items="listPhanLoai"
+                    item-text="name"
+                    item-value="value"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-form>
         </v-flex>
         <v-flex xs12 class="text-lg-right">
           <button
@@ -81,8 +98,14 @@ export default {
         modifiedDate: "",
         id: 0,
         portName: "",
-        portCode: ""
-      }
+        portCode: "",
+        portType: 0,
+      },
+      listPhanLoai: [
+        { value: 0, name: 'Cảng biển'}, 
+        { value: 1, name: 'Cảng thủy nội địa'},
+        { value: 2, name: 'Cảng ngoài đảo(tuyến bờ ra đảo)'}
+      ],
     };
   },
   computed: {
@@ -95,11 +118,11 @@ export default {
   },
   created() {
     if (this.$route.query.aticon === "sua-danh-muc") {
-      this.btnText = "Cập nhập bến cảng";
+      this.btnText = "Cập nhập cảng biển";
     } else if (this.$route.query.aticon === "them-danh-muc") {
-      this.btnText = "Thêm mới bến cảng";
+      this.btnText = "Thêm mới cảng biển";
     } else if (this.$route.query.aticon === "xoa-danh-muc") {
-      this.btnText = "Đánh dấu xóa bến cảng";
+      this.btnText = "Đánh dấu xóa cảng biển";
     }
   },
   mounted() {
@@ -112,17 +135,40 @@ export default {
         query: { categoryId: this.$route.query.categoryId }
       });
     },
+    submit() {
+      if (this.$route.query.aticon === "sua-danh-muc") {
+        if (this.$refs.form.validate()) {
+          this.editCategory();
+        }
+      }
+    },
+    async editCategory() {
+      let params = {
+        categoryId: this.categoryId,
+        portRegionCode: this.categoryModel.portName,
+        portHarbourCode: this.categoryModel.portCode,
+        portWharfNameVN: this.categoryModel.portType,
+        syncVersion: this.categoryModel.syncVersion,
+      };
+
+      await this.$store
+        .dispatch("category/editCategoryListItems", params)
+        .then();
+      this.back();
+    },
     getDetailCategory() {
       let vm = this;
       if (this.$route.query.aticon !== "them-danh-muc") {
         let params = {
           categoryId: this.categoryId,
-          portId: this.id
+          portId: this.id,
         };
         this.$store.dispatch("category/getDetailCategory", params).then(
           res => {
             vm.categoryModel.portName = res.portName;
             vm.categoryModel.portCode = res.portCode;
+            vm.categoryModel.portType = res.portType;
+            vm.categoryModel.syncVersion= res.syncVersion;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

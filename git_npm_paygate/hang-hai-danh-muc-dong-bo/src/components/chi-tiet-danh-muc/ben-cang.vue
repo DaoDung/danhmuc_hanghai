@@ -105,6 +105,20 @@
               </v-layout>
             </v-flex>
             <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Thứ tự hiển thị</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.sequenceNo"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
               <v-layout>
                 <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ghi chú:</label>
@@ -157,7 +171,8 @@ export default {
         portHarbourCode: "",
         portRegion: "",
         portRegionCode: "",
-        portCodeHH: ""
+        portCodeHH: "",
+        sequenceNo: null
       }
     };
   },
@@ -228,7 +243,8 @@ export default {
         portHarbourCode: this.id,
         note: this.categoryModel.note,
         portHarbourNameVN: this.categoryModel.portHarbourNameVN,
-        syncVersion: this.categoryModel.syncVersion
+        syncVersion: this.categoryModel.syncVersion,
+        sequenceNo: this.categoryModel.sequenceNo
       };
       await this.$store
         .dispatch("category/editCategoryListItems", params)
@@ -259,7 +275,8 @@ export default {
         portRegion: this.categoryModel.portRegion,
         //portRegionCode: this.categoryModel.portRegionCode,
         note: this.categoryModel.note,
-        portHarbourNameVN: this.categoryModel.portHarbourNameVN
+        portHarbourNameVN: this.categoryModel.portHarbourNameVN,
+        sequenceNo: this.categoryModel.sequenceNo
       };
 
       await this.$store
@@ -292,6 +309,7 @@ export default {
             vm.categoryModel.portRegionCode = res.portRegionCode;
             vm.categoryModel.portCodeHH = res.portCodeHH;
             vm.categoryModel.syncVersion = res.syncVersion;
+            vm.categoryModel.sequenceNo = res.sequenceNo;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

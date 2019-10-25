@@ -138,7 +138,7 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for>Chiều dài lớn nhất:</label>
+                  <label for>Chiều dài lớn nhất(m):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md8>

@@ -182,11 +182,49 @@
                   <v-text-field
                     v-model="categoryModel.maxDraft"
                     :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
-                   
-                   
-                    
                     height="25"
                   ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Thứ tự hiển thị:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.sequenceNo"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Phân loại:</label>  
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-autocomplete
+                    v-model="categoryModel.portWharfType"
+                    :items="listPhanLoai"
+                    item-text="name"
+                    item-value="value"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Thuộc quản lý của Vinalines:</label>
+                </v-flex>
+                <v-flex xs12 md8 class="text-sm-left">
+                  <input type="checkbox"  v-model="categoryModel.managedVinalines">
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -221,10 +259,8 @@
   </div>
 </template>
 <script>
-import {VMoney} from 'v-money'
 
 export default {
-  directives: {money: VMoney},
   data() {
     return {
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
@@ -236,12 +272,10 @@ export default {
       selectMaritime: "",
       portRegionCodeModel: "",
       btnText: "",
-      money: {
-        decimal: ',',
-        thousands: '.',
-        precision: 2,
-        masked: false
-      },
+      listPhanLoai: [
+        { value: 0, name: 'Cầu cảng'}, 
+        { value: 1, name: 'Điểm neo'}
+      ],
       categoryModel: {
         syncVersion: "",
         modifiedDate: "",
@@ -258,7 +292,10 @@ export default {
         cityCode: "",
         dwt: '',
         loa: '',
-        maxDraft: ''
+        maxDraft: '',
+        sequenceNo: null,
+        portWharfType: 0,
+        managedVinalines: 0,
       },
       BenCang: [],
       KhuVucHangHai: []
@@ -347,7 +384,10 @@ export default {
         syncVersion: this.categoryModel.syncVersion,
         dwt: this.categoryModel.dwt,
         loa: this.categoryModel.loa,
-        maxDraft: this.categoryModel.maxDraft
+        maxDraft: this.categoryModel.maxDraft,
+        sequenceNo: this.categoryModel.sequenceNo,
+        portWharfType: this.categoryModel.portWharfType ? '1' : '0',
+        managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
       };
 
       await this.$store
@@ -376,7 +416,10 @@ export default {
         portWharfNameVN: this.categoryModel.portWharfName,
         dwt: this.categoryModel.dwt,
         loa: this.categoryModel.loa,
-        maxDraft: this.categoryModel.maxDraft
+        maxDraft: this.categoryModel.maxDraft,
+        sequenceNo: this.categoryModel.sequenceNo,
+        portWharfType: this.categoryModel.portWharfType ? '1' : '0',
+        managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
       };
 
       await this.$store
@@ -411,6 +454,9 @@ export default {
             vm.categoryModel.dwt = res.dwt;
             vm.categoryModel.loa = res.loa;
             vm.categoryModel.maxDraft = res.maxDraft;
+            vm.categoryModel.sequenceNo= this.categoryModel.sequenceNo
+            vm.categoryModel.portWharfType= this.categoryModel.portWharfType
+            vm.categoryModel.managedVinalines= this.categoryModel.managedVinalines
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =
