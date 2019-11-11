@@ -120,6 +120,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.tugboatShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Công suất máy (HP):</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
@@ -336,6 +350,7 @@ export default {
         tugboatCompanyName: "",
         shipCode: "",
         shipName: "",
+        tugboatShortName: "",
         power: "",
         loa: "",
         breadth: "",
@@ -400,6 +415,7 @@ export default {
         // tugboatCompanyName: this.categoryModel.tugboatCompanyName,
         _shipCode: this.id,
         _shipName: this.categoryModel.shipName,
+        tugboatShortName: this.categoryModel.tugboatShortName,
         power: this.categoryModel.power,
         loa: this.categoryModel.loa,
         remarks: this.categoryModel.remarks,
@@ -455,6 +471,7 @@ export default {
         // tugboatCompanyName: this.categoryModel.tugboatCompanyName,
         // shipCode: this.id,
         _shipName: this.categoryModel.shipName,
+        tugboatShortName: this.categoryModel.tugboatShortName,
         power: this.categoryModel.power,
         loa: this.categoryModel.loa,
         remarks: this.categoryModel.remarks,
@@ -495,6 +512,7 @@ export default {
             vm.categoryModel.tugboatCompanyName = res.tugboatCompanyName;
             vm.categoryModel.shipCode = res.shipCode;
             vm.categoryModel.shipName = res.shipName;
+            vm.categoryModel.tugboatShortName = res.tugboatShortName
             vm.categoryModel.clearanceHeight = res.clearanceHeight;
             vm.categoryModel.remarks = res.remarks;
             vm.categoryModel.power = res.power;

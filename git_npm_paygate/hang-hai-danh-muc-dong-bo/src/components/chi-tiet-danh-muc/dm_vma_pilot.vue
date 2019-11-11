@@ -154,6 +154,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.pilotShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Ngày sinh:</label>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -313,6 +327,7 @@ export default {
         pilotCompanyName: "",
         pilotCode: "",
         pilotName: "",
+        pilotShortName: "",
         pilotNo: "",
         pilotBOD: "",
         pilotCertificateNo: "",
@@ -392,6 +407,7 @@ export default {
         pilotCompanyName: this.categoryModel.pilotCompanyName,
         pilotCode: this.id,
         pilotName: this.categoryModel.pilotName,
+        pilotShortName: this.categoryModel.pilotShortName,
         pilotNo: this.categoryModel.pilotNo,
         pilotBOD: this.pilotBOD,
         pilotCertificateNo: this.categoryModel.pilotCertificateNo,
@@ -442,6 +458,7 @@ export default {
         pilotCompanyName: this.categoryModel.pilotCompanyName,
         // pilotCode: this.categoryModel.pilotCode,
         pilotName: this.categoryModel.pilotName,
+        pilotShortName: this.categoryModel.pilotShortName,
         pilotNo: this.categoryModel.pilotNo,
         pilotBOD: this.pilotBOD,
         pilotCertificateNo: this.categoryModel.pilotCertificateNo,
@@ -486,7 +503,7 @@ export default {
             this.pilotCertificateDateFormated = this.formatDate(vm.pilotCertificateDate)
             vm.categoryModel.pilotCategoryCode = res.pilotCategoryCode;
             vm.categoryModel.syncVersion = res.syncVersion;
-
+            vm.categoryModel.pilotShortName = res.pilotShortName
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

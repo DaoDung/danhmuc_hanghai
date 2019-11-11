@@ -108,6 +108,7 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.shipOwnerCode  }}</td>
                 <td class="text-xs-center">{{ props.item.companyName}}</td>
+                <td class="text-xs-center">{{ props.item.companyShortName}}</td>
                 <td>{{ props.item.companyAddress}}</td>
                 <td class="text-xs-center">{{ props.item.telNo}}</td>
                 <td class="text-xs-center" :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
@@ -164,6 +165,12 @@ export default {
         {
           sortable: false,
           text: 'Tên chủ tàu / Người khai thác' ,
+          value: 'city',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt' ,
           value: 'city',
           align: 'center'
         },

@@ -93,6 +93,7 @@
                   <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                   <td class="text-xs-center">{{ props.item.tugboatCompanyCode  }}</td>
                   <td class="text-xs-center">{{ props.item.tugboatCompanyName }}</td>
+                  <td class="text-xs-center">{{ props.item.companyShortName }}</td>
                   <td class="text-xs-center">{{ props.item.contactEmail}}</td>
                   <td class="text-xs-center">{{ props.item.faxNo}}</td>
                   <td class="text-xs-center">{{ props.item.telNo}}</td>
@@ -148,6 +149,12 @@ export default {
         {
           sortable: false,
           text: 'Tên công ty tàu lai',
+          value: 'country',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt',
           value: 'country',
           align: 'center'
         },

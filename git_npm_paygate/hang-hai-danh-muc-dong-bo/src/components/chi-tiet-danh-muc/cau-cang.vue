@@ -221,6 +221,23 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Đánh dấu điểm neo theo Cảng vụ tính phí:</label>  
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-autocomplete
+                    v-model="categoryModel.portWharfPayment"
+                    :items="listDanhDauDiemNeoTheoCangVuTinhPhi"
+                    item-text="name"
+                    item-value="value"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Thuộc quản lý của Vinalines:</label>
                 </v-flex>
                 <v-flex xs12 md8 class="text-sm-left">
@@ -276,6 +293,11 @@ export default {
         { value: 0, name: 'Cầu cảng'}, 
         { value: 1, name: 'Điểm neo'}
       ],
+      listDanhDauDiemNeoTheoCangVuTinhPhi: [
+        { value: 0, name: 'Không tính phí'},
+        { value: 1, name: 'Do cảng vụ tính phí'},
+        { value: 2, name: 'Do doanh nghiệp tính phí'}
+      ],
       categoryModel: {
         syncVersion: "",
         modifiedDate: "",
@@ -295,6 +317,7 @@ export default {
         maxDraft: '',
         sequenceNo: null,
         portWharfType: 0,
+        portWharfPayment: 0,
         managedVinalines: 0,
       },
       BenCang: [],
@@ -386,7 +409,8 @@ export default {
         loa: this.categoryModel.loa,
         maxDraft: this.categoryModel.maxDraft,
         sequenceNo: this.categoryModel.sequenceNo,
-        portWharfType: this.categoryModel.portWharfType ? '1' : '0',
+        portWharfType: this.categoryModel.portWharfType.toString(),
+        portWharfPayment: this.categoryModel.portWharfPayment.toString(),
         managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
       };
 
@@ -418,7 +442,8 @@ export default {
         loa: this.categoryModel.loa,
         maxDraft: this.categoryModel.maxDraft,
         sequenceNo: this.categoryModel.sequenceNo,
-        portWharfType: this.categoryModel.portWharfType ? '1' : '0',
+        portWharfType: this.categoryModel.portWharfType.toString(),
+        portWharfPayment: this.categoryModel.portWharfPayment.toString(),
         managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
       };
 
@@ -456,6 +481,7 @@ export default {
             vm.categoryModel.maxDraft = res.maxDraft;
             vm.categoryModel.sequenceNo= this.categoryModel.sequenceNo
             vm.categoryModel.portWharfType= this.categoryModel.portWharfType
+            vm.categoryModel.portWharfPayment = this.categoryModel.portWharfPayment 
             vm.categoryModel.managedVinalines= this.categoryModel.managedVinalines
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
@@ -501,6 +527,20 @@ export default {
 
         vm.selectMaritime = vm.categoryModel.maritimeCode;
       }
+    },
+    getValue (val) {
+      let result = ''
+      switch (val) {
+        case 1:
+          result = '1'
+          break
+        case 0: 
+          result = '0'
+          break
+        case 2:
+          result = '2'
+      }
+      return result
     }
   }
 };

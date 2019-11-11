@@ -117,6 +117,20 @@
               <v-flex xs12>
                 <v-layout align-center>
                   <v-flex xs12 md4 class="text-sm-left">
+                    <label for>Tên viết tắt:</label>
+                  </v-flex>
+                  <v-flex xs12 md8>
+                    <v-text-field
+                      v-model="categoryModel.companyShortName"
+                      :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                      height="25"
+                    ></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+              <v-flex xs12>
+                <v-layout align-center>
+                  <v-flex xs12 md4 class="text-sm-left">
                     <label for>Địa chỉ:</label>
                   </v-flex>
                   <v-flex xs12 md8>
@@ -288,6 +302,7 @@ export default {
         shipOwnerCode: "",
         taxCode: "",
         companyName: "",
+        companyShortName: "",
         companyAddress: "",
         contactEmail: "",
         telNo: "",
@@ -382,6 +397,7 @@ export default {
         shipOwnerCode: this.categoryModel.shipOwnerCode,
         taxCode: this.taxCodeModel,
         companyName: this.categoryModel.companyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -432,6 +448,7 @@ export default {
         // shipOwnerCode: this.categoryModel.shipOwnerCode,
         taxCode: this.taxCodeModel,
         companyName: this.categoryModel.companyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -466,6 +483,7 @@ export default {
             vm.categoryModel.shipOwnerCode = res.shipOwnerCode;
             vm.categoryModel.taxCode = res.taxCode;
             vm.categoryModel.companyName = res.companyName;
+            vm.categoryModel.companyShortName = res.companyShortName;
             vm.categoryModel.companyAddress = res.companyAddress;
             vm.categoryModel.contactEmail = res.contactEmail;
             vm.categoryModel.telNo = res.telNo;

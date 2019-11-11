@@ -68,6 +68,20 @@
                 </v-flex>
               </v-layout>
             </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Thứ tự:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.portOrder"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
           </v-form>
         </v-flex>
         <v-flex xs12 class="text-lg-right">
@@ -99,12 +113,13 @@ export default {
         id: 0,
         portName: "",
         portCode: "",
-        portType: 0,
+        portType: '0',
+        portOrder: ''
       },
       listPhanLoai: [
-        { value: 0, name: 'Cảng biển'}, 
-        { value: 1, name: 'Cảng thủy nội địa'},
-        { value: 2, name: 'Cảng ngoài đảo(tuyến bờ ra đảo)'}
+        { value: '0', name: 'Cảng biển'}, 
+        { value: '1', name: 'Cảng thủy nội địa'},
+        { value: '2', name: 'Cảng ngoài đảo(tuyến bờ ra đảo)'}
       ],
     };
   },
@@ -145,9 +160,10 @@ export default {
     async editCategory() {
       let params = {
         categoryId: this.categoryId,
-        portRegionCode: this.categoryModel.portName,
-        portHarbourCode: this.categoryModel.portCode,
-        portWharfNameVN: this.categoryModel.portType,
+        portName: this.categoryModel.portName,
+        portCode: this.categoryModel.portCode,
+        portOrder: this.categoryModel.portOrder,
+        portType: this.categoryModel.portType,
         syncVersion: this.categoryModel.syncVersion,
       };
 
@@ -169,6 +185,7 @@ export default {
             vm.categoryModel.portCode = res.portCode;
             vm.categoryModel.portType = res.portType;
             vm.categoryModel.syncVersion= res.syncVersion;
+            vm.categoryModel.portOrder = res.portOrder;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

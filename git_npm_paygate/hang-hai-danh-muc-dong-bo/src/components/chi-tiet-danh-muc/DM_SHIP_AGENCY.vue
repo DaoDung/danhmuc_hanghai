@@ -58,6 +58,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.shipAgencyShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Địa chỉ:</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
@@ -175,6 +189,7 @@ export default {
         modifiedDate: "",
         shipAgencyCode: "",
         shipAgencyNameVN: "",
+        shipAgencyShortName: "",
         addressVN: "",
         phone: "",
         fax: "",
@@ -237,6 +252,7 @@ export default {
 
             vm.categoryModel.shipAgencyCode = res.shipAgencyCode;
             vm.categoryModel.shipAgencyNameVN = res.shipAgencyNameVN;
+            vm.categoryModel.shipAgencyShortName = res.shipAgencyShortName;
             vm.categoryModel.addressVN = res.addressVN;
             vm.categoryModel.phone = res.phone;
             vm.categoryModel.fax = res.fax;
@@ -288,6 +304,7 @@ export default {
         categoryId: this.categoryId,
         shipAgencyCode: this.categoryModel.shipAgencyCode,
         shipAgencyNameVN: this.categoryModel.shipAgencyNameVN,
+        shipAgencyShortName: this.categoryModel.shipAgencyShortName,
         phone: this.categoryModel.phone,
         fax: this.categoryModel.fax,
         email: this.categoryModel.email,
@@ -328,6 +345,7 @@ export default {
         categoryId: this.categoryId,
         shipAgencyCode: this.categoryModel.shipAgencyCode,
         shipAgencyNameVN: this.categoryModel.shipAgencyNameVN,
+        shipAgencyShortName: this.categoryModel.shipAgencyShortName,
         phone: this.categoryModel.phone,
         fax: this.categoryModel.fax,
         email: this.categoryModel.email,

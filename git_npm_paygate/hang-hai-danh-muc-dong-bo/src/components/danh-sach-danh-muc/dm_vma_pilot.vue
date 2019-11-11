@@ -137,6 +137,7 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCode  }}</td>
                 <td class="text-xs-center">{{ props.item.pilotName }}</td>
+                <td class="text-xs-center">{{ props.item.pilotShortName }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCompanyName}}</td>
                 <td class="text-xs-center">{{ formatDate(props.item.pilotCertificateDate.substr(0, 10))}}</td>
                 <td class="text-xs-center">{{ props.item.pilotNo}}</td>
@@ -200,7 +201,13 @@ export default {
         },
         {
           sortable: false,
-          text: 'Hoa tiêu',
+          text: 'Tên hoa tiêu',
+          value: 'country',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt',
           value: 'country',
           align: 'center'
         },

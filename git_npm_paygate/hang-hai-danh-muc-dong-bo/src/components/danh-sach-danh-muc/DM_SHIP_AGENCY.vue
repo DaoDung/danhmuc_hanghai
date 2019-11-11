@@ -72,6 +72,7 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.shipAgencyCode }}</td>
                 <td class="text-xs-center">{{ props.item.shipAgencyNameVN }}</td>
+                <td class="text-xs-center">{{ props.item.shipAgencyShortName }}</td>
                 <td class="text-xs-center">{{ props.item.phone }}</td>
                 <td class="text-xs-center">{{ props.item.fax }}</td>
                 <td class="text-xs-center">{{ props.item.email }}</td>
@@ -124,6 +125,11 @@ export default {
         {
           sortable: false,
           text: "Tên đại lý",
+          align: "center"
+        },
+        {
+          sortable: false,
+          text: "Tên viết tắt",
           align: "center"
         },
         {

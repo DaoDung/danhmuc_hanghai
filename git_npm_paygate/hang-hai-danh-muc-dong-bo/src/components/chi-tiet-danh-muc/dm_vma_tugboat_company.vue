@@ -88,6 +88,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.companyShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Địa chỉ</label>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -198,6 +212,7 @@ export default {
         maritimeName: "",
         tugboatCompanyCode: "",
         tugboatCompanyName: "",
+        companyShortName: "",
         companyAddress: "",
         contactEmail: "",
         telNo: "",
@@ -254,6 +269,7 @@ export default {
         categoryId: this.categoryId,
         tugboatCompanyCode: this.id,
         tugboatCompanyName: this.categoryModel.tugboatCompanyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -297,6 +313,7 @@ export default {
       let params = {
         categoryId: this.categoryId,
         tugboatCompanyName: this.categoryModel.tugboatCompanyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -328,6 +345,7 @@ export default {
           .then(res => {
             vm.categoryModel.tugboatCompanyCode = res.tugboatCompanyCode;
             vm.categoryModel.tugboatCompanyName = res.tugboatCompanyName;
+            vm.categoryModel.companyShortName = res.companyShortName;
             vm.categoryModel.companyAddress = res.companyAddress;
             vm.categoryModel.portHarbourNameVN = res.portHarbourNameVN;
             vm.categoryModel.telNo = res.telNo;

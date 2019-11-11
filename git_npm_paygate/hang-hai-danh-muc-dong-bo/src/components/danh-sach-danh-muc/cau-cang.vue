@@ -142,6 +142,7 @@
                 <td class="text-xs-center">{{ props.item.maxDraft}}</td>
                 <td class="text-xs-center">{{ props.item.sequenceNo }}</td>
                 <td class="text-xs-center">{{ getPortWarfType(props.item.portWharfType) }}</td>
+                <td class="text-xs-center">{{ getPortWharfPayment(props.item.portWharfPayment) }}</td>
                 <td class="text-xs-center"><input type="checkbox"  v-model="props.item.managedVinalines" onclick="return false;"></td>
                 <td class="text-xs-center"  :class="{'td-trangthai': props.item.isDelete }">{{ props.item.isDelete ? "Đã đánh dấu xóa" :  "Đang sử dụng" }}</td>
                 <td class="text-xs-center" style="width: 90px;padding-left: 0px;padding-right: 5px;">
@@ -249,6 +250,12 @@ export default {
         },
         {
           sortable: false,
+          text: 'Đánh dấu điểm neo theo Cảng vụ tính phí',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
           text: 'Thuộc quản lý của Vinalines',
           value: 'salary',
           align: 'center'
@@ -343,6 +350,21 @@ export default {
           break
       }
       return namePortWharfType
+    },
+    getPortWharfPayment (portWharfPayment) {
+      let namePortWharfPayment = ''
+      switch (portWharfPayment) {
+        case 0:
+          namePortWharfPayment = 'Không tính phí'
+          break
+        case 1:
+          namePortWharfPayment = 'Do cảng vụ tính phí'
+          break
+        case 2:
+          namePortWharfPayment = 'Do doanh nghiệp tính phí'
+          break
+      }
+      return namePortWharfPayment
     },
     editCategory (item) {
       this.$store.dispatch('category/setCategoryModel', item)

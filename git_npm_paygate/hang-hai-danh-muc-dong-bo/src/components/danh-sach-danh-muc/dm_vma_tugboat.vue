@@ -117,6 +117,7 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.shipCode  }}</td>
                 <td class="text-xs-center">{{ props.item.shipName }}</td>
+                <td class="text-xs-center">{{ props.item.tugboatShortName }}</td>
                 <td class="text-xs-center">{{ props.item.tugboatCompanyName}}</td>
                 <td class="text-xs-center">{{ props.item.power}}</td>
                 <td class="text-xs-center">{{ props.item.gt}}</td>
@@ -182,6 +183,12 @@ export default {
         {
           sortable: false,
           text: 'Tên tàu lai',
+          value: 'country',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt',
           value: 'country',
           align: 'center'
         },

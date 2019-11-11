@@ -124,6 +124,7 @@
                   <td class="text-xs-center">{{ props.item.shipYardCode  }}</td>
                   <td class="text-xs-center">{{ props.item.taxCode }}</td>
                   <td class="text-xs-center">{{ props.item.companyName}}</td>
+                  <td class="text-xs-center">{{ props.item.companyShortName}}</td>
                   <td>{{ props.item.companyAddress}}</td>
                   <td class="text-xs-center">{{ props.item.contactEmail}}</td>
                   <td class="text-xs-center">{{ props.item.telNo}}</td>
@@ -187,6 +188,12 @@ export default {
         {
           sortable: false,
           text: 'Công ty sửa chữa tàu',
+          value: 'salary',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt',
           value: 'salary',
           align: 'center'
         },

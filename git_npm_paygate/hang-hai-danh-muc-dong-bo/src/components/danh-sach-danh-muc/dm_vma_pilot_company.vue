@@ -107,6 +107,7 @@
                 <td class="text-xs-center">{{  page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCompanyCode  }}</td>
                 <td class="text-xs-center">{{ props.item.pilotCompanyName }}</td>
+                <td class="text-xs-center">{{ props.item.companyShortName }}</td>
                 <td>{{ props.item.companyAddress}}</td>
                 <td class="text-xs-center">{{ props.item.telNo}}</td>      
                 <td class="text-xs-center">{{ props.item.remarks}}</td>
@@ -162,6 +163,12 @@ export default {
         {
           sortable: false,
           text: 'Tên công ty hoa tiêu',
+          value: 'country',
+          align: 'center'
+        },
+        {
+          sortable: false,
+          text: 'Tên viết tắt',
           value: 'country',
           align: 'center'
         },

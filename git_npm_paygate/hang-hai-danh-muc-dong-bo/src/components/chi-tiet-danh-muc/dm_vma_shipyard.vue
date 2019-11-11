@@ -64,6 +64,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.companyShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>MST:</label>
                 </v-flex>
                 <v-flex xs12 md3>
@@ -144,6 +158,85 @@
                 </v-flex>
               </v-layout>
             </v-flex>
+
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                   <label for>Đánh dấu hoạt động sửa chữa:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-switch
+                    v-model="switch2"
+                  ></v-switch>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12 v-if="switch2">
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Năng lực, loại tàu sửa chữa:</label>
+                 
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-textarea
+                    v-model="categoryModel.profileMaintainane"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                  ></v-textarea>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                   <label for>Đánh dấu hoạt động đóng mới:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-switch
+                    v-model="switch3"
+                  ></v-switch>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12  v-if="switch3">
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Năng lực, loại tàu đóng mới:</label>
+                 
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-textarea
+                    v-model="categoryModel.profileConstruction"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                  ></v-textarea>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                   <label for>Đánh dấu hoạt động phá dỡ:</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-switch
+                    v-model="switch4"
+                  ></v-switch>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12  v-if="switch4">
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Năng lực, loại tàu phá dỡ:</label>
+                 
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-textarea
+                    v-model="categoryModel.profileDeconstruction"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                  ></v-textarea>
+                </v-flex>
+              </v-layout>
+            </v-flex>
             <v-flex xs12>
               <v-layout>
                 <v-flex xs12 md4 class="text-sm-left">
@@ -182,6 +275,9 @@ export default {
     return {
       taxCodeModel: '',
       switch1: false,
+      switch2: false,
+      switch3: false,
+      switch4: false,
       errors: [],
       errorsTaxCode: true,
       taxCodeRules: [v => {
@@ -225,8 +321,15 @@ export default {
         shipYardCode: "",
         taxCode: "",
         companyName: "",
+        companyShortName: "",
         companyAddress: "",
         contactEmail: "",
+        markupMaintainane: '0',
+        markupConstruction: '0',
+        markupDeconstruction: '0',
+        profileMaintainane: '',
+        profileConstruction: '',
+        profileDeconstruction: '',
         telNo: "",
         faxNo: "",
         remarks: ""
@@ -317,12 +420,19 @@ export default {
         shipYardCode: this.id,
         taxCode: this.taxCodeModel,
         companyName: this.categoryModel.companyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
         faxNo: this.categoryModel.faxNo,
         remarks: this.categoryModel.remarks,
-        syncVersion: this.categoryModel.syncVersion
+        syncVersion: this.categoryModel.syncVersion,
+        markupMaintainane: this.switch2 ? '1' : '0',
+        markupConstruction: this.switch3 ? '1' : '0',
+        markupDeconstruction: this.switch4 ? '1' : '0',
+        profileMaintainane: this.categoryModel.profileMaintainane,
+        profileConstruction: this.categoryModel.profileConstruction,
+        profileDeconstruction: this.categoryModel.profileDeconstruction,
       };
       await this.$store
         .dispatch("category/editCategoryListItems", params)
@@ -361,11 +471,18 @@ export default {
         // shipYardCode: this.categoryModel.shipYardCode,
         taxCode: this.taxCodeModel,
         companyName: this.categoryModel.companyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
         faxNo: this.categoryModel.faxNo,
-        remarks: this.categoryModel.remarks
+        remarks: this.categoryModel.remarks,
+        markupMaintainane: this.switch2 ? '1' : '0',
+        markupConstruction: this.switch3 ? '1' : '0',
+        markupDeconstruction: this.switch4 ? '1' : '0',
+        profileMaintainane: this.categoryModel.profileMaintainane,
+        profileConstruction: this.categoryModel.profileConstruction,
+        profileDeconstruction: this.categoryModel.profileDeconstruction,
       };
       await this.$store
         .dispatch("category/addCategoryListItems", params)
@@ -392,13 +509,20 @@ export default {
             vm.categoryModel.shipYardCode = res.shipYardCode;
             vm.categoryModel.taxCode = res.taxCode;
             vm.categoryModel.companyName = res.companyName;
+            vm.categoryModel.companyShortName = res.companyShortName;
             vm.categoryModel.companyAddress = res.companyAddress;
             vm.categoryModel.contactEmail = res.contactEmail;
             vm.categoryModel.telNo = res.telNo;
             vm.categoryModel.faxNo = res.faxNo;
             vm.categoryModel.remarks = res.remarks;
             vm.categoryModel.syncVersion = res.syncVersion;
-            vm.taxCodeModel = vm.categoryModel.taxCode
+            vm.taxCodeModel = vm.categoryModel.taxCode;
+            vm.switch2 = res.markupMaintainane ? true : false
+            vm.switch3 = res.markupConstruction ? true : false
+            vm.switch4 = res.markupDeconstruction ? true : false
+            vm.categoryModel.profileMaintainane = res.profileMaintainane
+            vm.categoryModel.profileConstruction = res.profileConstruction
+            vm.categoryModel.profileDeconstruction = res.profileDeconstruction
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

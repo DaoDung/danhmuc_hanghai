@@ -87,6 +87,20 @@
             <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
+                  <label for>Tên viết tắt</label>
+                </v-flex>
+                <v-flex xs12 md8>
+                  <v-text-field
+                    v-model="categoryModel.companyShortName"
+                    :readonly="this.$route.query.aticon === 'chi-tiet-danh-muc'"
+                    height="25"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex xs12>
+              <v-layout align-center>
+                <v-flex xs12 md4 class="text-sm-left">
                   <label for>Địa chỉ</label>
                 </v-flex>
                 <v-flex xs12 md8>
@@ -194,6 +208,7 @@ export default {
         maritimeName: "",
         pilotCompanyCode: "",
         pilotCompanyName: "",
+        companyShortName: "",
         companyAddress: "",
         contactEmail: "",
         telNo: "",
@@ -250,6 +265,7 @@ export default {
         categoryId: this.categoryId,
         pilotCompanyCode: this.id,
         pilotCompanyName: this.categoryModel.pilotCompanyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -292,6 +308,7 @@ export default {
       let params = {
         categoryId: this.categoryId,
         pilotCompanyName: this.categoryModel.pilotCompanyName,
+        companyShortName: this.categoryModel.companyShortName,
         companyAddress: this.categoryModel.companyAddress,
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
@@ -330,7 +347,7 @@ export default {
             vm.categoryModel.maritimeCode = res.maritimeCode;
             vm.categoryModel.contactEmail = res.contactEmail;
             vm.categoryModel.syncVersion = res.syncVersion;
-
+            vm.categoryModel.companyShortName = res.companyShortName;
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =
