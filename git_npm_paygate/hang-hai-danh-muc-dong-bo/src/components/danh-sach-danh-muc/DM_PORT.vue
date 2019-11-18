@@ -178,13 +178,13 @@ export default {
     getPortType (PortType) {
       let namePortType = ''
       switch (PortType) {
-        case 0:
+        case '0':
           namePortType = 'Cảng biển'
           break
-        case 1:
+        case '1':
           namePortType = 'Cảng thủy nội địa'
           break
-        case 2:
+        case '2':
           namePortType = 'Cảng ngoài đảo (tuyến bờ ra đảo)'
           break
       }

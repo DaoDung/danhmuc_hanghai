@@ -67,6 +67,26 @@
               <v-flex xs12>
                 <v-layout align-center>
                   <v-flex xs12 md4 class="text-sm-left">
+                    <label for>Tài khoản thanh toán công nợ (VNĐ):</label>
+                  </v-flex>
+                  <v-flex xs12 md8>
+                    <v-autocomplete
+                      v-model="categoryModel.transactionSettlement"
+                      persistent-hint
+                      :items="transactionType"
+                      item-text="transactionTypeName"
+                      item-value="transactionTypeCode"
+                      height="25"
+
+                    >
+                      <template v-slot:append-outer></template>
+                    </v-autocomplete>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+              <v-flex xs12>
+                <v-layout align-center>
+                  <v-flex xs12 md4 class="text-sm-left">
                     <label for>Mã giao dịch VNĐ:</label>
                   </v-flex>
                   <v-flex xs12 md8>
@@ -275,6 +295,7 @@ export default {
         maritimeCode: "",
         departmentCode: "",
         departmentName: "",
+        transactionSettlement: "",
         transactionTypeVND: "",
         transactionTypeVND: ""
       },
@@ -402,6 +423,7 @@ export default {
         categoryId: this.categoryId,
         departmentCode: this.categoryModel.departmentCode,
         departmentName: this.categoryModel.departmentName,
+        transactionSettlement: this.categoryModel.transactionSettlement,
         transactionTypeVND: this.categoryModel.transactionTypeVND,
         transactionTypeUSD: this.categoryModel.transactionTypeUSD
       };
@@ -420,6 +442,7 @@ export default {
         id: this.categoryModel.id,
         departmentCode: this.categoryModel.departmentCode,
         departmentName: this.categoryModel.departmentName,
+        transactionSettlement: this.categoryModel.transactionSettlement,
         transactionTypeVND: this.categoryModel.transactionTypeVND,
         transactionTypeUSD: this.categoryModel.transactionTypeUSD
       };
@@ -437,6 +460,7 @@ export default {
         categoryId: this.categoryId,
         departmentCode: this.categoryModel.departmentCode,
         departmentName: this.categoryModel.departmentName,
+        transactionSettlement: this.categoryModel.transactionSettlement,
         transactionTypeVND: this.categoryModel.transactionTypeVND,
         transactionTypeUSD: this.categoryModel.transactionTypeUSD
       };
@@ -469,6 +493,7 @@ export default {
               vm.categoryModel.portOfAuthority = res.portOfAuthority;
               vm.categoryModel.departmentCode = res.departmentCode;
               vm.categoryModel.departmentName = res.departmentName;
+              vm.categoryModel.transactionSettlement = res.transactionSettlement,
               vm.categoryModel.transactionTypeVND = res.transactionTypeVND;
               vm.categoryModel.transactionTypeUSD = res.transactionTypeUSD;
               vm.categoryModel.id = res.id;

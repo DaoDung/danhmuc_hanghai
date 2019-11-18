@@ -129,13 +129,32 @@
           :items = "categoryList"
           hide-actions
           >
+            <template slot="headers">
+         
+                <tr style="width: 100%;">
+                  <th class="column text-xs-center" colspan="1">STT</th>
+                  <th class="column text-xs-center" style="width: 100px; white-space: inherit" colspan="1">Mã Cầu cảng</th>
+                  <th class="column text-xs-center" colspan="1">Tên cầu cảng</th>
+                  <th class="column text-xs-center" colspan="1">Bến cảng, khu neo</th>
+                  <th class="column text-xs-center" colspan="1">Khu vực hàng hải</th>
+                  <th class="column text-xs-center" style="width: 100px; white-space: inherit" colspan="1">Lượng chiếm nước toàn tải</th>
+                  <th style="width: 100px; white-space: inherit" colspan="1">Chiều dài lớn nhất</th>
+                  <th style="width: 100px; white-space: inherit" colspan="1" >Mớn nước thiết kế(m)</th>
+                  <th class="column text-xs-center" colspan="1">Thứ tự hiển thị</th>
+                  <th class="column text-xs-center" colspan="1">Phân loại</th>
+                  <th class="column text-xs-center" colspan="1">Tính phí</th>
+                  <th class="column text-xs-center" style="width: 100px; white-space: inherit" colspan="1" >Thuộc quản lý Vinalines</th>
+                  <th class="column text-xs-center" colspan="1">Trạng thái</th>
+                  <th class="column text-xs-center" colspan="1">Thao tác</th>
+                </tr>
+    
+            </template>
             <template slot="items" slot-scope="props">
               <tr>
                 <td class="text-xs-center">{{ page*pagesize - pagesize + props.index + 1 }}</td>
                 <td class="text-xs-center">{{ props.item.portWharfCode  }}</td>
                 <td class="text-xs-center">{{ props.item.portWharfNameVN }}</td>
                 <td class="text-xs-center">{{ props.item.portCodeBC}}</td>
-                <td class="text-xs-center">{{ props.item.portHarbourCode}}</td>
                 <td class="text-xs-center">{{ props.item.portRegionNameVN}}</td>
                 <td class="text-xs-center">{{ props.item.dwt}}</td>
                 <td class="text-xs-center">{{ props.item.loa}}</td>
@@ -156,7 +175,7 @@
         </div>
         <div class="text-xs-right layout wrap" style="position: relative;">
           <div class="flex pagging-table px-2"> 
-            <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination> 
+             <tiny-pagination :page="page" :pagesize="pagesize" @tiny:change-page="paggingData"></tiny-pagination> 
           </div>
         </div>
       </v-container>
@@ -208,19 +227,13 @@ export default {
         },
         {
           sortable: false,
-          text: 'Mã Bến cảng',
-          value: 'salary',
-          align: 'center'
-        },
-        {
-          sortable: false,
           text: 'Khu vực hàng hải',
           value: 'salary',
           align: 'center'
         },
         {
           sortable: false,
-          text: 'Lượng chiếm lước toàn tải',
+          text: 'Lượng chiếm nước toàn tải',
           value: 'salary',
           align: 'center'
         },
@@ -250,13 +263,13 @@ export default {
         },
         {
           sortable: false,
-          text: 'Đánh dấu điểm neo theo Cảng vụ tính phí',
+          text: 'Tính phí',
           value: 'salary',
           align: 'center'
         },
         {
           sortable: false,
-          text: 'Thuộc quản lý của Vinalines',
+          text: 'Thuộc quản lý Vinalines',
           value: 'salary',
           align: 'center'
         },

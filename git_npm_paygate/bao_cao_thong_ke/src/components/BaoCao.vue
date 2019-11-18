@@ -47,7 +47,6 @@
                 <v-flex xs9>
                   <v-text-field
                       v-model="nguoiTaoBC"
-                      
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -252,7 +251,351 @@
                   ></datetime-picker>
                 </v-flex>
               </v-layout>
-            </v-flex>          
+            </v-flex>
+            <!--Cảng vụ-->
+            <v-flex xs12 v-if="optionSelect.maritimeCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Cảng vụ:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                        v-model="selectCangVuHangHai"
+                        :items="cangVuHangHai"
+                        item-text="maritimeNameVN"
+                        item-value="maritimeCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Cảng biển-->
+            <v-flex xs12 v-if="optionSelect.portCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Cảng biển:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                        v-model="selectCangBien"
+                        :items="cangBien"
+                        item-text="name"
+                        item-value="node2"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Khu vực HH-->
+            <v-flex xs12 v-if="optionSelect.portRegionCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Khu vực hàng hải:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectKhuVucHH"
+                      :items="khuVucHH"
+                      item-text="portRegionNameVN"
+                      item-value="portRegionCode"
+
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Bến cảng-->
+            <v-flex xs12 v-if="optionSelect.portHarbourCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Bến cảng:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectBenCang"
+                        :items="benCang"
+                        item-text="portHarbourNameVN"
+                        item-value="portHarbourCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Cầu cảng-->
+            <v-flex xs12 v-if="optionSelect.portWharfCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Cầu Cảng:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectCauCang"
+                        :items="cauCang"
+                        item-text="portWharfNameVN"
+                        item-value="portWharfCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Phòng ban-->
+            <v-flex xs12 v-if="optionSelect.departmentCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Phòng ban:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectPhongBan"
+                        :items="phongBan"
+                        item-text="departmentName"
+                        item-value="departmentCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Loại tàu-->
+            <!-- <v-flex xs12 v-if="optionSelect.shipTypeCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Loại tàu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectLoaiTau"
+                        :items="loaiTau"
+                        item-text="shipTypeNameVN"
+                        item-value="shipTypeCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> -->
+            <!--Quốc tịch-->
+            <v-flex xs12 v-if="optionSelect.flagStateCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Quốc tịch:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectQuocTich"
+                        :items="quocTich"
+                        item-text="stateName"
+                        item-value="stateCode"
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Tuyến Luồng-->
+            <v-flex xs12 v-if="optionSelect.channelCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Tuyến luồng:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectTuyenLuong"
+                        :items="tuyenLuong"
+                        item-text="name"
+                        item-value="dataItemId"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--Loại HH:-->
+            <v-flex xs12 v-if="optionSelect.cargoCategorySelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Loại HH:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectLoaiHH"
+                      :items="loaiHH"
+                      item-text="name"
+                      item-value="code0"
+
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--HT Đơn vị tính-->
+            <v-flex xs12 v-if="false">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >HT chuyến tải:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectHTChuyenTai"
+                        :items="htChuyenTai"
+                        item-text="goodsTypeNameVN"
+                        item-value="goodsTypeCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--HT xếp dỡ-->
+            <v-flex xs12 v-if="optionSelect.cargoUnloadingSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >HT xếp dỡ:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                        v-model="selectHTXepDo"
+                        :items="htXepDo"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+             <!--Nhóm HH-->
+            <v-flex xs12 v-if="optionSelect.cargoGroupSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Nhóm HH:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectNhomHH"
+                      :items="nhomHH"
+
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--Đại lý-->
+            <v-flex xs12 v-if="optionSelect.shipAgencyCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Đại lý:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectDaiLy"
+                        :items="daiLy"
+                        item-text="shipAgencyNameVN"
+                        item-value="shipAgencyCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--Chủ tàu-->
+            <v-flex xs12 v-if="optionSelect.shipOwnerCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Chủ tàu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectChuTau"
+                        :items="chuTau"
+                        item-text="companyName"
+                        item-value="shipOwnerCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--GT-->
+            <v-flex xs12 v-if="optionSelect.grossTonnageSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >GT:</label></v-flex>
+                <v-flex xs9>
+                  <v-text-field
+                    v-model="selectGT"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex> 
+            <!--DWT-->
+            <v-flex xs12 v-if="optionSelect.deadWeightSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >DWT:</label></v-flex>
+                <v-flex xs9>
+                  <v-text-field
+                    v-model="selectDWT"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Công ty hoa tiêu-->
+            <v-flex xs12 v-if="optionSelect.pilotCompanyCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Công ty hoa tiêu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectCongTyHoaTieu"
+                        :items="congTyHoaTieu"
+                        item-text="pilotCompanyName"
+                        item-value="pilotCompanyCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Hoa tiêu-->
+            <v-flex xs12 v-if="optionSelect.pilotCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Hoa tiêu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectHoaTieu"
+                        :items="hoaTieu"
+                        item-text="pilotName"
+                        item-value="pilotCode"
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Công ty tàu lai-->
+            <v-flex xs12 v-if="optionSelect.tugboatCompanyCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Công ty tàu lai:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectCongTyTauLai"
+                        :items="congTyTauLai"
+                        item-text="tugboatCompanyName"
+                        item-value="tugboatCompanyCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Tàu lai-->
+            <v-flex xs12 v-if="optionSelect.tugboatCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Tàu lai:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectTauLai"
+                        :items="tauLai"
+                        item-text="tugboatName"
+                        item-value="tugboatCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Tàu-->
+            <v-flex xs12 v-if="optionSelect.shipCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Tàu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectTau"
+                        :items="tau"
+                        item-text="shipName"
+                        item-value="shipCode"
+  
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Công ty sửa chữa tàu-->
+            <v-flex xs12 v-if="optionSelect.shipYardCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Công ty sửa chữa tàu:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectCongTySuaChuaTau"
+                        :items="congTySuaChuaTau"
+                        item-text="companyName"
+                        item-value="shipYardCode"
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <!--Cở quan ra quyết định bắt giữ-->
+            <v-flex xs12 v-if="optionSelect.securityOfficeCodeSelect === 1">
+              <v-layout row wrap>
+                <v-flex xs3><label for="" >Cơ quan ra quyết định bắt giữ:</label></v-flex>
+                <v-flex xs9>
+                    <v-autocomplete
+                      v-model="selectCoQuanRaQuyetDinhBatGiu"
+                        :items="coQuanRaQuyetDinhBatGiu"
+                        item-text="companyName"
+                        item-value="securityOfficeCode"
+                    ></v-autocomplete>
+                </v-flex>
+              </v-layout>
+            </v-flex>             
           </v-layout>
         </div>
         <div class="row-header" style="height: 38px; display:flex; justify-content: space-between; align-items: center; padding: 0 14px; background: white;">
@@ -322,6 +665,13 @@ export default {
         tuyenLuong: [],
         daiLy: [],
         chuTau: [],
+        congTyHoaTieu: [],
+        hoaTieu: [],
+        congTyTauLai: [],
+        tauLai: [],
+        tau: [],
+        congTySuaChuaTau: [],
+        coQuanRaQuyetDinhBatGiu: [],
         thang: [{name: 'Tháng 1', value: 0}, {name: 'Tháng 2', value: 1},{name: 'Tháng 3', value: 2},{name: 'Tháng 4', value: 3},{name: 'Tháng 5', value: 4},{name: 'Tháng 6', value: 5},{name: 'Tháng 7', value: 6},{name: 'Tháng 8', value: 7},{name: 'Tháng 9', value: 8},{name: 'Tháng 10', value: 9},{name: 'Tháng 11', value: 10},{name: 'Tháng 12', value: 11}],
         quy: [{name: 'Quý 1', value: 0}, {name: 'Quý 2', value: 1}, {name: 'Quý 3', value: 2}, {name: 'Quý 4', value: 3}],
         nam: [],
@@ -352,6 +702,14 @@ export default {
         selectQuy: '',
         selectNam: '',
         selectNgayLap: '',
+        selectNgayLap: '',
+        selectCongTyHoaTieu: '',
+        selectHoaTieu: '',
+        selectCongTyTauLai: '',
+        selectTauLai: '',
+        selectTau: '',
+        selectCongTySuaChuaTau: '',
+        selectCoQuanRaQuyetDinhBatGiu: '',
         isNgay: true,
         isThang: false,
         isQuy: false,
@@ -389,6 +747,13 @@ export default {
           cargoGroupSelect: 0,
           shipAgencyCodeSelect: 0,
           shipOwnerCodeSelect: 0,
+          pilotCompanyCodeSelect: 0,
+          pilotCodeSelect: 0,
+          tugboatCompanyCodeSelect: 0,
+          tugboatCodeSelect: 0,
+          shipCodeSelect: 0,
+          shipYardCodeSelect: 0,
+          securityOfficeCodeSelect: 0,
         }
   }),
   watch: {
@@ -478,6 +843,27 @@ export default {
       if(val.shipOwnerCodeSelect === 1) {
         this.chuTau = await this.getDanhMuc('DM_VMA_SHIP_OWNER')
       }
+      if(val.pilotCompanyCodeSelect === 1) {
+        this.congTyHoaTieu = await this.getDanhMuc('DM_VMA_PILOT_COMPANY')
+      }
+      if(val.pilotCodeSelect === 1) {
+        this.hoaTieu = await this.getDanhMuc('DM_VMA_PILOT')
+      }
+      if(val.tugboatCompanyCodeSelect === 1) {
+        this.congTyTauLai = await this.getDanhMuc('DM_VMA_TUGBOAT_COMPANY')
+      }
+      if(val.tugboatCodeSelect === 1) {
+        this.tauLai = await this.getDanhMuc('DM_VMA_TUGBOAT')
+      }
+      if(val.shipCodeSelect === 1) {
+        this.chuTau = await this.getShip()
+      }
+      if(val.shipYardCodeSelect === 1) {
+        this.congTySuaChuaTau = await this.getDanhMuc('DM_VMA_SHIPYARD')
+      }
+      if(val.securityOfficeCodeSelect === 1) {
+        this.coQuanRaQuyetDinhBatGiu = await this.getDanhMuc('DM_VMA_SECURITY_OFFICE')
+      }
     }
 
   },
@@ -502,36 +888,73 @@ export default {
       let fromDate = ''
       let toDate = ''
       let date = 0
+      let reportPeriod = 1
       if (this.thongKeTheo === 'Tháng') {
         const [year, month] = this.month.split('-')
         let date = new Date(year,month,-1).getDate(); 
         fromDate = this.month + '-' + '01'
         toDate = this.month + '-' + (date + 1)
+        reportPeriod = 3
       }
       if (this.thongKeTheo === 'Ngày') {
         fromDate = this.fromDateFomated
         toDate = this.toDateFomated
+        reportPeriod = 1
       }
       if (this.thongKeTheo === 'Ngày giờ') {
         fromDate = this.fromDateTime
         toDate = this.toDateTime
+        reportPeriod = 2
       }
       if (this.thongKeTheo === 'Năm') {
         fromDate = this.selectNam + '-01-01'
         toDate = this.selectNam + '-12-31'
+        reportPeriod = 4
       }
       let vm = this
       let params = {
         reportCode: this.selectMauBC,
-        maritimeCode: this.selectCangVuHangHai || this.maritimeCurrent.maritimeCode,
+        maritimeCode: this.optionSelect.maritimeCodeSelect ? this.selectCangVuHangHai : this.maritimeCurrent.maritimeCode,
         createDate: this.createDateFomated,
+        reportMadeBy: this.nguoiTaoBC,
         fromDate,
-        toDate
+        toDate,
+        reportPeriod,
+        portCode: this.optionSelect.portCodeSelect ? this.selectCangBien : '',
+        portRegionCode: this.optionSelect.portRegionCodeSelect ? this.selectKhuVucHH : '',
+        portHarbourCode: this.optionSelect.portHarbourCodeSelect ? this.selectBenCang : '',
+        portWharfCode: this.optionSelect.portWharfCodeSelect ? this.selectCauCang : '',
+        channelCode: this.optionSelect.channelCodeSelect ? this.selectTuyenLuong : '',
+        departmentCode: this.optionSelect.departmentCodeSelect ? this.selectPhongBan : '',
+        shipTypeCode: this.optionSelect.shipTypeCodeSelect ? this.selectLoaiTau : '',
+        flagStateCode: this.optionSelect.flagStateCodeSelect ? this.selectQuocTich : '',
+        grossTonnage: this.optionSelect.grossTonnageSelect ? this.selectGT : '',
+        deadWeight: this.optionSelect.deadWeightSelect ? this.selectDWT : '',
+        cargo: this.optionSelect.cargoSelect ? this.selectLoaiHH : '',
+        cargoCategory: this.optionSelect.cargoCategorySelect ? this.selectNhomHH : '',
+        cargoUnloading: this.optionSelect.cargoUnloadingSelect ? this.selectHTChuyenTai : '',
+        cargoGroup: this.optionSelect.cargoGroupSelect ? this.selectHTXepDo : '',
+        shipAgencyCode: this.optionSelect.shipAgencyCodeSelect ? this.selectDaiLy : '',
+        shipOwnerCode: this.optionSelect.shipOwnerCodeSelect ? this.selectChuTau : '',
+        pilotCompanyCode: this.optionSelect.pilotCompanyCodeSelect ? this.selectCongTyHoaTieu : '',
+        pilotCode: this.optionSelect.pilotCodeSelect ? this.selectHoaTieu : '',
+        tugboatCompanyCode: this.optionSelect.tugboatCompanyCodeSelect ? this.selectCongTyTauLai : '',
+        tugboatCode: this.optionSelect.tugboatCodeSelect ? this.selectTauLai : '',
+        shipCode: this.optionSelect.shipCodeSelect ? this.selectTau : '',
+        shipYardCode: this.optionSelect.shipYardCodeSelect ? this.selectCongTySuaChuaTau : '',
+        securityOfficeCode: this.optionSelect.securityOfficeCodeSelect ? this.selectCoQuanRaQuyetDinhBatGiu : '',
       }
       console.log('params:', params)
+
       var renderURLInit = "?p_p_id=baocaopmnvaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getReportPDF&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1"
       var orginURL = window.location.href
-      var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
+      // var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
+      var endPoit = orginURL + renderURLInit
+      for (const key in params) {
+        if (params[key] !== '' && typeof params[key] != "undefined") {
+          endPoit += '&' + key + '=' + params[key]
+        }
+      }
       this.isLoading = true
       axios.get(endPoit).then(
         res => {
@@ -545,34 +968,70 @@ export default {
       let fromDate = ''
       let toDate = ''
       let date = 0
+      let reportPeriod = 1
       if (this.thongKeTheo === 'Tháng') {
         const [year, month] = this.month.split('-')
         let date = new Date(year,month,-1).getDate(); 
         fromDate = this.month + '-' + '01'
         toDate = this.month + '-' + (date + 1)
+        reportPeriod = 3
       }
       if (this.thongKeTheo === 'Ngày') {
         fromDate = this.fromDateFomated
         toDate = this.toDateFomated
+        reportPeriod = 1
       }
       if (this.thongKeTheo === 'Ngày giờ') {
         fromDate = this.fromDateTime
         toDate = this.toDateTime
+        reportPeriod = 2
       }
       if (this.thongKeTheo === 'Năm') {
         fromDate = this.selectNam + '-01-01'
         toDate = this.selectNam + '-12-31'
+        reportPeriod = 4
       }
       let params = {
         reportCode: this.selectMauBC,
         maritimeCode: this.selectCangVuHangHai || this.maritimeCurrent.maritimeCode,
         createDate: this.createDateFomated,
+        reportMadeBy: this.nguoiTaoBC,
         fromDate,
-        toDate
+        toDate,
+        reportPeriod,
+        portCode: this.optionSelect.portCodeSelect ? this.selectCangBien : '',
+        portRegionCode: this.optionSelect.portRegionCodeSelect ? this.selectKhuVucHH : '',
+        portHarbourCode: this.optionSelect.portHarbourCodeSelect ? this.selectBenCang : '',
+        portWharfCode: this.optionSelect.portWharfCodeSelect ? this.selectCauCang : '',
+        channelCode: this.optionSelect.channelCodeSelect ? this.selectTuyenLuong : '',
+        departmentCode: this.optionSelect.departmentCodeSelect ? this.selectPhongBan : '',
+        shipTypeCode: this.optionSelect.shipTypeCodeSelect ? this.selectLoaiTau : '',
+        flagStateCode: this.optionSelect.flagStateCodeSelect ? this.selectQuocTich : '',
+        grossTonnage: this.optionSelect.grossTonnageSelect ? this.selectGT : '',
+        deadWeight: this.optionSelect.deadWeightSelect ? this.selectDWT : '',
+        cargo: this.optionSelect.cargoSelect ? this.selectLoaiHH : '',
+        cargoCategory: this.optionSelect.cargoCategorySelect ? this.selectNhomHH : '',
+        cargoUnloading: this.optionSelect.cargoUnloadingSelect ? this.selectHTChuyenTai : '',
+        cargoGroup: this.optionSelect.cargoGroupSelect ? this.selectHTXepDo : '',
+        shipAgencyCode: this.optionSelect.shipAgencyCodeSelect ? this.selectDaiLy : '',
+        shipOwnerCode: this.optionSelect.shipOwnerCodeSelect ? this.selectChuTau : '',
+        pilotCompanyCode: this.optionSelect.pilotCompanyCodeSelect ? this.selectCongTyHoaTieu : '',
+        pilotCode: this.optionSelect.pilotCodeSelect ? this.selectHoaTieu : '',
+        tugboatCompanyCode: this.optionSelect.tugboatCompanyCodeSelect ? this.selectCongTyTauLai : '',
+        tugboatCode: this.optionSelect.tugboatCodeSelect ? this.selectTauLai : '',
+        shipCode: this.optionSelect.shipCodeSelect ? this.selectTau : '',
+        shipYardCode: this.optionSelect.shipYardCodeSelect ? this.selectCongTySuaChuaTau : '',
+        securityOfficeCode: this.optionSelect.securityOfficeCodeSelect ? this.selectCoQuanRaQuyetDinhBatGiu : '',
       }
       var renderURLInit = "?p_p_id=baocaopmnvaction_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=getReportEXCEL&p_p_cacheability=cacheLevelPage&p_p_col_id=column-1&p_p_col_count=1"
       var orginURL = window.location.href
-      var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
+      // var endPoit = orginURL + renderURLInit + '&reportCode=' + params.reportCode + '&maritimeCode=' + params.maritimeCode + '&createDate=' + params.createDate + '&fromDate=' + params.fromDate + '&toDate=' + params.toDate
+      var endPoit = orginURL + renderURLInit
+      for (const key in params) {
+        if (params[key] !== '' && typeof params[key] != "undefined") {
+          endPoit += '&' + key + '=' + params[key]
+        }
+      }
       axios.get(endPoit).then(
         res => {
           console.log(res)
@@ -687,7 +1146,7 @@ export default {
       let url = this.urlInit.getDetailDmCategories
       let maritimeCode = this.maritimeCurrent.maritimeCode
       let params = {}
-      if (categoryId === 'DM_DATAITEM_GROUP107' || categoryId === 'DM_PORT_REGION' || categoryId === 'DM_PORT_HARBOUR' || categoryId === 'DM_PORT_WHARF' || categoryId === 'VMA_TRANSACTION_DEPARTMENT' || categoryId === 'DM_TUYEN_LUONG'){
+      if (categoryId === 'DM_DATAITEM_GROUP107' || categoryId === 'DM_PORT_REGION' || categoryId === 'DM_PORT_HARBOUR' || categoryId === 'DM_PORT_WHARF' || categoryId === 'VMA_TRANSACTION_DEPARTMENT' || categoryId === 'DM_TUYEN_LUONG' || categoryId === 'DM_VMA_TUGBOAT_COMPANY' || categoryId === 'DM_VMA_TUGBOAT' || categoryId === 'DM_VMA_PILOT_COMPANY' || categoryId === 'DM_VMA_PILOT' || categoryId === 'DM_VMA_SHIPYARD' || categoryId === 'DM_VMA_SECURITY_OFFICE'){
         params = {
           categoryId:  categoryId,
           maritimeCode: maritimeCode
@@ -713,9 +1172,22 @@ export default {
       await BaoCaoApi.getMaritimes(url).then(
         (res) => {
           console.log('Ham getMaritimes:', res)
-          data = res.data
+          data = res.data.data
         }
       )
+      return data
+    },
+    async getShip () {
+       let url = '?p_p_id=vma_WAR_TichHopGiaoThongportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=vma_ship_ship&p_p_cacheability=cacheLevelPage&start=-1&end=-1&shipBoat=SHIP'
+      let data = []
+      await axios.get(url)
+        .then((res) => {
+         data = res.data.data
+         
+        })
+        .catch(function (error) {
+      
+        }) 
       return data
     },
     getYear() {
