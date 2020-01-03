@@ -10,6 +10,11 @@
           <span>{{item.categoryDescription}}</span>
         </li>
       </ul>
+      <ul>
+        <li @click="getListCategory({categoryId: 'DM_VMA_SHIP_OWNER', categoryDescription: 'Chủ hàng, cá nhân khác'})" :class="{'category-dynamic': true, 'item-danh-muc': true}">
+          <span>Chủ hàng, cá nhân khác </span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -91,7 +96,8 @@ export default {
         .then(res => {
         }, error => {
         });
-    }
+    },
+    
   }
 };
 </script>

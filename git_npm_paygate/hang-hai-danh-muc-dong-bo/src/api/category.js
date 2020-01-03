@@ -666,7 +666,7 @@ const hasServer = {
      })
   },
   getCategoryListItems (query, cb, errorcb) {
-    axios.get(query.url + '&categoryId=' + query.params + '&start=0&end=10')
+    axios.get(query.url + '&categoryId=' + query.params + '&start=0&end=10&isDelete=0')
      .then((res) => {
       const result = res.data
       cb(result) 
@@ -767,7 +767,7 @@ const hasServer = {
         Url += '&' + key + '=' + query.params[key]
       }
     }
-    axios.get(Url)
+    axios.get(Url+'&isDelete=0')
      .then((res) => {
       const result = res.data
       cb(result) 

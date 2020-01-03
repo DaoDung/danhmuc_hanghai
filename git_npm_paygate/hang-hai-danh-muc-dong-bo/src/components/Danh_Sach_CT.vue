@@ -86,7 +86,7 @@
       <dmvmasecurityoffice v-else-if="this.categoryId === 'DM_VMA_SECURITY_OFFICE'  && !isLoading"
       ></dmvmasecurityoffice>
             <!-------->
-      <dmvmashipowner v-else-if="this.categoryId === 'DM_VMA_SHIP_OWNER'  && !isLoading"
+      <dmvmashipowner v-else-if="this.categoryId === 'DM_VMA_SHIP_OWNER' && this.category.categoryDescription === 'Chủ tàu, người khai thác' && !isLoading"
       ></dmvmashipowner>
             <!-------->
       <dmmashiptype v-else-if="this.categoryId === 'DM_VMA_SHIP_TYPE'  && !isLoading"
@@ -114,7 +114,7 @@
 
       <vmatransactiondepartment v-else-if="this.categoryId === 'VMA_TRANSACTION_DEPARTMENT'  && !isLoading"
       ></vmatransactiondepartment>
-
+      <chuhangcanhankhac  v-else-if="this.categoryId === 'DM_VMA_SHIP_OWNER' && this.category.categoryDescription === 'Chủ hàng, cá nhân khác'  && !isLoading"></chuhangcanhankhac>
   </div>
 </template>
 <script>
@@ -159,7 +159,7 @@ import vmapilotviolation from './danh-sach-danh-muc/vma_pilot_violation'
 import vmashipcertificate from './danh-sach-danh-muc/vma_ship_certificate'
 import vmaship from './danh-sach-danh-muc/vma_ship'
 import vmatransactiondepartment from './danh-sach-danh-muc/vma_transaction_department'
-
+import chuhangcanhankhac from './danh-sach-danh-muc/chu-hang-ca-nhan-khac'
 
 export default {
   components: {
@@ -198,7 +198,8 @@ export default {
     vmapilotviolation, 
     vmashipcertificate,
     vmaship,
-    vmatransactiondepartment
+    vmatransactiondepartment,
+    chuhangcanhankhac
   },
   data() {
     return {

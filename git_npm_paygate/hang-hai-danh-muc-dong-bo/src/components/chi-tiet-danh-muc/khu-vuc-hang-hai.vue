@@ -144,7 +144,7 @@ export default {
         portRegionName: "",
         portCodeRef: '',
         portRegionRef: '',
-        sequenceNo: null,
+        sequenceNo: 0,
       }
     };
   },
@@ -203,7 +203,7 @@ export default {
         portRegionCode: this.id,
         portRegionNameVN: this.categoryModel.portRegionName,
         syncVersion: this.categoryModel.syncVersion,
-        sequenceNo: this.categoryModel.sequenceNo
+        sequenceNo: this.categoryModel.sequenceNo.toString()
       };
       await this.$store
         .dispatch("category/editCategoryListItems", params)
@@ -232,7 +232,7 @@ export default {
         categoryId: this.categoryId,
         portCodeRef: this.categoryModel.portCodeRef,
         portRegionNameVN: this.categoryModel.portRegionName,
-        sequenceNo: this.categoryModel.sequenceNo
+        sequenceNo: this.categoryModel.sequenceNo.toString()
       };
       await this.$store
         .dispatch("category/addCategoryListItems", params)

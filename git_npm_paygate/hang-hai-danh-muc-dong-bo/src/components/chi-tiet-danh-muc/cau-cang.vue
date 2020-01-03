@@ -315,7 +315,7 @@ export default {
         dwt: '',
         loa: '',
         maxDraft: '',
-        sequenceNo: null,
+        sequenceNo: 0,
         portWharfType: 0,
         portWharfPayment: 0,
         managedVinalines: 0,
@@ -408,7 +408,7 @@ export default {
         dwt: this.categoryModel.dwt,
         loa: this.categoryModel.loa,
         maxDraft: this.categoryModel.maxDraft,
-        sequenceNo: this.categoryModel.sequenceNo,
+        sequenceNo: this.categoryModel.sequenceNo.toString(),
         portWharfType: this.categoryModel.portWharfType.toString(),
         portWharfPayment: this.categoryModel.portWharfPayment.toString(),
         managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
@@ -441,7 +441,7 @@ export default {
         dwt: this.categoryModel.dwt,
         loa: this.categoryModel.loa,
         maxDraft: this.categoryModel.maxDraft,
-        sequenceNo: this.categoryModel.sequenceNo,
+        sequenceNo: this.categoryModel.sequenceNo.toString(),
         portWharfType: this.categoryModel.portWharfType.toString(),
         portWharfPayment: this.categoryModel.portWharfPayment.toString(),
         managedVinalines: this.categoryModel.managedVinalines ? '1' : '0',
@@ -479,10 +479,10 @@ export default {
             vm.categoryModel.dwt = res.dwt;
             vm.categoryModel.loa = res.loa;
             vm.categoryModel.maxDraft = res.maxDraft;
-            vm.categoryModel.sequenceNo= this.categoryModel.sequenceNo
-            vm.categoryModel.portWharfType= this.categoryModel.portWharfType
-            vm.categoryModel.portWharfPayment = this.categoryModel.portWharfPayment 
-            vm.categoryModel.managedVinalines= this.categoryModel.managedVinalines
+            vm.categoryModel.sequenceNo= res.sequenceNo
+            vm.categoryModel.portWharfType= res.portWharfType
+            vm.categoryModel.portWharfPayment = res.portWharfPayment 
+            vm.categoryModel.managedVinalines= res.managedVinalines
             if (res.modifiedDate) {
               let date = new Date(res.modifiedDate);
               vm.categoryModel.modifiedDate =

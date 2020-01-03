@@ -5,7 +5,7 @@
       <v-layout row wrap>
         <v-flex xs12>
           <div class="title-chitiet">
-            <strong class="title-chitiet-danh-muc">Thông tin Chủ tàu, người khai thác</strong>
+            <strong class="title-chitiet-danh-muc">Thông tin chủ hàng, cá nhân khác</strong>
           </div>
         </v-flex>
         <v-flex xs12>
@@ -31,13 +31,6 @@
                     >
                       <template v-slot:append-outer></template>
                     </v-autocomplete>
-                    <!-- <v-select
-                    v-model="selectMaritime"
-                    item-text="maritimeNameVN"
-                    item-value="maritimeCode"
-                    :items="maritime"
-                  >
-                    ></v-select>-->
                   </v-flex>
                 </v-layout>
               </v-flex>
@@ -59,7 +52,7 @@
               <!-- <v-flex xs12>
               <v-layout align-center>
                 <v-flex xs12 md4 class="text-sm-left">
-                  <label for="">Mã chủ tàu/ Người khai thác:</label>
+                  <label for="">Mã chủ hàng/ cá nhân khác:</label>
                   <span class="red--text">(*)</span>
                 </v-flex>
                 <v-flex xs12 md3>
@@ -74,7 +67,7 @@
               <v-flex xs12>
                 <v-layout align-center>
                   <v-flex xs12 md4 class="text-sm-left">
-                    <label for>Mã chủ tàu (MST)/ Người khai thác:</label>
+                    <label for>Mã chủ hàng (MST)/ cá nhân khác:</label>
                   </v-flex>
                   <v-flex xs12 md3>
                     <v-text-field
@@ -100,7 +93,7 @@
               <v-flex xs12>
                 <v-layout align-center>
                   <v-flex xs12 md4 class="text-sm-left">
-                    <label for>Tên chủ tàu / Người khai thác:</label>
+                    <label for>Tên chủ hàng / cá nhân khác:</label>
                     <span class="red--text">(*)</span>
                   </v-flex>
                   <v-flex xs12 md8>
@@ -184,32 +177,6 @@
                   </v-flex>
                 </v-layout>
               </v-flex>
-              <v-flex xs4>
-                <v-layout align-center>
-                  <v-flex xs12 md5 class="text-sm-left">
-                    <label for>Chủ tàu:</label>
-                  </v-flex>
-                  <v-flex xs12 md7>
-                    <v-checkbox v-model="categoryModel.isShipOwner"
-                      required
-                      :rules="isShipOwnerRules"
-                    ></v-checkbox>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-              <v-flex xs6>
-                <v-layout align-center>
-                  <v-flex xs12 md5 class="text-sm-left">
-                    <label for>Người khai thác:</label>
-                  </v-flex>
-                  <v-flex xs12 md7>
-                    <v-checkbox v-model="categoryModel.isShipOperator"
-                      required
-                      :rules="isShipOwnerRules"
-                    ></v-checkbox>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
               <v-flex xs12>
                 <v-layout>
                   <v-flex xs12 md4 class="text-sm-left">
@@ -288,9 +255,9 @@ export default {
       maritimeRules: [v => !!v || "Chưa chọn Cảng vụ hàng hải"],
       isShipOwnerRules: [v => {
         const check = (this.categoryModel.isShipOperator || this.categoryModel.isShipOwner) 
-        return check || 'Chưa đánh dấu ô Chủ tàu/ Người khai thác'
+        return check || 'Chưa đánh dấu ô chủ hàng/ cá nhân khác'
       }],
-      isShipOperatorRules: [v => !!v || "Chưa đánh dấu ô Chủ tàu/ Người khai thác"],
+      isShipOperatorRules: [v => !!v || "Chưa đánh dấu ô chủ hàng/ cá nhân khác"],
       maritime: [],
       selectMaritime: "",
       btnText: "",
@@ -307,8 +274,8 @@ export default {
         contactEmail: "",
         telNo: "",
         faxNo: "",
-        isShipOwner: 0,
-        isShipOperator: 0,
+        isShipOwner: 9,
+        isShipOperator: 9,
         remarks: ""
       }
     };
@@ -329,11 +296,11 @@ export default {
   },
   created() {
     if (this.$route.query.aticon === "sua-danh-muc") {
-      this.btnText = "Cập nhập Chủ tàu/ Người khai thác";
+      this.btnText = "Cập nhập chủ hàng/ cá nhân khác";
     } else if (this.$route.query.aticon === "them-danh-muc") {
-      this.btnText = "Thêm mới Chủ tàu/ Người khai thác";
+      this.btnText = "Thêm mới chủ hàng/ cá nhân khác";
     } else if (this.$route.query.aticon === "xoa-danh-muc") {
-      this.btnText = "Đánh dấu xóa Chủ tàu/ Người khai thác";
+      this.btnText = "Đánh dấu xóa chủ hàng/ cá nhân khác";
     }
   },
   watch: {
@@ -402,11 +369,11 @@ export default {
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
         faxNo: this.categoryModel.faxNo,
-        isShipOwner: this.categoryModel.isShipOwner ? '1' : '0',
-        isShipOperator: this.categoryModel.isShipOperator ? '1' : '0',
-        isOther: '0',
+        isShipOwner: '9',
+        isShipOperator: '9',
         remarks: this.categoryModel.remarks,
-        syncVersion: this.categoryModel.syncVersion
+        syncVersion: this.categoryModel.syncVersion,
+        isOther: '1'
       };
 
       await this.$store
@@ -454,10 +421,10 @@ export default {
         contactEmail: this.categoryModel.contactEmail,
         telNo: this.categoryModel.telNo,
         faxNo: this.categoryModel.faxNo,
-        isShipOwner: this.categoryModel.isShipOwner ? '1' : '0',
-        isShipOperator: this.categoryModel.isShipOperator ? '1' : '0',
-        isOther: '0',
-        remarks: this.categoryModel.remarks
+        isShipOwner: '9',
+        isShipOperator: '9',
+        remarks: this.categoryModel.remarks,
+        isOther: '1'
       };
 
       await this.$store
