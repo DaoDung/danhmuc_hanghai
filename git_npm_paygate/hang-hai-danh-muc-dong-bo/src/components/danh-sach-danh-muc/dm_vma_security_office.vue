@@ -226,7 +226,7 @@ export default {
     },
     link () {
       let originUrl = this.$store.getters["category/Url"]
-      let url = originUrl.reportExels
+      let url = originUrl.reportExel
       let params = {
         reportId: this.categoryId,
         maritimeCode: this.selectMaritime,
