@@ -19,7 +19,7 @@
     "vue-content-placeholders": "^0.2.1",
     "vue-datetime-2": "^0.6.1",
     "vue-filepond": "^2.1.0",
-    "vue-moment": "^4.0.0-0",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.0",
     "vuex": "^3.0.1"
