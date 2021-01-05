@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@syncfusion/ej2-vue-grids": "^17.1.51",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "filepond-plugin-file-validate-type": "^1.1.0",
     "filepond-plugin-image-preview": "^1.0.9",
     "object.values": "^1.0.4",
