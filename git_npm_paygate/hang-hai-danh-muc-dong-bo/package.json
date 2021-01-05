@@ -10,7 +10,7 @@
   "dependencies": {
     "@chenfengyuan/vue-number-input": "^1.1.1",
     "@mdi/font": "^4.2.95",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "v-money": "^0.8.1",
     "vue": "^2.6.10",
